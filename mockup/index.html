@@ -1,0 +1,1950 @@
+<!doctype html>
+<html lang="ko" data-theme="light" data-primary="A" data-status-colors="1" data-status-shape="1">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>순천대 공실 알리미</title>
+<!--
+  S-01~S-10 전체 목업 (단일 자기완결 HTML, mockup/index.html)
+  - 근거 문서: docs/design/04_화면설계서.md v0.3 (화면·항목·이동·상태·예외),
+               docs/design/05_UI디자인시스템_IA.md v0.1 (토큰·부품·IA·반응형·접근성),
+               docs/design/03_기능명세서.md v0.8 (FR 번호·교시 시각표·문구)
+  - 파일 이름: 사용자 결정으로 index.html (화면 번호 이름 규칙 대신). 이 파일 하나에 S-01~S-10 전체를 담았습니다.
+  - S-08·S-09(구글폼)는 목업을 만들지 않습니다(04 확정). 누르면 "목업 알림"만 보입니다.
+  - 외부 요청: Pretendard 웹 글꼴 CDN 하나뿐. 받지 못하면 05의 대신 글꼴 순서로 보입니다.
+  - 데이터: 시간표·강의실·공지는 모두 예시 데이터입니다.
+  - 캠퍼스맵: 오픈스트리트맵(OSM) 자료(ODbL)의 건물·도로·운동장 모양으로 그리고, 학교 캠퍼스맵과 같은 방향(정문이 아래쪽)으로 돌렸습니다.
+               건물 번호·이름은 학교 캠퍼스맵 범례를 따릅니다. OSM에 없는 건물 몇 곳은 반듯한 사각형으로 대략 그렸습니다. 학교 그림은 넣거나 베끼지 않았습니다.
+  - "목업 조정판"(오른쪽 가장자리 점선 단추)은 사이트의 일부가 아닙니다. 점선 테두리 + "목업 전용" 표시로 구별합니다.
+  - 가정(04·05에 없어 목업에서 임의로 정한 것)은 파일 끝 스크립트 머리 주석과 조정판 5번 칸에 적었습니다.
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.min.css">
+<style>
+/* =====================================================================
+   1. 디자인 토큰 (05 1장 - CSS 변수 이름은 05 토큰 이름 앞에 "--"만 붙임)
+   ===================================================================== */
+:root{
+  /* 1.1.1 대표색 - 후보 A (05 제안) */
+  --color-primary:#2B5C8A;
+  --color-primary-hover:#234D74;
+  --color-primary-pressed:#1B3D5D;
+  --color-primary-soft:#E7EEF6;
+  --color-text-on-primary:#FFFFFF;
+  /* 1.1.2 바탕·글자·선 */
+  --color-bg:#FFFFFF;
+  --color-bg-subtle:#F4F6F9;
+  --color-text:#1F2933;
+  --color-text-secondary:#52606D;
+  --color-text-disabled:#A3ACB6;
+  --color-border:#D5DBE2;
+  --color-border-strong:#7B8794;
+  --color-hover-bg:#EEF2F6;
+  --color-pressed-bg:#DCE4EE;
+  --color-scrim:rgba(15,23,42,.5);
+  /* 1.1.3 상태 색 - 조합 ① (05 제안) */
+  --color-free-text:#1B6B3A;
+  --color-free-bg:#E5F4EA;
+  --color-free-border:#3D9A62;
+  --color-busy-text:#8A4510;
+  --color-busy-bg:#FCEEDF;
+  --color-busy-border:#C97A36;
+  --color-danger-text:#B42318;
+  --color-danger-bg:#FDECEA;
+  --color-notice-text:#243B53;
+  --color-notice-bg:#EEF2F7;
+  --color-notice-border:#6B869F;
+  --color-banner-text:var(--color-primary-pressed);
+  --color-banner-bg:var(--color-primary-soft);
+  /* 1.1.4 캠퍼스맵 (후보 ③ 직접 만든 지도 색) */
+  --color-map-label-text:var(--color-text);
+  --color-map-label-halo:#FFFFFF;
+  --color-map-highlight:var(--color-primary);
+  --color-map-ground:#EEF1EC;
+  --color-map-building-off:#D5DBE2;   /* 누를 수 없는 건물 */
+  --color-map-building-on:#C9D6E6;    /* 누를 수 있는 건물 */
+  --color-map-road:#FFFFFF;
+  --color-map-green:#DDE9D7;          /* 목업 임의: 잔디·운동장 */
+  --color-map-edge:#AEB8C3;           /* 목업 임의: 건물 윤곽선 */
+  --color-map-track:#E8DDCF;          /* 목업 임의: 운동장 트랙·테니스장 */
+  --color-map-road-edge:#D3D9E0;      /* 목업 임의: 도로 테두리 */
+  --color-map-lot:#E3E7EB;            /* 목업 임의: 주차장 */
+  /* 1.2 글꼴 */
+  --font-family-base:"Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "맑은 고딕", "Noto Sans KR", sans-serif;
+  --font-size-xs:0.75rem;
+  --font-size-sm:0.875rem;
+  --font-size-md:1rem;
+  --font-size-lg:1.125rem;
+  --font-size-xl:1.25rem;
+  --font-size-2xl:1.5rem;
+  --font-weight-regular:400;
+  --font-weight-semibold:600;
+  --font-weight-bold:700;
+  --font-line-tight:1.3;
+  --font-line-normal:1.5;
+  /* 1.3 간격 */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:20px;
+  --space-6:24px; --space-8:32px; --space-10:40px; --space-12:48px;
+  /* 1.4 크기 */
+  --size-target-min:24px;
+  --size-target-pc:32px;
+  --size-target-touch:44px;
+  --size-control-pc:40px;
+  --size-header-pc:56px;
+  --size-header-mobile:48px;
+  --size-filter-width:320px;
+  --size-panel-width:360px;
+  --size-sheet-height:50%;
+  --size-popup-width:480px;
+  --size-alert-width:320px;
+  --size-list-row-pc:48px;
+  --size-list-row-mobile:56px;
+  --size-room-cell-w:88px;
+  --size-room-cell-h:56px;
+  --size-calendar-cell:40px;
+  --size-period-button-pc:48px;
+  --size-period-button-mobile:52px;
+  --size-spinner:24px;
+  /* 1.5 모서리 */
+  --radius-sm:4px; --radius-md:8px; --radius-lg:12px; --radius-full:9999px;
+  /* 1.6 그림자 */
+  --shadow-1:0 1px 2px rgba(0,0,0,.08);
+  --shadow-2:0 4px 12px rgba(0,0,0,.12);
+  --shadow-3:0 12px 32px rgba(0,0,0,.20);
+  /* 1.7 층 */
+  --z-base:0; --z-map-label:10; --z-map-control:20; --z-sticky:100; --z-header:200;
+  --z-panel:300; --z-menu:400; --z-scrim:500; --z-modal:510; --z-alert:520;
+  /* 1.8 움직임 */
+  --motion-fast:.12s; --motion-normal:.2s; --motion-spin:1s;
+  /* 4.1 브레이크포인트 (미디어 쿼리에는 변수를 못 써서 스크립트가 1024px로 판단) */
+  --bp-desktop:1024px;
+  /* 목업 보조: 화면 높이 (휴대폰 틀 보기일 때 스크립트가 틀 높이로 바꿈) */
+  --screen-h:100vh;
+}
+@supports (height:100dvh){ :root{ --screen-h:100dvh; } }
+
+/* 대표색 후보 B·C (05 1.1.1 비교표). 마우스 올림·누름·옅은 색은 05에 값이 없어 목업에서 임의로 만듦 */
+html[data-primary="B"]{ --color-primary:#1F4E79; --color-primary-hover:#1A4267; --color-primary-pressed:#143552; --color-primary-soft:#E6EDF4; }
+html[data-primary="C"]{ --color-primary:#3A6EA5; --color-primary-hover:#315D8C; --color-primary-pressed:#284C73; --color-primary-soft:#E8F0F8; }
+/* 상태 색 조합 ②·③ (05 1.1.3 비교표). 공실은 같은 초록, 수업중 색만 바뀜. 값은 목업 임의 */
+html[data-status-colors="2"]{ --color-busy-text:#4B5563; --color-busy-bg:#EEF0F3; --color-busy-border:#7F8995; }
+html[data-status-colors="3"]{ --color-busy-text:#B42318; --color-busy-bg:#FDECEA; --color-busy-border:#D2463B; }
+
+/* ----- 다크: 비교용 임시 색 (05는 라이트만 확정, 다크 모드는 범위 밖). 글자 대비는 WCAG AA 4.5:1 이상으로 고름 ----- */
+html[data-theme="dark"]{
+  color-scheme:dark;
+  --color-bg:#141A21;
+  --color-bg-subtle:#1B222B;
+  --color-text:#E4E9EF;
+  --color-text-secondary:#A7B2BF;
+  --color-text-disabled:#5E6975;
+  --color-border:#33404D;
+  --color-border-strong:#7E8C9C;
+  --color-hover-bg:#212A35;
+  --color-pressed-bg:#2B3644;
+  --color-scrim:rgba(0,0,0,.6);
+  --color-primary:#8DB4DD;
+  --color-primary-hover:#A3C3E6;
+  --color-primary-pressed:#B8D1EC;
+  --color-primary-soft:#1E2E42;
+  --color-text-on-primary:#0D1B2A;
+  --color-free-text:#7ACB95;
+  --color-free-bg:#15291D;
+  --color-free-border:#3F9A63;
+  --color-busy-text:#EDB27E;
+  --color-busy-bg:#33241A;
+  --color-busy-border:#C0773A;
+  --color-danger-text:#FF9A8F;
+  --color-danger-bg:#3A1C19;
+  --color-notice-text:#D2DCE7;
+  --color-notice-bg:#1D2733;
+  --color-notice-border:#6F8AA3;
+  --color-banner-text:#CFE0F3;
+  --color-banner-bg:#1B2B3D;
+  --color-map-label-halo:#141A21;
+  --color-map-ground:#1A221C;
+  --color-map-building-off:#39424F;
+  --color-map-building-on:#2C4360;
+  --color-map-road:#2A323C;
+  --color-map-green:#1F3024;
+  --color-map-edge:#4D5866;
+  --color-map-track:#3A332B;
+  --color-map-road-edge:#39424D;
+  --color-map-lot:#242B33;
+  --shadow-1:0 1px 2px rgba(0,0,0,.4);
+  --shadow-2:0 4px 12px rgba(0,0,0,.45);
+  --shadow-3:0 12px 32px rgba(0,0,0,.6);
+}
+html[data-theme="dark"][data-primary="B"]{ --color-primary:#7FA7D1; --color-primary-hover:#96B8DB; --color-primary-pressed:#ACC8E5; --color-primary-soft:#1B2A3C; }
+html[data-theme="dark"][data-primary="C"]{ --color-primary:#9FC4EE; --color-primary-hover:#B4D1F2; --color-primary-pressed:#C8DEF6; --color-primary-soft:#203247; }
+html[data-theme="dark"][data-status-colors="2"]{ --color-busy-text:#B8C0CA; --color-busy-bg:#262C34; --color-busy-border:#7A8591; }
+html[data-theme="dark"][data-status-colors="3"]{ --color-busy-text:#FF9A8F; --color-busy-bg:#3A1C19; --color-busy-border:#D2574C; }
+
+/* =====================================================================
+   2. 기본
+   ===================================================================== */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ -webkit-text-size-adjust:100%; }
+body{
+  margin:0; background:var(--color-bg); color:var(--color-text);
+  font-family:var(--font-family-base); font-size:var(--font-size-md);
+  line-height:var(--font-line-normal); font-weight:var(--font-weight-regular);
+  word-break:keep-all; overflow-wrap:anywhere;
+}
+button{ font:inherit; color:inherit; background:none; border:0; padding:0; margin:0; cursor:pointer; text-align:inherit; }
+h1,h2,h3,p{ margin:0; }
+.num{ font-variant-numeric:tabular-nums; }
+[hidden]{ display:none !important; }
+
+/* =====================================================================
+   3. 공통 부품 (05 2장)
+   ===================================================================== */
+/* 2.1 단추 */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:var(--space-2);
+  min-height:var(--size-control-pc); padding:0 var(--space-4); border-radius:var(--radius-md);
+  font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); line-height:var(--font-line-tight);
+  white-space:nowrap; transition:background-color var(--motion-fast), color var(--motion-fast), border-color var(--motion-fast);
+}
+.is-m .btn{ min-height:var(--size-target-touch); }
+.btn-primary{ background:var(--color-primary); color:var(--color-text-on-primary); }
+.is-pc .btn-primary:hover{ background:var(--color-primary-hover); }
+.btn-primary:active{ background:var(--color-primary-pressed); }
+.btn-secondary{ background:var(--color-bg); color:var(--color-text); border:1px solid var(--color-border-strong); }
+.is-pc .btn-secondary:hover{ background:var(--color-hover-bg); }
+.btn-secondary:active{ background:var(--color-pressed-bg); }
+.btn-text{ color:var(--color-primary); padding:0 var(--space-3); }
+.is-pc .btn-text:hover{ background:var(--color-hover-bg); text-decoration:underline; }
+.btn-text:active{ background:var(--color-pressed-bg); }
+.ibtn{
+  width:var(--size-control-pc); height:var(--size-control-pc); flex:none;
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:var(--radius-md); color:var(--color-text-secondary);
+  transition:background-color var(--motion-fast), color var(--motion-fast);
+}
+.is-m .ibtn{ width:var(--size-target-touch); height:var(--size-target-touch); }
+.is-pc .ibtn:hover{ background:var(--color-hover-bg); color:var(--color-text); }
+.ibtn:active, .ibtn.on{ background:var(--color-pressed-bg); }
+.ibtn svg{ display:block; }
+
+/* 2.2 탭 */
+.tabs{ display:flex; flex:none; border-bottom:1px solid var(--color-border); padding:0 var(--space-4); background:var(--color-bg); }
+.is-m .tabs{ padding:0 var(--space-4); }
+.tab{ position:relative; height:44px; padding:0 var(--space-4); color:var(--color-text-secondary); font-weight:var(--font-weight-regular); transition:background-color var(--motion-fast), color var(--motion-fast); }
+.is-pc .tab:hover{ color:var(--color-text); background:var(--color-hover-bg); }
+.tab:active{ background:var(--color-pressed-bg); }
+.tab.sel{ color:var(--color-primary); font-weight:var(--font-weight-semibold); }
+.tab.sel::after{ content:""; position:absolute; left:0; right:0; bottom:-1px; height:3px; background:var(--color-primary); }
+
+/* 2.3 달력 */
+.cal-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:var(--space-2); }
+.cal-title{ font-size:var(--font-size-lg); font-weight:var(--font-weight-bold); }
+.cal-nav{ width:var(--size-target-pc); height:var(--size-target-pc); }
+.is-m .cal-nav{ width:var(--size-target-touch); height:var(--size-target-touch); }
+.cal-grid{ display:grid; grid-template-columns:repeat(7, minmax(0,1fr)); justify-items:center; row-gap:2px; }
+.dow{ font-size:var(--font-size-sm); color:var(--color-text-secondary); height:28px; display:flex; align-items:center; }
+.day{
+  width:var(--size-calendar-cell); height:var(--size-calendar-cell); border-radius:var(--radius-md);
+  display:flex; align-items:center; justify-content:center; position:relative;
+  font-size:var(--font-size-sm); font-variant-numeric:tabular-nums; color:var(--color-text);
+  transition:background-color var(--motion-fast);
+}
+.is-m .day{ width:100%; max-width:56px; height:auto; min-height:44px; aspect-ratio:1/1; }
+.day.blank{ visibility:hidden; }
+.day.today{ box-shadow:inset 0 0 0 2px var(--color-primary); font-weight:var(--font-weight-semibold); }
+.day.sel{ background:var(--color-primary); color:var(--color-text-on-primary); font-weight:var(--font-weight-bold); }
+.day.sel.today{ box-shadow:0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary); }
+.is-pc .day.can:not(.sel):hover{ background:var(--color-primary-soft); }
+.day.can:not(.sel):active{ background:var(--color-pressed-bg); }
+.day.off{ color:var(--color-text-disabled); cursor:default; }
+/* 오늘이 주말·공휴일·방학이고 골라져 있을 때 (보류 후보, 05 2.17) */
+.day.off.tl1{ box-shadow:inset 0 0 0 2px var(--color-primary); }
+.day.off.tl2{ background:var(--color-primary); color:var(--color-text-on-primary); font-weight:var(--font-weight-bold); box-shadow:0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary); }
+.day.off.tl3{ background:var(--color-primary-soft); box-shadow:inset 0 0 0 2px var(--color-primary); }
+
+/* 2.4 교시 단추 */
+.periods{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--space-2); }
+.per{
+  height:var(--size-period-button-pc); border:1px solid var(--color-border); border-radius:var(--radius-md);
+  background:var(--color-bg); display:flex; flex-direction:column; align-items:center; justify-content:center;
+  line-height:var(--font-line-tight); transition:background-color var(--motion-fast);
+}
+.is-m .per{ height:var(--size-period-button-mobile); }
+.per .pn{ font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); }
+.per .pt{ font-size:var(--font-size-xs); color:var(--color-text-secondary); }
+.is-pc .per:not(.sel):hover{ background:var(--color-primary-soft); }
+.per:not(.sel):active{ background:var(--color-pressed-bg); }
+.per.sel{ background:var(--color-primary); border-color:var(--color-primary); color:var(--color-text-on-primary); }
+.per.sel .pt{ color:var(--color-text-on-primary); }
+
+/* 2.5 헤드 배너 */
+.banner{
+  display:flex; align-items:center; gap:var(--space-3); min-height:40px; padding:var(--space-1) var(--space-6);
+  background:var(--color-banner-bg); color:var(--color-banner-text); font-size:var(--font-size-sm);
+  line-height:var(--font-line-normal); border-bottom:1px solid var(--color-border); flex:none;
+}
+.banner .bt{ flex:1; min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.banner .btn-text{ min-height:var(--size-target-pc); font-size:var(--font-size-sm); flex:none; }
+.is-m .banner{ padding:var(--space-1) var(--space-4); }
+.is-m .banner .bt{ white-space:normal; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.is-m .banner .btn-text{ min-height:var(--size-target-touch); }
+
+/* 2.6 팝업 / 2.7 안내 창 */
+.scrim{ position:fixed; inset:0; background:var(--color-scrim); z-index:var(--z-scrim); }
+.modal-wrap, .alert-wrap{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; padding:var(--space-4); pointer-events:none; }
+.modal-wrap{ z-index:var(--z-modal); }
+.alert-wrap{ z-index:var(--z-alert); }
+.modal{
+  pointer-events:auto; width:var(--size-popup-width); max-width:100%; max-height:80%;
+  background:var(--color-bg); border-radius:var(--radius-lg); box-shadow:var(--shadow-3);
+  display:flex; flex-direction:column; overflow:hidden;
+}
+.modal-head{ display:flex; align-items:flex-start; gap:var(--space-2); padding:var(--space-4) var(--space-4) var(--space-3) var(--space-6); flex:none; }
+.modal-title{ flex:1; min-width:0; font-size:var(--font-size-xl); font-weight:var(--font-weight-bold); line-height:var(--font-line-tight); padding-top:8px; }
+.modal-body{ padding:0 var(--space-6) var(--space-6); overflow:auto; white-space:pre-line; line-height:var(--font-line-normal); min-height:0; flex:1 1 auto; }
+.modal-foot{ flex:none; border-top:1px solid var(--color-border); padding:var(--space-2) var(--space-6) var(--space-2) var(--space-5); }
+.modal-count{ font-size:var(--font-size-xs); color:var(--color-text-secondary); padding:0 var(--space-6) var(--space-2); }
+.alert{
+  pointer-events:auto; width:var(--size-alert-width); max-width:100%;
+  background:var(--color-bg); border-radius:var(--radius-lg); box-shadow:var(--shadow-3); padding:var(--space-6);
+}
+.alert p{ line-height:var(--font-line-normal); margin-bottom:var(--space-4); }
+.alert .aact{ display:flex; justify-content:flex-end; }
+
+/* 2.8 패널 (S-04) */
+.panel{ display:none; background:var(--color-bg); }
+.panel.open{ display:flex; flex-direction:column; }
+.is-pc .panel.open{
+  width:var(--size-panel-width); flex:none; position:relative; z-index:var(--z-panel);
+  border-left:1px solid var(--color-border); box-shadow:var(--shadow-2); animation:slideR var(--motion-normal) ease-out;
+}
+.is-m .panel.open{
+  position:fixed; left:0; right:0; bottom:0; height:var(--size-sheet-height); z-index:var(--z-panel);
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0; box-shadow:0 -4px 12px rgba(0,0,0,.12); animation:slideU var(--motion-normal) ease-out;
+}
+html[data-theme="dark"] .is-m .panel.open{ box-shadow:0 -4px 12px rgba(0,0,0,.5); border-top:1px solid var(--color-border); }
+@keyframes slideR{ from{ transform:translateX(100%); } to{ transform:none; } }
+@keyframes slideU{ from{ transform:translateY(100%); } to{ transform:none; } }
+.panel-x{ position:absolute; top:var(--space-2); right:var(--space-2); z-index:1; }
+.panel-in{ flex:1; min-height:0; overflow:auto; padding:var(--space-5); display:flex; flex-direction:column; gap:var(--space-3); }
+.p-bname{ font-size:var(--font-size-xl); font-weight:var(--font-weight-bold); line-height:var(--font-line-tight); padding-right:44px; }
+.p-room{ font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); margin-top:calc(var(--space-2) * -1); }
+.p-base{ font-size:var(--font-size-sm); color:var(--color-text-secondary); }
+.p-time{ font-size:var(--font-size-md); }
+.p-fixed{ font-size:var(--font-size-sm); color:var(--color-text-secondary); }
+.p-report{ width:100%; margin-top:auto; }
+.kv{ display:grid; grid-template-columns:auto 1fr; column-gap:var(--space-4); row-gap:var(--space-2); align-items:baseline; }
+.kv dt{ font-size:var(--font-size-sm); color:var(--color-text-secondary); }
+.kv dd{ margin:0; font-size:var(--font-size-md); }
+
+/* 2.9 목록 줄 */
+.list{ max-width:720px; }
+.row{
+  display:flex; align-items:center; gap:var(--space-3); width:100%; min-height:var(--size-list-row-pc);
+  padding:var(--space-3) var(--space-4); border-bottom:1px solid var(--color-border); background:var(--color-bg);
+  text-align:left; transition:background-color var(--motion-fast);
+}
+.is-m .row{ min-height:var(--size-list-row-mobile); }
+.row .t{ flex:1; min-width:0; }
+.row .chev{ flex:none; color:var(--color-text-secondary); display:flex; }
+.is-pc .row:hover{ background:var(--color-hover-bg); }
+.row:active{ background:var(--color-pressed-bg); }
+.group-head{ font-size:var(--font-size-sm); font-weight:var(--font-weight-bold); color:var(--color-text-secondary); background:var(--color-bg-subtle); padding:var(--space-2) var(--space-4); border-bottom:1px solid var(--color-border); }
+
+/* 2.10 강의실 칸 */
+.rooms{ display:flex; flex-wrap:wrap; gap:var(--space-2); }
+.room{
+  position:relative; min-width:var(--size-room-cell-w); min-height:var(--size-room-cell-h);
+  padding:var(--space-1) var(--space-3); border-radius:var(--radius-md);
+  border:1px solid var(--color-border); background:var(--color-bg);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--space-1);
+  line-height:var(--font-line-tight); transition:border-color var(--motion-fast);
+}
+.room .no{ font-size:var(--font-size-md); font-weight:var(--font-weight-bold); }
+.st, .stchip{ display:inline-flex; align-items:center; gap:var(--space-1); font-size:var(--font-size-sm); }
+.free .st, .stchip.free{ color:var(--color-free-text); font-weight:var(--font-weight-bold); }
+.busy .st, .stchip.busy{ color:var(--color-busy-text); font-weight:var(--font-weight-regular); }
+.ico{ display:none; flex:none; }
+html[data-status-shape="3"] .ico{ display:block; }
+html[data-status-shape="1"] .room.free{ background:var(--color-free-bg); border-color:var(--color-free-border); }
+html[data-status-shape="1"] .room.busy{ background:var(--color-busy-bg); border-color:var(--color-busy-border); }
+.is-pc .room:hover{ border-color:var(--color-border-strong); box-shadow:inset 0 0 0 1px var(--color-border-strong); }
+.room:active::after{ content:""; position:absolute; inset:0; border-radius:inherit; background:rgba(0,0,0,.05); }
+.room.cur, .is-pc .room.cur:hover{ border-color:var(--color-primary); box-shadow:inset 0 0 0 1px var(--color-primary); }
+/* S-04 상태 표시 (S-03 칸과 같은 모양) */
+.stchip{ align-self:flex-start; font-size:var(--font-size-md); padding:var(--space-1) var(--space-3); border-radius:var(--radius-md); border:1px solid var(--color-border); }
+html[data-status-shape="1"] .stchip.free{ background:var(--color-free-bg); border-color:var(--color-free-border); }
+html[data-status-shape="1"] .stchip.busy{ background:var(--color-busy-bg); border-color:var(--color-busy-border); }
+
+/* 2.11 안내 문구 칸 */
+.note{
+  background:var(--color-notice-bg); border-left:4px solid var(--color-notice-border); color:var(--color-notice-text);
+  font-size:var(--font-size-sm); line-height:var(--font-line-normal); padding:var(--space-2) var(--space-3); border-radius:var(--radius-sm);
+}
+.err{
+  background:var(--color-danger-bg); color:var(--color-danger-text); font-size:var(--font-size-md);
+  border-radius:var(--radius-md); padding:var(--space-4) var(--space-5); text-align:center;
+  max-width:440px; margin:var(--space-12) auto 0;
+}
+.err .btn{ margin-top:var(--space-3); }
+.empty{ color:var(--color-text-secondary); font-size:var(--font-size-md); text-align:center; padding:var(--space-10) var(--space-4) 0; }
+.fixed-note{ font-size:var(--font-size-sm); color:var(--color-text-secondary); }
+
+/* 2.12 불러오는 중 */
+.loading{ display:flex; flex-direction:column; align-items:center; gap:var(--space-2); padding-top:var(--space-12); color:var(--color-text-secondary); font-size:var(--font-size-sm); }
+.spinner{ width:var(--size-spinner); height:var(--size-spinner); border-radius:var(--radius-full); border:3px solid var(--color-border); border-top-color:var(--color-primary); animation:spin var(--motion-spin) linear infinite; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* 2.13 체크 칸 */
+.chk-row{ display:inline-flex; align-items:center; gap:var(--space-2); min-height:var(--size-target-pc); padding:0 var(--space-1); border-radius:var(--radius-sm); cursor:pointer; font-size:var(--font-size-sm); }
+.is-m .chk-row{ min-height:var(--size-target-touch); }
+.chk{ appearance:none; -webkit-appearance:none; margin:0; width:20px; height:20px; flex:none; border:2px solid var(--color-border-strong); border-radius:var(--radius-sm); background:var(--color-bg); position:relative; cursor:pointer; }
+.is-pc .chk-row:hover .chk{ border-color:var(--color-text); }
+.chk-row:active .chk{ box-shadow:0 0 0 4px var(--color-pressed-bg); }
+.chk:checked{ background:var(--color-primary); border-color:var(--color-primary); }
+.chk:checked::after{ content:""; position:absolute; left:5px; top:1px; width:6px; height:11px; border:solid var(--color-text-on-primary); border-width:0 2px 2px 0; transform:rotate(45deg); }
+
+/* =====================================================================
+   4. 틀·배치 (04 2.0, 05 4장) - is-pc: 1024px 이상 / is-m: 1024px 미만(휴대폰 배치)
+   ===================================================================== */
+.site{ background:var(--color-bg); color:var(--color-text); position:relative; }
+.is-pc{ height:var(--screen-h); display:flex; flex-direction:column; overflow:hidden; }
+/* A. 머리 영역 */
+.hdr{ position:relative; z-index:var(--z-header); background:var(--color-bg); border-bottom:1px solid var(--color-border); flex:none; }
+.is-pc .hdr{ height:var(--size-header-pc); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:var(--space-4); padding:0 var(--space-6); }
+.svc{ font-size:var(--font-size-lg); font-weight:var(--font-weight-bold); line-height:var(--font-line-tight); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.stamp{ font-size:var(--font-size-sm); color:var(--color-text-secondary); white-space:nowrap; font-variant-numeric:tabular-nums; }
+.acts{ justify-self:end; display:flex; align-items:center; gap:var(--space-1); }
+.is-m .hdr{ padding:0 var(--space-4); }
+.hrow{ height:var(--size-header-mobile); display:flex; align-items:center; gap:var(--space-2); }
+.is-m .svc{ flex:1; min-width:0; }
+.is-m .stamp{ font-size:var(--font-size-xs); white-space:normal; padding-bottom:var(--space-2); min-height:1px; }
+.menu{ position:absolute; left:0; right:0; top:100%; z-index:var(--z-menu); background:var(--color-bg); box-shadow:var(--shadow-2); border-top:1px solid var(--color-border); }
+.mrow{ display:flex; align-items:center; width:100%; min-height:48px; padding:0 var(--space-4); border-bottom:1px solid var(--color-border); color:var(--color-primary); font-weight:var(--font-weight-semibold); }
+.mrow:active{ background:var(--color-pressed-bg); }
+/* 본문 줄 */
+.main{ position:relative; }
+.is-pc .main{ flex:1; min-height:0; display:flex; }
+/* C. 필터 영역 */
+.filter{ background:var(--color-bg-subtle); }
+.is-pc .filter{ width:var(--size-filter-width); flex:none; overflow:auto; padding:var(--space-4); border-right:1px solid var(--color-border); }
+.is-m .filter{ border-bottom:1px solid var(--color-border); }
+.f-gap{ height:var(--space-8); }
+.f-note{ margin-top:var(--space-3); }
+.fsum{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-2); width:100%; min-height:48px; padding:0 var(--space-4); font-weight:var(--font-weight-semibold); }
+.fsum:active{ background:var(--color-pressed-bg); }
+.fsum .car{ color:var(--color-text-secondary); font-size:var(--font-size-sm); }
+.fbody{ padding:var(--space-2) var(--space-4) var(--space-4); max-width:520px; }
+.fnote{ padding:0 var(--space-4) var(--space-3); }
+/* D. 가운데 구역 */
+.center{ position:relative; background:var(--color-bg); }
+.is-pc .center{ flex:1; min-width:0; display:flex; flex-direction:column; }
+.scr{ display:none; }
+.is-pc .scr.on{ display:flex; flex-direction:column; flex:1; min-height:0; }
+.is-m .scr.on{ display:block; }
+.tabbody{ position:relative; }
+.is-pc .tabbody{ flex:1; min-height:0; display:flex; flex-direction:column; }
+.is-pc .blist{ flex:1; min-height:0; overflow:auto; }
+.is-pc #scr-floor.on, .is-pc #scr-notices.on{ overflow:auto; }
+/* E. 바닥 영역 */
+.ftr{ flex:none; background:var(--color-bg-subtle); color:var(--color-text-secondary); font-size:var(--font-size-xs); line-height:var(--font-line-normal); border-top:1px solid var(--color-border); padding:var(--space-3) var(--space-6); display:flex; flex-wrap:wrap; align-items:center; column-gap:var(--space-4); row-gap:var(--space-1); }
+.is-m .ftr{ padding:var(--space-3) var(--space-4); flex-direction:column; align-items:flex-start; }
+.flink{ color:var(--color-primary); text-decoration:underline; font-size:var(--font-size-xs); min-height:var(--size-target-pc); display:inline-flex; align-items:center; }
+.is-m .flink{ min-height:var(--size-target-touch); }
+
+/* ----- S-01 캠퍼스맵 ----- */
+.mapvp{ position:relative; overflow:hidden; background:var(--color-bg-subtle); touch-action:none; user-select:none; -webkit-user-select:none; cursor:grab; }
+.is-pc .mapvp{ flex:1; min-height:0; }
+.is-m .mapvp{ height:calc(var(--screen-h) * .6); }
+.mapvp.dragging{ cursor:grabbing; }
+.mapvp > svg{ position:absolute; inset:0; width:100%; height:100%; display:block; }
+.m-ground{ fill:var(--color-map-ground); }
+.m-green{ fill:var(--color-map-green); }
+.m-rd, .m-rd-edge, .m-foot{ fill:none; stroke-linecap:round; stroke-linejoin:round; }  /* 도로: 둥근 끝·둥근 모서리 */
+.m-rd{ stroke:var(--color-map-road); }
+.m-rd-edge{ stroke:var(--color-map-road-edge); }
+.m-foot{ stroke:var(--color-map-road); stroke-opacity:.85; }
+.m-lot{ fill:var(--color-map-lot); }
+.m-plaza{ fill:var(--color-map-road); fill-opacity:.55; }
+.m-track{ fill:var(--color-map-track); }
+.m-line{ fill:none; stroke:var(--color-map-road); stroke-opacity:.85; stroke-width:1px; vector-effect:non-scaling-stroke; }
+.m-gate{ fill:var(--color-text-secondary); }
+.m-bgb{ fill:var(--color-map-building-off); stroke:var(--color-map-edge); stroke-width:1px; vector-effect:non-scaling-stroke; }  /* 이름 없는 바탕 건물 */
+.bld .base{ fill:var(--color-map-building-off); stroke:var(--color-map-edge); stroke-width:1px; vector-effect:non-scaling-stroke; }
+.bld.on .base{ fill:var(--color-map-building-on); }
+.mapvp.nodata .bld.on .base{ fill:var(--color-map-building-off); }
+.bld .hl{ fill:var(--color-map-highlight); fill-opacity:0; stroke:none; vector-effect:non-scaling-stroke; }
+.mapvp:not(.inert) .bld.on, .mapvp:not(.inert) .bld.tap{ cursor:pointer; }
+.is-pc .mapvp:not(.inert):not(.dragging) .bld.on:hover .hl{ fill-opacity:.25; stroke:var(--color-map-highlight); stroke-width:2px; }
+.lbl{ font-size:var(--font-size-sm); font-weight:var(--font-weight-semibold); fill:var(--color-map-label-text); stroke:var(--color-map-label-halo); stroke-width:6px; stroke-linejoin:round; paint-order:stroke; text-anchor:middle; dominant-baseline:central; pointer-events:none; }
+.lbl.pl{ font-size:var(--font-size-xs); font-weight:var(--font-weight-regular); fill:var(--color-text-secondary); }  /* 위치 표시(운동장·문): 건물이 아님, 누를 수 없음 */
+.zoom{ position:absolute; right:var(--space-4); bottom:var(--space-4); z-index:var(--z-map-control); display:flex; flex-direction:column; background:var(--color-bg); border-radius:var(--radius-md); box-shadow:var(--shadow-1); overflow:hidden; border:1px solid var(--color-border); }
+.zoom button{ width:var(--size-control-pc); height:var(--size-control-pc); display:flex; align-items:center; justify-content:center; color:var(--color-text-secondary); background:var(--color-bg); }
+.zoom button + button{ border-top:1px solid var(--color-border); }
+.is-m .zoom button{ width:var(--size-target-touch); height:var(--size-target-touch); }
+.is-pc .zoom button:not(:disabled):hover{ background:var(--color-hover-bg); color:var(--color-text); }
+.zoom button:not(:disabled):active{ background:var(--color-pressed-bg); }
+.zoom button:disabled{ color:var(--color-text-disabled); cursor:default; }
+.map-over{ position:absolute; inset:0; background:color-mix(in srgb, var(--color-bg) 70%, transparent); pointer-events:none; z-index:var(--z-map-label); }
+.strip{ position:absolute; top:56px; left:50%; transform:translateX(-50%); z-index:var(--z-map-control); width:max-content; max-width:calc(100% - 32px); box-shadow:var(--shadow-2); }
+
+/* ----- S-03 층별 안내도 ----- */
+.fhead{ position:sticky; top:0; z-index:var(--z-sticky); background:var(--color-bg); border-bottom:1px solid var(--color-border); padding:var(--space-4) var(--space-6) var(--space-3); display:flex; flex-direction:column; gap:var(--space-2); }
+.is-m .fhead{ padding:var(--space-3) var(--space-4); }
+.fh-top{ display:flex; align-items:center; flex-wrap:wrap; column-gap:var(--space-3); row-gap:var(--space-1); }
+.fh-top .btn-text{ padding:0 var(--space-2); margin-left:calc(var(--space-2) * -1); }
+.bname{ font-size:var(--font-size-2xl); font-weight:var(--font-weight-bold); line-height:var(--font-line-tight); }
+.is-m .bname{ font-size:var(--font-size-xl); }
+.fbase{ font-size:var(--font-size-md); font-variant-numeric:tabular-nums; }
+.jumps{ display:flex; flex-wrap:wrap; gap:var(--space-2); }
+.jumps .btn{ min-height:var(--size-target-pc); padding:0 var(--space-3); }
+.is-m .jumps .btn{ min-height:var(--size-target-touch); }
+.floors{ padding:0 var(--space-6) var(--space-6); }
+.is-m .floors{ padding:0 var(--space-4) var(--space-6); }
+.floor{ padding:var(--space-6) 0; border-top:1px solid var(--color-border); scroll-margin-top:calc(var(--fhead-h, 0px) + 8px); }
+.floor:first-child{ border-top:0; }
+.floor-name{ font-size:var(--font-size-lg); font-weight:var(--font-weight-bold); line-height:var(--font-line-tight); margin-bottom:var(--space-3); }
+.noroom{ color:var(--color-text-secondary); font-size:var(--font-size-sm); }
+.fp-cap{ font-size:var(--font-size-xs); color:var(--color-text-secondary); padding-top:var(--space-3); }
+.fp-cap + .floor{ border-top:0; }
+/* ① 강의실 배치 그림 */
+.plan{ border:2px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-2); display:flex; flex-direction:column; gap:var(--space-2); }
+.corr{ background:var(--color-bg-subtle); border-radius:var(--radius-sm); min-height:28px; display:flex; align-items:center; justify-content:center; font-size:var(--font-size-xs); color:var(--color-text-secondary); }
+/* ② 실제 지도 참고: 위에서 본 건물 윤곽 */
+.fp{ display:flex; flex-direction:column; }
+.wing{ border:1px solid var(--color-border-strong); padding:var(--space-3); background:var(--color-bg); }
+.fp.L .wing.b{ width:50%; min-width:118px; border-top:0; }
+
+/* ----- S-10 공지사항 모음 ----- */
+.nhead{ display:flex; align-items:center; flex-wrap:wrap; gap:var(--space-3); padding:var(--space-4) var(--space-6) var(--space-3); border-bottom:1px solid var(--color-border); }
+.is-m .nhead{ padding:var(--space-3) var(--space-4); }
+.nhead .btn-text{ padding:0 var(--space-2); margin-left:calc(var(--space-2) * -1); }
+.ntitle{ font-size:var(--font-size-xl); font-weight:var(--font-weight-bold); }
+
+/* =====================================================================
+   5. 목업 전용 (사이트의 일부가 아님) - 휴대폰 틀, 조정판, 목업 알림
+   ===================================================================== */
+body.phone-on{ background:#2F3542; }
+.stage.phone{ min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:20px 16px 64px; }
+.stage.phone .frame{ width:360px; flex:none; transform:translateZ(0); overflow:hidden; border-radius:20px; outline:8px solid #111418; box-shadow:0 20px 60px rgba(0,0,0,.5); background:var(--color-bg); }
+.stage.phone .scroller{ height:100%; overflow-y:auto; overflow-x:auto; scrollbar-width:none; }
+.stage.phone .scroller::-webkit-scrollbar{ display:none; }
+.phone-cap{ display:none; margin-top:18px; color:#FDE68A; font:600 13px/1.4 var(--font-family-base); border:1px dashed #FDE68A; border-radius:6px; padding:4px 10px; }
+.stage.phone .phone-cap{ display:block; }
+
+#mock-tab{
+  position:fixed; right:0; top:50%; transform:translateY(-50%); z-index:9000;
+  writing-mode:vertical-rl; padding:14px 6px; background:#FFF4C2; color:#5A3A00;
+  border:2px dashed #B45309; border-right:0; border-radius:8px 0 0 8px;
+  font:700 13px/1.2 var(--font-family-base); letter-spacing:.08em; box-shadow:-2px 2px 8px rgba(0,0,0,.2);
+}
+body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]를 가리지 않게 위로 옮김 */
+#mock{
+  position:fixed; top:0; right:0; bottom:0; width:min(420px, 100vw); z-index:9001; display:none;
+  background:#FFFBEA; color:#1F2933; color-scheme:light; border-left:3px dashed #B45309;
+  box-shadow:-8px 0 24px rgba(0,0,0,.28); overflow:auto; font:14px/1.5 var(--font-family-base); word-break:keep-all;
+}
+#mock.open{ display:block; }
+#mock .mhead{ position:sticky; top:0; z-index:2; padding:12px 16px; border-bottom:2px dashed #B45309; background:repeating-linear-gradient(45deg,#FDE68A 0 10px,#FEF3C7 10px 20px); display:flex; align-items:flex-start; gap:8px; }
+#mock .mhead .mt{ flex:1; }
+#mock .mhead strong{ font-size:16px; }
+#mock .badge{ display:inline-block; background:#7C2D12; color:#fff; font-size:12px; font-weight:700; padding:2px 8px; border-radius:999px; margin-right:6px; vertical-align:2px; }
+#mock section{ padding:12px 16px 14px; border-bottom:1px dashed #D6B35A; }
+#mock h3{ font-size:14px; font-weight:700; margin:0 0 8px; color:#5A3A00; }
+#mock h4{ font-size:13px; font-weight:700; margin:10px 0 4px; }
+#mock .hint{ font-size:12px; color:#6B5310; margin:2px 0 6px; }
+#mock label.o{ display:flex; gap:6px; align-items:flex-start; padding:2px 0; cursor:pointer; }
+#mock label.o input{ margin-top:4px; }
+#mock .fld{ margin:0 0 10px; }
+#mock .fld > span{ display:block; font-size:13px; font-weight:600; margin-bottom:3px; }
+#mock select, #mock input[type="datetime-local"]{ width:100%; padding:6px 8px; border:1px solid #B8A36A; border-radius:6px; background:#fff; color:#1F2933; font:inherit; }
+#mock .mbtn{ border:1px solid #B45309; background:#fff; color:#7C2D12; border-radius:6px; padding:6px 10px; margin:4px 4px 0 0; font-weight:600; font-size:13px; }
+#mock .mbtn:hover{ background:#FEF3C7; }
+#mock .readout{ font-size:13px; background:#fff; border:1px solid #E8D9A8; border-radius:6px; padding:6px 8px; }
+#mock .readout b{ color:#7C2D12; }
+#mock ul{ margin:4px 0 0; padding-left:18px; font-size:13px; }
+#mock li{ margin:2px 0; }
+#mock-toast{
+  position:fixed; left:50%; bottom:24px; transform:translateX(-50%); z-index:9002; display:none;
+  width:max-content; max-width:calc(100vw - 32px); background:#FFFBEA; color:#1F2933;
+  border:2px dashed #B45309; border-radius:10px; padding:10px 14px; box-shadow:0 8px 24px rgba(0,0,0,.25);
+  font:14px/1.5 var(--font-family-base); word-break:keep-all;
+}
+#mock-toast .badge{ display:inline-block; background:#7C2D12; color:#fff; font-size:11px; font-weight:700; padding:1px 7px; border-radius:999px; margin-right:6px; }
+</style>
+</head>
+<body>
+<!-- ============ 사이트 영역 (학생 화면 목업) ============ -->
+<div id="stage" class="stage">
+  <div id="frame" class="frame">
+    <div id="scroller" class="scroller">
+      <div id="site" class="site is-pc">
+        <header id="hdr" class="hdr"></header>
+        <div id="banner" class="banner" role="region" aria-label="헤드 배너" hidden></div>
+        <div id="main" class="main">
+          <aside id="filter" class="filter" aria-label="날짜·교시 고르기"></aside>
+          <main id="center" class="center">
+            <!-- S-01 캠퍼스맵 / S-02 건물 목록 (탭으로 바뀜) -->
+            <section id="scr-map" class="scr" aria-label="캠퍼스맵과 건물 목록">
+              <div class="tabs" role="tablist">
+                <button class="tab" role="tab" data-act="tab" data-tab="map" id="tab-map">캠퍼스맵</button>
+                <button class="tab" role="tab" data-act="tab" data-tab="list" id="tab-list">건물 목록</button>
+              </div>
+              <div class="tabbody" id="tabbody">
+                <div id="tabmsg" hidden></div>
+                <div id="mapvp" class="mapvp" aria-label="캠퍼스맵">
+                  <svg id="mapsvg" role="img" aria-label="캠퍼스맵 (오픈스트리트맵 자료로 그린 지도, 정문이 아래쪽)"><g id="mapg"></g><g id="lblg"></g></svg>
+                  <div id="map-over" class="map-over" hidden></div>
+                  <div class="zoom">
+                    <button id="zin" data-act="zin" aria-label="확대"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+                    <button id="zout" data-act="zout" aria-label="축소"><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+                  </div>
+                </div>
+                <div id="blist" class="blist" hidden></div>
+              </div>
+            </section>
+            <!-- S-03 층별 안내도 -->
+            <section id="scr-floor" class="scr" aria-label="층별 안내도"></section>
+            <!-- S-10 공지사항 모음 -->
+            <section id="scr-notices" class="scr" aria-label="공지사항 모음"></section>
+            <!-- S-07 후보 ② 띠 / 강의실 없는 건물 짧은 안내 -->
+            <div id="strip" class="strip note" role="status" hidden></div>
+          </main>
+          <!-- S-04 강의실 상세 (PC 오른쪽 패널 / 휴대폰 아래 패널) -->
+          <aside id="panel" class="panel" aria-label="강의실 상세"></aside>
+        </div>
+        <footer id="ftr" class="ftr"></footer>
+        <!-- 화면 위에 뜨는 것: 가림막, S-05·S-06 팝업, S-07 안내 창 -->
+        <div id="scrim" class="scrim" hidden></div>
+        <div id="modal" class="modal-wrap" hidden></div>
+        <div id="alert" class="alert-wrap" hidden></div>
+      </div>
+    </div>
+  </div>
+  <div class="phone-cap">목업 전용 보기 - 휴대폰 너비 360px 틀 안에 사이트를 보여 주는 중입니다</div>
+</div>
+
+<!-- ============ 목업 조정판 (사이트의 일부가 아님) ============ -->
+<button id="mock-tab" type="button" aria-controls="mock" aria-expanded="false">목업 조정판</button>
+<aside id="mock" aria-label="목업 조정판 (목업 전용)">
+  <div class="mhead">
+    <div class="mt">
+      <div><span class="badge">목업 전용</span><strong>목업 조정판</strong></div>
+      <p class="hint">사이트 화면이 아닙니다. 모양 후보와 상황을 바꿔 보는 칸입니다. 설정은 이 브라우저에만 기억됩니다.</p>
+    </div>
+    <button type="button" class="mbtn" data-m="close">닫기</button>
+  </div>
+
+  <section>
+    <h3>지금 보는 것</h3>
+    <div class="readout" id="m-now"></div>
+  </section>
+
+  <section>
+    <h3>1. 보기</h3>
+    <div class="fld"><span>테마</span>
+      <label class="o"><input type="radio" name="m-theme" value="light"> 라이트 (05 확정)</label>
+      <label class="o"><input type="radio" name="m-theme" value="dark"> 다크 (비교용)</label>
+      <p class="hint">다크는 비교용 임시 색입니다. 05는 라이트만 확정했고, 다크 모드는 범위 밖입니다. (글자 대비는 WCAG AA 4.5:1 이상으로 맞춤)</p>
+    </div>
+    <div class="fld"><span>휴대폰 너비</span>
+      <label class="o"><input type="checkbox" id="m-phone"> 사이트를 휴대폰 너비(360px) 틀 안에 보기</label>
+      <p class="hint">창을 1024px 미만으로 줄여도 휴대폰 배치가 됩니다(05 4.1). 휴대폰 틀에서는 마우스 올림 모양이 나오지 않습니다(05 2.0).</p>
+    </div>
+  </section>
+
+  <section>
+    <h3>2. 상황 흉내 내기</h3>
+    <p class="hint">시각·데이터 상태를 바꾸면, 그 상황에서 사이트를 새로 연 것처럼 다시 엽니다(E-20과 같음).</p>
+    <div class="fld"><span>오늘 날짜 · 지금 시각 (한국 시간)</span>
+      <div id="m-scen"></div>
+      <input type="datetime-local" id="m-custom" aria-label="직접 입력할 날짜와 시각">
+      <button type="button" class="mbtn" data-m="apply-custom">직접 입력한 시각으로 열기</button>
+      <button type="button" class="mbtn" data-m="plus10">시계 10분 앞으로 (E-16)</button>
+      <p class="hint">"시계 10분 앞으로"는 켜 둔 채 시간이 지난 상황입니다. 필터는 그대로이고, 사이트의 [초기화]를 누르면 그때 교시로 바뀝니다.</p>
+    </div>
+    <div class="fld"><span>데이터 파일 (시간표·강의실·학기·공휴일)</span>
+      <label class="o"><input type="radio" name="m-data" value="ok"> 정상</label>
+      <label class="o"><input type="radio" name="m-data" value="loading"> 불러오는 중에 멈춤 (E-01)</label>
+      <label class="o"><input type="radio" name="m-data" value="fail"> 불러오기 실패 (E-02)</label>
+      <label class="o"><input type="radio" name="m-data" value="none"> 시간표 미등록 (E-04)</label>
+    </div>
+    <div class="fld"><span>공지용 시트</span>
+      <label class="o"><input type="radio" name="m-sheet" value="ok"> 정상</label>
+      <label class="o"><input type="radio" name="m-sheet" value="fail"> 불러오지 못함 (E-08·E-22)</label>
+    </div>
+    <div class="fld"><span>헤드 배너</span>
+      <label class="o"><input type="radio" name="m-banner" value="short"> 짧은 문구</label>
+      <label class="o"><input type="radio" name="m-banner" value="long"> 긴 문구 (PC 한 줄 넘침, 휴대폰 두 줄 넘침)</label>
+      <label class="o"><input type="radio" name="m-banner" value="none"> 없음 (E-08)</label>
+    </div>
+    <div class="fld"><span>안내 팝업 (S-05)</span>
+      <select id="m-popups">
+        <option value="0">없음 (E-08)</option>
+        <option value="1">1개</option>
+        <option value="2">2개 (차례로 뜸)</option>
+        <option value="3">3개 (마지막은 긴 내용)</option>
+      </select>
+    </div>
+    <div class="fld"><span>공지사항 목록 (S-10)</span>
+      <label class="o"><input type="radio" name="m-nlist" value="yes"> 있음</label>
+      <label class="o"><input type="radio" name="m-nlist" value="no"> 없음 (E-22)</label>
+    </div>
+    <button type="button" class="mbtn" data-m="reopen">사이트 다시 열기 (새로 고침 흉내, E-20)</button>
+    <button type="button" class="mbtn" data-m="clear-dismiss">"오늘은 그만 보기" 기록 지우기</button>
+    <p class="hint" id="m-dismiss"></p>
+  </section>
+
+  <section>
+    <h3>3. 보류 후보 바꿔 보기</h3>
+    <p class="hint">04·05의 "보류 - 목업에서 결정" 항목입니다. 문서에 제안 후보가 있으면 그 후보로, 없으면 ①로 시작합니다. 바꾸면 바로 반영됩니다.</p>
+    <div id="m-opts"></div>
+  </section>
+
+  <section>
+    <h3>4. 제안 확인 (04·05 "제안 - 목업에서 확인")</h3>
+    <div id="m-props"></div>
+  </section>
+
+  <section>
+    <h3>5. 예시 데이터로 볼 수 있는 것</h3>
+    <ul>
+      <li>학기(예시): 2026-2학기, 2026-09-01 ~ 2026-12-18. 공휴일(예시): 10/3, 10/5~10/7(추석), 10/9, 12/25.</li>
+      <li>캠퍼스맵: 오픈스트리트맵(OSM) 자료로 건물·도로·운동장을 실제 모양대로 그렸습니다. 방향은 학교 캠퍼스맵과 같게 정문이 아래쪽이고, 건물 번호·이름은 학교 캠퍼스맵 범례를 따릅니다. OSM에 없는 건물(A3·A8·A11·A13·A18·C4·C5·F2·F4)은 반듯한 사각형으로 대략 그렸습니다.</li>
+      <li>누를 수 있는 건물(예시 강의실이 있는 건물, 13곳): 약학대학(A2), 생명산업과학대학 1·2호관(B3·B4), 공과대학 1·2·3호관(D2·D3·D4), 기초교육관(E2), 사범대학 1·2·3호관(E3·E4·E5), 미래창조관(E6), 사회과학대학(E7), 인문예술대학(E8).</li>
+      <li>공과대학 1호관(D2), 목요일 3교시: 301 공실·남은 수업 없음(E-12), 302 수업중·13:50 끝(3~5교시 이어지는 수업), 303 수업중·수용 인원 정보 없음(E-10), 304 수업중·11:50 끝(다음 교시는 다른 수업), 305 공실·다음 수업 13:00 시작, 201 폐강 수업이라 공실.</li>
+      <li>공과대학 1호관(D2)의 E01·E02: 층 정보 없음(E-09).</li>
+      <li>사범대학 1호관(E3), 목요일 3교시: 공실 없음(E-11).</li>
+      <li>사회과학대학(E7): 2층에 강의실 없음(E-15). 건물이 L자 모양(층별 안내도 ② 후보에서 보임).</li>
+      <li>공동실험실습관(C3): 캠퍼스맵 영역이 없는 건물로 둠(E-14). 지도에는 OSM 모양이 이름 없는 바탕으로만 보이고 누를 수 없음. 건물 목록에서만 고름.</li>
+      <li>수용 인원 정보 없음(E-10)은 D2 303 말고도 생명산업과학대학 1호관(B3) 203, 인문예술대학(E8) 205에서 보입니다.</li>
+      <li>대학본부(A1)·도서관(C1)·학생생활관(A4~A9)·체육관(A17) 등 나머지 건물: 강의실이 없는 건물. 지도에만 있고 누르면 반응 없음(E-13), 목록에 없음.</li>
+      <li>운동장(A15)·교직원 테니스장(A16)·학생 테니스장(F3)·정문(A19)·남문(A14)·북문(C6): 건물이 아니라 위치 표시 글자. 누를 수 없음.</li>
+      <li>공휴일 목록에 없는 날은 평일처럼 고를 수 있습니다(E-18). 기기 시계가 틀린 경우(E-19)는 "직접 입력"으로 흉내 낼 수 있습니다. 구글폼이 안 열리는 경우(E-21)는 구글폼 쪽 화면이라 담지 않았습니다.</li>
+    </ul>
+    <h4>목업에서 임의로 정한 것</h4>
+    <ul id="m-assume"></ul>
+  </section>
+
+  <section>
+    <button type="button" class="mbtn" data-m="defaults">조정판 설정을 처음 값으로</button>
+  </section>
+</aside>
+<div id="mock-toast" role="status" aria-live="polite"></div>
+
+<script>
+/* =====================================================================
+   S-01~S-10 전체 목업 스크립트
+   - 시간표·강의실·공지는 모두 예시 데이터입니다.
+   - 캠퍼스맵은 오픈스트리트맵(OSM) 자료로 그리고 학교 캠퍼스맵 방향으로 돌렸습니다(건물 번호·이름은 학교 범례).
+   - 04·05에 없어 목업에서 임의로 정한 것은 아래 ASSUME 목록에 모았습니다.
+     같은 목록이 목업 조정판 5번 칸에도 보입니다.
+   ===================================================================== */
+(function(){
+'use strict';
+
+const ASSUME = [
+  '처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대 ①②는 그 크기의 3배·4배, ③은 직접 그린 지도(SVG)라 글자가 흐려지지 않아 8배로 둠.',
+  '건물 이름 글자는 누름을 통과시킴: 글자를 누르면 그 아래 건물을 누른 것과 같음(05 R-11 확인 필요 항목).',
+  '서비스 이름을 누르면 반응 없음(05 R-10 확인 필요 항목).',
+  '불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둠(업데이트 시각도 데이터 파일에서 오기 때문). 04에는 적혀 있지 않음.',
+  '불러오는 중에도 필터(달력)는 학기·공휴일을 아는 것처럼 동작함. 04 E-01은 "필터는 쓸 수 있음"이지만, 학기·공휴일도 데이터 파일이라 실제로는 순서를 정해야 함.',
+  '시간표 미등록(E-04)이면 강의실이 없으므로 캠퍼스맵의 모든 건물을 누를 수 없게 함(FR-029 "강의실이 있는 건물만 누름"에서 끌어냄).',
+  '교시를 고르지 않았을 때 S-03·S-04 기준 줄은 "10/1(목) 기준"처럼 날짜만 보임.',
+  'S-03 층 바로가기 단추에 "층 정보 없음" 묶음 단추도 넣음(묶음을 보일 때).',
+  '"오늘" 모양 후보 ②의 글자("운영하지 않는 날" / "수업 기간 아님")는 05 2.17대로 필터 안내 문구 칸에 넣음. 방학일 때는 "현재 학기 수업 기간이 아닙니다"와 뜻이 겹침.',
+  'S-04 이름·값 모양(05 2.14)의 이름 칸 "상태"·"시각"은 목업에서 붙인 말. "수용 인원"은 04의 말.',
+  '대표색 B·C, 상태 색 ②·③의 마우스 올림·누름·옅은 색·테두리 값은 05에 없어 목업에서 만듦.',
+  '층별 안내도 ①의 "복도" 띠, ②의 "위에서 본 건물 모양(예시)" 글자는 그림을 설명하려고 목업에서 붙인 말.',
+  '휴대폰 필터를 펼치면 안내 문구는 교시 단추 밑(PC와 같은 자리)에, 접으면 요약 줄 밑에 보임.',
+  '브라우저 [뒤로]는 S-03에서만 S-01로 보냄(04 확정). 다른 화면의 [뒤로]는 04에 없어(05 R-02) 따로 처리하지 않음.',
+  '헤드 배너·팝업·공지는 모두 예시 문구입니다. 캠퍼스맵 잔디·운동장·테니스장·주차장·도로 테두리 색과 건물 윤곽선 색은 목업에서 더함.',
+  '캠퍼스맵은 오픈스트리트맵(OSM, ODbL) 자료의 건물·도로·운동장·테니스장·주차장 모양으로 그림. 학교 캠퍼스맵과 양쪽에 있는 건물 28곳의 가운데 점을 맞춰(돌리기·크기·옮기기만, 뒤집기 없음) 학교 지도 방향(정문이 아래쪽)으로 돌림. 건물 번호·이름은 학교 캠퍼스맵 범례를 따름.',
+  'OSM에 없는 건물(A3·A8·A11·A13·A18·C4·C5·F2·F4)은 학교 지도 자리를 둘레 건물에 맞춰 옮긴 곳에 반듯한 사각형으로 대략 그림. 도서관(C1)은 OSM의 이름 없는 건물과 정보전산원 두 조각, 기초교육관(E2)·체육관(A17)은 OSM의 이름 없는 건물로 짝지음. 정문 앞 둥근 잔디는 OSM에 없어 학교 지도를 보고 그림.',
+  '학군단(D5)은 OSM 위치(산학협력관 옆)로 그림. 학교 캠퍼스맵에는 공과대학 1호관 옆에 있어 서로 다름. 학교 지도의 체육관(A17)·국제문화컨벤션관(F1) 쪽은 OSM보다 왼쪽으로 몰려 있음.',
+  '누를 수 있는 건물(예시 강의실이 있는 건물)은 강의 건물로 보이는 13곳으로 정함. 실제로 강의실이 있는지는 시간표 자료로 확인해야 함.',
+  '공동실험실습관(C3)을 E-14 예시로 둠: 예시 강의실은 있지만 캠퍼스맵 영역이 없는 건물로 두어 건물 목록에만 보임. 지도에는 OSM 모양을 이름 없는 바탕으로만 그려 누를 수 없음(실제로 영역이 없는 건물이면 이 바탕도 없음).',
+  '운동장·테니스장·정문·남문·북문은 건물이 아니라 작은 위치 표시 글자로 둠(누를 수 없음). 문에는 작은 점을 찍음.',
+  '건물 이름 글자 겹침(05 2.15 제안)은 건물마다 따로 적용함. 건물이 많아 한 쌍만 겹쳐도 모두 번호로 바꾸면 크게 확대해도 이름이 돌아오지 않기 때문. 먼저 모두 번호로 두고 겹치는 번호는 숨긴 뒤, 이름을 넣을 자리가 있는 건물부터 이름으로 되돌림. 먼저 보이는 순서: 누를 수 있는 건물 → 문(정문·남문·북문) → 다른 건물 → 운동장·테니스장.',
+  '건물 번호 순서는 글자(A~F) 다음 숫자 크기 순(A2 → A10)으로 함.',
+  'S-02 단과대학별 묶기의 묶음 순서(공과대학 → 사범대학 → 생명산업과학대학 → 약학대학 → 사회과학대학 → 인문예술대학 → 기타)와 기타에 넣은 건물(기초교육관·미래창조관·공동실험실습관)은 목업에서 정함.'
+];
+
+/* ---------- 고정 값 (03 FR-012 교시 시각표) ---------- */
+const PERIODS = [null,
+  ['09:00','09:50'],['10:00','10:50'],['11:00','11:50'],['12:00','12:50'],['13:00','13:50'],
+  ['14:00','14:50'],['15:00','15:50'],['16:00','16:50'],['17:00','17:50']];
+const SEM = { name:'2026-2학기', start:'2026-09-01', end:'2026-12-18' };            /* 예시 학기 (FR-023) */
+const HOLIDAYS = { '2026-10-03':'개천절', '2026-10-05':'추석 연휴', '2026-10-06':'추석', '2026-10-07':'추석 연휴', '2026-10-09':'한글날', '2026-12-25':'성탄절' }; /* 예시 공휴일 (FR-030) */
+const UPDATED = { m:9, d:15, hm:'14:30' };                                            /* 예시 업데이트 시각 (FR-013) */
+const DOW = ['일','월','화','수','목','금','토'];
+/* ---------- 캠퍼스맵 모양 (FR-029 캠퍼스맵 영역) ----------
+   오픈스트리트맵(OSM) 자료(© OpenStreetMap 기여자, ODbL)를 미터 단위 평면으로 바꾼 뒤, 학교 캠퍼스맵과 같은 방향(정문이 아래쪽)으로
+   돌린 좌표(지도 단위, 1 = 약 0.66m). 건물 번호·이름은 학교 캠퍼스맵 범례를 따름. OSM에 없는 건물은 반듯한 사각형으로 대략 그림.
+   MAPGEO: 캠퍼스 땅·주차장·광장·잔디·둥근 잔디·테니스장·농구장·운동장(트랙·안쪽 잔디·선)·도로(종류별 선)·바탕 건물(이름 없음, 누를 수 없음)
+   SHAPES: 건물 영역(여러 조각 가능) / LPOS: 건물 이름 자리 / PLACES: 위치 표시 */
+const MW = 1264, MH = 1105;
+const MAPGEO = {"w":1264,"h":1105,"ground":[[1224.1,124],[1180.5,219.9],[1181.2,246],[1186.7,286.3],[1195.8,414.9],[1132.1,465.8],[1133.1,472.3],[1124.5,503.2],[1117.8,517.1],[1148.2,537],[1138.1,574.8],[1123.6,607.4],[1103.7,634.7],[972.3,714.3],[925.3,751.1],[903,783.4],[904.5,827.1],[931,879.4],[956.9,920.9],[958.6,934.1],[952.1,969.5],[962,985.9],[969.4,1025.2],[965.8,1038.6],[950.7,1046.9],[949.2,1054.8],[288.8,972.6],[89.6,951.2],[40.7,940.4],[61.2,775.1],[96.7,777.6],[102.7,742.2],[310.5,773.7],[373.3,299.3],[443.6,307.9],[562,169.5],[586.7,75],[667,30.4],[738.1,87],[850.5,78.6],[921.6,120],[984,152.4],[1001.1,128.9],[1017.6,68.3],[1073.5,50.4],[1123.6,56]],"lots":[[[299.9,792.6],[295.9,830.4],[287.5,829],[286.4,838.6],[70.1,817.4],[72.6,775.9],[102.4,778.1],[98.9,803.2],[213.1,820.4],[217.7,773],[292.7,784.2],[291.6,792.3]],[[604.5,272],[583.9,258],[580.3,263.3],[556.6,247.2],[511.1,314.6],[555.5,344.7]],[[828,962.5],[804.4,947.9],[765,1011.9],[788.7,1026.5]],[[956.9,920.9],[889.5,871.6],[844.7,936.5],[913.6,973.8],[905.7,1033.6],[920.6,1036.4],[936.4,968.5],[952.1,969.5],[958.6,934.1]]],"plazas":[[[699.9,761.5],[651.1,834.3],[652.6,838.9],[685.3,861.4],[692.4,853.9],[681.1,845.7],[715,798.2],[697.9,786],[727.1,745.5],[754.6,764.1],[757.6,759.8],[767.3,766.8],[769.1,763.8],[728.9,733.9],[722.3,733.2],[719.8,734]]],"greens":[[[1078.4,441.3],[1000.7,377],[990,404.1],[1066.6,460.4]],[[855.1,612.6],[847.9,617.5],[840.6,618.8],[826.4,614.2],[819.7,607.2],[816.6,599],[820.9,586.3],[805.8,576],[846.1,517.1],[912.3,562.5],[871.8,623.8]]],"ring":{"cx":439,"cy":951,"r":26},"courts":[[[366,813.1],[359.9,864.6],[305.9,858.3],[314.2,800.2],[359.7,805.8]],[[218.6,764.6],[213.1,820.4],[98.9,803.2],[106.5,748.1]]],"bcourts":[[[414.1,845.9],[412,850.1],[440.2,865.7],[431,882.2],[407,868.4],[367.7,854.6],[378.3,821.7]]],"track":[[576.7,715.5],[465.2,643.8],[429.9,629.7],[387.7,633.2],[352.3,652.4],[333,682.6],[323.9,724.4],[327.9,746.9],[343,774.3],[367.1,800.9],[380.3,811.7],[474.2,876.5],[493.8,880.7],[521.9,881.4],[548.1,873.9],[567.6,862.9],[587,837.9],[599.6,799.3],[598.1,778.5],[594.9,760.7],[583.2,742.1],[589.1,735.6]],"field":[[563.2,723.5],[462.3,658.3],[430.5,645.2],[393,647.2],[362.1,663],[345.6,688.8],[338.6,725],[342.7,744.6],[356.8,768.8],[378.9,792.6],[390.9,802.3],[476,861],[493.6,865.1],[518.5,866.4],[541.7,860.5],[558.8,851.4],[575.4,830.2],[585.6,796.9],[583.8,778.8],[580.5,763.2],[569.6,746.8],[574.7,741.2]],"pitch":[[429.4,661],[563.6,752.3],[497.6,849.2],[363.5,757.9]],"mid":[[496.5,706.7],[430.6,803.6]],"roads":[["foot",[[[561,960.2],[540.9,945.8]],[[652.9,830.7],[633.5,817.7]],[[699.9,761.5],[683.1,749.7]],[[652.9,830.7],[656.3,833],[703.9,764.2],[699.9,761.5]],[[489.6,992.2],[492.4,1000]],[[759.3,569.8],[863.3,416.3]],[[692.6,728.9],[723.4,685.5]],[[673.3,757.9],[663.2,772]],[[756.5,578.3],[746.8,592.4]],[[836.3,634.3],[827,647.1]],[[895,407.7],[895.9,417]],[[966.5,405.8],[967.4,414.4]],[[692.9,534],[683.4,548.7]],[[581,427.7],[568.9,426.4]],[[1010,693.4],[1005.5,688.5],[978.7,673]]]],["ped",[]],["svc",[[[475.6,343.7],[456.5,375.4],[625.7,493.5],[637.9,501.2],[670.6,518.3],[682.2,537.3],[865.9,665.8],[908.9,657],[921,651.7],[933.7,642.9],[949.2,629.3],[957.3,620.6],[1061.4,468.7]],[[565.9,451.2],[572.2,440.1],[579.6,380.6],[585.3,347.9],[592.6,319.7],[610,287.2],[651.6,231.1],[672.2,209.3],[701.8,186.4],[750.8,160.2],[762.7,155.2],[775.6,153.2],[795.3,156.5],[833.5,171.3],[920.9,226.5],[941.1,277.7],[988.2,352.8],[992.6,370.8],[982.4,407],[1061.4,468.7]],[[670.6,518.3],[784.9,345.1]],[[639.5,247.4],[784.9,345.1]],[[920.9,226.5],[955,170.8],[967.4,163.4],[990.3,161.1],[1028.2,160.1],[1041.4,171.1],[1058.6,175.4],[1099.5,176.9],[1118.5,179.4],[1137.1,185.2],[1152.5,195.4],[1157.2,196.7],[1162.1,195],[1167.9,189.5]],[[329.1,624.8],[358.1,614.1],[388.1,609],[425,607.6],[439.3,610.5],[446.1,614.2],[679.1,772.5]],[[625.7,493.5],[511.7,659.2]],[[982.4,407],[963.8,411.1],[880.9,412.7],[855.5,396.9],[853.1,389.4],[854.5,367.8],[841.2,306.8],[781,272.9],[749.5,321.6]],[[849.2,343.4],[796.3,353.7],[784.9,345.1]],[[716.9,719.1],[800.1,781.7],[815.2,859.2]],[[634.7,834.9],[741.7,903.8],[772.2,919.6],[815.2,859.2]],[[911.1,1031.5],[914.3,994],[751.5,887.8],[741.7,903.8]],[[1181.3,355.6],[1138.4,420.3],[1119.5,443.1],[1109.8,445.9],[1103.2,445.4],[1093,441.3],[1005.2,374.9],[992.6,370.8]],[[1061.4,468.7],[1125.9,509.6]],[[800.1,781.7],[839.6,804.2],[842,822.6],[815.2,859.2]],[[865.9,665.8],[900.9,690.8],[894.6,710],[849,775.4]],[[1028.2,160.1],[1023,139.8],[1021.6,119],[1027.8,95.6],[1036.4,82.9],[1060,60.2],[1074,55.4],[1101.6,58.4],[1192,112.5],[1200.5,125.8],[1195.9,148.3],[1167.9,189.5]],[[300,846.6],[225,837],[77.2,821.6],[81.1,782.7]],[[227.5,818.3],[230.2,788.6],[287.8,796.4]],[[781.4,1017.3],[831.6,940.8]],[[820.5,1009.4],[845.6,968],[772.2,919.6]],[[831.6,940.8],[887.1,859.9]],[[843.4,922.8],[884.2,949],[921.7,975.8],[938.3,950.5],[950.6,928.2],[876.4,875.3]],[[912.7,901.7],[898.7,927],[884.2,949]],[[935.4,955],[898.7,927],[859.6,899.5]],[[543.6,1008.3],[531.5,980],[502.1,993.8],[482,1000.7]],[[264.7,842.1],[254,902],[207.5,893.7]],[[940.1,637.8],[989,669]],[[1026.6,252.5],[991.6,228.8],[974.1,253.5]],[[934.7,227.4],[974.1,253.5]],[[974.1,253.5],[1009.5,276.4],[1026.6,252.5]],[[874.7,197],[904,147.5]],[[792,94.6],[767,131],[775.6,153.2]],[[724.3,136.4],[750.8,160.2]],[[779.6,924.8],[738.8,987.2]],[[637.9,501.2],[650.1,481.3],[607.4,452.7],[590.9,469.5]],[[579.6,380.6],[628.5,379]],[[582.8,707.4],[633.5,630.9]],[[297.2,869.3],[328.5,870.1],[325.7,899.8]],[[287.8,796.4],[283.9,825.2],[227.5,818.3]],[[225,837],[227.5,818.3]],[[549,335.1],[583.6,360.9]],[[562.5,261.6],[525.2,317.7],[549,335.1]],[[587.2,279.6],[608.5,244.4]],[[549,335.1],[587.2,279.6],[562.5,261.6]],[[684.2,200],[664.3,192.1],[653.8,194.4],[629.9,221.1],[599.6,197.3]],[[988.2,352.8],[1032.8,303.3],[1047,298.8],[1061.4,300.8],[1084,315.4],[1061.7,349],[1111.2,383],[1134.3,350.4],[1084,315.4]],[[682.2,537.3],[627.2,626.9],[703.5,675.5],[711.6,691.1],[716.9,719.1]],[[492.3,399.6],[424.2,501.2]],[[924.2,221.2],[934.7,227.4],[966.5,178.8],[993.8,175.9],[1074.4,233.5]],[[1083.5,281.1],[1055.1,261.1],[1074.4,233.5],[1089.4,226.7],[1179.2,290.2],[1184.1,305.7],[1188.1,332],[1181.3,355.6]],[[1078.2,568.3],[1119.7,505.6]],[[900.9,690.8],[923.1,670.1],[932,666.8],[947,665.6],[972,681.2],[978.7,673],[989,669],[1000.3,662.2],[1016.3,639.7]]]],["mid",[[[349.4,445.8],[364.4,355.2],[349.9,354.2]],[[349.4,445.8],[328.5,629.8],[282.5,988]],[[505.2,1015.7],[750.5,672.1]],[[1206.1,427.1],[1205.7,407.6],[1195.3,256.7],[1197.5,246.7]],[[338,444.6],[349.4,445.8]],[[1200.3,431.7],[1168.5,443.2],[1156.4,453],[1145.5,467.3],[1146,474],[1148.1,477.9]],[[1160.2,526.4],[1159.7,530.9],[1164,534]],[[750.5,672.1],[771.2,652.3],[781.5,644.4],[793.2,639],[807.1,638.5],[823.6,642.6],[830.4,645],[853.4,657.3]],[[754.9,588.2],[765.9,608.2],[768.1,617.7],[768.2,626.6],[767.2,633.8],[762.3,648.7],[750.5,672.1]]]],["maj",[[[857.4,1104.8],[860.9,1069.9]],[[1056.8,1003.2],[1031,969],[1017.1,945.8],[990.8,890.1],[975.1,848.2],[972.5,838],[969.8,817.5],[973.3,793.9],[976.3,785],[981.5,774.5],[991.8,761.4],[1023.5,736.3],[1051.9,717.2],[1123.6,688.7],[1139.6,680.4],[1148.4,672.7],[1173.7,643.5],[1186,625.8],[1198.7,605.6],[1231.3,543],[1238.1,532.4]],[[860.9,1069.9],[951.8,1079],[982.5,1078.5],[1024.7,1075.9],[1049.4,1072]],[[0,950.9],[20.2,958.5],[65.2,969.6],[699.3,1047],[860.9,1069.9]]]]],"bg":[[[1088.9,526.4],[1062.4,507.9],[1020.9,567.7],[1031.6,575.2],[1027.4,581.1],[1043.2,592.2]],[[955.5,1027.9],[946.4,1025.8],[942.8,1041.3],[951.9,1043.4]]]};
+const SHAPES = {
+  A1:[[[564.2,671.5],[638.7,560.3],[649.2,567.4],[665.6,543],[627.6,517.3],[536.7,653]]],
+  A2:[[[736.7,629.1],[660.5,579.2],[641.1,609],[717.4,658.9]]],
+  A3:[[[620.6,403.8],[699.6,457],[676.7,491],[597.7,437.7]]],
+  A4:[[[539.5,555.1],[574.6,502.9],[575.1,493.7],[568.3,485.4],[558.4,482.3],[548.9,482.9],[512.6,536.8]]],
+  A5:[[[531.4,566.6],[511.9,595.6],[520.5,601.4],[511.5,614.9],[482.8,595.5],[478.6,601.8],[466.9,594],[486.3,565.2],[478.5,559.9],[486.9,547.4],[516.9,567.7],[521.9,560.2]]],
+  A6:[[[550,417.4],[563.9,397.3],[512.7,361.6],[518.3,353.5],[492.7,335.7],[485.3,346.4],[490.3,349.8],[470.7,378.1],[480.5,384.9],[487.9,374.1]]],
+  A7:[[[529.9,456.4],[493.7,511.6],[490,509.2],[485.2,516.7],[465.7,503.8],[471.5,494.9],[451.8,481.9],[454.9,477.1],[447.7,472.3],[459.1,455],[465,458.9],[473.6,445.8],[467.3,441.6],[471.5,435.2],[479.3,440.4],[487.2,428.3]]],
+  A8:[[[382.7,480.7],[447.3,524.3],[417.1,569.1],[352.5,525.4]]],
+  A9:[[[403.4,406.6],[386.9,395],[362,430.7],[369.4,435.8],[364.8,442.3],[386,457.2],[389.1,452.7],[421,475.1],[431.7,459.8],[387.8,428.9]]],
+  A10:[[[469.7,326],[418.6,401.3],[405.9,392.6],[425.8,363.2],[423.1,361.4],[438.2,339.1],[442.3,339.8],[457.4,317.5]]],
+  A11:[[[464.1,287.9],[487,303.4],[473.2,323.9],[450.3,308.5]]],
+  A12:[[[433,332.1],[388.3,302.8],[381.6,313.1],[387.6,317],[386.6,319.8],[398.5,327.6],[381.4,353.9],[392.1,360.9],[410.2,333],[425.8,343.2]]],
+  A13:[[[353.4,584.5],[438.6,572.5],[441.6,594.3],[356.4,606.3]]],
+  A17:[[[421.5,890.6],[358.2,871.7],[354.2,884.9],[339.1,880.3],[322.7,934.8],[335.1,938.5],[330.9,952.4],[395.6,971.8],[400.3,956.2],[408.8,958.7],[423.8,909],[416.6,906.9]]],
+  A18:[[[323.5,914],[310.9,958.2],[296.5,954],[309.1,909.8]]],
+  B1:[[[753.8,927.3],[732.5,958],[727,954.1],[721.3,962.4],[726.9,966.3],[713,986.3],[686.7,968],[694.7,956.3],[674.9,942.4],[668.8,951.1],[633.7,926.4],[641.3,915.6],[647.2,919.7],[656.9,905.8],[671.4,916],[673.4,913.2],[669,910],[686.5,884.9],[697.2,892.4],[690.1,902.6],[705.2,913.2],[712.1,903.3],[722.7,910.8],[710.5,928.4],[718.5,934],[733.2,912.9]]],
+  B2:[[[681.1,845.7],[731,881.6],[780,813],[777.2,810.9],[774.2,815.2],[768.3,811],[783.9,789.1],[777.7,784.7],[782.6,777.8],[757.6,759.8],[754.6,764.1],[744.5,756.9]]],
+  B3:[[[820.8,925.5],[883.5,836.1],[872.6,828.4],[881.9,815.1],[853.5,795.1],[841.4,812.3],[852.3,820],[792.4,905.5]]],
+  B4:[[[828.1,792.2],[881.2,717.2],[871.5,710.3],[875.5,704.7],[810.4,658.3],[790.6,686.2],[832.9,716.4],[841.5,704.3],[851.5,711.4],[805.7,776.2]]],
+  B5:[[[884.8,797.5],[911.8,759],[884.8,739.9],[857.8,778.3]]],
+  B6:[[[957.5,691.7],[943.2,712.7],[938.5,709.5],[915.3,743.4],[894.4,729],[915.6,697.9],[911.2,694.9],[927.4,671.1]]],
+  B7:[[[801.7,1033.2],[804.7,1011.5],[824.8,1014.2],[857.5,967.4],[882.9,985.2],[913.3,988.2],[908.2,1038.4],[847.7,1032.5],[842.5,1038.7]]],
+  C1:[[[885.9,438.4],[965.3,492.6],[935.9,536],[856.5,481.6]],[[1022.4,459.7],[969.2,423.7],[936.2,472.9],[965.3,492.6],[950,515.3],[974.1,531.5]]],
+  C2:[[[1034,602.8],[1011.6,636],[1007.1,632.9],[989.4,659.3],[965.7,643.3],[989.8,607.4],[993.6,610],[1009.6,586.2]]],
+  C4:[[[1072.1,580.5],[1099,598.7],[1080.9,625.5],[1054,607.4]]],
+  C5:[[[1129.5,567.5],[1184.7,604.8],[1158.1,644.3],[1102.8,607]]],
+  D1:[[[1111,493.8],[1082.7,474.7],[1097.8,452.2],[1126.1,471.3]]],
+  D2:[[[1082.2,235.1],[1177.4,301.6],[1171.5,310.2],[1182.9,318.2],[1177.6,325.9],[1186,331.9],[1111.1,439.7],[1014.1,371.7],[1029.2,350],[1012.4,338.3],[1026.8,317.4],[1036.6,316.3],[1059.9,332.6],[1044,355.5],[1104.8,397.9],[1154.3,326.4],[1063,262.7]]],
+  D3:[[[944.8,223],[969,188.7],[992.4,185],[1062.7,234.9],[1044,261.5],[981.2,216.9],[966.2,238.2]]],
+  D4:[[[1182.4,141.2],[1159.7,172.5],[1046.9,90],[1062.2,69],[1069.6,74.4],[1077,64.2]]],
+  D5:[[[938.4,1046.2],[951.3,990.7],[932.2,986.3],[919.3,1041.8]]],
+  E1:[[[836.4,445.4],[778.6,406.1],[759.5,434.5],[798.7,461.1],[766.2,509.3],[719.9,477.8],[697,511.7],[754,550.4],[764.1,535.5],[772,540.9]]],
+  E2:[[[679.3,308.2],[666.2,327.9],[681.2,395],[703.7,409.5],[685.6,437.7],[652,416.1],[634.4,335],[660.5,295.7]]],
+  E3:[[[889.8,405.8],[883.7,402.3],[881,407],[867,399],[869.5,394.5],[863.8,391.3],[875.1,371.3],[857.8,302.4],[840.9,290.9],[851.7,274.9],[858.8,279.7],[868.3,265.5],[887.4,278.4],[878.9,291.1],[879.7,294.3],[888.3,291.9],[906.4,359.5],[892.6,363.3],[894.1,368.8],[906.7,376]]],
+  E4:[[[917.6,372.9],[913.7,364.5],[915.9,360.2],[913,358.7],[911.5,354.1],[918.6,341.7],[952.2,361],[951.1,363],[957,366.4],[961.6,373.4],[957.7,378.9],[949.2,380.6],[944.5,388.7]]],
+  E5:[[[839.7,289.4],[771.3,247.9],[738.8,301.9],[715.6,287.9],[761.9,210.9],[853.6,266.4]]],
+  E6:[[[596,240.8],[565.7,219.4],[563.5,222.4],[545.9,210],[530.2,232.3],[534.5,235.3],[492.3,295.4],[501.8,302.1],[498.7,306.4],[511.1,314.6],[556.6,247.2],[580.3,263.3]]],
+  E7:[[[715.1,135.1],[706.3,148.6],[659.6,117.9],[615.2,186],[593.8,171.9],[627.5,120.3],[623.3,117.5],[621.4,110.9],[622.9,104.7],[629.4,96.4],[639.2,92.4],[648.7,92.3],[655.9,97.1],[660.8,89.5],[674.1,98.3],[669.6,105.2]]],
+  E8:[[[858.8,184.1],[885.2,139.1],[861.6,125.2],[866.9,116.2],[834.6,97.2],[830.4,104.3],[807.4,90.7],[779.6,138.2],[795.6,147.6],[800,140.2],[809,145.5],[830,109.5],[837.9,114.2],[843,123.2],[853.7,123.3],[859.9,126.9],[834.8,170]]],
+  F1:[[[94.3,927.3],[73.1,925.7],[70.5,915.8],[88.5,882.3],[89.8,875],[82.3,841.9],[102.5,836.5],[109.3,873.9],[140.5,895.1],[142.6,880.7],[146.4,879],[210.2,925.5],[256.7,929],[263.2,933.7],[253.5,954.4],[203.5,949.9],[115.1,898],[98.3,925.3]]],
+  F2:[[[181.9,838.6],[254.7,847.6],[250,885.4],[177.2,876.4]]],
+  F4:[[[129.5,836.4],[166.3,840.9],[162.5,871.6],[125.7,867.1]]]
+};
+const LPOS = {"A1":[632.7,543.3],"A2":[686.1,617.2],"A3":[650.7,448.8],"A4":[538.6,527.3],"A5":[498.9,580.4],"A6":[498.7,363.7],"A7":[491.7,466.3],"A8":[408.5,530.7],"A9":[384,441],"A10":[434.9,360.5],"A11":[468.3,305.9],"A12":[406.4,324.8],"A13":[382.4,591.5],"A17":[375.7,921.7],"A18":[307.5,942.8],"B1":[688.7,926.9],"B2":[728.1,832.9],"B3":[850.4,853.1],"B4":[828.6,692.3],"B5":[886.8,765.9],"B6":[931.4,694.1],"B7":[864.7,1006.4],"C1":[921.5,494.4],"C2":[1005.7,618.2],"C4":[1076,602.5],"C5":[1138.8,602.5],"D1":[1101.7,471.2],"D2":[1106.4,415.1],"D3":[1010.8,218],"D4":[1135.9,131.2],"D5":[938.3,1003.3],"E1":[734,512.1],"E2":[667.4,405.7],"E3":[885.9,346.5],"E4":[932.5,365.7],"E5":[767.6,232.9],"E6":[550.3,233],"E7":[642.8,110.5],"E8":[809.6,115.7],"F1":[101.5,890.5],"F2":[229.2,863.6],"F4":[148.7,854.4]};
+const PLACES = [{"id":"A19","name":"정문","x":516,"y":1001,"kind":"gate"},{"id":"A14","name":"남문","x":330,"y":624,"kind":"gate"},{"id":"C6","name":"북문","x":1122,"y":507,"kind":"gate"},{"id":"A15","name":"운동장","x":463.5,"y":755.1,"kind":"area"},{"id":"A16","name":"교직원 테니스장","x":336.5,"y":832.8,"kind":"area"},{"id":"F3","name":"학생 테니스장","x":159.3,"y":784.2,"kind":"area"}];
+
+/* ---------- 건물 (FR-028·FR-029) ----------
+   - 번호·이름은 학교 캠퍼스맵 범례를 따름(붙여 쓴 이름은 띄어 씀). SHAPES에 영역이 있는 건물만 지도에 그림.
+   - 강의실(rooms)은 모두 예시. 강의실이 있는 건물만 건물 목록(S-02)에 보이고, 그중 영역이 있는 건물만 지도에서 누를 수 있음. */
+function rm(f, n){ const a = []; for (let i = 1; i <= n; i++) a.push(f + pad(i)); return a; }   /* 예시 호실: rm(3,4) → 301~304 */
+const BUILDINGS = [
+  { id:'A1',  name:'대학본부' },
+  { id:'A2',  name:'약학대학', college:'약학대학', floors:3, fp:'rect', rooms:{ 1:rm(1,4), 2:rm(2,5), 3:rm(3,3) } },
+  { id:'A3',  name:'천연물신약연구소' },
+  { id:'A4',  name:'학생생활관 부속동' },
+  { id:'A5',  name:'학생생활관 진리관' },
+  { id:'A6',  name:'학생생활관 창조관' },
+  { id:'A7',  name:'학생생활관 관리동' },
+  { id:'A8',  name:'학생생활관 향림관' },
+  { id:'A9',  name:'학생생활관 청운관' },
+  { id:'A10', name:'인재관' },
+  { id:'A11', name:'제2중앙공급실' },
+  { id:'A12', name:'우정원' },
+  { id:'A13', name:'웅지관' },
+  { id:'A17', name:'체육관' },
+  { id:'A18', name:'체육관 증축동' },
+  { id:'B1',  name:'박물관' },
+  { id:'B2',  name:'70주년 기념관' },
+  { id:'B3',  name:'생명산업과학대학 1호관', college:'생명산업과학대학', floors:4, fp:'rect',
+    rooms:{ 1:['101','102','103'], 2:['201','202','203','204'], 3:rm(3,3), 4:rm(4,2) } },          /* 203 수용 인원 정보 없음 */
+  { id:'B4',  name:'생명산업과학대학 2호관', college:'생명산업과학대학', floors:3, fp:'rect', rooms:{ 1:rm(1,3), 2:rm(2,4), 3:rm(3,2) } },
+  { id:'B5',  name:'생명산업과학대학 온실' },
+  { id:'B6',  name:'제1중앙공급실' },
+  { id:'B7',  name:'산학협력관' },
+  { id:'C1',  name:'도서관' },                                                                        /* 강의실 없음 (E-13) */
+  { id:'C2',  name:'친환경농업센터' },
+  { id:'C3',  name:'공동실험실습관', college:'기타', floors:2, fp:'rect',
+    rooms:{ 1:['101','102','103'], 2:['201','202'] } },                                               /* 캠퍼스맵 영역 없음 (E-14), 지도에는 이름 없는 바탕 모양만 */
+  { id:'C4',  name:'환경친화형 물질공장 기술혁신센터' },
+  { id:'C5',  name:'순천대학교 어린이집' },
+  { id:'D1',  name:'창업보육센터' },
+  { id:'D2',  name:'공과대학 1호관', college:'공과대학', floors:4, fp:'rect',
+    rooms:{ 1:['101','102','103','104','106'], 2:['201','202','203','204','205','206'],
+            3:['301','302','303','304','305','306','307','308'], 4:['401','402','403','404'] },
+    nofloor:['E01','E02'] },                                                                         /* 층 정보 없음 (E-09) */
+  { id:'D3',  name:'공과대학 2호관', college:'공과대학', floors:3, fp:'L',
+    rooms:{ 1:['101','102','103','104'], 2:['201','202','203','204','205'], 3:['301','302','303'] } },
+  { id:'D4',  name:'공과대학 3호관', college:'공과대학', floors:5, fp:'rect', rooms:{ 1:rm(1,3), 2:rm(2,4), 3:rm(3,4), 4:rm(4,3), 5:rm(5,2) } },
+  { id:'D5',  name:'학군단' },
+  { id:'E1',  name:'학생회관' },
+  { id:'E2',  name:'기초교육관', college:'기타', floors:4, fp:'rect', rooms:{ 1:rm(1,4), 2:rm(2,5), 3:rm(3,4), 4:rm(4,3) } },
+  { id:'E3',  name:'사범대학 1호관', college:'사범대학', floors:2, fp:'rect',
+    rooms:{ 1:['101','102','103'], 2:['201','202','203'] } },                                         /* 목 3교시 공실 없음 (E-11) */
+  { id:'E4',  name:'사범대학 2호관', college:'사범대학', floors:3, fp:'rect', rooms:{ 1:rm(1,3), 2:rm(2,3), 3:rm(3,3) } },
+  { id:'E5',  name:'사범대학 3호관', college:'사범대학', floors:4, fp:'rect', rooms:{ 1:rm(1,3), 2:rm(2,4), 3:rm(3,4), 4:rm(4,2) } },
+  { id:'E6',  name:'미래창조관', college:'기타', floors:3, fp:'rect', rooms:{ 1:rm(1,2), 2:rm(2,3), 3:rm(3,3) } },
+  { id:'E7',  name:'사회과학대학', college:'사회과학대학', floors:4, fp:'L',
+    rooms:{ 1:['101','102','103'], 3:['301','302','303','304'], 4:['401','402'] } },                  /* 2층 강의실 없음 (E-15) */
+  { id:'E8',  name:'인문예술대학', college:'인문예술대학', floors:3, fp:'rect',
+    rooms:{ 1:['101','102','104','105'], 2:['201','202','203','205','206'], 3:['301','302','303'] } }, /* 205 수용 인원 정보 없음 */
+  { id:'F1',  name:'국제문화컨벤션관' },
+  { id:'F2',  name:'평생교육원' },
+  { id:'F4',  name:'연립관사' }
+];
+const COLLEGES = ['공과대학', '사범대학', '생명산업과학대학', '약학대학', '사회과학대학', '인문예술대학', '기타'];  /* S-02 ③ 묶음 순서 (목업 임의) */
+const BMAP = {};
+BUILDINGS.forEach(function(b){
+  BMAP[b.id] = b;
+  b.parts = SHAPES[b.id] || null;                           /* 캠퍼스맵 영역 */
+  b.area = !!b.parts;
+  if (LPOS[b.id]){ b.lx = LPOS[b.id][0]; b.ly = LPOS[b.id][1]; }
+});
+function fullName(b){ return b.name + '(' + b.id + ')'; }
+function hasRooms(b){ return !!b.rooms; }
+function clickable(b){ return !!(b.rooms && b.area); }
+function codeKey(id){ const m = /^([A-Z]+)(\d+)$/.exec(id); return m ? [m[1], Number(m[2])] : [id, 0]; }
+function codeCmp(a, b){ const x = codeKey(a.id), y = codeKey(b.id); return x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : x[1] - y[1]; }  /* A2 → A10 */
+
+/* ---------- 작은 도구 ---------- */
+function hashStr(s){ let h = 2166136261; for (let i = 0; i < s.length; i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function rng(seed){ return function(){ seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function pad(n){ return String(n).padStart(2, '0'); }
+function parseD(ds){ const a = ds.split('-').map(Number); return { y:a[0], m:a[1], d:a[2] }; }
+function ymd(y, m, d){ return y + '-' + pad(m) + '-' + pad(d); }
+function dow(ds){ const p = parseD(ds); return new Date(Date.UTC(p.y, p.m - 1, p.d)).getUTCDay(); }
+function isWeekend(ds){ const w = dow(ds); return w === 0 || w === 6; }
+function isHoliday(ds){ return Object.prototype.hasOwnProperty.call(HOLIDAYS, ds); }
+function inSem(ds){ return ds >= SEM.start && ds <= SEM.end; }
+function selectable(ds){ return inSem(ds) && !isWeekend(ds) && !isHoliday(ds); }
+function offKind(ds){ return (isWeekend(ds) || isHoliday(ds)) ? 'weekend' : (!inSem(ds) ? 'vacation' : null); } /* 3.1: 주말·공휴일이 먼저 */
+function fmtMD(ds){ const p = parseD(ds); return p.m + '/' + p.d + '(' + DOW[dow(ds)] + ')'; }
+function daysInMonth(y, m){ return new Date(Date.UTC(y, m, 0)).getUTCDate(); }
+function curPeriod(h, mi){                  /* 03 FR-012 "지금 교시" */
+  if (h < 9) return null;
+  if (h > 17 || (h === 17 && mi >= 50)) return null;
+  return mi >= 50 ? h - 9 + 2 : h - 9 + 1;  /* :50 이상은 쉬는 시간 → 다음 교시 */
+}
+function periodText(p){ return p + '교시(' + PERIODS[p][0] + '~' + PERIODS[p][1] + ')'; }
+function esc(s){ return String(s).replace(/[&<>"']/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]; }); }
+
+/* ---------- 예시 수용 인원 (FR-005: 약 N명(추정)) ---------- */
+const CAPS = [24, 30, 36, 40, 48, 50, 60, 80];
+const CAP_OVR = { 'D2-303':null, 'D2-305':40, 'D2-302':60, 'B3-203':null, 'E8-205':null, 'D2-E02':null };
+function capOf(key){ if (Object.prototype.hasOwnProperty.call(CAP_OVR, key)) return CAP_OVR[key]; return CAPS[hashStr('cap' + key) % CAPS.length]; }
+
+/* ---------- 예시 시간표 (요일 1~5 = 월~금, [시작 교시, 교시 수, 폐강]) ---------- */
+const TT_OVR = {
+  'D2-301':{ 4:[[1,2]] },                  /* 목 3교시 공실 · 남은 수업 없음 */
+  'D2-302':{ 4:[[3,3]] },                  /* 3·4·5교시 이어지는 수업 → 13:50 끝 */
+  'D2-303':{ 4:[[2,2]] },                  /* 2·3교시 → 11:50 끝, 수용 인원 없음 */
+  'D2-304':{ 4:[[3,1],[4,2]] },            /* 3교시 수업 뒤 4교시는 다른 수업 → 11:50 끝 */
+  'D2-305':{ 4:[[1,2],[5,2]] },            /* 공실 · 다음 수업 13:00 시작 */
+  'D2-201':{ 4:[[3,2,1],[6,1]] },          /* 3·4교시 수업은 폐강 → 공실, 다음 수업 14:00 */
+  'E3-101':{ 4:[[2,2]] }, 'E3-102':{ 4:[[3,1]] }, 'E3-103':{ 4:[[3,3],[7,2]] },     /* 사범대학 1호관: 목 3교시 모두 수업 (E-11) */
+  'E3-201':{ 4:[[1,3]] }, 'E3-202':{ 4:[[3,2]] }, 'E3-203':{ 4:[[3,1],[5,1]] }
+};
+function genWeek(key){
+  const r = rng(hashStr(key));
+  const wk = {};
+  for (let d = 1; d <= 5; d++){
+    const bl = [];
+    let p = 1;
+    while (p <= 9){
+      if (r() < 0.38){
+        const n = 1 + Math.floor(r() * 3);
+        if (p + n - 1 <= 9){ bl.push({ s:p, n:n, x:false }); p += n + (r() < 0.5 ? 1 : 0); continue; }
+      }
+      p++;
+    }
+    wk[d] = bl;
+  }
+  return wk;
+}
+const TT = {};
+BUILDINGS.forEach(function(b){
+  if (!b.rooms) return;
+  const all = [];
+  Object.keys(b.rooms).forEach(function(f){ b.rooms[f].forEach(function(no){ all.push(no); }); });
+  (b.nofloor || []).forEach(function(no){ all.push(no); });
+  all.forEach(function(no){
+    const key = b.id + '-' + no;
+    const wk = genWeek(key);
+    const o = TT_OVR[key];
+    if (o) Object.keys(o).forEach(function(d){ wk[d] = o[d].map(function(a){ return { s:a[0], n:a[1], x:!!a[2] }; }); });
+    TT[key] = wk;
+  });
+});
+/* FR-012 공실 판정 + FR-005 시각 */
+function roomStatus(key, ds, p){
+  const w = dow(ds);
+  const bl = ((TT[key] || {})[w] || []).filter(function(b){ return !b.x; });      /* 폐강 수업은 수업으로 치지 않음 */
+  for (let i = 0; i < bl.length; i++){
+    const b = bl[i];
+    if (p >= b.s && p <= b.s + b.n - 1) return { st:'busy', end:PERIODS[b.s + b.n - 1][1] }; /* 이어지는 같은 수업은 마지막 교시 끝 */
+  }
+  const later = bl.filter(function(b){ return b.s > p; }).sort(function(a, b){ return a.s - b.s; });
+  return { st:'free', next: later.length ? PERIODS[later[0].s][0] : null };
+}
+function floorOf(b, no){
+  const fs = Object.keys(b.rooms || {});
+  for (let i = 0; i < fs.length; i++){ if (b.rooms[fs[i]].indexOf(no) >= 0) return Number(fs[i]); }
+  return null;
+}
+
+/* ---------- 예시 공지·배너·팝업 (FR-007·FR-008·FR-009, 관리자 시트 내용의 예) ---------- */
+const NOTICES = [
+  { id:'n6', title:'중간고사 기간 이용 안내', body:'10/19(월)~10/23(금)은 중간고사 기간입니다.\n시험 일정은 반영되지 않습니다. 공실로 보여도 시험을 보고 있을 수 있습니다.' },
+  { id:'n5', title:'추석 연휴에는 달력에서 날짜를 고를 수 없습니다', body:'10/5(월)~10/7(수)는 공휴일이라 달력에서 흐리게 보이고 고를 수 없습니다.' },
+  { id:'n4', title:'강의실 정보가 틀리면 알려 주세요', body:'강의실 상세의 [신고하기]를 누르면 신고 구글폼이 열립니다.\n건물과 호실을 직접 적어 주세요.' },
+  { id:'n3', title:'2026-2학기 시간표를 반영했습니다', body:'2026-2학기 수업시간표와 폐강 교과목 안내를 반영했습니다.\n수강정정 뒤 바뀐 시간표는 다시 반영할 예정입니다.' },
+  { id:'n2', title:'문의하기 이용 안내', body:'머리 영역의 [문의하기]를 누르면 문의 구글폼이 열립니다.\n답장을 받으려면 이메일을 적어 주세요.' },
+  { id:'n1', title:'서비스를 시작합니다', body:'빈 강의실을 찾는 서비스를 시작합니다.\n날짜와 교시를 고르고, 캠퍼스맵이나 건물 목록에서 건물을 누르세요.' }
+];
+const LONG_BODY = (function(){
+  const a = ['이 팝업은 내용이 길 때 팝업 안에서만 스크롤되는 모습을 보여 주는 예시입니다.', ''];
+  for (let i = 1; i <= 14; i++) a.push(i + '. 예시 안내 문장입니다. 관리자가 시트에 적은 줄바꿈이 그대로 보입니다.');
+  a.push('', '제목 줄과 "오늘은 그만 보기" 줄은 제자리에 있습니다.');
+  return a.join('\n');
+})();
+const POPUPS = [
+  { id:'p1', title:'중간고사 기간 안내', body:'10/19(월)~10/23(금)은 중간고사 기간입니다.\n시험 일정은 반영되지 않아, 공실로 보여도 시험 중일 수 있습니다.' },
+  { id:'p2', title:'강의실 정보 오류를 알려 주세요', body:'공실로 나오는데 수업 중이거나 문이 잠겨 있으면\n강의실 상세의 [신고하기]로 알려 주세요.' },
+  { id:'p3', title:'이용 안내 (긴 내용 예시)', body:LONG_BODY }
+];
+const BANNERS = {
+  short:'2026-2학기 시간표를 반영했습니다. 휴강·보강·시험 일정은 반영되지 않습니다.',
+  long:'10/19(월)~10/23(금) 중간고사 기간에는 시험 일정이 반영되지 않아 공실로 보여도 사용 중일 수 있습니다. 강의실 정보가 틀리면 강의실 상세의 [신고하기]로 알려 주세요. 이 문구는 헤드 배너가 한 줄을 넘칠 때를 보여 주는 예시입니다.'
+};
+
+/* ---------- 상황 흉내 (조정판) ---------- */
+const SCEN = [
+  ['weekday', '평일 수업 중',              '2026-10-01', 11, 20, '10/1(목) 11:20 → 3교시'],
+  ['break',   '평일 쉬는 시간 (E-17)',     '2026-10-01', 10, 55, '10/1(목) 10:55 → 다음 교시(3교시)'],
+  ['evening', '수업 시간 밖, 저녁 (E-06)', '2026-10-01', 18, 30, '10/1(목) 18:30 → 교시 비움'],
+  ['morning', '수업 시간 밖, 아침 (E-06)', '2026-10-01',  8, 30, '10/1(목) 08:30 → 교시 비움'],
+  ['sat',     '토요일 (E-07)',             '2026-10-10', 11, 20, '10/10(토) 11:20'],
+  ['holiday', '공휴일 (E-07)',             '2026-10-09', 11, 20, '10/9(금) 한글날 11:20'],
+  ['vac',     '방학, 8월 (E-05·E-07)',     '2026-08-20', 11, 20, '8/20(목) 11:20'],
+  ['vacsat',  '방학 중 토요일',            '2026-08-22', 11, 20, '8/22(토) 11:20 → 주말 문구가 먼저(04 3.1)'],
+  ['after',   '학기 끝난 뒤, 12월',        '2026-12-21', 11, 20, '12/21(월) 11:20'],
+  ['device',  '기기 시각 그대로 (처음 값)', '', 0, 0, '지금 기기 시계를 한국 시간으로 바꿈 - 실제 사이트와 같음'],
+  ['custom',  '직접 입력',                 '', 0, 0, '아래 칸에 적은 날짜·시각']
+];
+
+/* ---------- 조정판 선택지 ---------- */
+const OPTS = [   /* 3. 보류 후보 (04·05 "보류 - 목업에서 결정") */
+  { k:'statusShape', label:'공실 / 수업중 모양 (04 2.3·2.4, 05 2.17)', def:'1', ch:[['1','① 색 칸 + 글자'],['2','② 글자만'],['3','③ 아이콘 + 글자']] },
+  { k:'statusColors', label:'상태 색 조합 (05 1.1.3)', def:'1', ch:[['1','① 초록 / 주황빛 갈색 (05 제안)'],['2','② 초록 / 회색'],['3','③ 초록 / 빨강']] },
+  { k:'primary', label:'대표색 (05 1.1.1)', def:'A', ch:[['A','A #2B5C8A (05 제안)'],['B','B #1F4E79'],['C','C #3A6EA5']] },
+  { k:'plan', label:'층별 안내도 그림 모양 (04 2.3)', def:'1', ch:[['1','① 강의실 배치 그림'],['2','② 실제 지도 참고 (위에서 본 건물 모양)'],['3','③ 목록 모양']] },
+  { k:'floorOrder', label:'층 순서 (04 2.3)', def:'1', ch:[['1','① 높은 층이 위 (건물 모양과 같음)'],['2','② 1층이 위']] },
+  { k:'nofloor', label:'층을 알 수 없는 강의실 (04 2.3, E-09) - D2에서 보임', def:'1', ch:[['1','① 맨 아래 "층 정보 없음" 묶음'],['2','② 맨 위 묶음'],['3','③ 보여 주지 않음']] },
+  { k:'sort', label:'건물 목록 정렬 (04 2.2)', def:'1', ch:[['1','① 건물 번호 순 (A1, B1 …)'],['2','② 건물 이름 가나다순'],['3','③ 단과대학별 묶기']] },
+  { k:'stamp', label:'기준 표시의 시·분 (04 2.0 A)', def:'1', ch:[['1','① 날짜만 "9/15 업데이트"'],['2','② 시·분까지 "9/15 14:30 업데이트"']] },
+  { k:'todayLook', label:'오늘이 주말·공휴일·방학일 때 "오늘" 모양 (04 2.0 C) - 상황을 토요일·공휴일·방학으로 바꾸면 보임', def:'1', ch:[['1','① 흐린 모양 + "오늘" 테두리만'],['2','② 골라진 모양 + "운영하지 않는 날"/"수업 기간 아님" 글자'],['3','③ 흐린 모양 + 골라진 테두리(옅은 바탕)']] },
+  { k:'maxZoom', label:'캠퍼스맵 최대 확대 (04 2.1)', def:'1', ch:[['1','① 처음 크기의 3배'],['2','② 4배'],['3','③ 글자가 흐려지지 않는 만큼 (목업은 8배)']] },
+  { k:'report', label:'[신고하기] 공통 메뉴 (04 2.0 A, 05 3.5)', def:'1', ch:[['1','① 강의실 상세(S-04)에만 둠'],['2','② 머리 영역에도 둠'],['3','③ 바닥 영역에 글자 연결로 둠']] },
+  { k:'mapSrc', label:'바닥 영역의 캠퍼스맵 출처 줄 (04 2.0 E, 캠퍼스맵 재료와 함께 결정)', def:'1', ch:[['0','두지 않음 (학교 자료 없이 직접 만든 지도일 때)'],['1','둠 (학교 캠퍼스맵을 참고해 그렸을 때)']] }
+];
+const PROPS = [  /* 4. 제안 확인 (04·05 "제안 - 목업에서 확인") */
+  { k:'alertStyle', label:'S-07 이용할 수 없는 날 안내 모양 (04 2.7)', def:'1', ch:[['1','① 가운데 안내 창 + [확인] (04 제안)'],['2','② 몇 초 동안 떴다가 사라지는 띠']] },
+  { k:'noRoomBld', label:'강의실이 없는 건물을 누름 (04 2.1, E-13)', def:'1', ch:[['1','① 반응 없음 (04 제안)'],['2','② 짧은 안내 "강의실이 없는 건물입니다"']] },
+  { k:'emptyFloor', label:'강의실이 없는 층 (04 2.3, E-15) - 사회과학대학(E7)에서 보임', def:'1', ch:[['1','① 보여 주지 않음 (04 제안)'],['2','② "강의실 없음"으로 표시']] },
+  { k:'detailStyle', label:'강의실 상세의 시각·수용 인원 (05 2.14)', def:'1', ch:[['1','한 문장 (04 2.4 그림)'],['2','이름·값 짝 (05 2.14 표 모양)']] },
+  { k:'labelMode', label:'건물 이름 글자가 겹칠 때 (05 2.15)', def:'p', ch:[['p','번호로 바꾸고, 그래도 겹치면 숨김 (05 제안)'],['1','① 숨기기'],['2','② 번호만'],['3','③ 그대로 두기']] }
+];
+const DEFAULTS = { theme:'light', phone:false, scenario:'device', custom:'2026-10-01T11:20', data:'ok', sheet:'ok', banner:'short', popups:'1', nlist:'yes' };
+OPTS.concat(PROPS).forEach(function(o){ DEFAULTS[o.k] = o.def; });
+
+/* ---------- 브라우저 저장 (목업 설정, "오늘은 그만 보기" 기록) ---------- */
+const MEM = {};
+function sGet(k){ try { const v = window.localStorage.getItem(k); return v === null ? (MEM[k] || null) : v; } catch (e){ return MEM[k] || null; } }
+function sSet(k, v){ MEM[k] = v; try { window.localStorage.setItem(k, v); } catch (e){ /* 저장 불가 환경: 메모리만 씀 */ } }
+function sDel(k){ delete MEM[k]; try { window.localStorage.removeItem(k); } catch (e){ /* 무시 */ } }
+const KEY_OPT = 'advmock-scnu-options-v2';
+const KEY_DIS = 'advmock-scnu-dismiss-v1';
+const O = (function(){
+  const o = Object.assign({}, DEFAULTS);
+  try { const saved = JSON.parse(sGet(KEY_OPT) || '{}'); Object.keys(saved).forEach(function(k){ if (Object.prototype.hasOwnProperty.call(DEFAULTS, k)) o[k] = saved[k]; }); } catch (e){ /* 무시 */ }
+  return o;
+})();
+function saveO(){ sSet(KEY_OPT, JSON.stringify(O)); }
+
+/* ---------- 사이트 상태 ---------- */
+const S = {
+  filterDate:'', period:null, cal:{ y:2026, m:10 },
+  screen:'S-01', tab:'map', bid:null, room:null,
+  bannerHidden:false, menu:false, fexp:false,
+  alert:null, modal:null, popQ:[], popIdx:0, popChk:false, noticeId:null,
+  data:'loading', loadTimer:0, pushed:false, addMin:0, stripTimer:0
+};
+
+/* ---------- 흉내 낸 시계 (한국 시간) ---------- */
+function baseClock(){
+  if (O.scenario === 'custom'){
+    const v = String(O.custom || '');
+    const m = /^(\d{4}-\d{2}-\d{2})T(\d{2}):(\d{2})/.exec(v);
+    if (m) return { date:m[1], h:Number(m[2]), mi:Number(m[3]) };
+    return { date:'2026-10-01', h:11, mi:20 };
+  }
+  const s = SCEN.filter(function(x){ return x[0] === O.scenario; })[0] || SCEN[0];
+  return { date:s[2], h:s[3], mi:s[4] };
+}
+function nowParts(){
+  let ms;
+  if (O.scenario === 'device') ms = Date.now() + 9 * 3600e3;
+  else { const b = baseClock(); const p = parseD(b.date); ms = Date.UTC(p.y, p.m - 1, p.d, b.h, b.mi); }
+  const t = new Date(ms + S.addMin * 60000);
+  return { date:ymd(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate()), h:t.getUTCHours(), mi:t.getUTCMinutes() };
+}
+function today(){ return nowParts().date; }
+
+/* ---------- "오늘은 그만 보기" 기록 (FR-009, 그날 = 한국 시간 날짜) ---------- */
+function disLoad(){ try { return JSON.parse(sGet(KEY_DIS) || '{}') || {}; } catch (e){ return {}; } }
+function isDismissed(id){ const d = disLoad(); return (d[today()] || []).indexOf(id) >= 0; }
+function addDismiss(id){ const d = disLoad(); const t = today(); d[t] = (d[t] || []).concat([id]); sSet(KEY_DIS, JSON.stringify(d)); }
+function disCount(){ const d = disLoad(); return Object.keys(d).reduce(function(n, k){ return n + d[k].length; }, 0); }
+
+/* =====================================================================
+   화면 그리기
+   ===================================================================== */
+function $(id){ return document.getElementById(id); }
+const el = {
+  stage:$('stage'), frame:$('frame'), scroller:$('scroller'), site:$('site'), hdr:$('hdr'), banner:$('banner'),
+  main:$('main'), filter:$('filter'), center:$('center'), scrMap:$('scr-map'), scrFloor:$('scr-floor'), scrNotices:$('scr-notices'),
+  tabMap:$('tab-map'), tabList:$('tab-list'), tabmsg:$('tabmsg'), mapvp:$('mapvp'), mapg:$('mapg'), lblg:$('lblg'),
+  mapOver:$('map-over'), zin:$('zin'), zout:$('zout'), blist:$('blist'), strip:$('strip'), panel:$('panel'), ftr:$('ftr'),
+  scrim:$('scrim'), modal:$('modal'), alert:$('alert')
+};
+const ICON = {
+  left:'<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  right:'<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  chev:'<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  x:'<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  menu:'<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 6h14M4 11h14M4 16h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  free:'<svg class="ico" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+  busy:'<svg class="ico" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="currentColor"/></svg>'
+};
+const LOADING_HTML = '<div class="loading" role="status"><span class="spinner" aria-hidden="true"></span>불러오는 중…</div>';
+const ERR_HTML = '<div class="err" role="alert"><p>정보를 불러오지 못했습니다. 잠시 뒤 다시 시도해 주세요</p><button class="btn btn-primary" data-act="retry">다시 시도</button></div>';
+function isPC(){ return el.site.classList.contains('is-pc'); }
+
+/* ---------- A. 머리 영역 (FR-006·FR-007·FR-010·FR-013) ---------- */
+function stampText(){
+  if (S.data === 'loading' || S.data === 'fail') return '';
+  if (S.data === 'none') return '아직 시간표가 등록되지 않았습니다';                       /* E-04 */
+  return SEM.name + ' 시간표 기준 · ' + UPDATED.m + '/' + UPDATED.d + (O.stamp === '2' ? ' ' + UPDATED.hm : '') + ' 업데이트';
+}
+function renderHeader(){
+  const st = esc(stampText());
+  const rep = O.report === '2';
+  if (isPC()){
+    el.hdr.innerHTML =
+      '<div class="svc" data-act="svc">순천대 공실 알리미</div>' +
+      '<div class="stamp">' + st + '</div>' +
+      '<nav class="acts" aria-label="머리 메뉴">' +
+        '<button class="btn btn-secondary" data-act="reset">초기화</button>' +
+        '<button class="btn btn-text" data-act="inquiry">문의하기</button>' +
+        '<button class="btn btn-text" data-act="notices">공지사항</button>' +
+        (rep ? '<button class="btn btn-text" data-act="report">신고하기</button>' : '') +
+      '</nav>';
+  } else {
+    el.hdr.innerHTML =
+      '<div class="hrow">' +
+        '<div class="svc" data-act="svc">순천대 공실 알리미</div>' +
+        '<button class="btn btn-secondary" data-act="reset">초기화</button>' +
+        '<button class="ibtn' + (S.menu ? ' on' : '') + '" data-act="menu" aria-label="메뉴" aria-expanded="' + S.menu + '">' + ICON.menu + '</button>' +
+      '</div>' +
+      '<div class="stamp">' + st + '</div>' +
+      (S.menu ? '<div class="menu" role="menu">' +
+        '<button class="mrow" role="menuitem" data-act="inquiry">문의하기</button>' +
+        '<button class="mrow" role="menuitem" data-act="notices">공지사항</button>' +
+        (rep ? '<button class="mrow" role="menuitem" data-act="report">신고하기</button>' : '') +
+      '</div>' : '');
+  }
+}
+
+/* ---------- B. 헤드 배너 (FR-008) ---------- */
+function bannerOn(){ return O.sheet === 'ok' && O.banner !== 'none' && !S.bannerHidden; }
+function renderBanner(){
+  if (!bannerOn()){ el.banner.hidden = true; el.banner.innerHTML = ''; return; }
+  el.banner.hidden = false;
+  el.banner.innerHTML = '<p class="bt">' + esc(BANNERS[O.banner] || BANNERS.short) + '</p><button class="btn btn-text" data-act="bclose">닫기</button>';
+}
+
+/* ---------- C. 필터 영역 (FR-003·FR-014·FR-015·FR-018) ---------- */
+function noteLines(){
+  const L = [];
+  const t = today();
+  if (S.period === null) L.push('지금은 수업 시간이 아닙니다. 교시를 골라 주세요');         /* FR-015 */
+  if (S.filterDate === t && !inSem(t)) L.push('현재 학기 수업 기간이 아닙니다');              /* FR-014, E-05 */
+  if (O.todayLook === '2' && S.filterDate === t && !selectable(t)) L.push(offKind(t) === 'weekend' ? '운영하지 않는 날' : '수업 기간 아님'); /* "오늘" 후보 ② */
+  return L;
+}
+function calHTML(){
+  const y = S.cal.y, m = S.cal.m;
+  const first = dow(ymd(y, m, 1));
+  const n = daysInMonth(y, m);
+  const t = today();
+  let cells = DOW.map(function(w){ return '<div class="dow" aria-hidden="true">' + w + '</div>'; }).join('');
+  for (let i = 0; i < first; i++) cells += '<span class="day blank" aria-hidden="true"></span>';
+  for (let d = 1; d <= n; d++){
+    const ds = ymd(y, m, d);
+    const sel = ds === S.filterDate, isT = ds === t;
+    if (selectable(ds)){
+      cells += '<button class="day can' + (sel ? ' sel' : '') + (isT ? ' today' : '') + '" data-act="date" data-date="' + ds + '" aria-pressed="' + sel + '" aria-label="' + m + '월 ' + d + '일' + (isT ? ' 오늘' : '') + '">' + d + '</button>';
+    } else {
+      cells += '<span class="day off' + (isT ? (sel ? ' tl' + O.todayLook : ' today') : '') + '" aria-disabled="true">' + d + '</span>';
+    }
+  }
+  return '<div class="cal">' +
+    '<div class="cal-head">' +
+      '<button class="ibtn cal-nav" data-act="mprev" aria-label="앞 달">' + ICON.left + '</button>' +
+      '<div class="cal-title">' + y + '년 ' + m + '월</div>' +
+      '<button class="ibtn cal-nav" data-act="mnext" aria-label="다음 달">' + ICON.right + '</button>' +
+    '</div>' +
+    '<div class="cal-grid">' + cells + '</div></div>';
+}
+function perHTML(){
+  let h = '<div class="periods" role="group" aria-label="교시">';
+  for (let p = 1; p <= 9; p++){
+    const sel = S.period === p;
+    h += '<button class="per' + (sel ? ' sel' : '') + '" data-act="period" data-p="' + p + '" aria-pressed="' + sel + '"><span class="pn">' + p + '교시</span><span class="pt num">' + PERIODS[p][0] + '</span></button>';
+  }
+  return h + '</div>';
+}
+function renderFilter(){
+  const L = noteLines();
+  const note = L.length ? '<div class="note" role="status">' + L.map(esc).join('<br>') + '</div>' : '';
+  const body = calHTML() + '<div class="f-gap"></div>' + perHTML() + (note ? '<div class="f-note">' + note + '</div>' : '');
+  if (isPC()){ el.filter.innerHTML = body; return; }
+  const sum = fmtMD(S.filterDate) + ' · ' + (S.period ? S.period + '교시' : '교시를 골라 주세요');
+  el.filter.innerHTML =
+    '<button class="fsum" data-act="ftoggle" aria-expanded="' + S.fexp + '"><span class="num">' + esc(sum) + '</span><span class="car" aria-hidden="true">' + (S.fexp ? '▲' : '▼') + '</span></button>' +
+    (S.fexp ? '<div class="fbody">' + body + '</div>' : (note ? '<div class="fnote">' + note + '</div>' : ''));
+}
+
+/* ---------- D. 가운데 구역 ---------- */
+function renderCenter(){
+  const scr = S.screen;
+  el.scrMap.classList.toggle('on', scr === 'S-01' || scr === 'S-02');
+  el.scrFloor.classList.toggle('on', scr === 'S-03');
+  el.scrNotices.classList.toggle('on', scr === 'S-10');
+  if (scr === 'S-01' || scr === 'S-02') renderMapScreen();
+  if (scr === 'S-03') renderFloor(); else el.scrFloor.innerHTML = '';
+  if (scr === 'S-10') renderNotices(); else el.scrNotices.innerHTML = '';
+}
+/* S-01 캠퍼스맵 / S-02 건물 목록 */
+function renderMapScreen(){
+  const isMap = S.tab === 'map';
+  el.tabMap.classList.toggle('sel', isMap); el.tabMap.setAttribute('aria-selected', String(isMap));
+  el.tabList.classList.toggle('sel', !isMap); el.tabList.setAttribute('aria-selected', String(!isMap));
+  const fail = S.data === 'fail';
+  el.tabmsg.hidden = !fail;
+  el.tabmsg.innerHTML = fail ? ERR_HTML : '';                                               /* E-02 */
+  el.mapvp.hidden = fail || !isMap;
+  el.blist.hidden = fail || isMap;
+  el.mapvp.classList.toggle('inert', S.data !== 'ok');                                      /* E-01·E-04: 건물을 누를 수 없음 */
+  el.mapvp.classList.toggle('nodata', S.data === 'none');
+  el.mapOver.hidden = S.data !== 'loading';
+  el.mapOver.innerHTML = S.data === 'loading' ? LOADING_HTML : '';                          /* E-01 */
+  el.mapg.querySelectorAll('.bld.nr').forEach(function(g){ g.classList.toggle('tap', O.noRoomBld === '2'); });
+  if (!isMap && !fail) renderList();
+  if (isMap && !fail) mapRefresh();
+}
+function renderList(){
+  if (S.data === 'loading'){ el.blist.innerHTML = LOADING_HTML; return; }
+  if (S.data === 'none'){ el.blist.innerHTML = '<p class="empty">아직 시간표가 등록되지 않았습니다</p>'; return; }  /* E-04 */
+  const bs = BUILDINGS.filter(hasRooms);                                                    /* 강의실이 있는 건물만 (영역 없는 D4 포함) */
+  const row = function(b){
+    return '<button class="row" data-act="bld" data-bid="' + b.id + '"><span class="t">' + esc(fullName(b)) + '</span><span class="chev">' + ICON.chev + '</span></button>';
+  };
+  let h = '';
+  if (O.sort === '2'){
+    bs.sort(function(a, b){ return a.name.localeCompare(b.name, 'ko'); });
+    h = bs.map(row).join('');
+  } else if (O.sort === '3'){
+    bs.sort(codeCmp);
+    const names = COLLEGES.concat(bs.map(function(b){ return b.college; }).filter(function(c, i, a){ return COLLEGES.indexOf(c) < 0 && a.indexOf(c) === i; }));
+    h = names.map(function(c){
+      const items = bs.filter(function(b){ return b.college === c; });
+      return items.length ? '<div class="group-head">' + esc(c) + '</div>' + items.map(row).join('') : '';
+    }).join('');
+  } else {
+    bs.sort(codeCmp);
+    h = bs.map(row).join('');
+  }
+  el.blist.innerHTML = '<div class="list">' + h + '</div>';
+}
+
+/* S-03 층별 안내도 (FR-004·FR-012·FR-016) */
+function baseLine(){ return fmtMD(S.filterDate) + (S.period ? ' · ' + periodText(S.period) : '') + ' 기준'; }
+function floorGroups(b){
+  const has = Object.keys(b.rooms).map(Number);
+  let fl = has;
+  if (O.emptyFloor === '2'){ fl = []; for (let f = 1; f <= b.floors; f++) fl.push(f); }   /* 강의실 없는 층 후보 ② */
+  fl = fl.slice().sort(function(a, c){ return O.floorOrder === '1' ? c - a : a - c; });
+  const gs = fl.map(function(f){ return { key:'f' + f, label:f + '층', rooms:b.rooms[f] || [], known:true }; });
+  if (b.nofloor && b.nofloor.length && O.nofloor !== '3'){                                  /* E-09 후보 ①② (③은 숨김) */
+    const g = { key:'nf', label:'층 정보 없음', rooms:b.nofloor, known:false };
+    if (O.nofloor === '1') gs.push(g); else gs.unshift(g);
+  }
+  return gs;
+}
+function roomCell(b, no){
+  const key = b.id + '-' + no;
+  const r = S.period ? roomStatus(key, S.filterDate, S.period) : null;
+  const st = r ? r.st : '';
+  const cur = S.room === key;
+  return '<button class="room' + (st ? ' ' + st : '') + (cur ? ' cur' : '') + '" data-act="room" data-key="' + key + '" aria-pressed="' + cur + '">' +
+    '<span class="no num">' + esc(no) + '</span>' +
+    (st ? '<span class="st">' + (st === 'free' ? ICON.free + '공실' : ICON.busy + '수업중') + '</span>' : '') +
+    '</button>';
+}
+function cells(b, list){ return list.map(function(no){ return roomCell(b, no); }).join(''); }
+function groupHTML(b, g){
+  let body;
+  if (!g.rooms.length){
+    body = '<p class="noroom">강의실 없음</p>';
+  } else if (O.plan === '1' && g.known){                                                    /* ① 강의실 배치 그림 */
+    const half = Math.ceil(g.rooms.length / 2);
+    body = '<div class="plan"><div class="rooms">' + cells(b, g.rooms.slice(0, half)) + '</div><div class="corr" aria-hidden="true">복도</div>' +
+      (g.rooms.length > half ? '<div class="rooms">' + cells(b, g.rooms.slice(half)) + '</div>' : '') + '</div>';
+  } else if (O.plan === '2' && g.known){                                                    /* ② 위에서 본 건물 윤곽 */
+    if (b.fp === 'L' && g.rooms.length >= 2){
+      const cut = Math.min(g.rooms.length - 1, Math.ceil(g.rooms.length * 0.6));
+      body = '<div class="fp L"><div class="wing a"><div class="rooms">' + cells(b, g.rooms.slice(0, cut)) + '</div></div>' +
+        '<div class="wing b"><div class="rooms">' + cells(b, g.rooms.slice(cut)) + '</div></div></div>';
+    } else {
+      body = '<div class="fp"><div class="wing"><div class="rooms">' + cells(b, g.rooms) + '</div></div></div>';
+    }
+  } else {                                                                                   /* ③ 목록 모양 (또는 층 정보 없음 묶음) */
+    body = '<div class="rooms">' + cells(b, g.rooms) + '</div>';
+  }
+  return '<div class="floor" id="fl-' + g.key + '"><h3 class="floor-name">' + esc(g.label) + '</h3>' + body + '</div>';
+}
+function renderFloor(){
+  const b = BMAP[S.bid];
+  if (!b || !b.rooms){ el.scrFloor.innerHTML = ''; return; }
+  const gs = floorGroups(b);
+  let note = '';
+  if (S.period === null) note = '교시를 골라 주세요';                                       /* E-06 */
+  else {
+    const anyFree = gs.some(function(g){ return g.rooms.some(function(no){ return roomStatus(b.id + '-' + no, S.filterDate, S.period).st === 'free'; }); });
+    if (!anyFree) note = '이 시간에는 공실이 없습니다';                                       /* E-11 */
+  }
+  const keep = el.scrFloor.scrollTop;
+  el.scrFloor.innerHTML =
+    '<div class="fhead" id="fhead">' +
+      '<div class="fh-top"><button class="btn btn-text" data-act="tomap">← 캠퍼스맵으로</button><h2 class="bname">' + esc(fullName(b)) + '</h2></div>' +
+      '<p class="fbase">' + esc(baseLine()) + '</p>' +
+      '<p class="fixed-note">휴강·보강·시험 일정은 반영되지 않습니다</p>' +
+      (note ? '<div class="note" role="status">' + esc(note) + '</div>' : '') +
+      '<div class="jumps" role="group" aria-label="층 바로가기">' + gs.map(function(g){ return '<button class="btn btn-secondary" data-act="jump" data-key="' + g.key + '">' + esc(g.label) + '</button>'; }).join('') + '</div>' +
+    '</div>' +
+    '<div class="floors">' + (O.plan === '2' ? '<p class="fp-cap">위에서 본 건물 모양(예시)</p>' : '') + gs.map(function(g){ return groupHTML(b, g); }).join('') + '</div>';
+  el.scrFloor.scrollTop = keep;
+  const fh = $('fhead');
+  if (fh) el.scrFloor.style.setProperty('--fhead-h', fh.offsetHeight + 'px');
+}
+function jumpTo(key){
+  const t = $('fl-' + key);
+  if (t) t.scrollIntoView({ block:'start', behavior:'smooth' });
+}
+
+/* S-10 공지사항 모음 (FR-007) */
+function noticeList(){ return (O.sheet === 'ok' && O.nlist === 'yes') ? NOTICES : []; }
+function renderNotices(){
+  const list = noticeList();
+  el.scrNotices.innerHTML =
+    '<div class="nhead"><button class="btn btn-text" data-act="tomap">← 캠퍼스맵으로</button><h2 class="ntitle">공지사항</h2></div>' +
+    (list.length
+      ? '<div class="list">' + list.map(function(n){ return '<button class="row" data-act="notice" data-id="' + n.id + '"><span class="t">' + esc(n.title) + '</span><span class="chev">' + ICON.chev + '</span></button>'; }).join('') + '</div>'
+      : '<p class="empty">등록된 공지사항이 없습니다</p>');                                  /* E-22 */
+}
+
+/* ---------- S-04 강의실 상세 (FR-005·FR-011·FR-016) ---------- */
+function renderPanel(){
+  const open = S.screen === 'S-03' && !!S.room;
+  el.panel.classList.toggle('open', open);
+  el.site.style.paddingBottom = (open && !isPC()) ? 'calc(var(--screen-h) * 0.5)' : '';
+  document.body.classList.toggle('sheet-open', open && !isPC());
+  if (!open){ el.panel.innerHTML = ''; return; }
+  const i = S.room.indexOf('-');
+  const b = BMAP[S.room.slice(0, i)], no = S.room.slice(i + 1);
+  const f = floorOf(b, no);
+  const cap = capOf(S.room);
+  let chip = '', time = '';
+  if (S.period !== null){
+    const r = roomStatus(S.room, S.filterDate, S.period);
+    chip = '<span class="stchip ' + r.st + '">' + (r.st === 'free' ? ICON.free + '공실' : ICON.busy + '수업중') + '</span>';
+    time = r.st === 'busy' ? '수업중 · ' + r.end + ' 끝' : (r.next ? '다음 수업 ' + r.next + ' 시작' : '남은 수업 없음');
+  }
+  const pick = '<div class="note" role="status">교시를 골라 주세요</div>';                  /* E-06 */
+  let info;
+  if (O.detailStyle === '2'){
+    info = (S.period === null ? pick : '') + '<dl class="kv">' +
+      (S.period === null ? '' : '<dt>상태</dt><dd>' + chip + '</dd><dt>시각</dt><dd class="num">' + esc(time) + '</dd>') +
+      '<dt>수용 인원</dt><dd>' + (cap === null ? '정보 없음' : '약 ' + cap + '명(추정)') + '</dd></dl>';
+  } else {
+    info = (S.period === null ? pick : chip + '<p class="p-time num">' + esc(time) + '</p>') +
+      '<p class="p-time">' + (cap === null ? '수용 인원 정보 없음' : '수용 인원 약 ' + cap + '명(추정)') + '</p>';      /* E-10 */
+  }
+  el.panel.innerHTML =
+    '<button class="ibtn panel-x" data-act="px" aria-label="닫기">' + ICON.x + '</button>' +
+    '<div class="panel-in">' +
+      '<h2 class="p-bname">' + esc(fullName(b)) + '</h2>' +
+      '<p class="p-room">' + esc(no) + '호 · ' + (f === null ? '층 정보 없음' : f + '층') + '</p>' +      /* E-09 */
+      '<p class="p-base num">' + esc(baseLine()) + '</p>' +
+      info +
+      '<p class="p-fixed">휴강·보강·시험 일정은 반영되지 않습니다</p>' +
+      '<button class="btn btn-secondary p-report" data-act="report">신고하기</button>' +
+    '</div>';
+}
+
+/* ---------- E. 바닥 영역 (FR-016·FR-017) ---------- */
+function renderFooter(){
+  el.ftr.innerHTML =
+    '<span>출처: 국립순천대학교 수업시간표(' + SEM.name + ') · 폐강 교과목 안내</span>' +
+    (O.mapSrc === '1' ? '<span>캠퍼스맵 출처: 국립순천대학교</span>' : '') +
+    '<span>지도 데이터 © OpenStreetMap 기여자</span>' +                  /* OSM 사용 조건(ODbL): 항상 보임 */
+    '<span>휴강·보강·시험 일정은 반영되지 않습니다</span>' +
+    (O.report === '3' ? '<button class="flink" data-act="report">신고하기</button>' : '');
+}
+
+/* ---------- 화면 위에 뜨는 것: S-05·S-06 팝업, S-07 안내 창 ---------- */
+function renderOverlays(){
+  let mh = '';
+  if (S.modal === 'S-05'){
+    const p = S.popQ[S.popIdx];
+    if (!p) S.modal = null;
+    else mh = '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">' +
+      '<div class="modal-head"><h2 class="modal-title" id="m-title">' + esc(p.title) + '</h2><button class="ibtn" data-act="popx" aria-label="닫기">' + ICON.x + '</button></div>' +
+      '<div class="modal-body">' + esc(p.body) + '</div>' +
+      '<div class="modal-foot"><label class="chk-row"><input type="checkbox" class="chk" id="popchk"' + (S.popChk ? ' checked' : '') + '>오늘은 그만 보기</label></div>' +
+      '</div>';
+  } else if (S.modal === 'S-06'){
+    const n = NOTICES.filter(function(x){ return x.id === S.noticeId; })[0];
+    if (!n) S.modal = null;
+    else mh = '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="m-title">' +
+      '<div class="modal-head"><h2 class="modal-title" id="m-title">' + esc(n.title) + '</h2><button class="ibtn" data-act="nx" aria-label="닫기">' + ICON.x + '</button></div>' +
+      '<div class="modal-body">' + esc(n.body) + '</div></div>';
+  }
+  el.modal.hidden = !mh;
+  el.modal.innerHTML = mh;
+  let ah = '';
+  if (S.alert && O.alertStyle === '1'){
+    ah = '<div class="alert" role="alertdialog" aria-modal="true"><p>' +
+      (S.alert === 'weekend' ? '운영하지 않는 날입니다.<br>달력에서 평일을 골라 주세요.' : '현재 학기 수업 기간이 아닙니다.<br>달력에서 수업 기간 날짜를 골라 주세요.') +
+      '</p><div class="aact"><button class="btn btn-primary" data-act="alertok">확인</button></div></div>';
+  }
+  el.alert.hidden = !ah;
+  el.alert.innerHTML = ah;
+  el.scrim.hidden = !(mh || ah);
+}
+function showStrip(text){
+  clearTimeout(S.stripTimer);
+  el.strip.textContent = text;
+  el.strip.hidden = false;
+  S.stripTimer = setTimeout(function(){ el.strip.hidden = true; }, 3000);
+}
+function hideStrip(){ clearTimeout(S.stripTimer); el.strip.hidden = true; }
+
+function render(){
+  renderHeader(); renderBanner(); renderFilter(); renderCenter(); renderPanel(); renderFooter(); renderOverlays(); renderMock();
+}
+
+/* =====================================================================
+   S-01 캠퍼스맵 (FR-001) - 오픈스트리트맵 자료로 그린 지도(SVG, 학교 캠퍼스맵 방향), 끌기·휠·[+][-]·두 손가락
+   ===================================================================== */
+const V = { s:1, tx:0, ty:0, min:1, max:3, W:0, H:0, fitted:true, lastS:-1 };
+const ZF = { '1':3, '2':4, '3':8 };
+const LBL = [];
+let LORDER = [];
+function ptsStr(a){ return a.map(function(p){ return p[0] + ',' + p[1]; }).join(' '); }
+function buildMap(){
+  const G = MAPGEO;
+  const poly = function(cls, p){ return '<polygon class="' + cls + '" points="' + ptsStr(p) + '"/>'; };
+  let g = poly('m-ground', G.ground);                                                                            /* 캠퍼스 땅 */
+  G.lots.forEach(function(p){ g += poly('m-lot', p); });                                                       /* 주차장 */
+  G.plazas.forEach(function(p){ g += poly('m-plaza', p); });                                                   /* 보행 광장 */
+  G.greens.forEach(function(p){ g += poly('m-green', p); });                                                   /* 잔디·공원 */
+  g += '<circle class="m-green" cx="' + G.ring.cx + '" cy="' + G.ring.cy + '" r="' + G.ring.r + '"/>';          /* 정문 앞 둥근 잔디 */
+  /* 도로: 종류별 굵기(큰길 > 동네 길 > 건물 사이 길 > 산책로). 테두리를 먼저 모두 그린 뒤 도로 색을 덮어 교차로가 이어져 보이게 함 */
+  const RW = { foot:2.2, ped:5, svc:7, mid:11, maj:18 }, RD = {};
+  G.roads.forEach(function(r){ RD[r[0]] = r[1].map(function(l){ return 'M' + l.map(function(p){ return p[0] + ' ' + p[1]; }).join('L'); }).join(''); });
+  if (RD.foot) g += '<path class="m-foot" stroke-width="' + RW.foot + '" d="' + RD.foot + '"/>';
+  ['ped', 'svc', 'mid', 'maj'].forEach(function(k){ if (RD[k]) g += '<path class="m-rd-edge" stroke-width="' + (RW[k] + 2.5) + '" d="' + RD[k] + '"/>'; });
+  ['ped', 'svc', 'mid', 'maj'].forEach(function(k){ if (RD[k]) g += '<path class="m-rd" stroke-width="' + RW[k] + '" d="' + RD[k] + '"/>'; });
+  g += poly('m-track', G.track) + poly('m-green', G.field) + poly('m-line', G.pitch) +                        /* 운동장: 트랙·안쪽 잔디·축구장 선 */
+    '<polyline class="m-line" points="' + ptsStr(G.mid) + '"/>';
+  G.courts.forEach(function(p){ g += poly('m-track', p); });                                                   /* 테니스장 */
+  G.bcourts.forEach(function(p){ g += poly('m-green', p); });                                                  /* 농구장 */
+  G.bg.forEach(function(p){ g += poly('m-bgb', p); });                    /* 이름 없는 바탕 건물(C3 포함): 누를 수 없음, 이름 없음 (E-14) */
+  BUILDINGS.forEach(function(b){
+    if (!b.parts) return;                                                                                          /* 영역 없는 건물(E-14)은 그리지 않음 */
+    const on = clickable(b), nr = !b.rooms;
+    g += '<g class="bld' + (on ? ' on' : '') + (nr ? ' nr' : '') + '"' +
+      (on ? ' data-bid="' + b.id + '"' : '') + (nr ? ' data-nobld="' + b.id + '"' : '') + '>' +
+      b.parts.map(function(p){ const s = ptsStr(p); return '<polygon class="base" points="' + s + '"/>' + (on ? '<polygon class="hl" points="' + s + '"/>' : ''); }).join('') + '</g>';
+  });
+  PLACES.forEach(function(p){ if (p.kind === 'gate') g += '<circle class="m-gate" cx="' + p.x + '" cy="' + p.y + '" r="7"/>'; });  /* 문 자리 점 */
+  el.mapg.innerHTML = g;
+  LBL.length = 0;
+  BUILDINGS.forEach(function(b){ if (b.parts) LBL.push({ b:b, x:b.lx, y:b.ly, oy:0, name:fullName(b), code:b.id, place:false, prio:clickable(b) ? 0 : 2 }); });
+  PLACES.forEach(function(p, i){ LBL.push({ b:null, x:p.x, y:p.y, oy:p.kind === 'gate' ? -14 : 0, name:p.name, code:p.name, place:true, pi:i, prio:p.kind === 'gate' ? 1 : 3 }); });
+  el.lblg.innerHTML = LBL.map(function(l, i){ return '<text class="lbl' + (l.place ? ' pl' : '') + '" data-i="' + i + '"></text>'; }).join('');
+  measureLabels();                                          /* 글자 너비를 바로 잼 (글꼴을 받으면 다시 잼) */
+}
+function measureLabels(){
+  const ctx = document.createElement('canvas').getContext('2d');
+  LBL.forEach(function(l, i){
+    const t = el.lblg.children[i];
+    const cs = window.getComputedStyle(t);
+    const fs = parseFloat(cs.fontSize) || 14;
+    ctx.font = (cs.fontWeight || '600') + ' ' + fs + 'px ' + cs.fontFamily;
+    l.el = t; l.wName = ctx.measureText(l.name).width; l.wCode = ctx.measureText(l.code).width; l.h = fs * 1.3;
+    l.vis = true; l.mode = 'name';
+  });
+  /* 먼저 보일 차례: 누를 수 있는 건물 → 문 → 다른 건물 → 운동장·테니스장, 같은 묶음 안에서는 건물 번호 순 */
+  LORDER = LBL.map(function(l, i){ return i; }).sort(function(a, c){
+    const A = LBL[a], C = LBL[c];
+    return (A.prio - C.prio) || (A.place ? A.pi - C.pi : codeCmp(A.b, C.b));
+  });
+  V.lastS = -1;
+}
+/* 05 2.15: 겹치면 번호로 → 번호도 겹치면 숨김 (건물마다 따로, 누를 수 있는 건물부터) */
+function layoutLabels(){
+  if (!LBL.length || !LBL[0].el) return;                    /* 아직 재지 않음 */
+  const s = V.s, N = LBL.length;
+  const box = function(l, mode){
+    const w = (mode === 'name' ? l.wName : l.wCode) + 12, h = l.h + 6;
+    const cx = l.x * s, cy = l.y * s + l.oy;
+    return [cx - w / 2, cy - h / 2, cx + w / 2, cy + h / 2];
+  };
+  const ov = function(a, c){ return a[0] < c[2] && c[0] < a[2] && a[1] < c[3] && c[1] < a[3]; };
+  const NB = LBL.map(function(l){ return box(l, 'name'); }), CB = LBL.map(function(l){ return box(l, 'code'); });
+  const anyOv = function(bx){ for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) if (ov(bx[i], bx[j])) return true; return false; };
+  const hit = function(b, placed){ return placed.some(function(p){ return ov(p, b); }); };
+  const mode = LBL.map(function(){ return 'name'; }), vis = LBL.map(function(){ return true; });
+  if (O.labelMode === '1'){                                /* ① 숨기기: 겹치면 하나만 */
+    const placed = [];
+    LORDER.forEach(function(i){ if (hit(NB[i], placed)) vis[i] = false; else placed.push(NB[i]); });
+  } else if (O.labelMode === '2'){                         /* ② 번호만: 겹치는 이름은 번호로 (숨기지 않음) */
+    if (anyOv(NB)){
+      const placed = [];
+      LORDER.forEach(function(i){ if (hit(NB[i], placed)){ mode[i] = 'code'; placed.push(CB[i]); } else placed.push(NB[i]); });
+    }
+  } else if (O.labelMode === 'p'){                         /* 05 제안: 번호로 두고 겹치는 번호는 숨긴 뒤, 자리가 있으면 이름으로 되돌림 */
+    if (anyOv(NB)){
+      const cur = [];
+      LORDER.forEach(function(i){ mode[i] = 'code'; if (hit(CB[i], cur)) vis[i] = false; else cur.push(CB[i]); });
+      const cb = function(j){ return mode[j] === 'name' ? NB[j] : CB[j]; };
+      LORDER.forEach(function(i){                          /* 자리가 있으면 이름으로 되돌림. 누를 수 있는 건물 이름은 다른 건물·운동장 글자보다 먼저 */
+        if (!vis[i]) return;
+        const by = [];
+        for (let j = 0; j < N; j++){ if (j !== i && vis[j] && ov(NB[i], cb(j))) by.push(j); }
+        if (by.length && !(LBL[i].prio === 0 && by.every(function(j){ return LBL[j].prio >= 2; }))) return;
+        by.forEach(function(j){ vis[j] = false; });
+        mode[i] = 'name';
+      });
+      LORDER.forEach(function(i){                          /* 숨긴 번호 중 다시 자리가 난 것은 번호로 보임 */
+        if (vis[i]) return;
+        for (let j = 0; j < N; j++){ if (j !== i && vis[j] && ov(CB[i], cb(j))) return; }
+        vis[i] = true; mode[i] = 'code';
+      });
+    }
+  }                                                         /* ③ 그대로 두기: 모두 이름 */
+  LBL.forEach(function(l, i){
+    l.mode = mode[i]; l.vis = vis[i];
+    const t = mode[i] === 'name' ? l.name : l.code;
+    if (l.el.textContent !== t) l.el.textContent = t;
+    l.el.style.display = vis[i] ? '' : 'none';
+  });
+}
+function placeLabels(){
+  LBL.forEach(function(l){
+    if (!l.vis || !l.el) return;
+    l.el.setAttribute('x', (l.x * V.s + V.tx).toFixed(1));
+    l.el.setAttribute('y', (l.y * V.s + V.ty + l.oy).toFixed(1));
+  });
+}
+function measure(){
+  const W = el.mapvp.clientWidth, H = el.mapvp.clientHeight;
+  if (!W || !H) return false;
+  V.W = W; V.H = H;
+  V.min = Math.min(W / MW, H / MH);                        /* 캠퍼스맵 전체가 한 번에 들어오는 크기보다 작아지지 않음 */
+  V.max = V.min * (ZF[O.maxZoom] || 3);                     /* 최대 확대 (보류 후보) */
+  return true;
+}
+function clampV(){                                          /* 가장자리가 가운데 구역 안쪽까지만 들어옴 */
+  V.s = Math.min(V.max, Math.max(V.min, V.s));
+  const mw = MW * V.s, mh = MH * V.s;
+  V.tx = mw <= V.W ? (V.W - mw) / 2 : Math.min(0, Math.max(V.W - mw, V.tx));
+  V.ty = mh <= V.H ? (V.H - mh) / 2 : Math.min(0, Math.max(V.H - mh, V.ty));
+}
+function draw(){
+  el.mapg.setAttribute('transform', 'translate(' + V.tx.toFixed(2) + ' ' + V.ty.toFixed(2) + ') scale(' + V.s.toFixed(5) + ')');
+  if (Math.abs(V.s - V.lastS) > 1e-9){ layoutLabels(); V.lastS = V.s; }
+  placeLabels();
+  el.zin.disabled = V.s >= V.max * 0.9999;                  /* 끝에 닿은 쪽 단추는 못 누름 모양 (05 R-13) */
+  el.zout.disabled = V.s <= V.min * 1.0001;
+}
+function mapRefresh(){ if (!measure()) return; if (V.fitted) V.s = V.min; clampV(); draw(); }
+function mapFit(){ V.fitted = true; V.tx = 0; V.ty = 0; mapRefresh(); }
+function zoomAt(f, cx, cy){
+  if (!measure()) return;
+  const ns = Math.min(V.max, Math.max(V.min, V.s * f));
+  const k = ns / V.s;
+  V.tx = cx - (cx - V.tx) * k; V.ty = cy - (cy - V.ty) * k; V.s = ns; V.fitted = false;
+  clampV(); draw();
+}
+const PT = new Map();
+let drag = null, pinch = null;
+function localPt(e){ const r = el.mapvp.getBoundingClientRect(); return { x:e.clientX - r.left, y:e.clientY - r.top }; }
+function dist(a, c){ return Math.hypot(a.x - c.x, a.y - c.y); }
+el.mapvp.addEventListener('pointerdown', function(e){
+  if (e.target.closest('.zoom')) return;
+  if (e.pointerType === 'mouse' && e.button !== 0) return;
+  try { el.mapvp.setPointerCapture(e.pointerId); } catch (x){ /* 무시 */ }
+  const p = localPt(e);
+  PT.set(e.pointerId, p);
+  if (PT.size === 1){ drag = { x0:p.x, y0:p.y, tx0:V.tx, ty0:V.ty, moved:false, target:e.target }; pinch = null; }
+  else if (PT.size === 2){
+    const a = Array.from(PT.values());
+    pinch = { d0:dist(a[0], a[1]) || 1, s0:V.s, mx0:(a[0].x + a[1].x) / 2, my0:(a[0].y + a[1].y) / 2, tx0:V.tx, ty0:V.ty };
+    if (drag) drag.moved = true;
+  }
+});
+el.mapvp.addEventListener('pointermove', function(e){
+  if (!PT.has(e.pointerId)) return;
+  const p = localPt(e);
+  PT.set(e.pointerId, p);
+  if (pinch && PT.size >= 2){                               /* 두 손가락 확대·축소 */
+    const a = Array.from(PT.values());
+    measure();
+    const ns = Math.min(V.max, Math.max(V.min, pinch.s0 * dist(a[0], a[1]) / pinch.d0));
+    const px = (pinch.mx0 - pinch.tx0) / pinch.s0, py = (pinch.my0 - pinch.ty0) / pinch.s0;
+    V.s = ns; V.tx = (a[0].x + a[1].x) / 2 - px * ns; V.ty = (a[0].y + a[1].y) / 2 - py * ns; V.fitted = false;
+    clampV(); draw();
+    return;
+  }
+  if (drag){                                                /* 끌어 옮기기 */
+    const dx = p.x - drag.x0, dy = p.y - drag.y0;
+    if (!drag.moved && Math.hypot(dx, dy) > 5){ drag.moved = true; el.mapvp.classList.add('dragging'); }
+    if (drag.moved){ measure(); V.tx = drag.tx0 + dx; V.ty = drag.ty0 + dy; V.fitted = false; clampV(); draw(); }
+  }
+});
+function endPtr(e){
+  if (!PT.has(e.pointerId)) return;
+  PT.delete(e.pointerId);
+  if (pinch){
+    if (PT.size < 2){
+      pinch = null;
+      if (PT.size === 1){ const p = Array.from(PT.values())[0]; drag = { x0:p.x, y0:p.y, tx0:V.tx, ty0:V.ty, moved:true, target:null }; }
+      else { drag = null; el.mapvp.classList.remove('dragging'); }
+    }
+    return;
+  }
+  if (drag){
+    const d = drag; drag = null;
+    el.mapvp.classList.remove('dragging');
+    if (!d.moved && e.type === 'pointerup') mapTap(d.target);
+  }
+}
+el.mapvp.addEventListener('pointerup', endPtr);
+el.mapvp.addEventListener('pointercancel', endPtr);
+el.mapvp.addEventListener('wheel', function(e){
+  e.preventDefault();
+  const p = localPt(e);
+  const k = e.deltaMode === 1 ? 0.05 : (e.deltaMode === 2 ? 1 : 0.0015);
+  zoomAt(Math.exp(-e.deltaY * k), p.x, p.y);
+}, { passive:false });
+function mapTap(t){
+  if (!t || !t.closest) return;
+  if (el.mapvp.classList.contains('inert')) return;         /* 불러오는 중에는 건물을 누를 수 없음 (E-01) */
+  const g = t.closest('[data-bid]');
+  if (g){ clickBuilding(g.getAttribute('data-bid')); return; }
+  const n = t.closest('[data-nobld]');
+  if (n && O.noRoomBld === '2') showStrip('강의실이 없는 건물입니다');   /* E-13 후보 ② (①은 반응 없음) */
+}
+
+/* =====================================================================
+   이동·동작 (04 1.1, 05 3.3)
+   ===================================================================== */
+function scrollTopAll(){ try { window.scrollTo(0, 0); } catch (e){ /* 무시 */ } el.scroller.scrollTop = 0; el.scrFloor.scrollTop = 0; el.scrNotices.scrollTop = 0; }
+function setFilterDefault(){                                /* 기본값: 오늘 · 지금 교시 (한국 시간) */
+  const n = nowParts();
+  S.filterDate = n.date;
+  S.period = curPeriod(n.h, n.mi);
+  const p = parseD(n.date);
+  S.cal = { y:p.y, m:p.m };                                 /* 처음 보여 줄 달 = 오늘이 속한 달 */
+}
+function pushFloor(){ if (S.pushed) return; try { history.pushState({ mock:'S-03' }, '', '#S-03'); S.pushed = true; } catch (e){ S.pushed = false; } }
+function leaveFloorHistory(){ if (!S.pushed) return; S.pushed = false; try { history.replaceState(null, '', location.href.split('#')[0]); } catch (e){ /* 무시 */ } }
+window.addEventListener('popstate', function(){             /* 브라우저 [뒤로]: S-03 → S-01 (04 2.3 확정) */
+  if (S.screen !== 'S-03') return;
+  S.pushed = false; S.screen = 'S-01'; S.tab = 'map'; S.bid = null; S.room = null;
+  render();
+});
+function doReset(){                                         /* [초기화] FR-006 */
+  setFilterDefault();
+  leaveFloorHistory();
+  S.screen = 'S-01'; S.tab = 'map'; S.bid = null; S.room = null; S.menu = false; S.fexp = false; S.alert = null;
+  hideStrip();
+  render();
+  mapFit();                                                 /* 캠퍼스맵 위치·확대도 처음으로 */
+  scrollTopAll();
+}
+function openSite(){                                        /* 사이트를 새로 연 것처럼 (E-20) */
+  clearTimeout(S.loadTimer);
+  setFilterDefault();
+  leaveFloorHistory();
+  S.screen = 'S-01'; S.tab = 'map'; S.bid = null; S.room = null; S.menu = false; S.fexp = false; S.alert = null;
+  S.bannerHidden = false; S.noticeId = null; S.popChk = false; S.modal = null;
+  S.data = 'loading';                                       /* E-01 */
+  if (O.data !== 'loading') S.loadTimer = setTimeout(function(){ S.data = O.data; render(); }, 700);
+  S.popQ = O.sheet === 'ok' ? POPUPS.slice(0, Number(O.popups) || 0).filter(function(p){ return !isDismissed(p.id); }) : [];
+  S.popIdx = 0;
+  if (S.popQ.length) S.modal = 'S-05';                      /* 사이트를 열 때마다 뜸, 여러 개면 차례로 */
+  hideStrip();
+  render();
+  mapFit();
+  scrollTopAll();
+}
+function clickBuilding(bid){
+  if (S.data !== 'ok') return;
+  const b = BMAP[bid];
+  if (!b || !b.rooms) return;
+  if (!selectable(S.filterDate)){                           /* 필터 날짜가 오늘이고, 오늘이 주말·공휴일·학기 밖 (E-07) */
+    const kind = offKind(S.filterDate) || 'weekend';
+    if (O.alertStyle === '1'){ S.alert = kind; renderOverlays(); renderMock(); }
+    else showStrip(kind === 'weekend' ? '운영하지 않는 날입니다. 달력에서 평일을 골라 주세요.' : '현재 학기 수업 기간이 아닙니다. 달력에서 수업 기간 날짜를 골라 주세요.');
+    return;
+  }
+  S.screen = 'S-03'; S.bid = bid; S.room = null; S.menu = false;
+  pushFloor();
+  render();
+  el.scrFloor.scrollTop = 0;
+  if (!isPC()){ const top = el.center.getBoundingClientRect().top; const lim = O.phone ? el.frame.getBoundingClientRect().top : 0; if (top < lim) el.center.scrollIntoView({ block:'start' }); }
+}
+function goMap(){ leaveFloorHistory(); S.screen = 'S-01'; S.tab = 'map'; S.bid = null; S.room = null; render(); }
+function goNotices(){ leaveFloorHistory(); S.screen = 'S-10'; S.bid = null; S.room = null; S.menu = false; render(); el.scrNotices.scrollTop = 0; }
+function shiftMonth(d){ let y = S.cal.y, m = S.cal.m + d; if (m < 1){ m = 12; y--; } if (m > 12){ m = 1; y++; } S.cal = { y:y, m:m }; }
+function closePopup(){
+  const p = S.popQ[S.popIdx];
+  if (p && S.popChk) addDismiss(p.id);                      /* 체크한 그 팝업만, 그날만 */
+  S.popChk = false; S.popIdx++;
+  if (S.popIdx >= S.popQ.length) S.modal = null;
+  renderOverlays(); renderMock();
+}
+function keepRoomVisible(){                                 /* 휴대폰: 누른 강의실이 아래 패널에 가리지 않게 */
+  if (isPC() || !S.room) return;
+  const c = el.scrFloor.querySelector('[data-key="' + S.room + '"]');
+  if (!c) return;
+  const r = c.getBoundingClientRect();
+  const box = O.phone ? el.frame.getBoundingClientRect() : { top:0, bottom:window.innerHeight };
+  const sheetTop = box.bottom - (box.bottom - box.top) * 0.5;
+  if (r.bottom > sheetTop - 8){
+    const dy = r.bottom - sheetTop + 16;
+    if (O.phone) el.scroller.scrollBy({ top:dy, behavior:'smooth' }); else window.scrollBy({ top:dy, behavior:'smooth' });
+  }
+}
+function mockToast(msg){
+  M.toast.innerHTML = '<span class="badge">목업 알림</span>' + esc(msg);
+  M.toast.style.display = 'block';
+  clearTimeout(M.toastT);
+  M.toastT = setTimeout(function(){ M.toast.style.display = 'none'; }, 4000);
+}
+
+/* ---------- 사이트 안 누름 (한 곳에서 받음) ---------- */
+document.addEventListener('click', function(e){             /* ≡ 메뉴 밖을 누르면 닫힘 (05 3.1 제안) */
+  if (!S.menu) return;
+  if (e.target.closest('.menu') || e.target.closest('[data-act="menu"]')) return;
+  S.menu = false;
+  setTimeout(renderHeader, 0);
+}, true);
+el.site.addEventListener('click', function(e){
+  const t = e.target.closest('[data-act]');
+  if (!t || !el.site.contains(t)) return;
+  const a = t.getAttribute('data-act');
+  switch (a){
+    case 'svc': return;                                     /* 서비스 이름: 반응 없음 (05 R-10, 목업 임의) */
+    case 'reset': doReset(); return;
+    case 'inquiry': S.menu = false; renderHeader(); mockToast('실제 사이트에서는 문의하기 구글폼(S-08)이 새 탭으로 열립니다. 구글폼 화면은 목업을 만들지 않습니다(04 확정).'); return;
+    case 'report': S.menu = false; renderHeader(); mockToast('실제 사이트에서는 신고하기 구글폼(S-09)이 새 탭으로 열립니다. 건물·호실은 폼에서 직접 적습니다(04 확정).'); return;
+    case 'notices': goNotices(); return;
+    case 'menu': S.menu = !S.menu; renderHeader(); return;
+    case 'bclose': S.bannerHidden = true; renderBanner(); return;   /* 이번 방문 동안만 숨김 */
+    case 'tab': S.tab = t.getAttribute('data-tab'); S.screen = S.tab === 'map' ? 'S-01' : 'S-02'; render(); return;
+    case 'date': S.filterDate = t.getAttribute('data-date'); render(); return;
+    case 'period': S.period = Number(t.getAttribute('data-p')); render(); return;
+    case 'mprev': shiftMonth(-1); renderFilter(); return;
+    case 'mnext': shiftMonth(1); renderFilter(); return;
+    case 'ftoggle': S.fexp = !S.fexp; renderFilter(); return;
+    case 'bld': clickBuilding(t.getAttribute('data-bid')); return;
+    case 'tomap': goMap(); return;
+    case 'jump': jumpTo(t.getAttribute('data-key')); return;
+    case 'room': S.room = t.getAttribute('data-key'); renderFloor(); renderPanel(); renderMock(); keepRoomVisible(); return;
+    case 'px': S.room = null; renderFloor(); renderPanel(); renderMock(); return;
+    case 'retry': openSite(); return;                       /* [다시 시도] = 페이지를 새로 불러옴 */
+    case 'popx': closePopup(); return;
+    case 'notice': S.modal = 'S-06'; S.noticeId = t.getAttribute('data-id'); renderOverlays(); renderMock(); return;
+    case 'nx': S.modal = null; S.noticeId = null; renderOverlays(); renderMock(); return;
+    case 'alertok': S.alert = null; renderOverlays(); renderMock(); return;
+    case 'zin': zoomAt(1.5, V.W / 2, V.H / 2); return;
+    case 'zout': zoomAt(1 / 1.5, V.W / 2, V.H / 2); return;
+    default: return;
+  }
+});
+el.site.addEventListener('change', function(e){ if (e.target && e.target.id === 'popchk') S.popChk = e.target.checked; });
+
+/* =====================================================================
+   목업 조정판 (사이트의 일부가 아님)
+   ===================================================================== */
+const M = { root:$('mock'), tab:$('mock-tab'), now:$('m-now'), scen:$('m-scen'), custom:$('m-custom'), popups:$('m-popups'),
+  opts:$('m-opts'), props:$('m-props'), dis:$('m-dismiss'), assume:$('m-assume'), toast:$('mock-toast'), toastT:0 };
+function buildMock(){
+  M.scen.innerHTML = SCEN.map(function(s){
+    return '<label class="o"><input type="radio" name="m-scen" value="' + s[0] + '"><span>' + esc(s[1]) + ' <span class="hint">- ' + esc(s[5]) + '</span></span></label>';
+  }).join('');
+  const sel = function(o){
+    return '<div class="fld"><span>' + esc(o.label) + '</span><select data-k="' + o.k + '">' +
+      o.ch.map(function(c){ return '<option value="' + c[0] + '">' + esc(c[1]) + '</option>'; }).join('') + '</select></div>';
+  };
+  M.opts.innerHTML = OPTS.map(sel).join('');
+  M.props.innerHTML = PROPS.map(sel).join('');
+  M.assume.innerHTML = ASSUME.map(function(a){ return '<li>' + esc(a) + '</li>'; }).join('');
+}
+function setRadio(name, v){ M.root.querySelectorAll('input[name="' + name + '"]').forEach(function(r){ r.checked = r.value === v; }); }
+function syncMock(){
+  setRadio('m-theme', O.theme);
+  $('m-phone').checked = !!O.phone;
+  setRadio('m-scen', O.scenario);
+  M.custom.value = O.custom;
+  setRadio('m-data', O.data); setRadio('m-sheet', O.sheet); setRadio('m-banner', O.banner); setRadio('m-nlist', O.nlist);
+  M.popups.value = O.popups;
+  M.root.querySelectorAll('select[data-k]').forEach(function(s){ s.value = O[s.getAttribute('data-k')]; });
+}
+function applyAttrs(){
+  const d = document.documentElement;
+  d.setAttribute('data-theme', O.theme);
+  d.setAttribute('data-primary', O.primary);
+  d.setAttribute('data-status-colors', O.statusColors);
+  d.setAttribute('data-status-shape', O.statusShape);
+  const cs = document.querySelector('meta[name="color-scheme"]');
+  if (cs) cs.setAttribute('content', O.theme === 'dark' ? 'dark' : 'light');
+}
+const MQ = window.matchMedia('(min-width: 1024px)');       /* bp-desktop 1024px (05 4.1) */
+function applyLayout(force){
+  const pc = !O.phone && MQ.matches;
+  const was = el.site.classList.contains('is-pc');
+  el.site.classList.toggle('is-pc', pc);
+  el.site.classList.toggle('is-m', !pc);
+  el.stage.classList.toggle('phone', !!O.phone);
+  document.body.classList.toggle('phone-on', !!O.phone);
+  if (O.phone){
+    const fh = Math.round(Math.max(560, Math.min(780, window.innerHeight - 110)));
+    el.frame.style.height = fh + 'px';
+    document.documentElement.style.setProperty('--screen-h', fh + 'px');
+  } else {
+    el.frame.style.height = '';
+    document.documentElement.style.removeProperty('--screen-h');
+  }
+  if (force || was !== pc){ S.menu = false; render(); }
+}
+function screenName(){ return { 'S-01':'S-01 캠퍼스맵', 'S-02':'S-02 건물 목록', 'S-03':'S-03 층별 안내도', 'S-10':'S-10 공지사항 모음' }[S.screen] || S.screen; }
+function renderMock(){
+  const n = nowParts();
+  const cp = curPeriod(n.h, n.mi);
+  const kind = selectable(n.date) ? '수업하는 날' : (offKind(n.date) === 'weekend' ? (isHoliday(n.date) ? '공휴일(' + HOLIDAYS[n.date] + ')' : '주말') : '학기 밖(방학)');
+  const over = [];
+  if (S.room) over.push('S-04 강의실 상세');
+  if (S.modal === 'S-05') over.push('S-05 안내 팝업 ' + (S.popIdx + 1) + '/' + S.popQ.length);
+  if (S.modal === 'S-06') over.push('S-06 공지사항 내용');
+  if (S.alert) over.push('S-07 이용할 수 없는 날 안내');
+  M.now.innerHTML =
+    '<b>화면</b> ' + esc(screenName()) + (over.length ? ' + ' + esc(over.join(' + ')) : '') + '<br>' +
+    '<b>지금(흉내)</b> ' + esc(fmtMD(n.date) + ' ' + pad(n.h) + ':' + pad(n.mi)) + (S.addMin ? ' (시계 +' + S.addMin + '분)' : '') + ' · 지금 교시 ' + (cp ? cp + '교시' : '없음') + ' · 오늘은 ' + esc(kind) + '<br>' +
+    '<b>배치</b> ' + (isPC() ? 'PC (1024px 이상)' : '휴대폰 (1024px 미만)') + (O.phone ? ' · 360px 틀' : '') + ' · <span id="m-ovf">가로 넘침 검사 중</span><br>' +
+    '<b>데이터 파일</b> ' + ({ loading:'불러오는 중', ok:'정상', fail:'불러오기 실패', none:'시간표 미등록' }[S.data] || S.data);
+  M.dis.textContent = '"오늘은 그만 보기" 기록: ' + disCount() + '건';
+  checkOverflowSoon();
+}
+let ovfRaf = 0;
+function checkOverflowSoon(){                               /* NFR-015 점검 보조: 가로 스크롤이 생기는지 */
+  cancelAnimationFrame(ovfRaf);
+  ovfRaf = requestAnimationFrame(function(){
+    const sc = O.phone ? el.scroller : document.documentElement;
+    const over = Math.max(0, sc.scrollWidth - sc.clientWidth);
+    const o = $('m-ovf');
+    if (o) o.textContent = over ? '가로 넘침 ' + over + 'px 있음' : '가로 넘침 없음';
+    el.site.setAttribute('data-overflow', String(over));
+  });
+}
+M.tab.addEventListener('click', function(){ M.root.classList.add('open'); M.tab.hidden = true; M.tab.setAttribute('aria-expanded', 'true'); renderMock(); });
+function closeMock(){ M.root.classList.remove('open'); M.tab.hidden = false; M.tab.setAttribute('aria-expanded', 'false'); }
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && M.root.classList.contains('open')) closeMock(); });
+M.root.addEventListener('click', function(e){
+  const b = e.target.closest('[data-m]');
+  if (!b) return;
+  const a = b.getAttribute('data-m');
+  if (a === 'close') closeMock();
+  else if (a === 'apply-custom'){ O.custom = M.custom.value || O.custom; O.scenario = 'custom'; S.addMin = 0; saveO(); syncMock(); openSite(); }
+  else if (a === 'plus10'){ S.addMin += 10; render(); }
+  else if (a === 'reopen') openSite();
+  else if (a === 'clear-dismiss'){ sDel(KEY_DIS); renderMock(); }
+  else if (a === 'defaults'){
+    Object.keys(DEFAULTS).forEach(function(k){ O[k] = DEFAULTS[k]; });
+    S.addMin = 0; saveO(); syncMock(); applyAttrs(); applyLayout(true); V.lastS = -1; openSite();
+  }
+});
+M.root.addEventListener('change', function(e){
+  const t = e.target;
+  const k = t.getAttribute('data-k');
+  if (t.name === 'm-theme'){ O.theme = t.value; applyAttrs(); render(); }
+  else if (t.id === 'm-phone'){ O.phone = t.checked; applyLayout(true); }
+  else if (t.name === 'm-scen'){ O.scenario = t.value; S.addMin = 0; saveO(); openSite(); }
+  else if (t.name === 'm-data'){ O.data = t.value; saveO(); openSite(); }
+  else if (t.name === 'm-sheet'){ O.sheet = t.value; saveO(); openSite(); }
+  else if (t.name === 'm-banner'){ O.banner = t.value; S.bannerHidden = false; render(); }
+  else if (t.id === 'm-popups'){ O.popups = t.value; saveO(); openSite(); }
+  else if (t.name === 'm-nlist'){ O.nlist = t.value; render(); }
+  else if (t.id === 'm-custom'){ O.custom = t.value; }
+  else if (k){
+    O[k] = t.value;
+    applyAttrs();
+    if (k === 'maxZoom'){ measure(); clampV(); draw(); }
+    if (k === 'labelMode'){ V.lastS = -1; draw(); }
+    render();
+  }
+  saveO();
+});
+
+/* =====================================================================
+   시작
+   ===================================================================== */
+try { if (location.hash === '#S-03') history.replaceState(null, '', location.href.split('#')[0]); } catch (e){ /* 무시 */ }
+buildMap();
+buildMock();
+syncMock();
+applyAttrs();
+if (MQ.addEventListener) MQ.addEventListener('change', function(){ applyLayout(false); });
+else if (MQ.addListener) MQ.addListener(function(){ applyLayout(false); });
+window.addEventListener('resize', function(){ if (O.phone) applyLayout(false); checkOverflowSoon(); });
+applyLayout(false);
+measureLabels();
+openSite();
+if (window.ResizeObserver){
+  new ResizeObserver(function(){ mapRefresh(); checkOverflowSoon(); }).observe(el.mapvp);
+} else {
+  window.addEventListener('resize', mapRefresh);
+}
+if (document.fonts && document.fonts.ready){
+  document.fonts.ready.then(function(){ measureLabels(); draw(); });
+  if (document.fonts.addEventListener) document.fonts.addEventListener('loadingdone', function(){ measureLabels(); draw(); });
+}
+setInterval(function(){ if (M.root.classList.contains('open')) renderMock(); }, 30000);
+})();
+</script>
+</body>
+</html>
