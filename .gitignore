@@ -1,0 +1,28 @@
+# 비밀값·설정 (비밀번호, API 인증키, 메일 계정 등)
+.env
+.env.*
+*.key
+*.pem
+*.p12
+secrets/
+config/local*
+
+# 데이터베이스 파일 (학생 정보가 들어갈 수 있음)
+*.db
+*.sqlite
+*.sqlite3
+
+# 기록·백업
+*.log
+logs/
+*.bak
+
+# Claude Code 개인 설정
+.claude/settings.local.json
+
+# 운영체제·편집기 파일
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/
