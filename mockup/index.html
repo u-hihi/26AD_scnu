@@ -10,22 +10,22 @@
   - 기준 문서: docs/design/02_기획서.md v0.17, 결정 메모(목업 인테이크 결정 2026-10-01: 단추 이름·사용 불가·학생 로그인·공강 보기 등)
     참고 문서: 04_화면설계서.md v0.4, 05_UI디자인시스템_IA.md v0.2, 03_기능명세서.md v0.9 (이전 구조 기준이지만 화면·디자인 규칙은 이어 씀)
   - 파일 이름: 사용자 결정으로 index.html 한 파일에 학생 화면(S-xx)과 관리자 화면(A-xx)을 함께 담음(Q9).
-  - 학생 화면: S-01~S-13 (S-08·S-09는 사이트 안 팝업, S-11 개인정보 처리방침, S-12 공실 보기, S-13 내 시간표), S-14~S-17 가입·비밀번호 찾기·비밀번호 바꾸기·탈퇴 팝업.
-  - 관리자 화면: A-02~A-19, 확인 창 A-90, 자동 로그아웃 경고 A-91, 알림 A-92, 업데이트하기·미리 보기·변경 버리기 A-17. A-01(관리자 로그인 화면)은 비움 - 학생 화면 로그인 박스로 합침.
-    A-16은 "관리자 계정"(탭: 비밀번호 바꾸기 / 아이디 바꾸기), A-19는 시연 메일 허용 목록.
-  - 관리자 화면으로 가는 길: 학생 화면 로그인 박스에 관리자 아이디로 로그인 (조정판 지름길은 목업 전용).
+  - 학생 화면: S-01~S-13 (S-08·S-09는 사이트 안 팝업, S-11 개인정보 처리방침, S-12 공실 보기, S-13 내 시간표), S-14~S-17 가입·비밀번호 찾기·비밀번호 바꾸기·탈퇴 팝업, S-18 로그인 창(팝업).
+  - 관리자 화면: A-02~A-18, 확인 창 A-90, 자동 로그아웃 경고 A-91, 알림 A-92, 업데이트하기·미리 보기·변경 버리기 A-17. A-01(관리자 로그인 화면)은 비움 - 학생 화면 로그인 창(S-18)으로 합침.
+    A-16은 "관리자 계정"(탭: 비밀번호 바꾸기 / 아이디 바꾸기). A-19(시연 메일 허용 목록)는 없앰(사용자 결정 2026-10-03).
+  - 관리자 화면으로 가는 길: 학생 화면 머리 영역 [로그인] → 로그인 창(S-18)에 관리자 아이디로 로그인 (조정판 지름길은 목업 전용).
   - 외부 요청: Pretendard 웹 글꼴 CDN 하나뿐(기존과 같음). 새로 더한 외부 자원 없음. 바깥으로 데이터를 보내는 코드·분석·추적 스크립트 없음.
-  - 데이터: 시간표·강의실·공지·문의·신고·오류 기록·학생 계정은 모두 예시. 학번은 2026xxxx 예시, 이메일은 example.com 예시, 인증키는 끝자리 예시(…a1B2)만.
+  - 데이터: 시간표·강의실·공지·문의·신고·오류 기록·학생 계정은 모두 예시. 학번은 2026xxxx 예시(가입 시연 학번 20224257만 예외), 이메일은 example.com 예시, 인증키는 끝자리 예시(…a1B2)만.
   - 목업 계정(관리자·학생)은 조정판 0번 칸에만 적음 - 목업 전용 · 실제 비밀번호 아님. 로그인 검사는 이 파일 안에서만 흉내 냄.
   - 브라우저 저장소(localStorage)에는 조정판 설정과 "오늘은 그만 보기" 기록만 둠. 비밀번호·이메일·로그인 상태는 저장하지 않음(새로 열면 사라짐).
   - 캠퍼스맵: 오픈스트리트맵(OSM) 자료(ODbL)의 건물·도로·운동장 모양으로 그리고, 학교 캠퍼스맵과 같은 방향(정문이 아래쪽)으로 돌림. 학교 그림은 넣거나 베끼지 않음.
   - "목업 조정판"(오른쪽 가장자리 점선 단추)은 사이트의 일부가 아님. 점선 테두리 + "목업 전용" 표시로 구별.
   - 가정(문서에 없어 목업에서 임의로 정한 것): 아래 목록. 같은 목록이 조정판 5번 칸에도 보임. G-01~G-50은 인테이크 보고를 따름.
-    G-51 로그인 박스 자리: PC는 왼쪽 구역 맨 위(달력 위), 휴대폰은 필터 위 "로그인 ▼" 한 줄을 눌러 펼칩니다. 로그인하면 같은 자리에 "내 계정 ▾"만 보입니다.
-    G-52 로그인 박스의 학번 칸은 숫자만으로 막지 않습니다. 같은 박스에 관리자 아이디도 적기 때문입니다.
+    G-51 로그인 자리: 머리 영역에 [로그인] 단추를 둡니다. PC 순서는 [초기화] [로그인] [문의하기] [신고하기] [공지사항], 휴대폰은 [초기화] [로그인] [≡]입니다. 누르면 보던 화면은 그대로 두고 가림막 위 가운데에 로그인 창(S-18)이 뜹니다. 학생이 로그인하면 같은 자리가 "내 계정 ▾"로 바뀝니다. 왼쪽 구역에는 필터만 둡니다.
+    G-52 로그인 창의 첫 칸 이름은 "학번"이지만 숫자만으로 막지 않습니다. 같은 칸에 관리자 아이디도 적기 때문입니다(관리자 로그인을 학생에게 드러내지 않으려고 이름은 "학번"만 씀).
     G-53 학생 로그인도 5번 틀리면 잠시 막습니다(관리자와 같은 규칙, 계정마다·접속한 곳마다 셈). 목업 잠금 시간은 5분이고, 조정판에서 20초로 줄일 수 있습니다. 잠긴 동안 [로그인]만 누를 수 없습니다.
     G-54 정지 안내 문구: "이 계정은 이용이 정지되었습니다. 사유: (사유). 궁금한 점은 [문의하기]로 알려 주세요." 비밀번호가 맞을 때만 보입니다.
-    G-55 관리자 로그아웃·자동 로그아웃·비밀번호 변경 뒤, 학생 학번 로그아웃·탈퇴 뒤에는 학생 화면 로그인 박스 위에 이유를 한 줄로 보입니다(인테이크 A-01의 이유 띠를 옮김).
+    G-55 관리자 로그아웃·자동 로그아웃·비밀번호 변경 뒤, 학생 학번 로그아웃·탈퇴 뒤에는 학생 화면 머리 영역 바로 밑에 이유를 한 줄 안내 띠로 보입니다. 띠는 [닫기]를 누르거나 다시 로그인하면 사라집니다(인테이크 A-01의 이유 띠를 옮김).
     G-56 로그인한 학생에게 내 시간표가 없으면, 처음 열 때 지금 교시 하나를 골라 둡니다. 공강 교시 자동 고르기는 시간표가 있을 때만 합니다. 수업이 없는 날·수업 사이 빈 교시가 없는 날은 아무 교시도 고르지 않고, 이유를 필터 밑에 적습니다.
     G-57 로그인한 학생이 건물을 누르면 바로 들어가지 않고 고르기만 합니다. 위쪽 띠의 [공실 보기]로 S-12를 엽니다. 4번째 건물을 누르면 "건물은 3개까지 고를 수 있습니다" 띠가 잠깐 뜹니다.
     G-58 관리자가 적은 수용 인원(학교 홈페이지 값)은 학생 화면에 "(추정)" 없이 "수용 인원 N명"으로 보입니다(02 7.2 확인 필요 항목의 목업 안).
@@ -37,32 +37,54 @@
     G-64 탈퇴(S-17)는 비밀번호를 한 번 더 적어야 합니다. 학생이 비밀번호를 바꾸면(S-16) 다시 로그인합니다(B-3과 같게).
     G-65 확인 번호 단계에서 남은 시간(10분)과 [다시 받기]까지 남은 초(60초)를 보입니다. 틀리면 남은 기회를 알립니다.
     G-66 이미 가입한 학번으로 가입하거나, 가입하지 않은 학번으로 비밀번호를 찾아도 화면은 "확인 번호를 보냈습니다"로 똑같습니다. 이때 목업에서는 확인 번호가 맞지 않는 것으로 처리하고, 목업 알림으로 이유를 설명합니다.
-    G-67 흔한 비밀번호는 목업에서 모양으로만 막습니다(같은 글자 4번, 1234처럼 이어지는 숫자, qwer처럼 키보드 줄, pass 등). 실제로 막을 목록은 09에서 정합니다.
+    G-67 (삭제) 학생 비밀번호 규칙에서 "학번이 들어가지 않음"·"흔한 비밀번호가 아님"을 뺐습니다(사용자 결정 2026-10-03). 남은 규칙은 8자 이상·영문자·숫자·특수기호입니다.
     G-68 이용약관 내용은 틀만 둡니다(가입 첫 단계에서 [보기]로 펼침).
     G-69 관리자 [미리 보기]는 로그인하지 않은 학생 화면으로 보이고, 맨 위 띠에 [미리 보기 끝내기]가 있습니다. 업데이트할 변경이 없으면 [미리 보기]·[변경 버리기]·[업데이트하기]를 누를 수 없습니다.
     G-70 [변경 버리기]는 빨강 확인 창을 거칩니다. 버리면 저장한 값 전체(파일 반영 포함)가 마지막 업데이트 때로 돌아갑니다.
-    G-71 업데이트 확인 창의 "무엇이 바뀌나"는 바뀐 종류 이름 목록입니다(예: 공지사항, 사용 불가 설정). [업데이트하기] 단추는 파랑입니다(다시 고쳐 업데이트할 수 있어서). 지우기·버리기·해제·정지·삭제는 빨강입니다.
-    G-72 학생 계정 화면(A-18)에 [정지 풀기]를 둡니다(결정 파일에는 정지·삭제만 있음). 정지·정지 풀기·삭제, 인증키, 시연 메일 허용 목록, 관리자 비밀번호·아이디, 문의·신고 처리, 오류 기록 확인은 [업데이트하기] 없이 바로 적용됩니다.
+    G-71 확인 창(A-90)은 짧은 질문 제목과, 되돌릴 수 없을 때만 그 사실 한 줄을 보입니다(예: "처리 완료할까요?" + "이메일이 지워지며 되돌릴 수 없습니다."). 목록의 한 줄에서 연 창은 제목에 대상을 넣습니다(예: "학번 20260004 계정을 삭제할까요?"). 업데이트 확인 창만 바뀐 종류 이름을 한 줄로 보입니다(예: "바뀐 것: 공지사항, 사용 불가 설정"). [업데이트하기] 단추는 파랑입니다(다시 고쳐 업데이트할 수 있어서). 지우기·버리기·해제·정지·삭제는 빨강입니다.
+    G-72 학생 계정 화면(A-18)에 [정지 풀기]를 둡니다(결정 파일에는 정지·삭제만 있음). 정지·정지 풀기·삭제, 인증키, 관리자 비밀번호·아이디, 문의·신고 처리, 오류 기록 확인은 [업데이트하기] 없이 바로 적용됩니다.
     G-73 정지 사유 선택지: 도배·장난 / 부정 이용 / 계정 도용 의심 / 기타.
     G-74 사용 불가 사유 칸은 30자까지이고, 학생 화면에는 "사유 + 사용금지"로 붙여 보입니다. 적는 동안 학생 화면 문구를 미리 보입니다.
     G-75 캠퍼스맵 영역 그리기(A-11): 건물을 고르고 [영역 그리기] → 지도를 눌러 점을 차례로 찍음 → [다 그림](점 3개 이상). [점 하나 되돌리기]·[그리기 취소]가 있고, 고른 건물은 파란 테두리로 보입니다.
     G-76 공지·팝업 글쓰기와 수정은 오른쪽 패널에서 합니다. 팝업 차례는 ▲▼로 바꿉니다. 배너는 하나(보이기 켜기·끄기 + 60자)입니다.
     G-77 대시보드 방문자 막대그래프는 최근 7일이고, 마지막 날 값만 막대 위에 적습니다. 나머지는 마우스를 올리면 보이고, [표로 보기]로도 봅니다.
     G-78 문의 답장 확인 창의 [답장 보내기]는 파랑입니다. 답장 메일이 실패하면 오류 기록에 "답장 메일"로 남습니다.
-    G-79 관리자 화면 서버 오류는 내용 맨 위 빨강 띠 "(무엇)하지 못했습니다. 잠시 뒤 다시 해 주세요 · 오류 기록 #0008"과 [오류 기록 보기]로 알립니다. 오류 기록으로 가면 그 줄을 노랗게 표시합니다.
+    G-79 관리자 화면 서버 오류는 내용 맨 위 빨강 띠 "(무엇)하지 못했습니다. 오류 기록 #0008"과 [오류 기록 보기]로 알립니다. 오류 기록으로 가면 그 줄을 노랗게 표시합니다. 공휴일 불러오기와 인증키 연결 시험의 실패는 띠 대신 그 단추 아래 빨강 상자로, 같은 문구 모양으로 알립니다.
     G-80 시간표·폐강 파일 화면의 [목업: 예시 파일로 해 보기]는 목업 전용 단추입니다(점선 표시, 실제 화면에는 없음).
     G-81 새 학기로 반영하면 학기 정보(이름·개강일·종강일)도 함께 바뀝니다. [업데이트하기] 전까지 학생 화면은 그대로입니다.
     G-82 개인정보 처리방침(S-11)은 목차 7개만 두고 내용은 09에서 채웁니다. 바닥 영역 [자세히]는 그중 "4. 방문자 수 세기"로 갑니다.
     G-83 관리자 화면 표의 줄은 쪽을 나누지 않습니다(예시 줄이 적음). 인테이크 G-09의 "20줄씩 쪽 나누기"는 실제 화면에서 정합니다.
-    G-84 시연 메일 허용 목록(A-19)은 처음에 켜져 있고, 예시 학번 4개(20261234·20260002·20260101·20260102)가 들어 있습니다. 가입 시연은 목록에 있고 계정이 없는 20260101로 합니다.
-    G-85 허용 목록이 켜져 있을 때 목록 밖 학번으로 [확인 번호 받기]를 누르면 메일을 보내지 않습니다. 가입은 "지금은 미리 등록된 학번만 가입할 수 있습니다.", 비밀번호 찾기는 "지금은 미리 등록된 학번만 확인 번호를 받을 수 있습니다."를 학번 칸 밑에 보입니다. 계정이 있든 없든 같은 문구입니다.
-    G-86 (더 나은 방식 제안) 허용 목록이 켜져 있으면 가입·비밀번호 찾기의 학번 단계에 "지금은 시연 기간이라 미리 등록된 학번만 확인 번호를 받을 수 있습니다" 안내를 미리 보입니다. 학번을 적은 뒤에야 막히는 일을 줄이려는 것입니다. 안내는 계정 유무와 관계없습니다.
-    G-87 허용 목록 켜기는 바로 적용하고, 끄기는 빨강 확인 창("끄면 모든 학번으로 확인 메일을 보낼 수 있습니다")을 거칩니다. 켜져 있는데 목록이 비어 있으면 "지금은 아무도 확인 메일을 받을 수 없습니다" 경고를 보입니다. 학번 삭제도 빨강 확인 창입니다.
-    G-88 허용 목록에는 학번 8자리 숫자만 넣고(형식 오류: "학번 8자리를 숫자로 적어 주세요."), 같은 학번은 다시 넣지 못합니다. 학생 계정이 있는지는 목록에 보이지 않습니다. 메뉴 자리는 설정 묶음의 공휴일 API 인증키 바로 밑입니다.
+    G-84 (삭제) 시연 메일 허용 목록(A-19)을 없앴습니다(사용자 결정 2026-10-03). 이제 어떤 8자리 학번이든 확인 번호를 받을 수 있습니다.
+    G-85 (삭제) A-19를 없애 목록 밖 학번을 막는 문구도 없앴습니다.
+    G-86 (삭제) A-19를 없애 가입·비밀번호 찾기 학번 단계의 시연 기간 안내도 없앴습니다.
+    G-87 (삭제) A-19를 없애 허용 목록 켜기·끄기·학번 삭제 확인 창도 없앴습니다.
+    G-88 (삭제) A-19를 없애 허용 목록 학번 넣기 규칙과 메뉴 자리도 없앴습니다.
     G-89 관리자 아이디 바꾸기는 따로 A-20을 만들지 않고, A-16을 "관리자 계정" 화면(탭: 비밀번호 바꾸기 / 아이디 바꾸기)으로 묶어 넣었습니다. 둘 다 지금 비밀번호를 확인하고, 바꾸면 로그아웃해 다시 로그인하는 같은 흐름이기 때문입니다.
     G-90 관리자 아이디 규칙(목업): 4~20자, 영문·숫자·_·-만 씁니다. 학번과 같은 8자리 숫자는 쓸 수 없고("학번과 같은 8자리 숫자는 관리자 아이디로 쓸 수 없습니다."), 지금 아이디와 같으면 막습니다. 새 아이디는 두 번 적습니다. "짐작하기 어렵게" 같은 규칙은 넣지 않았습니다. 지금 아이디는 화면에 보이지 않습니다.
     G-91 지금 비밀번호를 틀리면 남은 기회를 알리고, 5번 틀리면 바로 로그아웃하고 로그인 잠시 막기를 겁니다(로그인 실패와 같은 5번 규칙). 관리자 비밀번호·아이디 바꾸기와 학생 비밀번호 바꾸기·탈퇴에 똑같이 씁니다. 이유 띠: "지금 비밀번호를 5번 틀려 로그아웃했습니다. 잠시 뒤 다시 로그인해 주세요."
     G-92 관리자 아이디를 바꾸면 목업 안에서도 새 아이디로만 로그인됩니다. 조정판 [목업 계정 처음으로]를 누르면 mock-admin으로 돌아갑니다. 바꾼 아이디는 조정판에 보이지 않습니다.
+    G-93 로그인 창(S-18): 제목은 "로그인"이고, 칸은 "학번"·"비밀번호"입니다. 그 밑에 "로그인 상태 유지"와 [로그인](창 너비 가득), 맨 아래에 [가입하기]·[비밀번호 찾기]가 있습니다. [가입하기]·[비밀번호 찾기]를 누르면 같은 팝업 자리가 S-14·S-15로 바뀝니다. [X]나 Esc로 닫으면 보던 화면 그대로입니다. 다시 열면 지난 오류 문구는 지우고, 잠시 막기 안내는 남깁니다.
+    G-94 비밀번호 찾기(S-15)를 마치고 [확인]을 누르면 로그인 창(S-18)으로 돌아갑니다. 학번 칸에는 방금 적은 학번이 들어 있습니다.
+    G-95 휴대폰 머리 줄(360px)에서는 서비스 이름 글자를 16px로, [초기화]·[로그인](로그인 뒤 "내 계정 ▾") 글자를 14px로, 단추 안 좌우 여백을 8px로, 단추 사이를 4px로 줄입니다. 서비스 이름이 잘리지 않게 하려는 것입니다. "내 계정 ▾" 메뉴는 단추 오른쪽 끝에 맞춰 아래로 펼칩니다.
+    G-96 서버 정보 불러오기 실패(E-02) 안내는 가운데 구역의 가로·세로 가운데에 하나만 보입니다. 이때 [캠퍼스맵]·[건물 목록] 탭은 숨깁니다(눌러도 보일 것이 없어서).
+    G-97 가입 시연 학번은 계정이 없는 20224257입니다. 가입·비밀번호 찾기의 학번 칸 예시 글자도 "예: 20224257"입니다.
+    G-110 관리자 화면의 결과 알림은 짧게 씁니다(예: "정지했습니다."). 학생 화면에 보이는 변경을 저장하면 "저장했습니다. 업데이트하면 학생 화면에 보입니다."처럼 한 문장을 붙이고, 지운 것은 "업데이트하면 학생 화면에서 빠집니다."를 붙입니다.
+    G-111 API 인증키(A-15)는 이름(쓰는 곳, 예: "공휴일 정보")으로 구별해 여러 개를 목록으로 둡니다. 줄마다 이름·끝 4자리(…a1B2)·저장 시각·마지막 확인 결과(성공·실패와 시각)를 보입니다. 키 값 전체는 적을 때도 보이지 않습니다([보기] 단추 없음).
+    G-112 [인증키 추가]는 이름(20자까지, 같은 이름은 안 됨)과 키 값을 받고, 줄마다 [바꾸기]는 키 값만 바꿉니다. 저장할 때 연결을 시험하고, 실패하면 저장하지 않습니다(무엇으로 시험할지는 08에서 정함). [지우기]는 빨강 확인 창을 거칩니다. 모두 [업데이트하기] 없이 바로 적용됩니다.
+    G-113 공휴일 불러오기는 이름이 "공휴일 정보"인 인증키를 씁니다. 그 키가 없어도 [공휴일 불러오기]는 누를 수 있고, 누르면 불러오기 실패 상자와 오류 기록("인증키가 없습니다")이 남습니다. 불러올 때마다 그 키의 마지막 확인 결과가 바뀝니다.
+    G-114 캠퍼스맵(A-11) 건물 표에서 건물을 지울 수 있습니다(빨강 확인 창). 강의실이 있는 건물은 지울 수 없고, 누르면 "강의실이 있는 건물은 지울 수 없습니다." 알림만 뜹니다. 지운 건물은 학생 캠퍼스맵에서 모양과 이름표가 빠집니다. 업데이트 전에는 [변경 버리기]로 되돌릴 수 있습니다.
+    G-115 건물 이름·번호는 A-11 건물 표(모든 건물)와 A-10(강의실이 있는 건물)에서 고칩니다. 번호는 "D2"처럼 영문자 1~2자 + 숫자 1~2자이고, 다른 건물이나 문·운동장(예: 정문 A19)이 쓰는 번호는 쓸 수 없습니다. 바꾼 값은 학생 화면(캠퍼스맵 이름표·건물 목록·층별 안내도·강의실 상세·신고 창)과 관리자 화면의 모든 표에 쓰입니다.
+    G-116 학생이 누를 수 있는 건물은 데이터입니다(처음 값 = 강의실이 있는 건물 14곳). A-11 건물 표의 [학생이 누르기]로 건물마다 켜고 끕니다. 강의실이 없는 건물은 켤 수 없습니다. 꺼진 건물은 학생 캠퍼스맵에서 누를 수 없는 건물 모양(회색)으로 보이고, 건물 목록 탭에서도 빠집니다. 켜져 있어도 영역이 없는 건물(C3)은 건물 목록에서만 고를 수 있습니다.
+    G-117 공휴일 화면(A-09)의 날짜는 저장한 목록·받아 온 목록·확인 창 모두 "2026-10-05 (월)"처럼 요일을 붙여 보입니다. 휴일을 직접 추가하거나 고칠 때도 고른 날짜의 요일을 날짜 칸 옆에 보입니다.
+    G-130 층별 안내도(S-03) 그림은 "위에서 내려다본 건물 모양 + 복도 + 강의실 칸" 하나로 정했습니다. 조정판의 "층별 안내도 그림 모양" 후보(① 강의실 배치 그림 / ② 실제 지도 참고 / ③ 목록 모양)는 없앴습니다.
+    G-131 건물 외곽선은 캠퍼스맵의 오픈스트리트맵 외곽선을 그대로 쓰고, 지도에서 비스듬한 건물을 가장 가까운 가로·세로 방향으로 바로 세워 그립니다(D2는 약 35° 돌림). 뒤집지 않아서 캠퍼스맵처럼 아래쪽이 정문 쪽입니다. 캠퍼스맵 영역이 없는 건물(C3)은 반듯한 사각형이고, 관리자가 A-11에서 영역을 그리면 그 영역을 씁니다.
+    G-132 공과대학 1호관(D2, ㄷ자) 배치(추정): 복도는 ㄷ자 안쪽(가운데 마당 쪽)을 따라 이어지는 띠이고, 강의실은 바깥쪽을 따라 번호 순서대로 놓습니다(위 날개 왼쪽→오른쪽, 오른쪽 날개 위→아래, 아래 날개 오른쪽→왼쪽). 모서리와 아래 날개 끝의 튀어나온 곳은 계단·현관 같은 다른 공간으로 비워 둡니다. 4개 층 모두 같은 틀입니다.
+    G-133 다른 건물은 자동 배치(추정)입니다. 외곽선 안에서 가장 큰 직사각형 "날개"를 최대 3개 찾고, 날개마다 긴 방향을 따라 복도를 놓습니다. 가운데 복도(양쪽 강의실)를 먼저 쓰고, 그러면 그림이 너무 커지는 날개는 한쪽 복도(다른 날개 쪽 복도, 반대쪽 강의실)로 바꿉니다. 날개끼리는 복도를 늘려 잇습니다. 강의실은 날개마다 복도를 시계 방향으로 돌며 번호 순서대로 놓고, 띠 길이에 비례해 나눕니다. 날개에 들지 않은 곳(좁거나 비스듬한 끝)은 다른 공간으로 비워 둡니다. 정확도보다 모든 건물이 같은 규칙을 따르는 것을 앞세웠습니다.
+    G-134 강의실 칸은 05 토큰의 최소 크기(88×56px)보다 작아지지 않게 건물마다 그림 배율을 정합니다(한 건물은 모든 층이 같은 배율). 그림이 가운데 구역보다 넓으면(휴대폰에서 자주 생김) 그림만 옆으로 밀어 보고, 그림 위에 "옆으로 밀면 그림의 나머지가 보입니다 →" 한 줄이 보입니다. 칸을 눌러 다시 그려도 옆으로 민 자리는 그대로입니다.
+    G-135 강의실 배치가 추정이라는 것은 목업 전용 표시(점선 테두리 + "목업 전용")로만 알립니다. 층 목록 맨 위 한 줄과 층 이름 옆 작은 표입니다. 실제 사이트 문구가 아닙니다. 실제 배치도(층별 안내판·소방 대피도)를 받으면 스크립트의 FLOOR_LAYOUT에 층별 외곽선·복도·강의실 칸 자리를 적어 바꿉니다.
+    G-136 그림 위에 "위에서 내려다본 건물 모양입니다. 캠퍼스맵처럼 아래쪽이 정문 쪽입니다." 한 줄(사이트 문구)을 둡니다. 복도 띠 안에 "복도" 글자를 둡니다. 건물 바닥은 캠퍼스맵의 건물 색을 옅게, 복도는 더 밝은 색으로 칠합니다(목업 임의). 강의실 칸 안의 정보·상태 모양과 사용 불가 빗금(G-59)은 예전과 같고, 칸마다 "301호 공실"처럼 읽어 주는 이름(aria-label)을 붙였습니다.
+    G-137 S-12 공실 보기(로그인한 학생, 여러 교시·여러 건물)는 칸 안에 교시 작은 칸(G-60)이 여러 개 들어가야 해서, 예전 ① 모양(강의실 줄 - 복도 - 강의실 줄)을 그대로 씁니다.
+    G-138 "층 정보 없음" 묶음은 그림 밖 칸 목록으로 보이고, 강의실이 없는 층(E-15 후보 ②)은 그림 없이 "강의실 없음" 글자만 보입니다.
     (이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 "처음 크기의 N배"(처음 값 3배).
     (이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11 확인 필요 항목). 서비스 이름을 누르면 반응이 없습니다(05 R-10).
     (이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.
@@ -75,7 +97,7 @@
     (이전 목업) 휴대폰 필터를 펼치면 안내 문구는 교시 단추 밑에, 접으면 요약 줄 밑에 보입니다.
     (이전 목업) 브라우저 [뒤로]는 S-03·S-12에서만 S-01로 보냅니다. 다른 화면의 [뒤로]는 04에 없어(05 R-02) 따로 처리하지 않습니다.
     (이전 목업) 캠퍼스맵은 오픈스트리트맵(OSM, ODbL) 자료의 모양으로 그리고, 학교 캠퍼스맵 방향(정문이 아래쪽)으로 돌렸습니다. OSM에 없는 건물은 반듯한 사각형으로 대략 그렸습니다. 건물 번호·이름은 학교 캠퍼스맵 범례를 따릅니다.
-    (이전 목업) 누를 수 있는 건물은 강의 건물로 보이는 13곳으로 정했습니다. 실제로 강의실이 있는지는 시간표 자료로 확인해야 합니다.
+    (이전 목업) 누를 수 있는 건물의 처음 값은 강의 건물로 보이는 13곳입니다(영역이 없는 C3까지 14곳이 켜져 있음). 이제 데이터이고, A-11에서 건물마다 켜고 끕니다(G-116). 실제로 강의실이 있는지는 시간표 자료로 확인해야 합니다.
     (이전 목업) 건물 이름 글자 겹침은 건물마다 따로 적용합니다(먼저 번호로 두고, 겹치는 번호는 숨긴 뒤, 자리가 있는 건물부터 이름으로 되돌림).
     (이전 목업) 건물 번호 순서는 글자(A~F) 다음 숫자 크기 순(A2 → A10)입니다.
 -->
@@ -447,6 +469,11 @@ html[data-status-shape="1"] .stchip.busy{ background:var(--color-busy-bg); borde
   max-width:440px; margin:var(--space-12) auto 0;
 }
 .err .btn{ margin-top:var(--space-3); }
+/* E-02 불러오기 실패 안내: 가운데 구역의 가로·세로 가운데에 하나만 (G-96) */
+.tabmsg{ display:flex; align-items:center; justify-content:center; padding:var(--space-4); }
+.is-pc .tabmsg{ flex:1; min-height:0; }
+.is-m .tabmsg{ min-height:calc(var(--screen-h) * .6); }
+.tabmsg .err{ margin:0; }
 .empty{ color:var(--color-text-secondary); font-size:var(--font-size-md); text-align:center; padding:var(--space-10) var(--space-4) 0; }
 .fixed-note{ font-size:var(--font-size-sm); color:var(--color-text-secondary); }
 
@@ -566,14 +593,29 @@ html[data-status-shape="1"] .stchip.busy{ background:var(--color-busy-bg); borde
 .floor-name{ font-size:var(--font-size-lg); font-weight:var(--font-weight-bold); line-height:var(--font-line-tight); margin-bottom:var(--space-3); }
 .noroom{ color:var(--color-text-secondary); font-size:var(--font-size-sm); }
 .fp-cap{ font-size:var(--font-size-xs); color:var(--color-text-secondary); padding-top:var(--space-3); }
-.fp-cap + .floor{ border-top:0; }
-/* ① 강의실 배치 그림 */
+.fp-cap + .floor, .fp-est + .floor{ border-top:0; }
+/* S-12 공실 보기: 강의실 줄 - 복도 - 강의실 줄 (예전 ① 모양 그대로, G-137) */
 .plan{ border:2px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-2); display:flex; flex-direction:column; gap:var(--space-2); }
 .corr{ background:var(--color-bg-subtle); border-radius:var(--radius-sm); min-height:28px; display:flex; align-items:center; justify-content:center; font-size:var(--font-size-xs); color:var(--color-text-secondary); }
-/* ② 실제 지도 참고: 위에서 본 건물 윤곽 */
-.fp{ display:flex; flex-direction:column; }
-.wing{ border:1px solid var(--color-border-strong); padding:var(--space-3); background:var(--color-bg); }
-.fp.L .wing.b{ width:50%; min-width:118px; border-top:0; }
+/* S-03: 위에서 내려다본 건물 모양 + 복도 + 강의실 칸 (G-130~G-136). 칸 자리·배율은 스크립트(FLOOR_LAYOUT·자동 배치)가 정함 */
+.fl-head{ display:flex; align-items:center; flex-wrap:wrap; gap:var(--space-1) var(--space-3); margin-bottom:var(--space-3); }
+.fl-head .floor-name{ margin-bottom:0; }
+.fp-more{ display:none; font-size:var(--font-size-xs); color:var(--color-text-secondary); margin-bottom:var(--space-1); }
+.floor.ovf .fp-more{ display:block; }
+.fpwrap{ overflow-x:auto; overflow-y:hidden; max-width:100%; }
+.fpl{ position:relative; --fp-bld:color-mix(in srgb, var(--color-map-building-on) 60%, var(--color-bg)); --fp-wall:var(--color-border-strong); --fp-corr:var(--color-bg-subtle); }  /* 건물 바닥(캠퍼스맵 건물 색)·벽·복도 색 - 목업 임의 */
+.fpl-svg{ position:absolute; left:0; top:0; display:block; }
+.fpl-bld{ fill:var(--fp-bld); }
+.fpl-corr{ fill:var(--fp-corr); }
+.fpl-wall{ fill:none; stroke:var(--fp-wall); stroke-width:2px; stroke-linejoin:round; }
+.fpl-cl{ position:absolute; transform:translate(-50%, -50%); font-size:var(--font-size-xs); line-height:1; letter-spacing:.3em; color:var(--color-text-secondary); white-space:nowrap; pointer-events:none; }
+.fpl-cl.v{ writing-mode:vertical-rl; }
+.fpl .room{ position:absolute; min-width:0; min-height:0; padding:var(--space-1); border-radius:var(--radius-sm); gap:2px; }
+.fp-miss{ margin-top:var(--space-3); }
+/* 목업 전용 표시 (사이트 문구가 아님): 조정판과 같은 점선 테두리 + "목업 전용" */
+.fp-est{ display:flex; align-items:flex-start; gap:var(--space-2); margin-top:var(--space-2); padding:6px 10px; border:2px dashed #B45309; border-radius:8px; background:#FFFBEA; color:#5A3A00; font-size:var(--font-size-sm); line-height:var(--font-line-normal); }
+.fp-badge{ flex:none; background:#7C2D12; color:#FFFFFF; font-size:11px; font-weight:700; line-height:1.5; padding:1px 7px; border-radius:999px; margin-top:2px; }
+.fp-tag{ font-size:11px; font-weight:600; line-height:18px; color:#7C2D12; background:#FFF8E1; border:1px dashed #B45309; border-radius:999px; padding:0 8px; }
 
 /* ----- S-10 공지사항 모음 ----- */
 .nhead{ display:flex; align-items:center; flex-wrap:wrap; gap:var(--space-3); padding:var(--space-4) var(--space-6) var(--space-3); border-bottom:1px solid var(--color-border); }
@@ -659,32 +701,30 @@ em.opt{ font-style:normal; font-size:var(--font-size-xs); color:var(--color-text
 .prevband .btn{ min-height:var(--size-target-pc); }
 .is-m .prevband{ padding:var(--space-2) var(--space-4); flex-wrap:wrap; }
 
-/* 왼쪽 구역 = L. 로그인 박스 + C. 필터 영역 */
+/* 왼쪽 구역 = C. 필터 영역만 (로그인은 머리 영역 [로그인] → 로그인 창 S-18, G-51) */
 .is-pc .leftcol{ width:var(--size-filter-width); flex:none; overflow:auto; background:var(--color-bg-subtle); border-right:1px solid var(--color-border); }
 .is-pc .leftcol > .filter{ width:auto; overflow:visible; border-right:0; }
 .is-m .leftcol{ background:var(--color-bg-subtle); }
-.is-pc .loginbox{ padding:var(--space-4) var(--space-4) 0; }
-.is-m .loginbox{ border-bottom:1px solid var(--color-border); }
-.is-m .loginbox .lbox, .is-m .loginbox .acct, .is-m .loginbox .band-note{ margin:0 var(--space-4) var(--space-3); }
-.band-note{ margin-bottom:var(--space-2); }
-.lbox{ background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-3); display:flex; flex-direction:column; gap:var(--space-2); }
-.lb-row{ display:grid; grid-template-columns:1fr 1fr; gap:var(--space-2); }
-.is-m .lb-row{ grid-template-columns:1fr; }
-.lfld{ display:flex; flex-direction:column; gap:2px; min-width:0; }
-.lfld > span:first-child{ font-size:var(--font-size-xs); color:var(--color-text-secondary); font-weight:var(--font-weight-semibold); }
-.lfld .pwwrap input{ padding-right:52px !important; }
-.lfld .pwshow{ font-size:var(--font-size-xs); padding:0 var(--space-1); }
-.lb-row2{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-2); }
+/* 머리 영역 [로그인] / 내 계정 ▾ (G-51). 휴대폰 머리 줄은 360px에 맞게 줄임 (G-95) */
+.is-m .hrow{ gap:var(--space-1); }
+.is-m .hrow .svc{ font-size:var(--font-size-md); }
+.is-m .hrow .btn{ padding:0 var(--space-2); font-size:var(--font-size-sm); }
+.acct{ position:relative; display:inline-flex; }
+.acct-menu{ position:absolute; right:0; top:calc(100% + 4px); min-width:200px; z-index:var(--z-menu); background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-md); box-shadow:var(--shadow-2); overflow:hidden; }
+.acct-menu .mrow{ color:var(--color-text); font-weight:var(--font-weight-regular); white-space:nowrap; }
+.is-pc .acct-menu .mrow:hover{ background:var(--color-hover-bg); }
+/* 로그아웃·탈퇴 이유 띠 - 머리 영역 바로 밑 (G-55) */
+.authband{ flex:none; display:flex; align-items:center; gap:var(--space-3); min-height:40px; padding:var(--space-1) var(--space-6); background:var(--color-notice-bg); color:var(--color-notice-text); border-bottom:1px solid var(--color-border); font-size:var(--font-size-sm); line-height:var(--font-line-normal); }
+.authband .ab-t{ flex:1; min-width:0; }
+.authband .btn-text{ flex:none; min-height:var(--size-target-pc); font-size:var(--font-size-sm); }
+.is-m .authband{ padding:var(--space-1) var(--space-4); }
+.is-m .authband .btn-text{ min-height:var(--size-target-touch); }
+/* S-18 로그인 창 (G-93) */
+.lform{ display:flex; flex-direction:column; gap:var(--space-3); }
+.lg-go{ width:100%; }
 .lb-msg{ font-size:var(--font-size-sm); color:var(--color-danger-text); }
 .lb-stop{ font-size:var(--font-size-sm); color:var(--color-warn-text); background:var(--color-warn-bg); border-radius:var(--radius-sm); padding:var(--space-2); }
-.lb-links{ display:flex; align-items:center; gap:var(--space-1); color:var(--color-text-secondary); }
-.acct{ position:relative; }
-.acct-btn{ display:flex; align-items:center; justify-content:space-between; width:100%; min-height:var(--size-target-touch); padding:0 var(--space-4); background:var(--color-bg); border:1px solid var(--color-border-strong); border-radius:var(--radius-md); font-weight:var(--font-weight-semibold); }
-.is-pc .acct-btn:hover{ background:var(--color-hover-bg); }
-.acct-menu{ position:absolute; left:0; right:0; top:calc(100% + 4px); z-index:var(--z-menu); background:var(--color-bg); border:1px solid var(--color-border); border-radius:var(--radius-md); box-shadow:var(--shadow-2); overflow:hidden; }
-.acct-menu .mrow{ color:var(--color-text); font-weight:var(--font-weight-regular); }
-.is-pc .acct-menu .mrow:hover{ background:var(--color-hover-bg); }
-.lsum{ border-bottom:0; }
+.lb-links{ display:flex; align-items:center; justify-content:center; gap:var(--space-1); color:var(--color-text-secondary); border-top:1px solid var(--color-border); padding-top:var(--space-2); }
 .per-hint{ font-size:var(--font-size-xs); color:var(--color-text-secondary); margin-bottom:var(--space-2); }
 
 /* 로그인한 학생: 고른 건물 띠 */
@@ -759,8 +799,10 @@ em.opt{ font-style:normal; font-size:var(--font-size-xs); color:var(--color-text
 .ttg tfoot th, .ttg tfoot td{ background:var(--color-bg-subtle); font-size:var(--font-size-xs); height:32px; }
 .tt-saved{ font-size:var(--font-size-sm); color:var(--color-free-text); min-height:1.5em; }
 
-/* S-08·S-09·S-14~S-17 입력 팝업 */
+/* S-08·S-09·S-14~S-18 입력 팝업 */
 .mform{ width:var(--size-form-width); }
+:root{ --size-login-width:400px; }   /* 로그인 창(S-18) 너비 - 05에 없어 목업 임의 */
+.mform.lgm{ width:var(--size-login-width); }
 .mf-body{ white-space:normal; display:flex; flex-direction:column; gap:var(--space-3); }
 .mf-foot{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-2); padding:var(--space-3) var(--space-6); flex-wrap:wrap; }
 .mf-foot > .btn:only-child{ margin-left:auto; }
@@ -849,6 +891,7 @@ button.a-card:hover{ border-color:var(--color-primary); box-shadow:var(--shadow-
 .a-tbl tbody tr:last-child td{ border-bottom:0; }
 .a-tbl.sm th, .a-tbl.sm td{ padding:6px var(--space-2); }
 .a-tbl .r{ text-align:right; }
+.a-tbl + .acard{ margin-top:var(--space-4); }   /* 표 바로 밑 입력 칸 띄움 (A-15 인증키 추가 등) */
 .a-tr[data-a]{ cursor:pointer; }
 .a-tr[data-a]:hover td{ background:var(--color-hover-bg); }
 .a-tr.sel td{ background:var(--color-primary-soft); }
@@ -884,6 +927,9 @@ button.a-card:hover{ border-color:var(--color-primary); box-shadow:var(--shadow-
 .a-errband{ display:flex; align-items:center; gap:var(--space-2); background:var(--color-danger-bg); color:var(--color-danger-text); border:1px solid var(--color-danger-text); border-radius:var(--radius-md); padding:var(--space-1) var(--space-1) var(--space-1) var(--space-3); margin-bottom:var(--space-4); font-size:var(--font-size-sm); }
 .a-errband > span{ flex:1; }
 .a-errband .btn-text{ color:var(--color-danger-text); }
+.a-failbox{ display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; }   /* 그 자리 실패 상자 (G-79) */
+.a-failbox > span{ flex:1; }
+.a-failbox .btn-text{ color:var(--color-danger-text); }
 .a-toast{ position:fixed; right:var(--space-6); bottom:var(--space-6); z-index:var(--z-adm-toast); background:var(--color-text); color:var(--color-bg); border-radius:var(--radius-md); padding:var(--space-3) var(--space-4); box-shadow:var(--shadow-3); font-size:var(--font-size-sm); max-width:480px; min-width:0 !important; }
 .a-scrim{ position:fixed; inset:0; background:var(--color-scrim); z-index:var(--z-adm-scrim); min-width:0 !important; }
 .a-mwrap{ position:fixed; inset:0; z-index:var(--z-adm-modal); display:flex; align-items:center; justify-content:center; padding:var(--space-4); min-width:0 !important; }
@@ -891,10 +937,7 @@ button.a-card:hover{ border-color:var(--color-primary); box-shadow:var(--shadow-
 .a-modal.sm{ width:440px; }
 .a-modal h2{ font-size:var(--font-size-xl); font-weight:var(--font-weight-bold); margin-bottom:var(--space-3); }
 .a-modal p{ line-height:var(--font-line-normal); }
-.a-conf{ display:grid; grid-template-columns:auto 1fr; gap:var(--space-2) var(--space-4); margin:0; padding:var(--space-3); background:var(--color-bg-subtle); border-radius:var(--radius-md); }
-.a-conf dt{ font-size:var(--font-size-sm); font-weight:var(--font-weight-semibold); color:var(--color-text-secondary); white-space:nowrap; }
-.a-conf dd{ margin:0; font-size:var(--font-size-sm); line-height:var(--font-line-normal); }
-.a-conf ul{ margin:0; padding-left:var(--space-4); }
+.a-cnote{ margin:0; font-size:var(--font-size-md); color:var(--color-text-secondary); }   /* A-90 확인 창의 한 줄 (G-71) */
 .a-mact{ display:flex; justify-content:flex-end; gap:var(--space-2); margin-top:var(--space-5); }
 .a-keyline{ font-size:var(--font-size-sm); display:flex; align-items:center; gap:var(--space-2); }
 .a-filerow{ display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; margin:var(--space-2) 0; }
@@ -944,11 +987,19 @@ button.a-card:hover{ border-color:var(--color-primary); box-shadow:var(--shadow-
 .adot.first{ fill:var(--color-primary); }
 .a-drawbar{ display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; background:var(--color-primary-soft); border-radius:var(--radius-md); padding:var(--space-2) var(--space-3); margin-bottom:var(--space-2); font-size:var(--font-size-sm); }
 .a-mapside .acard{ margin-bottom:var(--space-3); }
+.a-sw{ display:inline-flex; align-items:center; gap:var(--space-2); min-height:var(--size-target-pc); font-size:var(--font-size-sm); }   /* A-11 학생이 누르기 켜기·끄기 (G-116) */
+.a-sw .sw-t{ position:relative; width:36px; height:20px; flex:none; border-radius:var(--radius-full); background:var(--color-border-strong); transition:background-color var(--motion-fast); }
+.a-sw .sw-t::after{ content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:var(--radius-full); background:var(--color-bg); transition:left var(--motion-fast); }
+.a-sw[aria-checked="true"] .sw-t{ background:var(--color-primary); }
+.a-sw[aria-checked="true"] .sw-t::after{ left:18px; }
+.a-sw:disabled{ opacity:.5; cursor:not-allowed; }
+.a-sw:focus-visible{ outline:2px solid var(--color-primary); outline-offset:2px; border-radius:var(--radius-sm); }
 .mockonly{ border:1px dashed #B45309 !important; color:#7C2D12 !important; background:#FFF8E1 !important; }
 /* 오른쪽 패널 안에서는 칸을 한 줄에 하나씩 (좁은 너비) */
 .a-side .a-grid2, .a-side .a-grid3{ grid-template-columns:minmax(0,1fr); gap:0; }
 .a-endrow input{ flex:1; min-width:0; }
 .a-endrow .chk-row{ flex:none; }
+.a-dow{ flex:none; min-width:2.5em; font-size:var(--font-size-sm); color:var(--color-text-secondary); }
 .a-tbl td.num{ white-space:nowrap; }
 .a-tbl td.tgt{ min-width:150px; }
 /* =====================================================================
@@ -1012,11 +1063,12 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
         <!-- 관리자 [미리 보기]일 때만 보이는 띠 -->
         <div id="prevband" class="prevband" role="status" hidden></div>
         <header id="hdr" class="hdr"></header>
+        <!-- 로그아웃·탈퇴 등의 이유 띠 (G-55) -->
+        <div id="authband" class="authband" role="status" hidden></div>
         <div id="banner" class="banner" role="region" aria-label="헤드 배너" hidden></div>
         <div id="main" class="main">
-          <!-- 왼쪽 구역: L. 로그인 박스(학생·관리자 같이 씀) + C. 필터 영역 -->
+          <!-- 왼쪽 구역: C. 필터 영역 (로그인은 머리 영역 [로그인] → 로그인 창 S-18) -->
           <div id="leftcol" class="leftcol">
-            <div id="loginbox" class="loginbox" role="region" aria-label="로그인"></div>
             <aside id="filter" class="filter" aria-label="날짜·교시 고르기"></aside>
           </div>
           <main id="center" class="center">
@@ -1029,7 +1081,7 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
               <!-- 로그인한 학생: 고른 건물(최대 3개) -->
               <div id="selbar" class="selbar" hidden></div>
               <div class="tabbody" id="tabbody">
-                <div id="tabmsg" hidden></div>
+                <div id="tabmsg" class="tabmsg" hidden></div>
                 <div id="mapvp" class="mapvp" aria-label="캠퍼스맵">
                   <svg id="mapsvg" role="img" aria-label="캠퍼스맵 (오픈스트리트맵 자료로 그린 지도, 정문이 아래쪽)"><defs><pattern id="na-hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect class="hatch-bg" width="12" height="12"/><rect class="hatch-ln" width="4" height="12"/></pattern></defs><g id="mapg"></g><g id="lblg"></g></svg>
                   <div id="map-over" class="map-over" hidden></div>
@@ -1059,7 +1111,7 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
           <aside id="panel" class="panel" aria-label="강의실 상세"></aside>
         </div>
         <footer id="ftr" class="ftr"></footer>
-        <!-- 화면 위에 뜨는 것: 가림막, 팝업(S-05·S-06·S-08·S-09·S-14~S-17), 안내 창(S-07 등) -->
+        <!-- 화면 위에 뜨는 것: 가림막, 팝업(S-05·S-06·S-08·S-09·S-14~S-18), 안내 창(S-07 등) -->
         <div id="scrim" class="scrim" hidden></div>
         <div id="modal" class="modal-wrap" hidden></div>
         <div id="alert" class="alert-wrap" hidden></div>
@@ -1069,7 +1121,7 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
   <div class="phone-cap">목업 전용 보기 - 휴대폰 너비 360px 틀 안에 사이트를 보여 주는 중입니다</div>
 </div>
 
-<!-- ============ 관리자 화면 (A-02~A-18) - 학생 화면 로그인 박스에 관리자 아이디로 로그인하면 보임. PC만 ============ -->
+<!-- ============ 관리자 화면 (A-02~A-18) - 학생 화면 로그인 창(S-18)에 관리자 아이디로 로그인하면 보임. PC만 ============ -->
 <div id="admin" class="adm" hidden></div>
 
 <!-- ============ 목업 조정판 (사이트의 일부가 아님) ============ -->
@@ -1096,10 +1148,11 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
         <tr><td>관리자</td><td><code>mock-admin</code></td><td><code>Mock!2026</code></td></tr>
         <tr><td>학생 (내 시간표 있음)</td><td><code>20261234</code></td><td><code>Mock!2026</code></td></tr>
         <tr><td>정지된 학생</td><td><code>20260003</code></td><td><code>Mock!2026</code></td></tr>
+        <tr><td>가입 시연 (계정 없음)</td><td><code>20224257</code></td><td>가입할 때 정함</td></tr>
         <tr><td colspan="2">가입·비밀번호 찾기 확인 번호</td><td><code>135790</code></td></tr>
       </tbody>
     </table>
-    <p class="hint">학생 화면 왼쪽 위 로그인 박스에 적습니다. 관리자 아이디로 로그인하면 바로 관리자 화면으로 넘어갑니다(관리자 PC에서만). 목업에서 바꾼 비밀번호·관리자 아이디는 여기에 보이지 않습니다. 잊었으면 아래 단추를 누르세요(관리자 아이디도 mock-admin으로 돌아감).</p>
+    <p class="hint">학생 화면 머리 영역의 [로그인]을 누르면 뜨는 로그인 창에 적습니다. 가입 시연은 계정이 없는 20224257로 합니다. 관리자 아이디로 로그인하면 바로 관리자 화면으로 넘어갑니다(관리자 PC에서만). 목업에서 바꾼 비밀번호·관리자 아이디는 여기에 보이지 않습니다. 잊었으면 아래 단추를 누르세요(관리자 아이디도 mock-admin으로 돌아감).</p>
     <button type="button" class="mbtn" data-m="acc-reset">목업 계정 처음으로</button>
     <div class="fld"><span>목업 전용 지름길 (사이트에는 이런 단추가 없음)</span>
       <button type="button" class="mbtn" data-m="go-admin">관리자 화면 바로 보기</button>
@@ -1174,12 +1227,6 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
     <label class="o"><input type="checkbox" data-o="formFail"> 문의·신고 보내기 실패</label>
     <label class="o"><input type="checkbox" data-o="dayLimit"> 문의·신고 하루 보내기 한도를 넘긴 상황</label>
     <button type="button" class="mbtn" data-m="wait-skip">보낸 뒤 1분 기다림 건너뛰기</button>
-    <div class="fld"><span>시연 메일 허용 목록 (A-19)</span>
-      <label class="o"><input type="radio" name="m-allow" value="on"> 켬 (목록에 있는 학번만 확인 메일을 받음)</label>
-      <label class="o"><input type="radio" name="m-allow" value="off"> 끔 (모든 학번)</label>
-      <p class="hint">처음 목록(예시): 20261234, 20260002, 20260101, 20260102. 가입 시연은 20260101로 합니다.</p>
-      <button type="button" class="mbtn" data-m="allow-try">목록 밖 학번(20260199)으로 가입 시도</button>
-    </div>
   </section>
 
   <section>
@@ -1197,7 +1244,7 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
       <label class="o"><input type="radio" name="m-holfetch" value="ok"> 성공</label>
       <label class="o"><input type="radio" name="m-holfetch" value="fail"> 실패</label>
     </div>
-    <div class="fld"><span>인증키 연결 시험 (A-15)</span>
+    <div class="fld"><span>API 인증키 연결 시험 (A-15)</span>
       <label class="o"><input type="radio" name="m-keytest" value="ok"> 성공</label>
       <label class="o"><input type="radio" name="m-keytest" value="fail"> 실패 (저장하지 않음)</label>
     </div>
@@ -1221,15 +1268,15 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
   <section>
     <h3>5. 예시 데이터로 볼 수 있는 것</h3>
     <ul>
-      <li>학기(예시): 2026-2학기, 개강일 2026-09-01 ~ 종강일 2026-12-18. 공휴일(예시): 10/3, 10/5~10/7(추석), 10/9, 12/25 등. 2027년 공휴일은 없어 새 학기 반영 때 경고가 나옵니다.</li>
+      <li>학기(예시): 2026-2학기, 개강일 2026-09-01 ~ 종강일 2026-12-18. 학기 안 공휴일: 9/24~9/26 추석 연휴, 10/3 개천절, 10/5 대체공휴일, 10/9 한글날, 12/25 성탄절. 2027년 공휴일은 없어 새 학기 반영 때 경고가 나옵니다.</li>
       <li>사용 불가(예시): 사범대학 3호관(E5) 건물 전체 9/21~10/16 "공사 중", 공과대학 1호관(D2) 4층 9/28부터 계속 "누수 점검", D2 306호 9/28~10/5 "공사 중".</li>
       <li>목업 학생 20261234의 내 시간표: 월 1·2·5, 화 3·4, 목 1·2·5·6, 금 2·6·7교시. 목요일(10/1)에는 3·4교시가 공강으로 저절로 골라집니다. 수요일은 수업이 없어 저절로 고르지 않습니다.</li>
       <li>캠퍼스맵: 오픈스트리트맵(OSM) 자료로 건물·도로·운동장을 실제 모양대로 그렸습니다. 방향은 학교 캠퍼스맵과 같게 정문이 아래쪽이고, 건물 번호·이름은 학교 캠퍼스맵 범례를 따릅니다.</li>
-      <li>누를 수 있는 건물(예시 강의실이 있는 건물, 13곳): 약학대학(A2), 생명산업과학대학 1·2호관(B3·B4), 공과대학 1·2·3호관(D2·D3·D4), 기초교육관(E2), 사범대학 1·2·3호관(E3·E4·E5), 미래창조관(E6), 사회과학대학(E7), 인문예술대학(E8).</li>
+      <li>누를 수 있는 건물(처음 값, 예시 강의실이 있는 건물 13곳): 약학대학(A2), 생명산업과학대학 1·2호관(B3·B4), 공과대학 1·2·3호관(D2·D3·D4), 기초교육관(E2), 사범대학 1·2·3호관(E3·E4·E5), 미래창조관(E6), 사회과학대학(E7), 인문예술대학(E8). 관리자 화면 A-11 건물 표에서 건물마다 켜고 끕니다.</li>
       <li>공과대학 1호관(D2), 목요일 3교시: 301 공실·남은 수업 없음(E-12), 302 수업중·13:50 끝, 303 수업중·수용 인원 정보 없음(E-10), 304 수업중·11:50 끝, 305 공실·다음 수업 13:00 시작, 201 폐강 수업이라 공실. E01·E02는 층 정보 없음(E-09).</li>
       <li>사범대학 1호관(E3), 목요일 3교시: 공실 없음(E-11). 사회과학대학(E7): 2층에 강의실 없음(E-15).</li>
       <li>공동실험실습관(C3): 캠퍼스맵 영역이 없는 건물(E-14). 관리자 화면 A-11에서 점을 찍어 영역을 그리고 업데이트하면 학생 캠퍼스맵에서 누를 수 있습니다.</li>
-      <li>관리자 예시: 문의 4건(이메일은 example.com 예시), 신고 3건, 오류 기록 4건, 학생 계정 8개(학번은 2026xxxx 예시), 인증키 끝자리 …a1B2, 시연 메일 허용 목록 4개(켜짐).</li>
+      <li>관리자 예시: 문의 4건(이메일은 example.com 예시), 신고 3건, 오류 기록 4건, 학생 계정 8개(학번은 2026xxxx 예시), 인증키 끝자리 …a1B2.</li>
     </ul>
     <h4>목업에서 임의로 정한 것</h4>
     <ul id="m-assume"></ul>
@@ -1251,11 +1298,11 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
 'use strict';
 
 const ASSUME = [
-  "G-51 로그인 박스 자리: PC는 왼쪽 구역 맨 위(달력 위), 휴대폰은 필터 위 \"로그인 ▼\" 한 줄을 눌러 펼칩니다. 로그인하면 같은 자리에 \"내 계정 ▾\"만 보입니다.",
-  "G-52 로그인 박스의 학번 칸은 숫자만으로 막지 않습니다. 같은 박스에 관리자 아이디도 적기 때문입니다.",
+  "G-51 로그인 자리: 머리 영역에 [로그인] 단추를 둡니다. PC 순서는 [초기화] [로그인] [문의하기] [신고하기] [공지사항], 휴대폰은 [초기화] [로그인] [≡]입니다. 누르면 보던 화면은 그대로 두고 가림막 위 가운데에 로그인 창(S-18)이 뜹니다. 학생이 로그인하면 같은 자리가 \"내 계정 ▾\"로 바뀝니다. 왼쪽 구역에는 필터만 둡니다.",
+  "G-52 로그인 창의 첫 칸 이름은 \"학번\"이지만 숫자만으로 막지 않습니다. 같은 칸에 관리자 아이디도 적기 때문입니다(관리자 로그인을 학생에게 드러내지 않으려고 이름은 \"학번\"만 씀).",
   "G-53 학생 로그인도 5번 틀리면 잠시 막습니다(관리자와 같은 규칙, 계정마다·접속한 곳마다 셈). 목업 잠금 시간은 5분이고, 조정판에서 20초로 줄일 수 있습니다. 잠긴 동안 [로그인]만 누를 수 없습니다.",
   "G-54 정지 안내 문구: \"이 계정은 이용이 정지되었습니다. 사유: (사유). 궁금한 점은 [문의하기]로 알려 주세요.\" 비밀번호가 맞을 때만 보입니다.",
-  "G-55 관리자 로그아웃·자동 로그아웃·비밀번호 변경 뒤, 학생 학번 로그아웃·탈퇴 뒤에는 학생 화면 로그인 박스 위에 이유를 한 줄로 보입니다(인테이크 A-01의 이유 띠를 옮김).",
+  "G-55 관리자 로그아웃·자동 로그아웃·비밀번호 변경 뒤, 학생 학번 로그아웃·탈퇴 뒤에는 학생 화면 머리 영역 바로 밑에 이유를 한 줄 안내 띠로 보입니다. 띠는 [닫기]를 누르거나 다시 로그인하면 사라집니다(인테이크 A-01의 이유 띠를 옮김).",
   "G-56 로그인한 학생에게 내 시간표가 없으면, 처음 열 때 지금 교시 하나를 골라 둡니다. 공강 교시 자동 고르기는 시간표가 있을 때만 합니다. 수업이 없는 날·수업 사이 빈 교시가 없는 날은 아무 교시도 고르지 않고, 이유를 필터 밑에 적습니다.",
   "G-57 로그인한 학생이 건물을 누르면 바로 들어가지 않고 고르기만 합니다. 위쪽 띠의 [공실 보기]로 S-12를 엽니다. 4번째 건물을 누르면 \"건물은 3개까지 고를 수 있습니다\" 띠가 잠깐 뜹니다.",
   "G-58 관리자가 적은 수용 인원(학교 홈페이지 값)은 학생 화면에 \"(추정)\" 없이 \"수용 인원 N명\"으로 보입니다(02 7.2 확인 필요 항목의 목업 안).",
@@ -1267,32 +1314,54 @@ const ASSUME = [
   "G-64 탈퇴(S-17)는 비밀번호를 한 번 더 적어야 합니다. 학생이 비밀번호를 바꾸면(S-16) 다시 로그인합니다(B-3과 같게).",
   "G-65 확인 번호 단계에서 남은 시간(10분)과 [다시 받기]까지 남은 초(60초)를 보입니다. 틀리면 남은 기회를 알립니다.",
   "G-66 이미 가입한 학번으로 가입하거나, 가입하지 않은 학번으로 비밀번호를 찾아도 화면은 \"확인 번호를 보냈습니다\"로 똑같습니다. 이때 목업에서는 확인 번호가 맞지 않는 것으로 처리하고, 목업 알림으로 이유를 설명합니다.",
-  "G-67 흔한 비밀번호는 목업에서 모양으로만 막습니다(같은 글자 4번, 1234처럼 이어지는 숫자, qwer처럼 키보드 줄, pass 등). 실제로 막을 목록은 09에서 정합니다.",
+  "G-67 (삭제) 학생 비밀번호 규칙에서 \"학번이 들어가지 않음\"·\"흔한 비밀번호가 아님\"을 뺐습니다(사용자 결정 2026-10-03). 남은 규칙은 8자 이상·영문자·숫자·특수기호입니다.",
   "G-68 이용약관 내용은 틀만 둡니다(가입 첫 단계에서 [보기]로 펼침).",
   "G-69 관리자 [미리 보기]는 로그인하지 않은 학생 화면으로 보이고, 맨 위 띠에 [미리 보기 끝내기]가 있습니다. 업데이트할 변경이 없으면 [미리 보기]·[변경 버리기]·[업데이트하기]를 누를 수 없습니다.",
   "G-70 [변경 버리기]는 빨강 확인 창을 거칩니다. 버리면 저장한 값 전체(파일 반영 포함)가 마지막 업데이트 때로 돌아갑니다.",
-  "G-71 업데이트 확인 창의 \"무엇이 바뀌나\"는 바뀐 종류 이름 목록입니다(예: 공지사항, 사용 불가 설정). [업데이트하기] 단추는 파랑입니다(다시 고쳐 업데이트할 수 있어서). 지우기·버리기·해제·정지·삭제는 빨강입니다.",
-  "G-72 학생 계정 화면(A-18)에 [정지 풀기]를 둡니다(결정 파일에는 정지·삭제만 있음). 정지·정지 풀기·삭제, 인증키, 시연 메일 허용 목록, 관리자 비밀번호·아이디, 문의·신고 처리, 오류 기록 확인은 [업데이트하기] 없이 바로 적용됩니다.",
+  "G-71 확인 창(A-90)은 짧은 질문 제목과, 되돌릴 수 없을 때만 그 사실 한 줄을 보입니다(예: \"처리 완료할까요?\" + \"이메일이 지워지며 되돌릴 수 없습니다.\"). 목록의 한 줄에서 연 창은 제목에 대상을 넣습니다(예: \"학번 20260004 계정을 삭제할까요?\"). 업데이트 확인 창만 바뀐 종류 이름을 한 줄로 보입니다(예: \"바뀐 것: 공지사항, 사용 불가 설정\"). [업데이트하기] 단추는 파랑입니다(다시 고쳐 업데이트할 수 있어서). 지우기·버리기·해제·정지·삭제는 빨강입니다.",
+  "G-72 학생 계정 화면(A-18)에 [정지 풀기]를 둡니다(결정 파일에는 정지·삭제만 있음). 정지·정지 풀기·삭제, 인증키, 관리자 비밀번호·아이디, 문의·신고 처리, 오류 기록 확인은 [업데이트하기] 없이 바로 적용됩니다.",
   "G-73 정지 사유 선택지: 도배·장난 / 부정 이용 / 계정 도용 의심 / 기타.",
   "G-74 사용 불가 사유 칸은 30자까지이고, 학생 화면에는 \"사유 + 사용금지\"로 붙여 보입니다. 적는 동안 학생 화면 문구를 미리 보입니다.",
   "G-75 캠퍼스맵 영역 그리기(A-11): 건물을 고르고 [영역 그리기] → 지도를 눌러 점을 차례로 찍음 → [다 그림](점 3개 이상). [점 하나 되돌리기]·[그리기 취소]가 있고, 고른 건물은 파란 테두리로 보입니다.",
   "G-76 공지·팝업 글쓰기와 수정은 오른쪽 패널에서 합니다. 팝업 차례는 ▲▼로 바꿉니다. 배너는 하나(보이기 켜기·끄기 + 60자)입니다.",
   "G-77 대시보드 방문자 막대그래프는 최근 7일이고, 마지막 날 값만 막대 위에 적습니다. 나머지는 마우스를 올리면 보이고, [표로 보기]로도 봅니다.",
   "G-78 문의 답장 확인 창의 [답장 보내기]는 파랑입니다. 답장 메일이 실패하면 오류 기록에 \"답장 메일\"로 남습니다.",
-  "G-79 관리자 화면 서버 오류는 내용 맨 위 빨강 띠 \"(무엇)하지 못했습니다. 잠시 뒤 다시 해 주세요 · 오류 기록 #0008\"과 [오류 기록 보기]로 알립니다. 오류 기록으로 가면 그 줄을 노랗게 표시합니다.",
+  "G-79 관리자 화면 서버 오류는 내용 맨 위 빨강 띠 \"(무엇)하지 못했습니다. 오류 기록 #0008\"과 [오류 기록 보기]로 알립니다. 오류 기록으로 가면 그 줄을 노랗게 표시합니다. 공휴일 불러오기와 인증키 연결 시험의 실패는 띠 대신 그 단추 아래 빨강 상자로, 같은 문구 모양으로 알립니다.",
   "G-80 시간표·폐강 파일 화면의 [목업: 예시 파일로 해 보기]는 목업 전용 단추입니다(점선 표시, 실제 화면에는 없음).",
   "G-81 새 학기로 반영하면 학기 정보(이름·개강일·종강일)도 함께 바뀝니다. [업데이트하기] 전까지 학생 화면은 그대로입니다.",
   "G-82 개인정보 처리방침(S-11)은 목차 7개만 두고 내용은 09에서 채웁니다. 바닥 영역 [자세히]는 그중 \"4. 방문자 수 세기\"로 갑니다.",
   "G-83 관리자 화면 표의 줄은 쪽을 나누지 않습니다(예시 줄이 적음). 인테이크 G-09의 \"20줄씩 쪽 나누기\"는 실제 화면에서 정합니다.",
-  "G-84 시연 메일 허용 목록(A-19)은 처음에 켜져 있고, 예시 학번 4개(20261234·20260002·20260101·20260102)가 들어 있습니다. 가입 시연은 목록에 있고 계정이 없는 20260101로 합니다.",
-  "G-85 허용 목록이 켜져 있을 때 목록 밖 학번으로 [확인 번호 받기]를 누르면 메일을 보내지 않습니다. 가입은 \"지금은 미리 등록된 학번만 가입할 수 있습니다.\", 비밀번호 찾기는 \"지금은 미리 등록된 학번만 확인 번호를 받을 수 있습니다.\"를 학번 칸 밑에 보입니다. 계정이 있든 없든 같은 문구입니다.",
-  "G-86 (더 나은 방식 제안) 허용 목록이 켜져 있으면 가입·비밀번호 찾기의 학번 단계에 \"지금은 시연 기간이라 미리 등록된 학번만 확인 번호를 받을 수 있습니다\" 안내를 미리 보입니다. 학번을 적은 뒤에야 막히는 일을 줄이려는 것입니다. 안내는 계정 유무와 관계없습니다.",
-  "G-87 허용 목록 켜기는 바로 적용하고, 끄기는 빨강 확인 창(\"끄면 모든 학번으로 확인 메일을 보낼 수 있습니다\")을 거칩니다. 켜져 있는데 목록이 비어 있으면 \"지금은 아무도 확인 메일을 받을 수 없습니다\" 경고를 보입니다. 학번 삭제도 빨강 확인 창입니다.",
-  "G-88 허용 목록에는 학번 8자리 숫자만 넣고(형식 오류: \"학번 8자리를 숫자로 적어 주세요.\"), 같은 학번은 다시 넣지 못합니다. 학생 계정이 있는지는 목록에 보이지 않습니다. 메뉴 자리는 설정 묶음의 공휴일 API 인증키 바로 밑입니다.",
+  "G-84 (삭제) 시연 메일 허용 목록(A-19)을 없앴습니다(사용자 결정 2026-10-03). 이제 어떤 8자리 학번이든 확인 번호를 받을 수 있습니다.",
+  "G-85 (삭제) A-19를 없애 목록 밖 학번을 막는 문구도 없앴습니다.",
+  "G-86 (삭제) A-19를 없애 가입·비밀번호 찾기 학번 단계의 시연 기간 안내도 없앴습니다.",
+  "G-87 (삭제) A-19를 없애 허용 목록 켜기·끄기·학번 삭제 확인 창도 없앴습니다.",
+  "G-88 (삭제) A-19를 없애 허용 목록 학번 넣기 규칙과 메뉴 자리도 없앴습니다.",
   "G-89 관리자 아이디 바꾸기는 따로 A-20을 만들지 않고, A-16을 \"관리자 계정\" 화면(탭: 비밀번호 바꾸기 / 아이디 바꾸기)으로 묶어 넣었습니다. 둘 다 지금 비밀번호를 확인하고, 바꾸면 로그아웃해 다시 로그인하는 같은 흐름이기 때문입니다.",
   "G-90 관리자 아이디 규칙(목업): 4~20자, 영문·숫자·_·-만 씁니다. 학번과 같은 8자리 숫자는 쓸 수 없고(\"학번과 같은 8자리 숫자는 관리자 아이디로 쓸 수 없습니다.\"), 지금 아이디와 같으면 막습니다. 새 아이디는 두 번 적습니다. \"짐작하기 어렵게\" 같은 규칙은 넣지 않았습니다. 지금 아이디는 화면에 보이지 않습니다.",
   "G-91 지금 비밀번호를 틀리면 남은 기회를 알리고, 5번 틀리면 바로 로그아웃하고 로그인 잠시 막기를 겁니다(로그인 실패와 같은 5번 규칙). 관리자 비밀번호·아이디 바꾸기와 학생 비밀번호 바꾸기·탈퇴에 똑같이 씁니다. 이유 띠: \"지금 비밀번호를 5번 틀려 로그아웃했습니다. 잠시 뒤 다시 로그인해 주세요.\"",
   "G-92 관리자 아이디를 바꾸면 목업 안에서도 새 아이디로만 로그인됩니다. 조정판 [목업 계정 처음으로]를 누르면 mock-admin으로 돌아갑니다. 바꾼 아이디는 조정판에 보이지 않습니다.",
+  "G-93 로그인 창(S-18): 제목은 \"로그인\"이고, 칸은 \"학번\"·\"비밀번호\"입니다. 그 밑에 \"로그인 상태 유지\"와 [로그인](창 너비 가득), 맨 아래에 [가입하기]·[비밀번호 찾기]가 있습니다. [가입하기]·[비밀번호 찾기]를 누르면 같은 팝업 자리가 S-14·S-15로 바뀝니다. [X]나 Esc로 닫으면 보던 화면 그대로입니다. 다시 열면 지난 오류 문구는 지우고, 잠시 막기 안내는 남깁니다.",
+  "G-94 비밀번호 찾기(S-15)를 마치고 [확인]을 누르면 로그인 창(S-18)으로 돌아갑니다. 학번 칸에는 방금 적은 학번이 들어 있습니다.",
+  "G-95 휴대폰 머리 줄(360px)에서는 서비스 이름 글자를 16px로, [초기화]·[로그인](로그인 뒤 \"내 계정 ▾\") 글자를 14px로, 단추 안 좌우 여백을 8px로, 단추 사이를 4px로 줄입니다. 서비스 이름이 잘리지 않게 하려는 것입니다. \"내 계정 ▾\" 메뉴는 단추 오른쪽 끝에 맞춰 아래로 펼칩니다.",
+  "G-96 서버 정보 불러오기 실패(E-02) 안내는 가운데 구역의 가로·세로 가운데에 하나만 보입니다. 이때 [캠퍼스맵]·[건물 목록] 탭은 숨깁니다(눌러도 보일 것이 없어서).",
+  "G-97 가입 시연 학번은 계정이 없는 20224257입니다. 가입·비밀번호 찾기의 학번 칸 예시 글자도 \"예: 20224257\"입니다.",
+  "G-110 관리자 화면의 결과 알림은 짧게 씁니다(예: \"정지했습니다.\"). 학생 화면에 보이는 변경을 저장하면 \"저장했습니다. 업데이트하면 학생 화면에 보입니다.\"처럼 한 문장을 붙이고, 지운 것은 \"업데이트하면 학생 화면에서 빠집니다.\"를 붙입니다.",
+  "G-111 API 인증키(A-15)는 이름(쓰는 곳, 예: \"공휴일 정보\")으로 구별해 여러 개를 목록으로 둡니다. 줄마다 이름·끝 4자리(…a1B2)·저장 시각·마지막 확인 결과(성공·실패와 시각)를 보입니다. 키 값 전체는 적을 때도 보이지 않습니다([보기] 단추 없음).",
+  "G-112 [인증키 추가]는 이름(20자까지, 같은 이름은 안 됨)과 키 값을 받고, 줄마다 [바꾸기]는 키 값만 바꿉니다. 저장할 때 연결을 시험하고, 실패하면 저장하지 않습니다(무엇으로 시험할지는 08에서 정함). [지우기]는 빨강 확인 창을 거칩니다. 모두 [업데이트하기] 없이 바로 적용됩니다.",
+  "G-113 공휴일 불러오기는 이름이 \"공휴일 정보\"인 인증키를 씁니다. 그 키가 없어도 [공휴일 불러오기]는 누를 수 있고, 누르면 불러오기 실패 상자와 오류 기록(\"인증키가 없습니다\")이 남습니다. 불러올 때마다 그 키의 마지막 확인 결과가 바뀝니다.",
+  "G-114 캠퍼스맵(A-11) 건물 표에서 건물을 지울 수 있습니다(빨강 확인 창). 강의실이 있는 건물은 지울 수 없고, 누르면 \"강의실이 있는 건물은 지울 수 없습니다.\" 알림만 뜹니다. 지운 건물은 학생 캠퍼스맵에서 모양과 이름표가 빠집니다. 업데이트 전에는 [변경 버리기]로 되돌릴 수 있습니다.",
+  "G-115 건물 이름·번호는 A-11 건물 표(모든 건물)와 A-10(강의실이 있는 건물)에서 고칩니다. 번호는 \"D2\"처럼 영문자 1~2자 + 숫자 1~2자이고, 다른 건물이나 문·운동장(예: 정문 A19)이 쓰는 번호는 쓸 수 없습니다. 바꾼 값은 학생 화면(캠퍼스맵 이름표·건물 목록·층별 안내도·강의실 상세·신고 창)과 관리자 화면의 모든 표에 쓰입니다.",
+  "G-116 학생이 누를 수 있는 건물은 데이터입니다(처음 값 = 강의실이 있는 건물 14곳). A-11 건물 표의 [학생이 누르기]로 건물마다 켜고 끕니다. 강의실이 없는 건물은 켤 수 없습니다. 꺼진 건물은 학생 캠퍼스맵에서 누를 수 없는 건물 모양(회색)으로 보이고, 건물 목록 탭에서도 빠집니다. 켜져 있어도 영역이 없는 건물(C3)은 건물 목록에서만 고를 수 있습니다.",
+  "G-117 공휴일 화면(A-09)의 날짜는 저장한 목록·받아 온 목록·확인 창 모두 \"2026-10-05 (월)\"처럼 요일을 붙여 보입니다. 휴일을 직접 추가하거나 고칠 때도 고른 날짜의 요일을 날짜 칸 옆에 보입니다.",
+  "G-130 층별 안내도(S-03) 그림은 \"위에서 내려다본 건물 모양 + 복도 + 강의실 칸\" 하나로 정했습니다. 조정판의 \"층별 안내도 그림 모양\" 후보(① 강의실 배치 그림 / ② 실제 지도 참고 / ③ 목록 모양)는 없앴습니다.",
+  "G-131 건물 외곽선은 캠퍼스맵의 오픈스트리트맵 외곽선을 그대로 쓰고, 지도에서 비스듬한 건물을 가장 가까운 가로·세로 방향으로 바로 세워 그립니다(D2는 약 35° 돌림). 뒤집지 않아서 캠퍼스맵처럼 아래쪽이 정문 쪽입니다. 캠퍼스맵 영역이 없는 건물(C3)은 반듯한 사각형이고, 관리자가 A-11에서 영역을 그리면 그 영역을 씁니다.",
+  "G-132 공과대학 1호관(D2, ㄷ자) 배치(추정): 복도는 ㄷ자 안쪽(가운데 마당 쪽)을 따라 이어지는 띠이고, 강의실은 바깥쪽을 따라 번호 순서대로 놓습니다(위 날개 왼쪽→오른쪽, 오른쪽 날개 위→아래, 아래 날개 오른쪽→왼쪽). 모서리와 아래 날개 끝의 튀어나온 곳은 계단·현관 같은 다른 공간으로 비워 둡니다. 4개 층 모두 같은 틀입니다.",
+  "G-133 다른 건물은 자동 배치(추정)입니다. 외곽선 안에서 가장 큰 직사각형 \"날개\"를 최대 3개 찾고, 날개마다 긴 방향을 따라 복도를 놓습니다. 가운데 복도(양쪽 강의실)를 먼저 쓰고, 그러면 그림이 너무 커지는 날개는 한쪽 복도(다른 날개 쪽 복도, 반대쪽 강의실)로 바꿉니다. 날개끼리는 복도를 늘려 잇습니다. 강의실은 날개마다 복도를 시계 방향으로 돌며 번호 순서대로 놓고, 띠 길이에 비례해 나눕니다. 날개에 들지 않은 곳(좁거나 비스듬한 끝)은 다른 공간으로 비워 둡니다. 정확도보다 모든 건물이 같은 규칙을 따르는 것을 앞세웠습니다.",
+  "G-134 강의실 칸은 05 토큰의 최소 크기(88×56px)보다 작아지지 않게 건물마다 그림 배율을 정합니다(한 건물은 모든 층이 같은 배율). 그림이 가운데 구역보다 넓으면(휴대폰에서 자주 생김) 그림만 옆으로 밀어 보고, 그림 위에 \"옆으로 밀면 그림의 나머지가 보입니다 →\" 한 줄이 보입니다. 칸을 눌러 다시 그려도 옆으로 민 자리는 그대로입니다.",
+  "G-135 강의실 배치가 추정이라는 것은 목업 전용 표시(점선 테두리 + \"목업 전용\")로만 알립니다. 층 목록 맨 위 한 줄과 층 이름 옆 작은 표입니다. 실제 사이트 문구가 아닙니다. 실제 배치도(층별 안내판·소방 대피도)를 받으면 스크립트의 FLOOR_LAYOUT에 층별 외곽선·복도·강의실 칸 자리를 적어 바꿉니다.",
+  "G-136 그림 위에 \"위에서 내려다본 건물 모양입니다. 캠퍼스맵처럼 아래쪽이 정문 쪽입니다.\" 한 줄(사이트 문구)을 둡니다. 복도 띠 안에 \"복도\" 글자를 둡니다. 건물 바닥은 캠퍼스맵의 건물 색을 옅게, 복도는 더 밝은 색으로 칠합니다(목업 임의). 강의실 칸 안의 정보·상태 모양과 사용 불가 빗금(G-59)은 예전과 같고, 칸마다 \"301호 공실\"처럼 읽어 주는 이름(aria-label)을 붙였습니다.",
+  "G-137 S-12 공실 보기(로그인한 학생, 여러 교시·여러 건물)는 칸 안에 교시 작은 칸(G-60)이 여러 개 들어가야 해서, 예전 ① 모양(강의실 줄 - 복도 - 강의실 줄)을 그대로 씁니다.",
+  "G-138 \"층 정보 없음\" 묶음은 그림 밖 칸 목록으로 보이고, 강의실이 없는 층(E-15 후보 ②)은 그림 없이 \"강의실 없음\" 글자만 보입니다.",
   "(이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 \"처음 크기의 N배\"(처음 값 3배).",
   "(이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11 확인 필요 항목). 서비스 이름을 누르면 반응이 없습니다(05 R-10).",
   "(이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.",
@@ -1305,7 +1374,7 @@ const ASSUME = [
   "(이전 목업) 휴대폰 필터를 펼치면 안내 문구는 교시 단추 밑에, 접으면 요약 줄 밑에 보입니다.",
   "(이전 목업) 브라우저 [뒤로]는 S-03·S-12에서만 S-01로 보냅니다. 다른 화면의 [뒤로]는 04에 없어(05 R-02) 따로 처리하지 않습니다.",
   "(이전 목업) 캠퍼스맵은 오픈스트리트맵(OSM, ODbL) 자료의 모양으로 그리고, 학교 캠퍼스맵 방향(정문이 아래쪽)으로 돌렸습니다. OSM에 없는 건물은 반듯한 사각형으로 대략 그렸습니다. 건물 번호·이름은 학교 캠퍼스맵 범례를 따릅니다.",
-  "(이전 목업) 누를 수 있는 건물은 강의 건물로 보이는 13곳으로 정했습니다. 실제로 강의실이 있는지는 시간표 자료로 확인해야 합니다.",
+  "(이전 목업) 누를 수 있는 건물의 처음 값은 강의 건물로 보이는 13곳입니다(영역이 없는 C3까지 14곳이 켜져 있음). 이제 데이터이고, A-11에서 건물마다 켜고 끕니다(G-116). 실제로 강의실이 있는지는 시간표 자료로 확인해야 합니다.",
   "(이전 목업) 건물 이름 글자 겹침은 건물마다 따로 적용합니다(먼저 번호로 두고, 겹치는 번호는 숨긴 뒤, 자리가 있는 건물부터 이름으로 되돌림).",
   "(이전 목업) 건물 번호 순서는 글자(A~F) 다음 숫자 크기 순(A2 → A10)입니다."
 ];
@@ -1315,9 +1384,9 @@ const PERIODS0 = [null,                                                         
   ['09:00','09:50'],['10:00','10:50'],['11:00','11:50'],['12:00','12:50'],['13:00','13:50'],
   ['14:00','14:50'],['15:00','15:50'],['16:00','16:50'],['17:00','17:50']];
 const SEM0 = { name:'2026-2학기', start:'2026-09-01', end:'2026-12-18' };            /* 예시 학기: 개강일·종강일 (FR-023, A-08) */
-const HOLIDAYS0 = { '2026-01-01':'신정', '2026-02-16':'설날 연휴', '2026-02-17':'설날', '2026-02-18':'설날 연휴', '2026-03-01':'삼일절',
-  '2026-05-05':'어린이날', '2026-05-24':'부처님오신날', '2026-06-06':'현충일', '2026-08-15':'광복절',
-  '2026-10-03':'개천절', '2026-10-05':'추석 연휴', '2026-10-06':'추석', '2026-10-07':'추석 연휴', '2026-10-09':'한글날', '2026-12-25':'성탄절' }; /* 예시 공휴일 (FR-030) - 날짜는 예시 */
+const HOLIDAYS0 = { '2026-01-01':'신정', '2026-02-16':'설날 연휴', '2026-02-17':'설날', '2026-02-18':'설날 연휴', '2026-03-01':'삼일절', '2026-03-02':'대체공휴일',
+  '2026-05-01':'노동절', '2026-05-05':'어린이날', '2026-05-24':'부처님오신날', '2026-05-25':'대체공휴일', '2026-06-06':'현충일', '2026-07-17':'제헌절', '2026-08-15':'광복절', '2026-08-17':'대체공휴일',
+  '2026-09-24':'추석 연휴', '2026-09-25':'추석', '2026-09-26':'추석 연휴', '2026-10-03':'개천절', '2026-10-05':'대체공휴일', '2026-10-09':'한글날', '2026-12-25':'성탄절' }; /* 2026년 공휴일 (FR-030). 06-03 전국동시지방선거는 일부러 뺌 - [공휴일 불러오기]로 새로 받는 시연용 (HOL_API) */
 const UPDATED0 = { ds:'2026-09-15', hm:'14:30' };                                     /* 예시 업데이트 시각 = 마지막 [업데이트하기] (FR-013) */
 const DOW = ['일','월','화','수','목','금','토'];
 /* ---------- 캠퍼스맵 모양 (FR-029 캠퍼스맵 영역) ----------
@@ -1440,7 +1509,7 @@ function refreshParts(){                                    /* 캠퍼스맵 영�
   const A = D().areas || {};
   BUILDINGS.forEach(function(b){
     const own = Object.prototype.hasOwnProperty.call(A, b.id);
-    b.parts = own ? (A[b.id] ? [A[b.id]] : null) : (SHAPES[b.id] || null);
+    b.parts = (D().bdel || []).indexOf(b.id) >= 0 ? null : own ? (A[b.id] ? [A[b.id]] : null) : (SHAPES[b.id] || null);   /* 지운 건물(A-11)은 그리지 않음 */
     b.area = !!b.parts;
     if (own && A[b.id]){ const c = centroid(A[b.id]); b.lx = c[0]; b.ly = c[1]; }
     else if (LPOS[b.id]){ b.lx = LPOS[b.id][0]; b.ly = LPOS[b.id][1]; }
@@ -1450,7 +1519,11 @@ function bName(b){ const n = D().bname || {}; return n[b.id] || b.name; }       
 function bNo(b){ const n = D().bno || {}; return n[b.id] || b.id; }             /* A-10에서 고친 건물 번호 */
 function fullName(b){ return bName(b) + '(' + bNo(b) + ')'; }
 function hasRooms(b){ return !!b.rooms; }
-function clickable(b){ return !!(b.rooms && b.area); }
+function clickable(b){ return !!(b.rooms && b.area && tapOn(b)); }                    /* 지도에서 누를 수 있음 = 강의실 + 영역 + 켜짐 */
+/* 학생이 누를 수 있는 건물의 처음 값 (A-11에서 건물마다 켜고 끔, G-116): 강의실이 있는 건물 14곳. C3는 영역이 없어 지도에서는 못 누름 */
+const TAP0 = ['A2', 'B3', 'B4', 'C3', 'D2', 'D3', 'D4', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8'];
+function tapOn(b){ return (D().tap || []).indexOf(b.id) >= 0; }
+function canPick(b){ return !!(b.rooms && tapOn(b)); }                                  /* 건물 목록(S-02)·고르기에 쓸 수 있음 */
 function codeKey(id){ const m = /^([A-Z]+)(\d+)$/.exec(id); return m ? [m[1], Number(m[2])] : [id, 0]; }
 function codeCmp(a, b){ const x = codeKey(a.id), y = codeKey(b.id); return x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : x[1] - y[1]; }  /* A2 → A10 */
 
@@ -1553,7 +1626,7 @@ function roomGone(key){ return !!(D().roomDel || {})[key]; }  /* A-10에서 지�
 /* ---------- 예시 공지·배너·팝업 (FR-007·FR-008·FR-009, 관리자 시트 내용의 예) ---------- */
 const NOTICES = [
   { id:'n6', title:'중간고사 기간 이용 안내', body:'10/19(월)~10/23(금)은 중간고사 기간입니다.\n시험 일정은 반영되지 않습니다. 공실로 보여도 시험을 보고 있을 수 있습니다.' },
-  { id:'n5', title:'추석 연휴에는 달력에서 날짜를 고를 수 없습니다', body:'10/5(월)~10/7(수)는 공휴일이라 달력에서 흐리게 보이고 고를 수 없습니다.' },
+  { id:'n5', title:'10/5(월) 대체공휴일 안내', body:'10/5(월)은 개천절 대체공휴일입니다.\n공휴일은 달력에서 흐리게 보이고 고를 수 없습니다.' },
   { id:'n4', title:'강의실 정보가 틀리면 알려 주세요', body:'강의실 상세의 [신고하기]를 누르면 그 강의실이 들어간 신고 창이 열립니다.\n맨 위 [신고하기]로도 보낼 수 있습니다.' },
   { id:'n3', title:'2026-2학기 시간표를 반영했습니다', body:'2026-2학기 수업시간표와 폐강 교과목 안내를 반영했습니다.\n수강정정 뒤 바뀐 시간표는 다시 반영할 예정입니다.' },
   { id:'n2', title:'문의하기 이용 안내', body:'맨 위 [문의하기]를 누르면 문의 창이 열립니다.\n답장을 받으려면 이메일을 적어 주세요.' },
@@ -1595,7 +1668,6 @@ const OPTS = [   /* 3. 보류 후보 (04·05 "보류 - 목업에서 결정") */
   { k:'statusShape', label:'공실 / 수업중 모양 (04 2.3·2.4, 05 2.17)', def:'1', ch:[['1','① 색 칸 + 글자'],['2','② 글자만'],['3','③ 아이콘 + 글자']] },
   { k:'statusColors', label:'상태 색 조합 (05 1.1.3)', def:'1', ch:[['1','① 초록 / 주황빛 갈색 (05 제안)'],['2','② 초록 / 회색'],['3','③ 초록 / 빨강']] },
   { k:'primary', label:'대표색 (05 1.1.1)', def:'A', ch:[['A','A #2B5C8A (05 제안)'],['B','B #1F4E79'],['C','C #3A6EA5']] },
-  { k:'plan', label:'층별 안내도 그림 모양 (04 2.3)', def:'1', ch:[['1','① 강의실 배치 그림'],['2','② 실제 지도 참고 (위에서 본 건물 모양)'],['3','③ 목록 모양']] },
   { k:'floorOrder', label:'층 순서 (04 2.3)', def:'1', ch:[['1','① 높은 층이 위 (건물 모양과 같음)'],['2','② 1층이 위']] },
   { k:'nofloor', label:'층을 알 수 없는 강의실 (04 2.3, E-09) - D2에서 보임', def:'1', ch:[['1','① 맨 아래 "층 정보 없음" 묶음'],['2','② 맨 위 묶음'],['3','③ 보여 주지 않음']] },
   { k:'stamp', label:'기준 표시의 시·분 (04 2.0 A)', def:'1', ch:[['1','① 날짜만 "9/15 업데이트"'],['2','② 시·분까지 "9/15 14:30 업데이트"']] },
@@ -1632,7 +1704,7 @@ function saveO(){ sSet(KEY_OPT, JSON.stringify(O)); }
 const S = {
   filterDate:'', period:null, periods:[], sel:[], autoNote:'', cal:{ y:2026, m:10 },
   screen:'S-01', tab:'map', bid:null, room:null,
-  bannerHidden:false, menu:false, fexp:false, loginExp:false, acct:false,
+  bannerHidden:false, menu:false, fexp:false, acct:false, lg:{ id:'', keep:false }, lgLast:'',
   alert:null, alertText:'', modal:null, popQ:[], popIdx:0, popChk:false, noticeId:null,
   form:null, flow:null, policyAt:'',
   data:'loading', loadTimer:0, pushed:false, addMin:0, stripTimer:0
@@ -1660,7 +1732,7 @@ function initContent(){
     texts:{
       srcTT:'출처: 국립순천대학교 수업시간표(2026-2학기) · 폐강 교과목 안내',
       srcMap:'캠퍼스맵 출처: 국립순천대학교',
-      offday:'운영하지 않는 날입니다.\n달력에서 평일을 골라 주세요.',
+      offday:'운영하지 않는 날입니다.',
       vacation:'현재 학기 수업 기간이 아닙니다.\n달력에서 수업 기간 날짜를 골라 주세요.',
       vacNote:'현재 학기 수업 기간이 아닙니다',
       noClass:'지금은 수업 시간이 아닙니다. 교시를 골라 주세요',
@@ -1670,6 +1742,7 @@ function initContent(){
     reportTypes:['공실로 나오는데 실제로 수업 중', '문이 잠김', '수용 인원이 틀림'],     /* "기타"는 맨 끝에 늘 붙음 (G-40) */
     sort:'1', maxZoom:3,
     bname:{}, bno:{}, roomCap:{}, roomFloor:{}, roomDel:{}, areas:{}, mapImg:'',
+    tap:TAP0.slice(), bdel:[],                                   /* 학생이 누를 수 있는 건물·지운 건물 (A-11, G-114·G-116). 건물 차례로 둠 */
     codeMap:[['A2','A2'],['B3','B3'],['B4','B4'],['C3','C3'],['D2','D2'],['D3','D3'],['D4','D4'],['E2','E2'],['E3','E3'],['E4','E4'],['E5','E5'],['E6','E6'],['E7','E7'],['E8','E8']],
     tt:{ sem:'2026-2학기', file:'2026-2학기_시간표_v3.xlsx', at:'2026-09-14 16:20' },
     cx:{ sem:'2026-2학기', file:'2026-2학기_폐강교과목.xlsx', at:'2026-09-14 16:25' },
@@ -1681,7 +1754,7 @@ const VIEW = { mode:'student', preview:false };             /* mode: 'student' |
 function D(){ return VIEW.preview ? DRAFT : PUB; }
 const CATS = [ ['sem','학기 정보'], ['periods','교시 시각표'], ['tt','시간표 파일 반영'], ['cx','폐강 파일 반영'], ['holidays','공휴일'],
   ['notices','공지사항'], ['banner','배너'], ['popups','팝업'], ['unavail','사용 불가 설정'], ['texts','출처·안내 문구'], ['reportTypes','신고 종류'],
-  ['sort','건물 목록 순서'], ['maxZoom','캠퍼스맵 최대 확대'], ['areas','캠퍼스맵 건물 영역'], ['mapImg','캠퍼스맵 그림'],
+  ['sort','건물 목록 순서'], ['maxZoom','캠퍼스맵 최대 확대'], ['areas','캠퍼스맵 건물 영역'], ['mapImg','캠퍼스맵 그림'], ['tap','누를 수 있는 건물'], ['bdel','지운 건물'],
   ['bname','건물 이름'], ['bno','건물 번호'], ['roomCap','강의실 수용 인원'], ['roomFloor','강의실 층'], ['roomDel','지운 강의실'], ['codeMap','강의실 코드 짝짓기'] ];
 function dirtyCats(){ return CATS.filter(function(c){ return JSON.stringify(DRAFT[c[0]]) !== JSON.stringify(PUB[c[0]]); }); }
 function itemState(key, item){                             /* 목록 항목의 업데이트 상태: 'same' | 'new' | 'changed' */
@@ -1740,11 +1813,10 @@ function resetAdminData(){
     err:[
       { no:7, at:'2026-10-01 09:12', kind:'답장 메일', doing:'문의 #10 답장 보내기', why:'메일을 보내는 곳이 응답하지 않았습니다(연결 시간 초과).', rel:'받는 사람 [가림]', status:'new' },
       { no:6, at:'2026-09-30 22:05', kind:'학생 화면 요청', doing:'층별 안내도 정보 보내기', why:'데이터베이스 연결이 잠시 끊겼습니다.', rel:'건물 D2', status:'new' },
-      { no:5, at:'2026-09-28 10:00', kind:'공휴일 받아 오기', doing:'2027년 공휴일 불러오기', why:'인증키가 맞지 않습니다.', rel:'인증키 [가림]', status:'seen' },
+      { no:5, at:'2026-09-28 10:00', kind:'공휴일 받아 오기', doing:'2027년 공휴일 불러오기', why:'인증키가 맞지 않습니다.', rel:'"공휴일 정보" 인증키 [가림]', status:'seen' },
       { no:4, at:'2026-09-14 16:18', kind:'파일 검사', doing:'시간표 파일 검사', why:'파일을 읽는 중 서버 메모리가 모자랐습니다.', rel:'2026-2학기_시간표_v2.xlsx', status:'seen' }
     ],
-    key:{ set:true, tail:'a1B2', saved:'2026-09-30 14:10', ok:'2026-10-01 09:12' },   /* 인증키: 끝자리 예시만 */
-    allow:{ on:true, list:[ { id:'20261234', at:'2026-09-01' }, { id:'20260002', at:'2026-09-01' }, { id:'20260101', at:'2026-09-28' }, { id:'20260102', at:'2026-09-28' } ] },   /* A-19 시연 메일 허용 목록 (예시 학번) */
+    keys:[ { id:'k1', name:'공휴일 정보', tail:'a1B2', saved:'2026-09-30 14:10', chk:'ok', at:'2026-10-01 09:12' } ],   /* API 인증키(A-15): 끝 4자리 예시만. chk = 마지막 확인 결과 ok·fail */
     visits:[['9/25',132],['9/26',0],['9/27',0],['9/28',158],['9/29',171],['9/30',149],['10/1',96]],
     views:[['D2',88],['E3',61],['D3',54],['E8',47],['B3',33],['E2',29],['A2',18],['E7',12]],
     seqInq:13, seqRep:9, seqErr:8
@@ -1785,7 +1857,7 @@ function disCount(){ const d = disLoad(); return Object.keys(d).reduce(function(
 function $(id){ return document.getElementById(id); }
 const el = {
   stage:$('stage'), frame:$('frame'), scroller:$('scroller'), site:$('site'), prevband:$('prevband'), hdr:$('hdr'), banner:$('banner'),
-  main:$('main'), login:$('loginbox'), filter:$('filter'), center:$('center'), scrMap:$('scr-map'), scrFloor:$('scr-floor'), scrNotices:$('scr-notices'),
+  main:$('main'), authband:$('authband'), filter:$('filter'), center:$('center'), scrMap:$('scr-map'), scrFloor:$('scr-floor'), scrNotices:$('scr-notices'),
   scrPolicy:$('scr-policy'), scrMulti:$('scr-multi'), scrTT:$('scr-tt'), selbar:$('selbar'), legend:$('maplegend'),
   tabMap:$('tab-map'), tabList:$('tab-list'), tabmsg:$('tabmsg'), mapvp:$('mapvp'), mapg:$('mapg'), lblg:$('lblg'),
   mapOver:$('map-over'), zin:$('zin'), zout:$('zout'), blist:$('blist'), strip:$('strip'), panel:$('panel'), ftr:$('ftr'),
@@ -1839,6 +1911,18 @@ function stampText(){
   const u = D().updated;
   return D().sem.name + ' 시간표 기준 · ' + md(u.ds) + (O.stamp === '2' ? ' ' + u.hm : '') + ' 업데이트';   /* 업데이트 = [업데이트하기]를 누른 시각 */
 }
+function authBtnHTML(){                                    /* [로그인] / 내 계정 ▾ (G-51). 관리자 [미리 보기]에서는 숨김 */
+  if (VIEW.preview) return '';
+  if (AUTH.who !== 'student') return '<button class="btn btn-text" data-act="loginopen" aria-haspopup="dialog">로그인</button>';
+  return '<div class="acct">' +
+    '<button class="btn btn-text" data-act="acct" aria-haspopup="menu" aria-expanded="' + S.acct + '">내 계정 <span aria-hidden="true">' + (S.acct ? '▴' : '▾') + '</span></button>' +
+    (S.acct ? '<div class="acct-menu" role="menu">' +
+      '<button class="mrow" role="menuitem" data-act="mytt">내 시간표</button>' +
+      '<button class="mrow" role="menuitem" data-act="chpw">비밀번호 바꾸기</button>' +
+      '<button class="mrow" role="menuitem" data-act="logout">로그아웃</button>' +
+      '<button class="mrow danger-t" role="menuitem" data-act="leave">탈퇴하기</button>' +
+    '</div>' : '') + '</div>';
+}
 function renderHeader(){
   const st = esc(stampText());
   if (isPC()){
@@ -1847,6 +1931,7 @@ function renderHeader(){
       '<div class="stamp">' + st + '</div>' +
       '<nav class="acts" aria-label="머리 메뉴">' +
         '<button class="btn btn-secondary" data-act="reset">초기화</button>' +
+        authBtnHTML() +
         '<button class="btn btn-text" data-act="inquiry">문의하기</button>' +
         '<button class="btn btn-text" data-act="report">신고하기</button>' +
         '<button class="btn btn-text" data-act="notices">공지사항</button>' +
@@ -1856,6 +1941,7 @@ function renderHeader(){
       '<div class="hrow">' +
         '<div class="svc" data-act="svc">순천대 공실 알리미</div>' +
         '<button class="btn btn-secondary" data-act="reset">초기화</button>' +
+        authBtnHTML() +
         '<button class="ibtn' + (S.menu ? ' on' : '') + '" data-act="menu" aria-label="메뉴" aria-expanded="' + S.menu + '">' + ICON.menu + '</button>' +
       '</div>' +
       '<div class="stamp">' + st + '</div>' +
@@ -1875,45 +1961,41 @@ function renderBanner(){
   el.banner.innerHTML = '<p class="bt">' + esc(D().banner.text) + '</p><button class="btn btn-text" data-act="bclose">닫기</button>';
 }
 
-/* ---------- L. 로그인 박스 (학생·관리자 같이 씀) / 내 계정 ---------- */
+/* ---------- S-18 로그인 창 (학생·관리자 같이 씀, 머리 영역 [로그인]으로 엶) / 이유 띠 ---------- */
 function lockLeft(id){ const k = id + '|' + O.place; const t = AUTH.lock[k] || 0; return Math.max(0, Math.ceil((t - Date.now()) / 1000)); }
-function renderLogin(){
-  if (VIEW.preview){ el.login.hidden = true; el.login.innerHTML = ''; return; }
-  el.login.hidden = false;
-  if (AUTH.who === 'student'){
-    el.login.innerHTML = '<div class="acct">' +
-      '<button class="acct-btn" data-act="acct" aria-expanded="' + S.acct + '">내 계정 <span aria-hidden="true">' + (S.acct ? '▴' : '▾') + '</span></button>' +
-      (S.acct ? '<div class="acct-menu" role="menu">' +
-        '<button class="mrow" role="menuitem" data-act="mytt">내 시간표</button>' +
-        '<button class="mrow" role="menuitem" data-act="chpw">비밀번호 바꾸기</button>' +
-        '<button class="mrow" role="menuitem" data-act="logout">로그아웃</button>' +
-        '<button class="mrow danger-t" role="menuitem" data-act="leave">탈퇴하기</button>' +
-      '</div>' : '') + '</div>';
-    return;
-  }
-  if (!isPC() && !S.loginExp){
-    el.login.innerHTML = (AUTH.band ? '<div class="note band-note" role="status">' + esc(AUTH.band) + '</div>' : '') +
-      '<button class="fsum lsum" data-act="loginexp" aria-expanded="false"><span>로그인</span><span class="car" aria-hidden="true">▼</span></button>';
-    return;
-  }
-  const lid = (S.lg && S.lg.id) || '';
+function renderAuthBand(){                                  /* 로그아웃·탈퇴 등의 이유 한 줄 - 머리 영역 바로 밑 (G-55) */
+  const on = !!AUTH.band && !VIEW.preview && AUTH.who !== 'student';
+  el.authband.hidden = !on;
+  el.authband.innerHTML = on ? '<p class="ab-t">' + esc(AUTH.band) + '</p><button class="btn btn-text" data-act="abx">닫기</button>' : '';
+}
+function loginHTML(){                                       /* S-18 (G-93) */
+  const lid = S.lg.id || '';
   const left = lid ? lockLeft(lid) : 0;
-  el.login.innerHTML =
-    (AUTH.band ? '<div class="note band-note" role="status">' + esc(AUTH.band) + '</div>' : '') +
-    (!isPC() ? '<button class="fsum lsum" data-act="loginexp" aria-expanded="true"><span>로그인</span><span class="car" aria-hidden="true">▲</span></button>' : '') +
-    '<form class="lbox" data-form="login" autocomplete="off" novalidate>' +
-      '<div class="lb-row">' +
-        '<label class="lfld"><span>학번</span><input id="lg-id" type="text" maxlength="30" autocomplete="off" spellcheck="false" value="' + esc(lid) + '"></label>' +
-        '<label class="lfld"><span>비밀번호</span><span class="pwwrap"><input id="lg-pw" type="password" maxlength="64" autocomplete="off"><button type="button" class="pwshow" data-act="pwshow" data-for="lg-pw">보기</button></span></label>' +
-      '</div>' +
-      '<p class="caps" data-caps="lg-pw" hidden>Caps Lock이 켜져 있습니다</p>' +
-      '<div class="lb-row2"><label class="chk-row"><input type="checkbox" class="chk" id="lg-keep">로그인 상태 유지</label>' +
-        '<button type="submit" class="btn btn-primary" data-act="login"' + (left ? ' disabled' : '') + '>로그인</button></div>' +
-      (AUTH.msg ? '<p class="lb-msg" role="alert" id="lg-msg">' + esc(AUTH.msg) + '</p>' : '') +
-      (left ? '<p class="lb-msg" role="alert" id="lg-lock" data-lock="' + esc(lid) + '">로그인을 잠시 막았습니다. ' + left + '초 뒤에 다시 시도해 주세요.</p>' : '') +
-      (AUTH.stopMsg ? '<p class="lb-stop" role="alert">' + esc(AUTH.stopMsg) + '</p>' : '') +
-      '<div class="lb-links"><button type="button" class="lnk" data-act="signup">가입하기</button><span aria-hidden="true">·</span><button type="button" class="lnk" data-act="findpw">비밀번호 찾기</button></div>' +
-    '</form>';
+  return '<div class="modal mform lgm" role="dialog" aria-modal="true" aria-labelledby="m-title">' +
+    '<div class="modal-head"><h2 class="modal-title" id="m-title">로그인</h2><button class="ibtn" data-act="lgx" aria-label="닫기">' + ICON.x + '</button></div>' +
+    '<div class="modal-body mf-body">' +
+      '<form class="lform" data-form="login" autocomplete="off" novalidate>' +
+        '<div class="fld2"><label for="lg-id">' + fLabel('학번') + '</label><input id="lg-id" type="text" maxlength="30" autocomplete="off" spellcheck="false" value="' + esc(lid) + '"></div>' +
+        '<div class="fld2"><label for="lg-pw">' + fLabel('비밀번호') + '</label><span class="pwwrap"><input id="lg-pw" type="password" maxlength="64" autocomplete="off"><button type="button" class="pwshow" data-act="pwshow" data-for="lg-pw">보기</button></span>' +
+          '<p class="caps" data-caps="lg-pw" hidden>Caps Lock이 켜져 있습니다</p></div>' +
+        '<label class="chk-row"><input type="checkbox" class="chk" id="lg-keep"' + (S.lg.keep ? ' checked' : '') + '>로그인 상태 유지</label>' +
+        (AUTH.msg ? '<p class="lb-msg" role="alert" id="lg-msg">' + esc(AUTH.msg) + '</p>' : '') +
+        (left ? '<p class="lb-msg" role="alert" id="lg-lock" data-lock="' + esc(lid) + '">로그인을 잠시 막았습니다. ' + left + '초 뒤에 다시 시도해 주세요.</p>' : '') +
+        (AUTH.stopMsg ? '<p class="lb-stop" role="alert">' + esc(AUTH.stopMsg) + '</p>' : '') +
+        '<button type="submit" class="btn btn-primary lg-go" data-act="login"' + (left ? ' disabled' : '') + '>로그인</button>' +
+        '<div class="lb-links"><button type="button" class="lnk" data-act="signup">가입하기</button><span aria-hidden="true">·</span><button type="button" class="lnk" data-act="findpw">비밀번호 찾기</button></div>' +
+      '</form>' +
+    '</div></div>';
+}
+function renderLogin(){ renderHeader(); renderAuthBand(); renderOverlays(); }   /* 로그인 상태가 바뀔 때: 머리 영역 단추·이유 띠·로그인 창 */
+function openLogin(){                                       /* 머리 영역 [로그인]: 보던 화면은 그대로, 가운데에 로그인 창 */
+  S.menu = false; S.acct = false; S.modal = 'S-18'; AUTH.msg = ''; AUTH.stopMsg = '';   /* 지난 오류 문구는 지움 (잠시 막기 안내는 남음) */
+  renderLogin(); renderMock();
+  setTimeout(function(){ const f = $(S.lg.id ? 'lg-pw' : 'lg-id'); if (f) f.focus(); }, 0);
+}
+function closeLogin(){
+  S.modal = null; renderOverlays(); renderMock();
+  const b = el.hdr.querySelector('[data-act="loginopen"]'); if (b) b.focus();   /* 연 단추로 포커스를 돌려줌 */
 }
 
 /* ---------- C. 필터 영역 (FR-003·FR-014·FR-015·FR-018) ---------- */
@@ -1998,7 +2080,7 @@ function mapMarks(){                                         /* 지도 위 사�
   let any = false;
   el.mapg.querySelectorAll('.bld[data-b]').forEach(function(g){
     const id = g.getAttribute('data-b');
-    const na = S.data === 'ok' && !!BMAP[id].rooms && !!naBld(id);
+    const na = S.data === 'ok' && canPick(BMAP[id]) && !!naBld(id);
     if (na) any = true;
     g.classList.toggle('na', na);
     g.classList.toggle('pick', multi() && S.sel.indexOf(id) >= 0);
@@ -2011,7 +2093,8 @@ function renderMapScreen(){
   el.tabList.classList.toggle('sel', !isMap); el.tabList.setAttribute('aria-selected', String(!isMap));
   const fail = S.data === 'fail';
   el.tabmsg.hidden = !fail;
-  el.tabmsg.innerHTML = fail ? ERR_HTML : '';                                               /* E-02 */
+  el.tabmsg.innerHTML = fail ? ERR_HTML : '';                                               /* E-02: 가운데 구역 가운데에 하나만 (G-96) */
+  el.tabMap.parentNode.hidden = fail;                                                       /* 실패하면 탭은 숨김 (눌러도 보일 것이 없음) */
   el.mapvp.hidden = fail || !isMap;
   el.blist.hidden = fail || isMap;
   el.mapvp.classList.toggle('inert', S.data !== 'ok');                                      /* E-01·E-04: 건물을 누를 수 없음 */
@@ -2028,7 +2111,7 @@ function cmpNo(a, c){ const x = codeKey(bNo(a)), y = codeKey(bNo(c)); return x[0
 function renderList(){
   if (S.data === 'loading'){ el.blist.innerHTML = LOADING_HTML; return; }
   if (S.data === 'none'){ el.blist.innerHTML = '<p class="empty">아직 시간표가 등록되지 않았습니다</p>'; return; }  /* E-04 */
-  const bs = BUILDINGS.filter(hasRooms);                                                    /* 강의실이 있는 건물만 (영역 없는 C3 포함) */
+  const bs = BUILDINGS.filter(canPick);                                                    /* 강의실이 있고 켜진 건물만 (영역 없는 C3 포함, G-116) */
   if (D().sort === '2') bs.sort(function(a, c){ return bName(a).localeCompare(bName(c), 'ko'); });   /* 가나다순 (A-10) */
   else bs.sort(cmpNo);                                                                      /* 건물 번호 순 (A-10, 처음 값) */
   const mu = multi();
@@ -2069,11 +2152,262 @@ function floorGroups(b){
   }
   return gs;
 }
-function roomCell(b, no, floor){
+
+/* ---------- S-03 층별 안내도 그림: 위에서 내려다본 건물 모양 + 복도 + 강의실 칸 (G-130~G-136) ----------
+   좌표 = "배치 단위": 캠퍼스맵 외곽선(SHAPES, 1 = 약 0.66m)을 가장 가까운 가로·세로 방향으로 바로 세운 뒤(rot, 도)
+   왼쪽 위 끝을 0,0으로 옮긴 값. 그림은 건물마다 배율을 정해 그림(강의실 칸이 05 토큰 최소 크기 88×56px보다 작아지지 않게).
+   FLOOR_LAYOUT[건물ID] - 손으로 적는 배치. 실제 배치도(층별 안내판·소방 대피도)를 받으면 여기를 고치거나 더함.
+     rot        : 캠퍼스맵 외곽선을 돌리는 각도(도). 적지 않으면 저절로 정함
+     outline    : 외곽선 [[x,y], ...]. 적지 않으면 캠퍼스맵 외곽선을 rot만큼 돌려 씀
+     corridors  : 복도 면 [[[x,y], ...], ...]   corrLabels: "복도" 글자 자리 [[x, y, 'h'(가로)|'v'(세로)], ...]
+     zones      : 강의실을 놓을 띠 [[x, y, 너비, 높이, 'x+'|'x-'|'y+'|'y-'], ...] - 적힌 띠 차례·방향(x+ = 왼쪽→오른쪽, y+ = 위→아래)대로
+                  강의실을 번호 순서로 채우고, 띠 길이에 비례해 나눔
+     est        : true = 추정 배치 (목업 전용 표시를 붙임). 실제 배치도로 바꾸면 false
+     floors     : 층마다 다른 것 { 층: { outline, corridors, corrLabels, zones, rooms:{ '301':[x, y, 너비, 높이], ... }, est } }
+                  rooms를 적은 층은 그 자리를 그대로 쓰고, 자리가 없는 강의실은 그림 밑 칸 목록으로 보임
+   FLOOR_LAYOUT에 없는 건물은 fpAuto()가 외곽선에서 날개(가장 큰 직사각형)를 찾아 복도·강의실 띠를 만듦(G-133). */
+const FLOOR_LAYOUT = {
+  D2: {                                                        /* 공과대학 1호관: ㄷ자. 복도는 안쪽(가운데 마당 쪽) 띠, 강의실은 바깥쪽 (G-132, 추정) */
+    est:true, rot:-34.87,
+    corridors:[ [[0,27.6],[117.4,27.6],[117.4,126.6],[22.2,126.6],[22.2,120.6],[111.4,120.6],[111.4,33.6],[0,33.6]] ],
+    corrLabels:[ [55.7,30.6,'h'], [114.4,77.1,'v'], [74.8,123.6,'h'] ],
+    zones:[ [0,0,111.4,27.6,'x+'], [117.4,27.6,23.3,99,'y+'], [22.2,126.6,95.2,24.4,'x-'] ]  /* 위 날개 → 오른쪽 날개 → 아래 날개 (마당을 시계 방향으로) */
+  }
+};
+const FP = { cell:0.5, cw:5.5, gap:1.6, ins:0.9, cap:30, minW:88, minH:56, sMin:3, sOk:6, pad:10, wingMin:14, wingArea:0.3,
+  rect:[[0,0],[90,0],[90,32],[0,32]] };                       /* 캠퍼스맵 영역이 없는 건물의 사각형 (목업 임의) */
+const FP_CACHE = {};
+function fpRot(p, deg){ const t = deg * Math.PI / 180, c = Math.cos(t), s = Math.sin(t); return p.map(function(q){ return [q[0] * c - q[1] * s, q[0] * s + q[1] * c]; }); }
+function fpNorm(p){
+  const mx = Math.min.apply(null, p.map(function(q){ return q[0]; })), my = Math.min.apply(null, p.map(function(q){ return q[1]; }));
+  return p.map(function(q){ return [Math.round((q[0] - mx) * 10) / 10, Math.round((q[1] - my) * 10) / 10]; });
+}
+function fpBox(p){ return [Math.max.apply(null, p.map(function(q){ return q[0]; })), Math.max.apply(null, p.map(function(q){ return q[1]; }))]; }
+function fpArea(p){ let a = 0; for (let i = 0, j = p.length - 1; i < p.length; j = i++) a += (p[j][0] + p[i][0]) * (p[j][1] - p[i][1]); return Math.abs(a / 2); }
+function fpAngles(p){                                          /* 바로 세울 각도 후보: 변 방향(90°로 접음)을 변 길이로 세어 많은 차례로 3개 */
+  const bins = new Array(90).fill(0), E = [], out = [];
+  for (let i = 0; i < p.length; i++){
+    const a = p[i], b = p[(i + 1) % p.length], L = Math.hypot(b[0] - a[0], b[1] - a[1]);
+    const g = ((Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI) % 90 + 90) % 90;
+    E.push([g, L]);
+    for (let k = -2; k <= 2; k++) bins[(Math.round(g) + k + 90) % 90] += L * (3 - Math.abs(k));
+  }
+  for (let n = 0; n < 3; n++){
+    let best = -1;
+    for (let i = 0; i < 90; i++) if (bins[i] > 0 && (best < 0 || bins[i] > bins[best])) best = i;
+    if (best < 0) break;
+    let sw = 0, sa = 0;
+    E.forEach(function(e){ let d = e[0] - best; if (d > 45) d -= 90; if (d < -45) d += 90; if (Math.abs(d) <= 4){ sw += e[1]; sa += e[1] * d; } });
+    let a = best + (sw ? sa / sw : 0); if (a > 45) a -= 90;
+    out.push(a);
+    for (let k = -8; k <= 8; k++) bins[(best + k + 90) % 90] = 0;
+  }
+  return out.length ? out : [0];
+}
+function fpInside(p, x, y){
+  let c = false;
+  for (let i = 0, j = p.length - 1; i < p.length; j = i++){
+    if (((p[i][1] > y) !== (p[j][1] > y)) && x < (p[j][0] - p[i][0]) * (y - p[i][1]) / (p[j][1] - p[i][1]) + p[i][0]) c = !c;
+  }
+  return c;
+}
+function fpMask(p, W, H){                                      /* 외곽선 안쪽을 0.5 단위 칸으로 나눈 표 */
+  const k = FP.cell, cw = Math.ceil(W / k), ch = Math.ceil(H / k), M = new Uint8Array(cw * ch);
+  for (let y = 0; y < ch; y++) for (let x = 0; x < cw; x++) M[y * cw + x] = fpInside(p, (x + 0.5) * k, (y + 0.5) * k) ? 1 : 0;
+  return { M:M, cw:cw, ch:ch };
+}
+function fpMaxRect(G){                                         /* 표 안에서 가장 넓은 직사각형 (막대그래프 방식) */
+  const cw = G.cw, ch = G.ch, h = new Array(cw).fill(0), lim = Math.ceil(FP.wingMin / FP.cell), k = FP.cell;
+  let best = null, bestA = 0;
+  for (let y = 0; y < ch; y++){
+    for (let x = 0; x < cw; x++) h[x] = G.M[y * cw + x] ? h[x] + 1 : 0;
+    const st = [];
+    for (let x = 0; x <= cw; x++){
+      const cur = x < cw ? h[x] : 0;
+      let start = x;
+      while (st.length && st[st.length - 1][1] >= cur){
+        const t = st.pop(), w = x - t[0], a = w * t[1];
+        if (a > bestA && w >= lim && t[1] >= lim){ bestA = a; best = [t[0], y - t[1] + 1, w, t[1]]; }
+        start = t[0];
+      }
+      st.push([start, cur]);
+    }
+  }
+  return best ? { x:best[0] * k, y:best[1] * k, w:best[2] * k, h:best[3] * k, c:best } : null;
+}
+function fpWings(G0){                                          /* 날개: 가장 큰 직사각형부터 최대 3개 (작은 것은 뺌) */
+  const G = { M:new Uint8Array(G0.M), cw:G0.cw, ch:G0.ch }, out = [];
+  for (let n = 0; n < 3; n++){
+    const r = fpMaxRect(G);
+    if (!r || (out.length && r.w * r.h < out[0].w * out[0].h * FP.wingArea)) break;
+    out.push(r);
+    for (let y = r.c[1]; y < r.c[1] + r.c[3]; y++) for (let x = r.c[0]; x < r.c[0] + r.c[2]; x++) G.M[y * G.cw + x] = 0;
+  }
+  return out;
+}
+function fpSub(iv, a, b){                                      /* 구간 목록에서 [a, b]를 뺌 */
+  const out = [];
+  iv.forEach(function(s){
+    if (b <= s[0] || a >= s[1]){ out.push(s); return; }
+    if (a > s[0]) out.push([s[0], a]);
+    if (b < s[1]) out.push([b, s[1]]);
+  });
+  return out;
+}
+function fpAuto(wings, modes, G0){                             /* 날개마다 긴 방향 복도 + 강의실 띠 (modes: 'd' 가운데 복도·양쪽 강의실 / 's' 한쪽 복도) */
+  const corr = [], zones = [], labels = [];
+  const W = wings.map(function(r, i){
+    const hz = r.w >= r.h, wid = hz ? r.h : r.w, cw = FP.cw;
+    let c0;
+    if (modes[i] === 'd') c0 = (wid - cw) / 2;
+    else {                                                     /* 한쪽 복도: 다른 날개 쪽(없으면 위·왼쪽)에 복도, 반대쪽에 강의실 */
+      const o = wings.filter(function(q, j){ return j !== i; });
+      const mid = hz ? r.y + r.h / 2 : r.x + r.w / 2;
+      const tgt = o.length ? o.reduce(function(a, q){ return a + (hz ? q.y + q.h / 2 : q.x + q.w / 2); }, 0) / o.length : mid;
+      c0 = (Math.abs(tgt - mid) < 1 || tgt < mid) ? 0 : wid - cw;
+    }
+    const band = hz ? [r.x, r.y + c0, r.w, cw] : [r.x + c0, r.y, cw, r.h];
+    const far = wid - c0 - cw, sides = [];                     /* 복도를 시계 방향으로 도는 차례: 위(→)·아래(←) / 오른쪽(↓)·왼쪽(↑) */
+    if (hz){
+      if (c0 > 0.1) sides.push({ a:[r.x, r.y, r.w, c0], dir:'x+' });
+      if (far > 0.1) sides.push({ a:[r.x, r.y + c0 + cw, r.w, far], dir:'x-' });
+    } else {
+      if (far > 0.1) sides.push({ a:[r.x + c0 + cw, r.y, far, r.h], dir:'y+' });
+      if (c0 > 0.1) sides.push({ a:[r.x, r.y, c0, r.h], dir:'y-' });
+    }
+    sides.forEach(function(s){ s.iv = [hz ? [s.a[0], s.a[0] + s.a[2]] : [s.a[1], s.a[1] + s.a[3]]]; });
+    return { hz:hz, band:band, sides:sides };
+  });
+  /* 날개 잇기: 뒤 날개의 복도를 긴 방향으로 늘려 앞 날개의 복도에 닿으면 잇고, 지나간 강의실 띠는 그만큼 비움 */
+  function hit(r, q){ return r[0] < q[0] + q[2] - 0.01 && r[0] + r[2] > q[0] + 0.01 && r[1] < q[1] + q[3] - 0.01 && r[1] + r[3] > q[1] + 0.01; }
+  function inB(r){                                             /* 직사각형이 건물 안에 드는 비율 */
+    const k = FP.cell; let n = 0, m = 0;
+    for (let y = Math.floor(r[1] / k); y < Math.ceil((r[1] + r[3]) / k); y++) for (let x = Math.floor(r[0] / k); x < Math.ceil((r[0] + r[2]) / k); x++){
+      m++; if (x >= 0 && y >= 0 && x < G0.cw && y < G0.ch && G0.M[y * G0.cw + x]) n++;
+    }
+    return m ? n / m : 0;
+  }
+  for (let i = 1; i < W.length; i++){
+    const bd = W[i].band, hz = W[i].hz;
+    let done = false;
+    [-1, 1].forEach(function(sg){
+      if (done) return;
+      for (let d = 0.5; d <= 60; d += 0.5){
+        const e = hz ? (sg < 0 ? [bd[0] - d, bd[1], d, bd[3]] : [bd[0] + bd[2], bd[1], d, bd[3]])
+                     : (sg < 0 ? [bd[0], bd[1] - d, bd[2], d] : [bd[0], bd[1] + bd[3], bd[2], d]);
+        if (inB(e) < 0.85) return;
+        if (!W.slice(0, i).some(function(a){ return hit(e, a.band); })) continue;
+        corr.push(e); done = true;
+        W.forEach(function(a){ a.sides.forEach(function(s){
+          if (hit(e, s.a)) s.iv = a.hz ? fpSub(s.iv, e[0] - FP.gap / 2, e[0] + e[2] + FP.gap / 2) : fpSub(s.iv, e[1] - FP.gap / 2, e[1] + e[3] + FP.gap / 2);
+        }); });
+        return;
+      }
+    });
+  }
+  W.forEach(function(w){ corr.push(w.band); labels.push([w.band[0] + w.band[2] / 2, w.band[1] + w.band[3] / 2, w.hz ? 'h' : 'v']); });
+  function zs(w, s){                                           /* 한 쪽의 띠 (늘린 복도로 끊기면 여러 개) */
+    const out = [];
+    s.iv.forEach(function(v){ if (v[1] - v[0] > 4) out.push(w.hz ? [v[0], s.a[1], v[1] - v[0], s.a[3], s.dir] : [s.a[0], v[0], s.a[2], v[1] - v[0], s.dir]); });
+    if (s.dir === 'x-' || s.dir === 'y-') out.reverse();
+    return out;
+  }
+  W.forEach(function(w){ w.sides.forEach(function(s){ zones.push.apply(zones, zs(w, s)); }); });   /* 날개마다 시계 방향 */
+  return { corridors:corr.map(function(r){ return [[r[0], r[1]], [r[0] + r[2], r[1]], [r[0] + r[2], r[1] + r[3]], [r[0], r[1] + r[3]]]; }), corrLabels:labels, zones:zones };
+}
+function fpPlace(zones, list){                                 /* 강의실을 띠에 번호 순서대로 놓음 (띠 길이에 비례해 나누고, 칸 길이는 cap까지) */
+  const n = list.length, out = {};
+  if (!n || !zones || !zones.length) return out;
+  const L = zones.map(function(z){ return z[4][0] === 'x' ? z[2] : z[3]; }), tot = L.reduce(function(a, c){ return a + c; }, 0);
+  const q = L.map(function(l){ return Math.floor(n * l / tot); });
+  let left = n - q.reduce(function(a, c){ return a + c; }, 0);
+  const ord = L.map(function(l, i){ return i; }).sort(function(a, c){ return (n * L[c] / tot - q[c]) - (n * L[a] / tot - q[a]) || a - c; });
+  for (let i = 0; left > 0; i = (i + 1) % ord.length){ q[ord[i]]++; left--; }
+  let k = 0;
+  zones.forEach(function(z, i){
+    const hz = z[4][0] === 'x', neg = z[4][1] === '-', slot = L[i] / (q[i] || 1);
+    const rl = Math.min(slot - FP.gap, FP.cap), dep = (hz ? z[3] : z[2]) - 2 * FP.ins;
+    for (let j = 0; j < q[i]; j++){
+      const c = neg ? L[i] - (j + 0.5) * slot : (j + 0.5) * slot;
+      out[list[k++]] = hz ? [z[0] + c - rl / 2, z[1] + FP.ins, rl, dep] : [z[0] + FP.ins, z[1] + c - rl / 2, dep, rl];
+    }
+  });
+  return out;
+}
+function fpScale(rooms){ let s = FP.sMin; Object.keys(rooms).forEach(function(no){ const r = rooms[no]; s = Math.max(s, FP.minW / r[2], FP.minH / r[3]); }); return s; }
+function fpBuild(b){                                           /* 건물 한 채의 그림: 모든 층이 같은 외곽선·배율, 층마다 강의실 칸 */
+  const x = roomsByFloor(b), FL = FLOOR_LAYOUT[b.id] || {};
+  const fl = Object.keys(x.R).filter(function(f){ return x.R[f].length; });
+  const parts = (b.parts || []).slice().sort(function(a, c){ return fpArea(c) - fpArea(a); });
+  const poly = parts.length ? parts[0] : null;                 /* 영역이 여러 조각이면 가장 큰 조각 */
+  const ck = b.id + '|' + JSON.stringify(poly) + '|' + JSON.stringify(x.R);
+  if (FP_CACHE[ck]) return FP_CACHE[ck];
+  let p, base;
+  if (FL.outline || (FL.zones && poly)){                       /* 손으로 적은 배치 */
+    p = FL.outline || fpNorm(fpRot(poly, FL.rot || 0));
+    base = { corridors:FL.corridors || [], corrLabels:FL.corrLabels || [], zones:FL.zones || [], est:FL.est !== false };
+  } else {                                                     /* 자동 배치 (G-133) */
+    let best = null;
+    (poly ? (FL.rot !== undefined ? [FL.rot] : fpAngles(poly).map(function(a){ return -a; })) : [0]).forEach(function(r){
+      const q = poly ? fpNorm(fpRot(poly, r)) : FP.rect, bx = fpBox(q), G0 = fpMask(q, bx[0], bx[1]), wg = fpWings(G0);
+      const ar = wg.length ? wg[0].w * wg[0].h : 0;
+      if (!best || ar > best.ar * 1.02) best = { q:q, G0:G0, wg:wg.length ? wg : [{ x:0, y:0, w:bx[0], h:bx[1] }], ar:ar };
+    });
+    p = best.q;
+    let pick = null;                                           /* 가운데 복도를 먼저 쓰되, 배율이 sOk를 넘는 날개는 한쪽 복도 */
+    for (let m = 0; m < (1 << best.wg.length); m++){
+      const md = best.wg.map(function(r, i){ return (m >> i) & 1 ? 's' : 'd'; });
+      if (md.some(function(v, i){ return v === 'd' && (Math.min(best.wg[i].w, best.wg[i].h) - FP.cw) / 2 - 2 * FP.ins < 6; })) continue;
+      const pl = fpAuto(best.wg, md, best.G0);
+      let s = FP.sMin;
+      fl.forEach(function(f){ s = Math.max(s, fpScale(fpPlace(pl.zones, x.R[f]))); });
+      const nd = md.filter(function(v){ return v === 'd'; }).length, ok = s <= FP.sOk;
+      if (!pick || (ok && !pick.ok) || (ok === pick.ok && (ok ? (nd > pick.nd || (nd === pick.nd && s < pick.s)) : s < pick.s))) pick = { ok:ok, nd:nd, s:s, pl:pl };
+    }
+    base = { corridors:pick.pl.corridors, corrLabels:pick.pl.corrLabels, zones:pick.pl.zones, est:true };
+  }
+  const P = { floors:{}, W:0, H:0, s:FP.sMin, est:false };
+  fl.forEach(function(f){
+    const o = (FL.floors || {})[f] || {};
+    const F = { outline:o.outline || p, corridors:o.corridors || base.corridors, labels:o.corrLabels || base.corrLabels,
+      rooms:o.rooms ? o.rooms : fpPlace(o.zones || base.zones, x.R[f]), est:o.est !== undefined ? o.est : base.est };
+    const bx = fpBox(F.outline);
+    P.W = Math.max(P.W, bx[0]); P.H = Math.max(P.H, bx[1]); P.s = Math.max(P.s, fpScale(F.rooms));
+    if (F.est) P.est = true;
+    P.floors[f] = F;
+  });
+  FP_CACHE[ck] = P;
+  return P;
+}
+function fpPts(poly, s){ return poly.map(function(q){ return (q[0] * s + FP.pad).toFixed(1) + ',' + (q[1] * s + FP.pad).toFixed(1); }).join(' '); }
+function fpHTML(b, g){                                         /* 한 층의 그림 (그릴 수 없으면 null → 칸 목록) */
+  const P = fpBuild(b), F = P.floors[g.floor];
+  if (!F) return null;
+  const s = P.s, d = FP.pad, Wp = Math.ceil(P.W * s + 2 * d), Hp = Math.ceil(P.H * s + 2 * d);
+  const on = g.rooms.filter(function(no){ return F.rooms[no]; }), miss = g.rooms.filter(function(no){ return !F.rooms[no]; });
+  if (!on.length) return null;
+  const px = function(v){ return (v * s + d).toFixed(1) + 'px'; };
+  return '<p class="fp-more" aria-hidden="true">옆으로 밀면 그림의 나머지가 보입니다 →</p>' +
+    '<div class="fpwrap" data-fk="' + b.id + '-' + g.key + '"><div class="fpl" role="group" aria-label="' + esc(g.label) + ' 강의실 배치 그림 (위에서 본 모양)" style="width:' + Wp + 'px;height:' + Hp + 'px">' +
+      '<svg class="fpl-svg" width="' + Wp + '" height="' + Hp + '" viewBox="0 0 ' + Wp + ' ' + Hp + '" aria-hidden="true" focusable="false">' +
+        '<polygon class="fpl-bld" points="' + fpPts(F.outline, s) + '"/>' +
+        F.corridors.map(function(c){ return '<polygon class="fpl-corr" points="' + fpPts(c, s) + '"/>'; }).join('') +
+        '<polygon class="fpl-wall" points="' + fpPts(F.outline, s) + '"/>' +
+      '</svg>' +
+      F.labels.map(function(l){ return '<span class="fpl-cl' + (l[2] === 'v' ? ' v' : '') + '" style="left:' + px(l[0]) + ';top:' + px(l[1]) + '" aria-hidden="true">복도</span>'; }).join('') +
+      on.map(function(no){ const r = F.rooms[no]; return roomCell(b, no, g.floor, ' style="left:' + px(r[0]) + ';top:' + px(r[1]) + ';width:' + (r[2] * s).toFixed(1) + 'px;height:' + (r[3] * s).toFixed(1) + 'px"'); }).join('') +
+    '</div></div>' +
+    (miss.length ? '<div class="rooms fp-miss">' + cells(b, miss, g.floor) + '</div>' : '');
+}
+function fpOvf(){                                              /* 그림이 가운데 구역보다 넓으면 "옆으로 밀면" 한 줄을 보임 */
+  el.scrFloor.querySelectorAll('.fpwrap').forEach(function(w){ const f = w.closest('.floor'); if (f) f.classList.toggle('ovf', w.scrollWidth > w.clientWidth + 1); });
+}
+if (window.ResizeObserver) new ResizeObserver(function(){ if (S.screen === 'S-03') fpOvf(); }).observe(el.scrFloor);   /* 오른쪽 패널·창 크기가 바뀔 때 */
+function roomCell(b, no, floor, at){
   const key = b.id + '-' + no;
   const cur = S.room === key;
   const na = naOf(b.id, floor, no, S.filterDate);
-  if (na) return '<button class="room na" data-act="naroom" data-text="' + esc(naText(na)) + '" aria-label="' + esc(no) + '호 사용 불가"><span class="no num">' + esc(no) + '</span><span class="st">' + ICON.na + '사용 불가</span></button>';
+  if (na) return '<button class="room na" data-act="naroom" data-text="' + esc(naText(na)) + '" aria-label="' + esc(no) + '호 사용 불가"' + (at || '') + '><span class="no num">' + esc(no) + '</span><span class="st">' + ICON.na + '사용 불가</span></button>';
   if (S.screen === 'S-12'){                                                                 /* 고른 교시마다 작은 칸 */
     const P = selPeriods();
     const minis = P.map(function(p){
@@ -2084,34 +2418,29 @@ function roomCell(b, no, floor){
   }
   const r = S.period ? roomStatus(key, S.filterDate, S.period) : null;
   const st = r ? r.st : '';
-  return '<button class="room' + (st ? ' ' + st : '') + (cur ? ' cur' : '') + '" data-act="room" data-key="' + key + '" aria-pressed="' + cur + '">' +
+  return '<button class="room' + (st ? ' ' + st : '') + (cur ? ' cur' : '') + '" data-act="room" data-key="' + key + '" aria-pressed="' + cur + '" aria-label="' + esc(no) + '호' + (st ? (st === 'free' ? ' 공실' : ' 수업중') : '') + '"' + (at || '') + '>' +
     '<span class="no num">' + esc(no) + '</span>' +
     (st ? '<span class="st">' + (st === 'free' ? ICON.free + '공실' : ICON.busy + '수업중') + '</span>' : '') +
     '</button>';
 }
 function cells(b, list, floor){ return list.map(function(no){ return roomCell(b, no, floor); }).join(''); }
 function groupHTML(b, g){
-  let body;
+  let body, tag = '';
   const fna = g.floor !== null ? naOf(b.id, g.floor, null, S.filterDate) : null;
   const fnote = fna && fna.type === 'floor' ? '<p class="na-note">' + ICON.na + esc(naText(fna)) + '</p>' : '';
   if (!g.rooms.length){
     body = '<p class="noroom">강의실 없음</p>';
-  } else if (O.plan === '1' && g.known){                                                    /* ① 강의실 배치 그림 */
+  } else if (S.screen === 'S-12' && g.known){                                               /* S-12: 강의실 줄 - 복도 - 강의실 줄 (예전 ① 모양, G-137) */
     const half = Math.ceil(g.rooms.length / 2);
     body = '<div class="plan"><div class="rooms">' + cells(b, g.rooms.slice(0, half), g.floor) + '</div><div class="corr" aria-hidden="true">복도</div>' +
       (g.rooms.length > half ? '<div class="rooms">' + cells(b, g.rooms.slice(half), g.floor) + '</div>' : '') + '</div>';
-  } else if (O.plan === '2' && g.known){                                                    /* ② 위에서 본 건물 윤곽 */
-    if (b.fp === 'L' && g.rooms.length >= 2){
-      const cut = Math.min(g.rooms.length - 1, Math.ceil(g.rooms.length * 0.6));
-      body = '<div class="fp L"><div class="wing a"><div class="rooms">' + cells(b, g.rooms.slice(0, cut), g.floor) + '</div></div>' +
-        '<div class="wing b"><div class="rooms">' + cells(b, g.rooms.slice(cut), g.floor) + '</div></div></div>';
-    } else {
-      body = '<div class="fp"><div class="wing"><div class="rooms">' + cells(b, g.rooms, g.floor) + '</div></div></div>';
-    }
-  } else {                                                                                   /* ③ 목록 모양 (또는 층 정보 없음 묶음) */
+  } else if (g.known && (body = fpHTML(b, g))){                                             /* S-03: 위에서 본 건물 모양 + 복도 (G-130) */
+    if (fpBuild(b).floors[g.floor].est) tag = '<span class="fp-tag">목업 전용 · 추정 배치</span>';
+  } else {                                                                                   /* 층 정보 없음 묶음 (그림 밖 칸 목록, G-138) */
     body = '<div class="rooms">' + cells(b, g.rooms, g.floor) + '</div>';
   }
-  return '<div class="floor" id="fl-' + (S.screen === 'S-12' ? b.id + '-' : '') + g.key + '"><h3 class="floor-name">' + esc(g.label) + '</h3>' + fnote + body + '</div>';
+  const head = tag ? '<div class="fl-head"><h3 class="floor-name">' + esc(g.label) + '</h3>' + tag + '</div>' : '<h3 class="floor-name">' + esc(g.label) + '</h3>';
+  return '<div class="floor" id="fl-' + (S.screen === 'S-12' ? b.id + '-' : '') + g.key + '">' + head + fnote + body + '</div>';
 }
 function anyFreeIn(b, gs, P){
   return gs.some(function(g){ return g.rooms.some(function(no){
@@ -2126,7 +2455,9 @@ function renderFloor(){
   let note = '';
   if (S.period === null) note = T('pick');                                                  /* E-06 */
   else if (!anyFreeIn(b, gs, [S.period])) note = '이 시간에는 공실이 없습니다';             /* E-11 */
-  const keep = el.scrFloor.scrollTop;
+  const keep = el.scrFloor.scrollTop, kx = {};
+  el.scrFloor.querySelectorAll('.fpwrap').forEach(function(w){ kx[w.getAttribute('data-fk')] = w.scrollLeft; });   /* 칸을 눌러 다시 그려도 옆으로 민 자리 유지 */
+  const est = gs.some(function(g){ return g.known && g.rooms.length; }) && fpBuild(b).est;
   el.scrFloor.innerHTML =
     '<div class="fhead" id="fhead">' +
       '<div class="fh-top"><button class="btn btn-text" data-act="tomap">← 캠퍼스맵으로</button><h2 class="bname">' + esc(fullName(b)) + '</h2></div>' +
@@ -2135,7 +2466,11 @@ function renderFloor(){
       (note ? '<div class="note" role="status">' + esc(note) + '</div>' : '') +
       '<div class="jumps" role="group" aria-label="층 바로가기">' + gs.map(function(g){ return '<button class="btn btn-secondary" data-act="jump" data-key="' + g.key + '">' + esc(g.label) + '</button>'; }).join('') + '</div>' +
     '</div>' +
-    '<div class="floors">' + (O.plan === '2' ? '<p class="fp-cap">위에서 본 건물 모양(예시)</p>' : '') + gs.map(function(g){ return groupHTML(b, g); }).join('') + '</div>';
+    '<div class="floors"><p class="fp-cap">위에서 내려다본 건물 모양입니다. 캠퍼스맵처럼 아래쪽이 정문 쪽입니다.</p>' +
+      (est ? '<p class="fp-est"><span class="fp-badge">목업 전용</span><span>강의실 배치는 추정입니다(목업 전용). 실제 배치도(층별 안내판·소방 대피도)를 받으면 바꿉니다.</span></p>' : '') +
+      gs.map(function(g){ return groupHTML(b, g); }).join('') + '</div>';
+  el.scrFloor.querySelectorAll('.fpwrap').forEach(function(w){ const v = kx[w.getAttribute('data-fk')]; if (v) w.scrollLeft = v; });
+  fpOvf();
   el.scrFloor.scrollTop = keep;
   const fh = $('fhead');
   if (fh) el.scrFloor.style.setProperty('--fhead-h', fh.offsetHeight + 'px');
@@ -2304,11 +2639,14 @@ function renderOverlays(){
       '<div class="modal-body">' + esc(n.body) + '</div></div>';
   } else if (S.modal === 'S-08' || S.modal === 'S-09'){
     mh = formHTML();
+  } else if (S.modal === 'S-18'){
+    mh = loginHTML();
   } else if (S.modal && S.flow){
     mh = flowHTML();
   }
   el.modal.hidden = !mh;
-  el.modal.innerHTML = mh;
+  if (!(S.modal === 'S-18' && mh === S.lgLast)) el.modal.innerHTML = mh;   /* 같은 로그인 창이면 다시 그리지 않음 (적던 학번·비밀번호가 지워지지 않게) */
+  S.lgLast = S.modal === 'S-18' ? mh : '';
   let ah = '';
   if (S.alert === 'weekend' || S.alert === 'vacation' || S.alert === 'na'){
     if (O.alertStyle === '1') ah = '<div class="alert" role="alertdialog" aria-modal="true"><p>' +
@@ -2334,23 +2672,18 @@ function showStrip(text){
 }
 function hideStrip(){ clearTimeout(S.stripTimer); el.strip.hidden = true; }
 
-function render(){                                          /* 로그인 박스는 다시 그리지 않음 (적던 학번이 지워지지 않게) */
-  renderPrevBand(); renderHeader(); renderBanner(); renderFilter(); renderCenter(); renderPanel(); renderFooter(); renderOverlays(); renderMock();
+function render(){                                          /* 로그인 창(S-18)은 내용이 같으면 다시 그리지 않음 (renderOverlays) */
+  renderPrevBand(); renderHeader(); renderAuthBand(); renderBanner(); renderFilter(); renderCenter(); renderPanel(); renderFooter(); renderOverlays(); renderMock();
 }
-function renderAll(){ renderLogin(); render(); }               /* 로그인 상태·배치가 바뀔 때 */
+function renderAll(){ render(); }                            /* 로그인 상태·배치가 바뀔 때 (머리 영역 단추·이유 띠·로그인 창 포함) */
 
 /* =====================================================================
    학생 화면 - 로그인·가입·문의·신고 (목업 안에서만 흉내. 바깥으로 보내는 것 없음)
    ===================================================================== */
 function mmss(sec){ return Math.floor(sec / 60) + ':' + pad(sec % 60); }
 function addDays(ds, n){ const p = parseD(ds); const t = new Date(Date.UTC(p.y, p.m - 1, p.d + n)); return ymd(t.getUTCFullYear(), t.getUTCMonth() + 1, t.getUTCDate()); }
-function looksCommon(pw){                                  /* 흔한 비밀번호 막기 - 목업은 모양으로만 봄 (같은 글자 4번, 이어지는 숫자, 키보드 줄 등) */
-  const s = String(pw).toLowerCase();
-  return /(.)\1\1\1/.test(s) || /0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321/.test(s) || /qwer|asdf|zxcv|pass|love/.test(s);
-}
-function pwRules(pw, pw2, sid){                            /* sid가 있으면 학생 규칙(학번 포함·흔한 비밀번호 금지 더함) */
+function pwRules(pw, pw2){                                 /* 학생·관리자 같은 규칙: 8자 이상·영문자·숫자·특수기호 + 두 칸이 같음 (G-67 삭제) */
   const r = [['8자 이상', pw.length >= 8], ['영문자를 넣음', /[A-Za-z]/.test(pw)], ['숫자를 넣음', /\d/.test(pw)], ['특수기호를 넣음', /[^A-Za-z0-9\s]/.test(pw)]];
-  if (sid !== undefined){ r.push(['학번이 들어가지 않음', !!pw && (!sid || pw.indexOf(sid) < 0)]); r.push(['흔한 비밀번호가 아님', !!pw && !looksCommon(pw)]); }
   r.push(['두 칸이 같음', !!pw && pw === pw2]);
   return r;
 }
@@ -2366,8 +2699,6 @@ function fieldTA(id, label, req, val, max, rows, err, help){
 function pwField(id, label, err){
   return '<div class="fld2"><label for="' + id + '">' + fLabel(label) + '</label><span class="pwwrap"><input id="' + id + '" type="password" maxlength="64" autocomplete="off"><button type="button" class="pwshow" data-act="pwshow" data-for="' + id + '">보기</button></span>' + errHTML(id, err) + '</div>';
 }
-function allowList(){ return O.emptyAdm ? [] : ADM.allow.list; }                 /* A-19 시연 메일 허용 목록 */
-function allowBlocked(id){ return ADM.allow.on && !allowList().some(function(x){ return x.id === id; }); }
 function wrongCurrent(){                                   /* 지금 비밀번호를 틀림: 5번이면 로그아웃 + 잠시 막기 (G-91). 로그아웃했으면 true */
   AUTH.chFails = (AUTH.chFails || 0) + 1;
   if (AUTH.chFails < 5) return false;
@@ -2380,7 +2711,7 @@ function wrongCurrent(){                                   /* 지금 비밀번�
 function wrongMsg(base){ return base + ' (남은 기회 ' + (5 - AUTH.chFails) + '번)'; }
 function maskEmail(e){ if (!e) return ''; const i = e.indexOf('@'); const l = e.slice(0, i); return l.slice(0, 2) + new Array(Math.max(1, l.length - 1)).join('*') + e.slice(i); }
 
-/* ---------- 로그인 (학생·관리자 같은 박스, 같은 실패 문구) ---------- */
+/* ---------- 로그인 (학생·관리자 같은 창 S-18, 같은 실패 문구) ---------- */
 function autoPeriods(ds){                                   /* 로그인한 학생: 날짜를 고르면 공강 교시를 저절로 고름 */
   const u = me();
   if (!u) return { list:[], note:'' };
@@ -2399,7 +2730,7 @@ function applyAuto(){ const a = autoPeriods(S.filterDate); S.periods = a.list; S
 function doLogin(){
   const iId = $('lg-id'), iPw = $('lg-pw'), iK = $('lg-keep');
   const id = iId ? iId.value.trim() : '', pw = iPw ? iPw.value : '', keep = iK ? iK.checked : false;
-  S.lg = { id:id }; AUTH.msg = ''; AUTH.stopMsg = ''; AUTH.band = '';
+  S.lg = { id:id, keep:keep }; S.lgLast = ''; AUTH.msg = ''; AUTH.stopMsg = ''; AUTH.band = '';   /* 누를 때마다 로그인 창을 새로 그림 (비밀번호 칸은 비움) */
   if (!id || !pw){ AUTH.msg = '학번과 비밀번호를 적어 주세요.'; renderLogin(); return; }
   if (lockLeft(id)){ renderLogin(); return; }
   const k = id + '|' + O.place;                               /* 잠시 막기는 계정마다, 접속한 곳마다 셈 */
@@ -2421,6 +2752,7 @@ function loginStudent(s, keep){
   AUTH.who = 'student'; AUTH.sid = s.id; AUTH.keep = !!keep; s.last = today(); AUTH.chFails = 0;
   if (today() > PUB.sem.end) s.tt = {};                     /* 종강하면 내 시간표를 저절로 지움 (결정 2026-10-01) */
   S.acct = false; S.sel = []; S.room = null; S.lg = { id:'' };
+  if (S.modal === 'S-18') S.modal = null;                   /* 로그인 창을 닫고 보던 화면으로 */
   if (S.screen === 'S-03') { leaveFloorHistory(); S.screen = 'S-01'; S.bid = null; }
   applyAuto();
   renderAll(); renderMock();
@@ -2428,6 +2760,7 @@ function loginStudent(s, keep){
 function loginAdmin(){
   AUTH.who = 'admin'; AUTH.sid = null; AUTH.chFails = 0; AUTH.admInfo = { last:ACC.admin.last, fails:ACC.admin.fails };
   ACC.admin.last = nowStamp(); ACC.admin.fails = 0; S.lg = { id:'' };
+  if (S.modal === 'S-18') S.modal = null;
   VIEW.mode = 'admin'; VIEW.preview = false;
   admEnter();
 }
@@ -2449,7 +2782,7 @@ function openForm(kind, ctx){
   S.menu = false; S.acct = false;
   S.form = { kind:kind, ctx:ctx || null, text:'', email:'', agree:false, type:'', other:'', detail:'', state:'edit', err:{} };
   S.modal = kind === 'inq' ? 'S-08' : 'S-09';
-  renderHeader(); if (AUTH.who === 'student') renderLogin(); renderOverlays(); renderMock();
+  renderHeader(); renderOverlays(); renderMock();
   setTimeout(function(){ const f = $(kind === 'inq' ? 'f-text' : 'f-type-0'); if (f) f.focus(); }, 0);
 }
 function grabForm(){
@@ -2470,8 +2803,8 @@ function formHTML(){
   if (F.state === 'sending'){
     body = '<div class="loading" role="status"><span class="spinner" aria-hidden="true"></span>보내는 중…</div>';
   } else if (F.state === 'sent'){
-    body = '<div class="done-box"><p class="done-t">' + (inq ? '문의를 보냈습니다.' : '신고를 보냈습니다.') + '</p><p>' +
-      (inq ? (F.emailUsed ? '답장은 적은 이메일로 보냅니다.' : '이메일을 적지 않아 답장은 없습니다.') : '신고에는 답장하지 않습니다. 알려 주셔서 고맙습니다.') + '</p></div>';
+    body = inq ? '<div class="done-box"><p class="done-t">문의를 보냈습니다.</p><p>' + (F.emailUsed ? '답장은 적은 이메일로 보냅니다.' : '이메일을 적지 않아 답장은 없습니다.') + '</p></div>'
+      : '<div class="done-box"><p class="done-t">신고를 보냈습니다. 감사합니다.</p></div>';   /* 신고 완료는 한 줄만 (사용자 결정 2026-10-03) */
     foot = '<button class="btn btn-primary" data-act="fclose">닫기</button>';
   } else {
     if (F.state === 'fail') body += '<div class="ferrbox" role="alert">보내지 못했습니다. 잠시 뒤 다시 보내 주세요. 적은 내용은 그대로 있습니다.</div>';
@@ -2548,9 +2881,8 @@ const FLOW_ID = { signup:'S-14', findpw:'S-15', chpw:'S-16', leave:'S-17' };
 function openFlow(kind){
   S.menu = false; S.acct = false;
   S.flow = { kind:kind, step:kind === 'signup' ? 'agree' : (kind === 'findpw' ? 'id' : 'form'), sid:'', exp:0, resendAt:0, tries:5, exists:false, err:{}, a1:false, a2:false, terms:false };
-  S.modal = FLOW_ID[kind];
-  if (AUTH.who === 'student') renderLogin();
-  renderOverlays(); renderMock();
+  S.modal = FLOW_ID[kind];                                   /* 가입하기·비밀번호 찾기는 로그인 창(S-18) 자리에서 바뀜 */
+  renderHeader(); renderOverlays(); renderMock();
 }
 function codeToast(){
   const F = S.flow;
@@ -2569,7 +2901,6 @@ function flowHTML(){
   const F = S.flow; if (!F) return '';
   const title = { signup:'가입하기', findpw:'비밀번호 찾기', chpw:'비밀번호 바꾸기', leave:'탈퇴하기' }[F.kind];
   let body = stepsHTML(F), foot = '';
-  const sidRule = F.kind === 'chpw' ? (me() ? me().id : '') : F.sid;
   if (F.step === 'agree'){
     body += '<p>가입하려면 아래 두 가지에 각각 동의해 주세요.</p>' +
       '<div class="cbox"><div class="cb-top"><label class="chk-row"><input type="checkbox" class="chk" id="g-a1"' + (F.a1 ? ' checked' : '') + '>이용약관에 동의합니다 <em class="req">필수</em></label><button type="button" class="lnk" data-act="gterms">' + (F.terms ? '접기' : '보기') + '</button></div>' +
@@ -2578,8 +2909,7 @@ function flowHTML(){
         '<dl class="agree-t"><dt>쓰는 곳</dt><dd>로그인, 내 시간표 저장, 계정 관리·부정 이용 대응</dd><dt>받는 항목</dt><dd>학번, 비밀번호(알아볼 수 없게 바꿔 저장), 내 시간표</dd><dt>보관</dt><dd>탈퇴하면 바로 지웁니다. 1년 동안 쓰지 않으면 지웁니다. 내 시간표는 종강하면 지웁니다.</dd><dt>거부할 권리</dt><dd>동의하지 않아도 됩니다. 로그인하지 않고 공실 보기를 쓸 수 있습니다.</dd></dl></div>';
     foot = '<button class="btn btn-primary" data-act="gnext" id="g-next"' + (F.a1 && F.a2 ? '' : ' disabled') + '>다음</button>';
   } else if (F.step === 'id'){
-    body += (ADM.allow.on ? '<p class="fhelp2">지금은 시연 기간이라 미리 등록된 학번만 확인 번호를 받을 수 있습니다.</p>' : '') +
-      '<div class="fld2"><label for="g-id">' + fLabel('학번') + '</label><div class="mailrow"><input id="g-id" type="text" inputmode="numeric" maxlength="8" autocomplete="off" value="' + esc(F.sid) + '"><span class="dom">@s.scnu.ac.kr</span></div>' +
+    body += '<div class="fld2"><label for="g-id">' + fLabel('학번') + '</label><div class="mailrow"><input id="g-id" type="text" inputmode="numeric" maxlength="8" autocomplete="off" placeholder="예: 20224257" value="' + esc(F.sid) + '"><span class="dom">@s.scnu.ac.kr</span></div>' +
       '<p class="fhelp">학번 8자리 숫자만 적습니다. 이 학교 메일 주소로 확인 번호를 보냅니다.</p>' + errHTML('g-id', F.err['g-id']) + '</div>';
     foot = '<button class="btn btn-primary" data-act="gsend">확인 번호 받기</button>';
   } else if (F.step === 'code'){
@@ -2592,7 +2922,7 @@ function flowHTML(){
   } else if (F.step === 'pw' || F.kind === 'chpw'){
     if (F.kind === 'chpw') body += pwField('c-now', '지금 비밀번호', F.err['c-now']);
     body += pwField('g-pw', '새 비밀번호') + pwField('g-pw2', '새 비밀번호 다시 적기') + '<p class="caps" data-caps="any" hidden>Caps Lock이 켜져 있습니다</p>' +
-      '<ul class="rules" id="g-rules" aria-live="polite">' + rulesHTML(pwRules('', '', sidRule)) + '</ul>' + errHTML('g-pw', F.err['g-pw']);
+      '<ul class="rules" id="g-rules" aria-live="polite">' + rulesHTML(pwRules('', '')) + '</ul>' + errHTML('g-pw', F.err['g-pw']);
     foot = '<button class="btn btn-primary" data-act="' + (F.kind === 'chpw' ? 'cpgo' : 'gpw') + '" id="g-pwgo" disabled>' + (F.kind === 'signup' ? '가입하기' : '비밀번호 바꾸기') + '</button>';
   } else if (F.kind === 'leave' && F.step === 'form'){
     body += '<p>탈퇴하면 계정과 내 시간표가 바로 지워집니다. 되돌릴 수 없습니다.</p><p class="fhelp">로그인하지 않고 공실 보기는 계속 쓸 수 있습니다.</p>' + pwField('l-pw', '비밀번호 확인', F.err['l-pw']);
@@ -2615,11 +2945,7 @@ function flowAct(a){
   else if (a === 'gsend' || a === 'gresend'){
     if (a === 'gsend') F.sid = val('g-id').trim();
     if (a === 'gresend' && now < F.resendAt) return;
-    if (!/^\d{8}$/.test(F.sid)) F.err['g-id'] = '학번 8자리 숫자를 적어 주세요.';
-    else if (allowBlocked(F.sid)){                           /* 허용 목록 밖 학번: 메일을 보내지 않음 (A-19, G-85) */
-      F.err[a === 'gsend' ? 'g-id' : 'g-code'] = F.kind === 'signup' ? '지금은 미리 등록된 학번만 가입할 수 있습니다.' : '지금은 미리 등록된 학번만 확인 번호를 받을 수 있습니다.';
-      mockToast('허용 목록(A-19) 밖 학번이라 확인 메일을 보내지 않았습니다. 계정이 있든 없든 같은 문구입니다.');
-    }
+    if (!/^\d{8}$/.test(F.sid)) F.err['g-id'] = '학번 8자리 숫자를 적어 주세요.';   /* 8자리 학번이면 누구나 확인 번호를 받음 (A-19 삭제) */
     else if (O.codeLimit) F.err[a === 'gsend' ? 'g-id' : 'g-code'] = '확인 번호를 너무 많이 받았습니다. 1시간 뒤에 다시 시도해 주세요.';   /* 학번당 1시간 5통·하루 10통 */
     else {
       F.exists = ACC.students.some(function(s){ return s.id === F.sid; });
@@ -2638,7 +2964,7 @@ function flowAct(a){
   }
   else if (a === 'gpw'){
     const pw = val('g-pw'), pw2 = val('g-pw2');
-    if (!rulesOK(pwRules(pw, pw2, F.sid))) return;
+    if (!rulesOK(pwRules(pw, pw2))) return;
     if (F.kind === 'signup'){
       const s = { no:ACC.seq++, id:F.sid, pw:pw, joined:today(), last:today(), status:'ok', reason:'', tt:{} };
       ACC.students.unshift(s);
@@ -2655,7 +2981,7 @@ function flowAct(a){
     if (!u) return;
     if (now2 !== u.pw){ if (wrongCurrent()) return; F.err['c-now'] = wrongMsg('지금 비밀번호가 맞지 않습니다.'); }
     else if (pw === now2){ F.err['g-pw'] = '지금 비밀번호와 다른 비밀번호를 적어 주세요.'; }
-    else if (rulesOK(pwRules(pw, pw2, u.id))){ u.pw = pw; S.flow = null; S.modal = null; doLogout('비밀번호가 바뀌었습니다. 새 비밀번호로 다시 로그인해 주세요.'); return; }
+    else if (rulesOK(pwRules(pw, pw2))){ u.pw = pw; S.flow = null; S.modal = null; doLogout('비밀번호가 바뀌었습니다. 새 비밀번호로 다시 로그인해 주세요.'); return; }
     else return;
   }
   else if (a === 'lvgo'){
@@ -2663,7 +2989,11 @@ function flowAct(a){
     if (val('l-pw') !== u.pw){ if (wrongCurrent()) return; F.err['l-pw'] = wrongMsg('비밀번호가 맞지 않습니다.'); }
     else { ACC.students = ACC.students.filter(function(s){ return s !== u; }); S.flow = null; S.modal = null; doLogout('탈퇴했습니다. 계정과 내 시간표를 지웠습니다.'); return; }
   }
-  else if (a === 'gdone'){ const wasSign = F.kind === 'signup'; S.flow = null; S.modal = null; if (wasSign) renderAll(); else renderOverlays(); renderMock(); return; }
+  else if (a === 'gdone'){
+    const k = F.kind; S.flow = null; S.modal = null;
+    if (k === 'findpw'){ S.lg = { id:F.sid }; openLogin(); return; }   /* 비밀번호를 찾았으면 로그인 창으로 (학번 채움, G-94) */
+    if (k === 'signup') renderAll(); else renderOverlays(); renderMock(); return;
+  }
   else if (a === 'flowx'){ S.flow = null; S.modal = null; renderOverlays(); renderMock(); return; }
   renderOverlays(); renderMock();
   const fe = el.modal.querySelector('.ferr:not([hidden])');
@@ -2676,8 +3006,7 @@ function flowInput(t){
   if (t.id === 'g-a1' || t.id === 'g-a2'){ F[t.id === 'g-a1' ? 'a1' : 'a2'] = t.checked; const n = $('g-next'); if (n) n.disabled = !(F.a1 && F.a2); }
   if (t.id === 'g-id' || t.id === 'g-code'){ const v = t.value.replace(/\D/g, ''); if (v !== t.value) t.value = v; }
   if (t.id === 'g-pw' || t.id === 'g-pw2'){
-    const sid = F.kind === 'chpw' ? (me() ? me().id : '') : F.sid;
-    const r = pwRules(($('g-pw') || {}).value || '', ($('g-pw2') || {}).value || '', sid);
+    const r = pwRules(($('g-pw') || {}).value || '', ($('g-pw2') || {}).value || '');
     $('g-rules').innerHTML = rulesHTML(r);
     const b = $('g-pwgo'); if (b) b.disabled = !rulesOK(r);
   }
@@ -2732,7 +3061,7 @@ function buildMap(){
   PLACES.forEach(function(p){ if (p.kind === 'gate') g += '<circle class="m-gate" cx="' + p.x + '" cy="' + p.y + '" r="7"/>'; });  /* 문 자리 점 */
   el.mapg.innerHTML = g;
   LBL.length = 0;
-  BUILDINGS.forEach(function(b){ if (b.parts) LBL.push({ b:b, x:b.lx, y:b.ly, oy:0, name:fullName(b), code:b.id, place:false, prio:clickable(b) ? 0 : 2 }); });
+  BUILDINGS.forEach(function(b){ if (b.parts) LBL.push({ b:b, x:b.lx, y:b.ly, oy:0, name:fullName(b), code:bNo(b), place:false, prio:clickable(b) ? 0 : 2 }); });
   PLACES.forEach(function(p, i){ LBL.push({ b:null, x:p.x, y:p.y, oy:p.kind === 'gate' ? -14 : 0, name:p.name, code:p.name, place:true, pi:i, prio:p.kind === 'gate' ? 1 : 3 }); });
   el.lblg.innerHTML = LBL.map(function(l, i){ return '<text class="lbl' + (l.place ? ' pl' : '') + '" data-i="' + i + '"></text>'; }).join('');
   measureLabels();                                          /* 글자 너비를 바로 잼 (글꼴을 받으면 다시 잼) */
@@ -2954,7 +3283,7 @@ function openSite(how){                                     /* 사이트를 새�
   setFilterDefault();
   leaveFloorHistory();
   resetView();
-  S.bannerHidden = false; S.noticeId = null; S.popChk = false; S.modal = null; S.form = null; S.flow = null; S.loginExp = false;
+  S.bannerHidden = false; S.noticeId = null; S.popChk = false; S.modal = null; S.form = null; S.flow = null;
   S.data = 'loading';                                       /* E-01 */
   if (O.data !== 'loading') S.loadTimer = setTimeout(function(){ S.data = O.data; render(); }, 700);
   S.popQ = D().popups.filter(function(p){ return !isDismissed(p.id); });
@@ -2974,7 +3303,7 @@ function showAlertText(kind, text){
 function clickBuilding(bid){
   if (S.data !== 'ok') return;
   const b = BMAP[bid];
-  if (!b || !b.rooms) return;
+  if (!b || !canPick(b)) return;                             /* 꺼진 건물은 고를 수 없음 (G-116) */
   if (!selectable(S.filterDate)){ showAlertText(offKind(S.filterDate) || 'weekend'); return; }   /* E-07 */
   const na = naBld(bid);
   if (na){ showAlertText('na', naText(na)); return; }       /* 건물 전체 사용 불가: 사유만 보이고 캠퍼스맵에 머묾 (Q7, E-24) */
@@ -2995,7 +3324,7 @@ function clickBuilding(bid){
 function bringCenter(){ if (!isPC()){ const top = el.center.getBoundingClientRect().top; const lim = O.phone ? el.frame.getBoundingClientRect().top : 0; if (top < lim) el.center.scrollIntoView({ block:'start' }); } }
 function goMulti(){ if (!S.sel.length) return; S.screen = 'S-12'; S.room = null; S.menu = false; pushFloor(); render(); el.scrMulti.scrollTop = 0; bringCenter(); }
 function goMap(){ leaveFloorHistory(); S.screen = 'S-01'; S.tab = 'map'; S.bid = null; S.room = null; render(); }
-function goScreen(scr){ leaveFloorHistory(); S.screen = scr; S.bid = null; S.room = null; S.menu = false; S.acct = false; render(); if (AUTH.who === 'student') renderLogin(); scrollTopAll(); bringCenter(); }
+function goScreen(scr){ leaveFloorHistory(); S.screen = scr; S.bid = null; S.room = null; S.menu = false; S.acct = false; render(); scrollTopAll(); bringCenter(); }
 function shiftMonth(d){ let y = S.cal.y, m = S.cal.m + d; if (m < 1){ m = 12; y--; } if (m > 12){ m = 1; y++; } S.cal = { y:y, m:m }; }
 function closePopup(){
   const p = S.popQ[S.popIdx];
@@ -3033,14 +3362,14 @@ function capsCheck(e){                                      /* Caps Lock 안내 
   if (!t || t.type !== 'password' && !(t.getAttribute && t.getAttribute('data-pw') === '1')) return;
   if (!e.getModifierState) return;
   const on = e.getModifierState('CapsLock');
-  const root = t.closest('.lbox, .modal, .acard, .adm') || document;
+  const root = t.closest('.modal, .acard, .adm') || document;
   root.querySelectorAll('[data-caps]').forEach(function(c){ c.hidden = !on; });
 }
 
 /* ---------- 사이트 안 누름 (한 곳에서 받음) ---------- */
 document.addEventListener('click', function(e){             /* ≡ 메뉴·내 계정 메뉴 밖을 누르면 닫힘 (05 3.1 제안) */
   if (S.menu && !e.target.closest('.menu') && !e.target.closest('[data-act="menu"]')){ S.menu = false; setTimeout(renderHeader, 0); }
-  if (S.acct && !e.target.closest('.acct')){ S.acct = false; setTimeout(renderLogin, 0); }
+  if (S.acct && !e.target.closest('.acct')){ S.acct = false; setTimeout(renderHeader, 0); }
 }, true);
 el.site.addEventListener('click', function(e){
   const t = e.target.closest('[data-act]');
@@ -3086,13 +3415,15 @@ el.site.addEventListener('click', function(e){
     case 'ttclearok': { const u = me(); if (u) u.tt = {}; S.alert = null; renderOverlays(); renderTT(); return; }
     case 'zin': zoomAt(1.5, V.W / 2, V.H / 2); return;
     case 'zout': zoomAt(1 / 1.5, V.W / 2, V.H / 2); return;
-    /* 로그인 박스·내 계정 */
+    /* 머리 영역 [로그인] · S-18 로그인 창 · 내 계정 · 이유 띠 */
+    case 'loginopen': openLogin(); return;
+    case 'lgx': closeLogin(); return;
     case 'login': e.preventDefault(); doLogin(); return;
     case 'pwshow': togglePw(t); return;
-    case 'loginexp': S.loginExp = !S.loginExp; renderLogin(); return;
-    case 'signup': openFlow('signup'); return;
-    case 'findpw': openFlow('findpw'); return;
-    case 'acct': S.acct = !S.acct; renderLogin(); return;
+    case 'signup': openFlow('signup'); return;                /* 로그인 창 자리가 S-14로 바뀜 */
+    case 'findpw': openFlow('findpw'); return;                /* 로그인 창 자리가 S-15로 바뀜 */
+    case 'acct': S.acct = !S.acct; S.menu = false; renderHeader(); return;
+    case 'abx': AUTH.band = ''; renderAuthBand(); return;
     case 'mytt': goScreen('S-13'); return;
     case 'chpw': openFlow('chpw'); return;
     case 'leave': openFlow('leave'); return;
@@ -3136,9 +3467,14 @@ el.site.addEventListener('keydown', function(e){
   }
 });
 el.site.addEventListener('keyup', capsCheck);
+document.addEventListener('keydown', function(e){            /* 로그인 창(S-18): Esc로 닫기 (G-93) */
+  if (e.key !== 'Escape' || S.modal !== 'S-18' || S.alert || el.stage.hidden) return;
+  if (M.root.contains(e.target)) return;                    /* 조정판 안에서 누른 Esc는 조정판이 받음 */
+  closeLogin();
+});
 
 /* =====================================================================
-   관리자 화면 (PC만, 라이트만) - 학생 화면 로그인 박스에 관리자 아이디로 로그인하면 들어옴
+   관리자 화면 (PC만, 라이트만) - 학생 화면 로그인 창(S-18)에 관리자 아이디로 로그인하면 들어옴
    ===================================================================== */
 const AS = { scr:'A-02', tab:{}, flt:{}, panel:null, f:{}, confirm:null, toast:'', toastT:0, err:null, warn:null, busy:'', sel:{}, open:{}, hl:0, lastAct:0, draw:null, edit:null, q:'' };
 const ADM_MENU = [
@@ -3147,7 +3483,7 @@ const ADM_MENU = [
   ['수업 자료', [['A-07', '시간표·폐강 파일'], ['A-08', '학기·교시 시각표'], ['A-09', '공휴일']]],
   ['건물·강의실', [['A-10', '건물·강의실'], ['A-11', '캠퍼스맵'], ['A-12', '사용 불가 설정']]],
   ['학생 화면 글', [['A-13', '공지·배너·팝업'], ['A-14', '문구·신고 종류']]],
-  ['설정', [['A-15', '공휴일 API 인증키'], ['A-19', '시연 메일 허용 목록'], ['A-16', '관리자 계정']]]
+  ['설정', [['A-15', 'API 인증키'], ['A-16', '관리자 계정']]]
 ];
 const ADM_TITLE = {
   'A-02':['대시보드', '오늘 볼 숫자와 처리할 일을 모았습니다.'],
@@ -3158,12 +3494,11 @@ const ADM_TITLE = {
   'A-08':['학기·교시 시각표', '지금 학기의 개강일·종강일과 교시별 시각을 고칩니다.'],
   'A-09':['공휴일', '공휴일을 불러오고, 학교 휴업일을 더해 목록을 관리합니다.'],
   'A-10':['건물·강의실', '건물 이름·번호, 강의실의 층·수용 인원, 코드 짝짓기, 건물 목록 순서를 고칩니다.'],
-  'A-11':['캠퍼스맵', '캠퍼스맵 그림과 건물 영역, 최대 확대 크기를 정합니다.'],
+  'A-11':['캠퍼스맵', '건물(영역·이름·번호·학생이 누르기)과 캠퍼스맵 그림, 최대 확대 크기를 정합니다.'],
   'A-12':['사용 불가 설정', '공사 등으로 쓸 수 없는 건물·층·강의실과 기간·사유를 정합니다.'],
   'A-13':['공지·배너·팝업', '학생 화면의 공지사항·배너·팝업을 쓰고 고칩니다.'],
   'A-14':['문구·신고 종류', '학생 화면의 출처 문구·안내 문구와 신고 종류 선택지를 고칩니다.'],
-  'A-15':['공휴일 API 인증키', '공휴일을 불러올 때 쓰는 인증키를 등록하고 바꿉니다.'],
-  'A-19':['시연 메일 허용 목록', '가입·비밀번호 찾기 확인 메일을 받을 수 있는 학번을 정합니다.'],
+  'A-15':['API 인증키', '외부 서비스에 연결할 때 쓰는 인증키를 등록하고 바꿉니다.'],
   'A-16':['관리자 계정', '관리자 비밀번호와 아이디를 바꿉니다. 바꾸면 로그아웃되고 다시 로그인합니다.']
 };
 const ADM_SCR = {}, ADM_ACT = {};
@@ -3178,7 +3513,7 @@ function abtn(label, act, cls, busyKey, extra){
   return '<button class="btn ' + cls + '" data-a="' + act + '"' + (extra || '') + (AS.busy ? ' disabled' : '') + '>' + esc(label) + '</button>';
 }
 function daysTo(a, b){ const x = parseD(a), y = parseD(b); return Math.round((Date.UTC(y.y, y.m - 1, y.d) - Date.UTC(x.y, x.m - 1, x.d)) / 86400000); }
-function roomLabel(key){ if (!key) return ''; const i = key.indexOf('-'); const b = BMAP[key.slice(0, i)]; return (b ? fullName(b) : key.slice(0, i)) + ' ' + key.slice(i + 1) + '호'; }
+function roomLabel(key){ if (!key) return ''; const i = key.indexOf('-'); const b = BMAP[key.slice(0, i)]; return (b ? dFull(b) : key.slice(0, i)) + ' ' + key.slice(i + 1) + '호'; }
 
 /* ---------- 들어오기·나가기 ---------- */
 function admEnter(){
@@ -3199,11 +3534,12 @@ function admGo(scr, opt){
     admRender(true);
   };
   if (AS.panel && AS.panel.form){                           /* 입력 칸이 열려 있으면 먼저 묻기 (G-06) */
-    AS.confirm = { title:'저장하지 않고 다른 화면으로 갈까요?', what:'열려 있는 입력 칸에 적은 내용', when:'다른 화면으로 바로 갑니다.', undo:'저장하지 않은 내용은 사라집니다.', ok:'저장하지 않고 이동', danger:true, fn:go };
+    AS.confirm = { title:'저장하지 않고 다른 화면으로 갈까요?', note:'적은 내용은 사라집니다.', ok:'저장하지 않고 이동', danger:true, fn:go };
     admRender(); return;
   }
   go();
 }
+const UPD = ' 업데이트하면 학생 화면에 보입니다.', UPD_OUT = ' 업데이트하면 학생 화면에서 빠집니다.';   /* 결과 알림 끝말 (G-110) */
 function admToast(msg){
   AS.toast = msg; clearTimeout(AS.toastT);
   AS.toastT = setTimeout(function(){ AS.toast = ''; const t = el.admin.querySelector('.a-toast'); if (t) t.remove(); }, 4000);
@@ -3213,6 +3549,7 @@ function admFail(doing, fail, why, kind){
   ADM.err.unshift({ no:no, at:nowStamp(), kind:kind || '관리자 화면 요청', doing:doing, why:why || '데이터베이스에 저장하지 못했습니다(연결이 잠시 끊김).', rel:'-', status:'new' });
   AS.err = { msg:fail, no:no };
 }
+function failBox(msg, no){ return '<div class="ferrbox a-failbox" role="alert"><span>' + esc(msg) + ' 오류 기록 <b class="num">' + errNo(no) + '</b></span><button class="btn btn-text sm" data-a="errgo" data-no="' + no + '">오류 기록 보기</button></div>'; }   /* 그 자리 실패 상자 (G-79) */
 function admBusy(key, doing, fail, fn){                     /* 처리 중 → 결과. 조정판 "서버 오류"면 실패 + 오류 기록 */
   AS.busy = key; AS.confirm = null; admRender();
   setTimeout(function(){
@@ -3237,18 +3574,16 @@ function navHTML(){
     return '<div class="a-ng"><p class="a-ngt">' + esc(g[0]) + '</p>' + g[1].map(function(x){ return item(x[0], x[1]); }).join('') + '</div>';
   }).join('');
 }
-function confirmHTML(){
+function confirmHTML(){                                     /* A-90 확인 창: 짧은 질문 제목 + (되돌릴 수 없을 때만) 한 줄 (G-71) */
   const c = AS.confirm; if (!c) return '';
-  const what = Array.isArray(c.what) ? '<ul>' + c.what.map(function(w){ return '<li>' + esc(w) + '</li>'; }).join('') + '</ul>' : esc(c.what);
-  return '<div class="a-scrim"></div><div class="a-mwrap"><div class="a-modal" role="dialog" aria-modal="true" aria-labelledby="ac-t">' +
-    '<h2 id="ac-t">' + esc(c.title) + '</h2>' +
-    '<dl class="a-conf"><dt>무엇이 바뀌나</dt><dd>' + what + '</dd><dt>언제 보이나</dt><dd>' + esc(c.when) + '</dd><dt>되돌릴 수 있나</dt><dd>' + esc(c.undo) + '</dd></dl>' + (c.extra || '') +
+  return '<div class="a-scrim"></div><div class="a-mwrap"><div class="a-modal sm" role="dialog" aria-modal="true" aria-labelledby="ac-t"' + (c.note ? ' aria-describedby="ac-n"' : '') + '>' +
+    '<h2 id="ac-t">' + esc(c.title) + '</h2>' + (c.note ? '<p class="a-cnote" id="ac-n">' + esc(c.note) + '</p>' : '') + (c.extra || '') +
     '<div class="a-mact"><button class="btn btn-secondary" data-a="cno">취소</button><button class="btn ' + (c.danger ? 'btn-danger' : 'btn-primary') + '" data-a="cok">' + esc(c.ok) + '</button></div></div></div>';
 }
 function warnHTML(){                                        /* A-91 자동 로그아웃 경고 */
   if (!AS.warn) return '';
   return '<div class="a-scrim"></div><div class="a-mwrap"><div class="a-modal sm" role="alertdialog" aria-modal="true" aria-labelledby="aw-t">' +
-    '<h2 id="aw-t">곧 자동으로 로그아웃합니다</h2><p>30분 가까이 쓰지 않아 <b class="num" id="aw-left">' + mmss(AS.warn.left) + '</b> 뒤에 자동으로 로그아웃합니다. 저장하지 않은 내용은 사라집니다.</p>' +
+    '<h2 id="aw-t">곧 자동으로 로그아웃합니다</h2><p><b class="num" id="aw-left">' + mmss(AS.warn.left) + '</b> 뒤에 로그아웃합니다. 저장하지 않은 내용은 사라집니다.</p>' +
     '<div class="a-mact"><button class="btn btn-secondary" data-a="wout">지금 로그아웃</button><button class="btn btn-primary" data-a="wkeep">계속 쓰기</button></div></div></div>';
 }
 function admRender(top){
@@ -3270,7 +3605,7 @@ function admRender(top){
     '</header>' +
     '<div class="a-body"><nav class="a-nav" aria-label="관리자 메뉴">' + navHTML() + '</nav>' +
       '<main class="a-main">' +
-        (AS.err ? '<div class="a-errband" role="alert"><span>' + esc(AS.err.msg) + ' 잠시 뒤 다시 해 주세요 · 오류 기록 <b class="num">' + errNo(AS.err.no) + '</b></span><button class="btn btn-text" data-a="errgo" data-no="' + AS.err.no + '">오류 기록 보기</button><button class="ibtn" data-a="errx" aria-label="닫기">' + ICON.x + '</button></div>' : '') +
+        (AS.err ? '<div class="a-errband" role="alert"><span>' + esc(AS.err.msg) + ' 오류 기록 <b class="num">' + errNo(AS.err.no) + '</b></span><button class="btn btn-text" data-a="errgo" data-no="' + AS.err.no + '">오류 기록 보기</button><button class="ibtn" data-a="errx" aria-label="닫기">' + ICON.x + '</button></div>' : '') +
         '<div class="a-title"><div><h1>' + esc(ti[0]) + '</h1><p>' + esc(ti[1]) + '</p></div>' + (r.tools || '') + '</div>' +
         r.html +
       '</main>' +
@@ -3296,22 +3631,19 @@ function admTick(){
 /* ---------- 업데이트하기 · 미리 보기 · 변경 버리기 (A-17) ---------- */
 ADM_ACT.publish = function(){
   const dc = dirtyCats(); if (!dc.length) return;
-  AS.confirm = { title:'학생 화면에 업데이트할까요?', what:dc.map(function(c){ return c[1]; }),
-    when:'누르면 바로 학생 화면에 보입니다. 학생 화면의 업데이트 시각이 지금 시각으로 바뀝니다.',
-    undo:'업데이트한 뒤에는 이 화면에서 되돌릴 수 없습니다. 다시 고쳐 저장한 뒤 업데이트하세요.', ok:'학생 화면에 업데이트하기', danger:false,
-    fn:function(){ admBusy('publish', '업데이트하기', '업데이트하지 못했습니다. 학생 화면은 이전 그대로입니다.', function(){
+  AS.confirm = { title:'학생 화면에 업데이트할까요?', note:'바뀐 것: ' + dc.map(function(c){ return c[1]; }).join(', '), ok:'학생 화면에 업데이트하기', danger:false,
+    fn:function(){ admBusy('publish', '업데이트하기', '업데이트하지 못했습니다.', function(){
       const t = nowParts();
       PUB = clone(DRAFT); PUB.updated = { ds:t.date, hm:pad(t.h) + ':' + pad(t.mi) }; DRAFT.updated = clone(PUB.updated);
       refreshStudent();
-      admToast('업데이트했습니다 · 학생 화면 업데이트 시각 ' + md(t.date) + ' ' + pad(t.h) + ':' + pad(t.mi));
+      admToast('학생 화면에 업데이트했습니다.');
     }); } };
   admRender();
 };
 ADM_ACT.discard = function(){
   const dc = dirtyCats(); if (!dc.length) return;
-  AS.confirm = { title:'업데이트하지 않은 변경을 버릴까요?', what:dc.map(function(c){ return c[1]; }),
-    when:'관리자 화면의 값이 마지막 업데이트 때로 바로 돌아갑니다. 학생 화면은 바뀌지 않습니다.', undo:'버린 변경은 되돌릴 수 없습니다.', ok:'변경 버리기', danger:true,
-    fn:function(){ admBusy('discard', '변경 버리기', '변경을 버리지 못했습니다.', function(){ DRAFT = clone(PUB); AS.panel = null; AS.edit = null; AS.f = {}; AS.draw = null; admToast('변경을 버렸습니다. 마지막 업데이트 때의 값으로 돌아갔습니다.'); }); } };
+  AS.confirm = { title:'업데이트하지 않은 변경을 버릴까요?', note:'버린 변경은 되돌릴 수 없습니다.', ok:'변경 버리기', danger:true,
+    fn:function(){ admBusy('discard', '변경 버리기', '변경을 버리지 못했습니다.', function(){ DRAFT = clone(PUB); AS.panel = null; AS.edit = null; AS.f = {}; AS.draw = null; admToast('변경을 버렸습니다.'); }); } };
   admRender();
 };
 ADM_ACT.preview = function(){                               /* 업데이트하면 학생 화면이 어떻게 보일지 (로그인하지 않은 학생 화면) */
@@ -3374,7 +3706,7 @@ ADM_SCR['A-02'] = function(){
       card('처리할 신고', repN, '건', 'A-03', ' data-tab="rep" data-flt="todo"') + card('새 오류', errN, '건', 'A-06', ' data-flt="new"') + '</div>' +
     '<div class="a-two"><section class="acard"><h2>방문자 수 · 최근 7일</h2><p class="a-muted">같은 브라우저는 하루에 한 번만 셉니다. 누구인지는 남기지 않습니다.</p>' + chart + '</section>' +
     '<section class="acard"><h2>건물 조회수 · 최근 7일</h2>' + (views.length ? '<table class="a-tbl sm"><thead><tr><th>건물</th><th class="r">누른 횟수</th></tr></thead><tbody>' +
-      views.map(function(v){ const b = BMAP[v[0]]; return '<tr><td>' + esc(b ? fullName(b) : v[0]) + '</td><td class="r num">' + v[1].toLocaleString('ko-KR') + '</td></tr>'; }).join('') + '</tbody></table>' : '<p class="a-empty">아직 건물 조회 기록이 없습니다</p>') + '</section></div>',
+      views.map(function(v){ const b = BMAP[v[0]]; return '<tr><td>' + esc(b ? dFull(b) : v[0]) + '</td><td class="r num">' + v[1].toLocaleString('ko-KR') + '</td></tr>'; }).join('') + '</tbody></table>' : '<p class="a-empty">아직 건물 조회 기록이 없습니다</p>') + '</section></div>',
     after:bindChartTip };
 };
 function bindChartTip(){
@@ -3444,7 +3776,7 @@ ADM_ACT.replyask = function(){
   const q = findNo('inq', AS.panel.no); const txt = String(fv('reply', '')).trim();
   if (txt.length < 2){ AS.f.e_reply = '답장 내용을 적어 주세요.'; admRender(); return; }
   AS.f.e_reply = '';
-  AS.confirm = { title:'이 답장을 보낼까요?', what:'받는 사람 ' + maskEmail(q.email) + ' · 답장 ' + txt.length.toLocaleString('ko-KR') + '자', when:'누르면 바로 메일로 보냅니다.', undo:'보낸 메일은 되돌릴 수 없습니다.', ok:'답장 보내기', danger:false,
+  AS.confirm = { title:'답장을 보낼까요?', note:'보낸 메일은 되돌릴 수 없습니다.', ok:'답장 보내기', danger:false,
     fn:function(){
       AS.busy = 'reply'; admRender();
       setTimeout(function(){
@@ -3458,12 +3790,12 @@ ADM_ACT.replyask = function(){
 };
 ADM_ACT.doneask = function(){
   const q = findNo('inq', AS.panel.no);
-  AS.confirm = { title:'처리 완료하고 이메일을 지울까요?', what:'문의 #' + q.no + '를 처리 완료로 바꾸고, 이메일(' + maskEmail(q.email) + ')을 지웁니다.', when:'누르면 바로 지웁니다.', undo:'지운 이메일은 되돌릴 수 없습니다. 더는 답장할 수 없습니다.', ok:'처리 완료하고 이메일 지우기', danger:true,
-    fn:function(){ admBusy('done', '문의 #' + q.no + ' 처리 완료', '처리 완료로 바꾸지 못했습니다.', function(){ q.status = 'done'; q.gone = true; q.email = ''; q.del = ''; admToast('처리 완료로 바꾸고 이메일을 지웠습니다.'); }); } };
+  AS.confirm = { title:'처리 완료할까요?', note:'이메일이 지워지며 되돌릴 수 없습니다.', ok:'처리 완료하고 이메일 지우기', danger:true,
+    fn:function(){ admBusy('done', '문의 #' + q.no + ' 처리 완료', '처리 완료하지 못했습니다.', function(){ q.status = 'done'; q.gone = true; q.email = ''; q.del = ''; admToast('처리 완료했습니다.'); }); } };
   admRender();
 };
-ADM_ACT.doneinq = function(){ const q = findNo('inq', AS.panel.no); admBusy('done', '문의 #' + q.no + ' 처리 완료', '처리 완료로 바꾸지 못했습니다.', function(){ q.status = 'done'; admToast('처리 완료로 바꿨습니다.'); }); };
-ADM_ACT.donerep = function(){ const r = findNo('rep', AS.panel.no); admBusy('done', '신고 #' + r.no + ' 처리 완료', '처리 완료로 바꾸지 못했습니다.', function(){ r.status = 'done'; admToast('처리 완료로 바꿨습니다.'); }); };
+ADM_ACT.doneinq = function(){ const q = findNo('inq', AS.panel.no); admBusy('done', '문의 #' + q.no + ' 처리 완료', '처리 완료하지 못했습니다.', function(){ q.status = 'done'; admToast('처리 완료했습니다.'); }); };
+ADM_ACT.donerep = function(){ const r = findNo('rep', AS.panel.no); admBusy('done', '신고 #' + r.no + ' 처리 완료', '처리 완료하지 못했습니다.', function(){ r.status = 'done'; admToast('처리 완료했습니다.'); }); };
 
 /* ---------- A-06 오류 기록 ---------- */
 ADM_SCR['A-06'] = function(){
@@ -3486,7 +3818,7 @@ ADM_SCR['A-06'] = function(){
 ADM_ACT.esel = function(t){ const s = (AS.sel.err = AS.sel.err || {}); const no = Number(t.getAttribute('data-no')); s[no] = t.checked; admRender(); };
 ADM_ACT.eopen = function(t){ const k = 'e' + t.getAttribute('data-no'); AS.open[k] = !AS.open[k]; admRender(); };
 ADM_ACT.eseen = function(t){ const x = findNo('err', Number(t.getAttribute('data-no'))); if (x) x.status = 'seen'; admRender(); };
-ADM_ACT.eseensel = function(){ const s = AS.sel.err || {}; ADM.err.forEach(function(x){ if (s[x.no]) x.status = 'seen'; }); AS.sel.err = {}; admToast('고른 기록을 확인함으로 표시했습니다.'); admRender(); };
+ADM_ACT.eseensel = function(){ const s = AS.sel.err || {}; ADM.err.forEach(function(x){ if (s[x.no]) x.status = 'seen'; }); AS.sel.err = {}; admToast('확인함으로 표시했습니다.'); admRender(); };
 
 /* ---------- A-18 학생 계정 ---------- */
 ADM_SCR['A-18'] = function(){
@@ -3509,21 +3841,21 @@ ADM_ACT.search = function(){ AS.q = String(fv('q', '')).trim(); admRender(true);
 ADM_ACT.searchx = function(){ AS.q = ''; AS.f.q = ''; admRender(true); };
 ADM_ACT.stopask = function(t){
   const s = accById(t.getAttribute('data-id')); AS.f.stopReason = '도배·장난';
-  AS.confirm = { title:'이 계정을 이용 정지할까요?', what:'학번 ' + s.id + ' 계정을 이용 정지합니다.', when:'바로 적용됩니다. 그 학생은 비밀번호가 맞을 때 정지 안내를 봅니다.', undo:'[정지 풀기]로 되돌릴 수 있습니다.', ok:'이용 정지', danger:true,
+  AS.confirm = { title:'학번 ' + s.id + ' 계정을 정지할까요?', ok:'이용 정지', danger:true,
     extra:'<div class="a-fld"><label for="c-reason">정지 사유</label><select id="c-reason" data-f="stopReason"><option>도배·장난</option><option>부정 이용</option><option>계정 도용 의심</option><option>기타</option></select></div>',
-    fn:function(){ admBusy('acc', '학번 ' + s.id + ' 이용 정지', '이용 정지하지 못했습니다.', function(){ s.status = 'stop'; s.reason = AS.f.stopReason || '기타'; admToast('이용 정지했습니다.'); }); } };
+    fn:function(){ admBusy('acc', '학번 ' + s.id + ' 이용 정지', '정지하지 못했습니다.', function(){ s.status = 'stop'; s.reason = AS.f.stopReason || '기타'; admToast('정지했습니다.'); }); } };
   admRender();
 };
 ADM_ACT.unstop = function(t){
   const s = accById(t.getAttribute('data-id'));
-  AS.confirm = { title:'정지를 풀까요?', what:'학번 ' + s.id + ' 계정의 이용 정지를 풉니다.', when:'바로 적용됩니다.', undo:'다시 [정지]할 수 있습니다.', ok:'정지 풀기', danger:false,
+  AS.confirm = { title:'학번 ' + s.id + ' 계정의 정지를 풀까요?', ok:'정지 풀기', danger:false,
     fn:function(){ admBusy('acc', '학번 ' + s.id + ' 정지 풀기', '정지를 풀지 못했습니다.', function(){ s.status = 'ok'; s.reason = ''; admToast('정지를 풀었습니다.'); }); } };
   admRender();
 };
 ADM_ACT.delacc = function(t){
   const s = accById(t.getAttribute('data-id'));
-  AS.confirm = { title:'이 계정을 삭제할까요?', what:'학번 ' + s.id + ' 계정과 그 학생의 내 시간표를 지웁니다.', when:'바로 지웁니다.', undo:'지운 계정은 되돌릴 수 없습니다. 같은 학번으로 다시 가입할 수 있습니다.', ok:'계정 삭제', danger:true,
-    fn:function(){ admBusy('acc', '학번 ' + s.id + ' 계정 삭제', '계정을 지우지 못했습니다.', function(){ ACC.students = ACC.students.filter(function(x){ return x !== s; }); admToast('계정을 지웠습니다.'); }); } };
+  AS.confirm = { title:'학번 ' + s.id + ' 계정을 삭제할까요?', note:'내 시간표도 함께 지워지며 되돌릴 수 없습니다.', ok:'계정 삭제', danger:true,
+    fn:function(){ admBusy('acc', '학번 ' + s.id + ' 계정 삭제', '삭제하지 못했습니다.', function(){ ACC.students = ACC.students.filter(function(x){ return x !== s; }); admToast('삭제했습니다.'); }); } };
   admRender();
 };
 
@@ -3531,6 +3863,8 @@ ADM_ACT.delacc = function(t){
 function dName(b){ return DRAFT.bname[b.id] || b.name; }
 function dNo(b){ return DRAFT.bno[b.id] || b.id; }
 function dFull(b){ return dName(b) + '(' + dNo(b) + ')'; }
+function dGone(b){ return DRAFT.bdel.indexOf(b.id) >= 0; }   /* A-11에서 지운 건물 (G-114) */
+function dTap(b){ return DRAFT.tap.indexOf(b.id) >= 0; }     /* 학생이 누를 수 있게 켠 건물 (G-116) */
 function roomBlds(){ return BUILDINGS.filter(hasRooms).slice().sort(function(a, c){ const x = codeKey(dNo(a)), y = codeKey(dNo(c)); return x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : x[1] - y[1]; }); }
 function aFld(id, label, inner, help, err){ return '<div class="a-fld"><label for="' + id + '">' + esc(label) + '</label>' + inner + (help ? '<p class="fhelp">' + esc(help) + '</p>' : '') + errHTML(id, err) + '</div>'; }
 function aIn(id, key, val, attrs){ return '<input id="' + id + '" data-f="' + key + '" value="' + esc(val == null ? '' : val) + '"' + (attrs || '') + '>'; }
@@ -3569,7 +3903,7 @@ function fileCard(k){
       (R.back.length ? '<div class="a-resbox"><p><b>다시 추가된 강의실 ' + R.back.length + '개</b> - 전에 지웠지만 이번 파일에 나와 다시 넣었습니다. 전에 적은 층·수용 인원을 되살렸습니다.</p><p class="num">' + esc(R.back.join(', ')) + '</p></div>' : '') +
       (!R.errs.length ? '<div class="a-pact">' + abtn(isTT ? '반영하기' : '폐강 파일 반영하기', 'freflect', 'btn-primary', 'refl-' + k, ' data-k="' + k + '"') + '</div>' : '') + '</div>';
   }
-  if (F.state === 'done') h += '<div class="okbox" role="status">반영했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.</div>';
+  if (F.state === 'done') h += '<div class="okbox" role="status">반영했습니다.' + UPD + '</div>';
   return h + '</section>';
 }
 ADM_SCR['A-07'] = function(){
@@ -3629,18 +3963,15 @@ ADM_ACT.fcheck = function(t){
 ADM_ACT.freflect = function(t){
   const k = t.getAttribute('data-k'), sem = targetSem(), F = AS.file[k];
   const isNew = k === 'tt' && fv('semMode', 'cur') === 'new' && sem.name !== DRAFT.sem.name;
-  const fn = function(){ admBusy('refl-' + k, (k === 'tt' ? '시간표' : '폐강') + ' 파일 반영', '파일을 반영하지 못했습니다. 기존 데이터는 그대로입니다.', function(){
+  const fn = function(){ admBusy('refl-' + k, (k === 'tt' ? '시간표' : '폐강') + ' 파일 반영', '파일을 반영하지 못했습니다.', function(){
     DRAFT[k] = { sem:sem.name, file:F.name, at:nowStamp() };
     if (isNew){ DRAFT.sem = { name:sem.name, start:sem.start, end:sem.end }; AS.f.semMode = 'cur'; AS.file.cx = null; }
     F.state = 'done';
-    admToast('반영했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.');
+    admToast('반영했습니다.' + UPD);
   }); };
-  if (k === 'tt' && isNew) AS.confirm = { title:'새 학기로 반영할까요?', what:'지난 학기(' + DRAFT.sem.name + ')의 수업 시간 데이터를 지우고 ' + sem.name + '(' + sem.start + ' ~ ' + sem.end + ')로 반영합니다. 건물·강의실·층·수용 인원 정보는 남습니다.',
-    when:'[업데이트하기]를 누르면 학생 화면에 보입니다.', undo:'업데이트하기 전에는 [변경 버리기]로 되돌릴 수 있습니다. 업데이트한 뒤에는 되돌릴 수 없습니다.', ok:'지난 학기 수업 시간을 지우고 반영', danger:true, fn:fn };
-  else if (k === 'tt') AS.confirm = { title:'시간표 파일을 반영할까요?', what:'기존 ' + DRAFT.sem.name + ' 수업 시간 데이터를 이 파일 내용으로 덮어씁니다. 관리자가 적은 층·수용 인원은 남습니다.',
-    when:'[업데이트하기]를 누르면 학생 화면에 보입니다.', undo:'업데이트하기 전에는 [변경 버리기]로 되돌릴 수 있습니다.', ok:'덮어쓰고 반영', danger:false, fn:fn };
-  else AS.confirm = { title:'폐강 파일을 반영할까요?', what:sem.name + ' 폐강 목록을 이 파일 내용으로 바꿉니다. 폐강 수업이 있던 시간의 강의실은 공실로 보입니다.',
-    when:'[업데이트하기]를 누르면 학생 화면에 보입니다.', undo:'업데이트하기 전에는 [변경 버리기]로 되돌릴 수 있습니다.', ok:'폐강 파일 반영하기', danger:false, fn:fn };
+  if (k === 'tt' && isNew) AS.confirm = { title:'새 학기(' + sem.name + ')로 반영할까요?', ok:'지난 학기 수업 시간을 지우고 반영', danger:true, fn:fn };
+  else if (k === 'tt') AS.confirm = { title:'시간표 파일을 반영할까요?', ok:'덮어쓰고 반영', danger:false, fn:fn };
+  else AS.confirm = { title:'폐강 파일을 반영할까요?', ok:'폐강 파일 반영하기', danger:false, fn:fn };
   admRender();
 };
 
@@ -3670,7 +4001,7 @@ ADM_ACT.savesem = function(){
   if (!validDate(a)) e.semStart = '개강일을 적어 주세요.';
   if (!validDate(b)) e.semEnd = '종강일을 적어 주세요.'; else if (validDate(a) && b <= a) e.semEnd = '종강일은 개강일보다 뒤여야 합니다.';
   if (setErr(e)){ admRender(); return; }
-  admBusy('sem', '학기 정보 저장', '학기 정보를 저장하지 못했습니다.', function(){ DRAFT.sem = { name:n, start:a, end:b }; AS.f = {}; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.'); });
+  admBusy('sem', '학기 정보 저장', '학기 정보를 저장하지 못했습니다.', function(){ DRAFT.sem = { name:n, start:a, end:b }; AS.f = {}; admToast('저장했습니다.' + UPD); });
 };
 ADM_ACT.saveper = function(){
   const P = [null], e = {};
@@ -3683,63 +4014,72 @@ ADM_ACT.saveper = function(){
     P.push([s, t]);
   }
   if (setErr(e)){ admRender(); return; }
-  admBusy('per', '교시 시각표 저장', '교시 시각표를 저장하지 못했습니다.', function(){ DRAFT.periods = P; AS.f = {}; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.'); });
+  admBusy('per', '교시 시각표 저장', '교시 시각표를 저장하지 못했습니다.', function(){ DRAFT.periods = P; AS.f = {}; admToast('저장했습니다.' + UPD); });
 };
 
 /* ---------- A-09 공휴일 ---------- */
-const HOL_API = {                                           /* 공공 공휴일 정보 API 응답 흉내 (예시 날짜) */
+const HOL_API = {                                           /* 공공 공휴일 정보 API 응답 흉내 (2026·2027년 공휴일) */
   '2026':Object.assign({ '2026-06-03':'전국동시지방선거' }, HOLIDAYS0),
-  '2027':{ '2027-01-01':'신정', '2027-02-06':'설날 연휴', '2027-02-07':'설날', '2027-02-08':'설날 연휴', '2027-02-09':'대체공휴일', '2027-03-01':'삼일절', '2027-05-05':'어린이날', '2027-05-13':'부처님오신날',
-    '2027-06-06':'현충일', '2027-08-15':'광복절', '2027-08-16':'대체공휴일', '2027-09-14':'추석 연휴', '2027-09-15':'추석', '2027-09-16':'추석 연휴', '2027-10-03':'개천절', '2027-10-04':'대체공휴일', '2027-10-09':'한글날', '2027-10-11':'대체공휴일', '2027-12-25':'성탄절' }
+  '2027':{ '2027-01-01':'신정', '2027-02-06':'설날 연휴', '2027-02-07':'설날', '2027-02-08':'설날 연휴', '2027-02-09':'대체공휴일', '2027-03-01':'삼일절', '2027-05-01':'노동절', '2027-05-03':'대체공휴일', '2027-05-05':'어린이날', '2027-05-13':'부처님오신날',
+    '2027-06-06':'현충일', '2027-07-17':'제헌절', '2027-07-19':'대체공휴일', '2027-08-15':'광복절', '2027-08-16':'대체공휴일', '2027-09-14':'추석 연휴', '2027-09-15':'추석', '2027-09-16':'추석 연휴', '2027-10-03':'개천절', '2027-10-04':'대체공휴일', '2027-10-09':'한글날', '2027-10-11':'대체공휴일',
+    '2027-12-25':'성탄절', '2027-12-27':'대체공휴일' }
 };
+function dDow(ds){ return ds + ' (' + DOW[dow(ds)] + ')'; }                     /* "2026-10-05 (월)" - A-09 날짜는 모두 요일을 붙임 (G-117) */
+function dowOf(v){ return validDate(v) ? '(' + DOW[dow(v)] + ')' : ''; }        /* 날짜 칸 옆 요일 */
 ADM_SCR['A-09'] = function(){
-  const y = fv('hy', '2026'), H = DRAFT.holidays, e = AS.f.err || {};
+  const y = fv('hy', '2026'), H = DRAFT.holidays, e = AS.f.err || {}, hk = keyBy(HOL_KEY);
   const days = Object.keys(H).filter(function(d){ return d.slice(0, 4) === y; }).sort();
   const R = AS.hres && AS.hres.year === y ? AS.hres : null;
   const ed = AS.edit && AS.edit.k === 'hol' ? AS.edit.ds : null;
   const row = function(d){
     const h = H[d], st = PUB.holidays[d] && JSON.stringify(PUB.holidays[d]) === JSON.stringify(h) ? 'same' : 'changed';
-    if (ed === d) return '<tr class="a-tr edit"><td>' + aIn('h-ed-d', 'hEdD', fv('hEdD', d), ' type="date" aria-label="날짜"') + errHTML('h-ed-d', e.hEdD) + '</td><td></td><td>' + aIn('h-ed-n', 'hEdN', fv('hEdN', h.name), ' maxlength="20" aria-label="이름"') + errHTML('h-ed-n', e.hEdN) + '</td><td>' + (h.src === 'api' ? '불러옴' : '직접 추가') + '</td><td></td>' +
+    if (ed === d) return '<tr class="a-tr edit"><td><div class="a-endrow">' + aIn('h-ed-d', 'hEdD', fv('hEdD', d), ' type="date" aria-label="날짜"') + '<span class="a-dow num" id="h-ed-dow">' + dowOf(fv('hEdD', d)) + '</span></div>' + errHTML('h-ed-d', e.hEdD) + '</td><td>' + aIn('h-ed-n', 'hEdN', fv('hEdN', h.name), ' maxlength="20" aria-label="이름"') + errHTML('h-ed-n', e.hEdN) + '</td><td>' + (h.src === 'api' ? '불러옴' : '직접 추가') + '</td><td></td>' +
       '<td class="a-acts">' + abtn('저장', 'hEdSave', 'btn-primary sm', 'hol') + '<button class="btn btn-text sm" data-a="editx">취소</button></td></tr>';
-    return '<tr class="a-tr"><td class="num">' + d + '</td><td>' + DOW[dow(d)] + '</td><td>' + esc(h.name) + '</td><td>' + (h.src === 'api' ? '불러옴' : '직접 추가') + '</td><td>' + pubBadge(st) + '</td>' +
+    return '<tr class="a-tr"><td class="num">' + dDow(d) + '</td><td>' + esc(h.name) + '</td><td>' + (h.src === 'api' ? '불러옴' : '직접 추가') + '</td><td>' + pubBadge(st) + '</td>' +
       '<td class="a-acts"><button class="btn btn-secondary sm" data-a="hEd" data-d="' + d + '">수정</button><button class="btn btn-text sm danger-t" data-a="hDel" data-d="' + d + '">지우기</button></td></tr>';
   };
   return { html:
-    '<div class="a-keyline">' + (ADM.key.set ? badge('인증키 등록됨', 'ok') + ' <span class="num">끝자리 …' + esc(ADM.key.tail) + '</span>' : badge('인증키 등록 안 됨', 'warn') + ' 인증키가 없어 공휴일을 불러올 수 없습니다.') + ' <button class="btn btn-text sm" data-a="go" data-to="A-15">인증키 관리</button></div>' +
+    '<div class="a-keyline"><span>"' + HOL_KEY + '" 인증키</span>' + (hk ? badge('등록됨', 'ok') + ' <span class="num">…' + esc(hk.tail) + '</span>' : badge('없음', 'warn') + ' <span>없으면 공휴일을 불러오지 못합니다.</span>') + ' <button class="btn btn-text sm" data-a="go" data-to="A-15">API 인증키 관리</button></div>' +
     '<div class="a-tool"><label class="a-inl" for="h-y">연도</label><select id="h-y" data-f="hy" data-rr><option' + (y === '2026' ? ' selected' : '') + '>2026</option><option' + (y === '2027' ? ' selected' : '') + '>2027</option></select>' +
-      abtn('공휴일 불러오기', 'hfetch', 'btn-primary', 'hfetch', ADM.key.set ? '' : ' disabled') +
+      abtn('공휴일 불러오기', 'hfetch', 'btn-primary', 'hfetch') +
       '<button class="btn btn-secondary" data-a="hAdd">휴일 직접 추가</button></div>' +
-    (AS.hfail ? '<div class="ferrbox" role="alert">공휴일을 불러오지 못했습니다. 공공 공휴일 정보 서비스에 연결하지 못했습니다(오류 기록 ' + errNo(AS.hfail) + '). 이미 저장한 목록은 그대로입니다.</div>' : '') +
+    (AS.hfail ? failBox('공휴일을 불러오지 못했습니다.', AS.hfail) : '') +
     (R ? '<section class="acard"><h2>받아 온 목록 · ' + y + '년 (' + R.list.length + '개)</h2><table class="a-tbl sm"><thead><tr><th>날짜</th><th>이름</th><th></th></tr></thead><tbody>' +
-      R.list.map(function(x){ return '<tr><td class="num">' + x[0] + '</td><td>' + esc(x[1]) + '</td><td>' + (H[x[0]] ? badge('이미 있음', 'muted') : badge('새로 받음', 'new')) + '</td></tr>'; }).join('') + '</tbody></table>' +
+      R.list.map(function(x){ return '<tr><td class="num">' + dDow(x[0]) + '</td><td>' + esc(x[1]) + '</td><td>' + (H[x[0]] ? badge('이미 있음', 'muted') : badge('새로 받음', 'new')) + '</td></tr>'; }).join('') + '</tbody></table>' +
       '<p class="a-muted">[저장]을 누르면 새로 받은 날만 목록에 더합니다. 직접 추가한 날은 그대로 둡니다.</p><div class="a-pact">' + abtn('저장', 'hsave', 'btn-primary', 'hol') + '<button class="btn btn-text" data-a="hresx">닫기</button></div></section>' : '') +
-    (AS.edit && AS.edit.k === 'holnew' ? '<section class="acard"><h2>휴일 직접 추가</h2><div class="a-grid3">' + aFld('h-new-d', '날짜', aIn('h-new-d', 'hNewD', fv('hNewD', ''), ' type="date"'), '학교 휴업일, API에 없는 휴일을 더합니다.', e.hNewD) +
+    (AS.edit && AS.edit.k === 'holnew' ? '<section class="acard"><h2>휴일 직접 추가</h2><div class="a-grid3">' + aFld('h-new-d', '날짜', '<div class="a-endrow">' + aIn('h-new-d', 'hNewD', fv('hNewD', ''), ' type="date"') + '<span class="a-dow num" id="h-new-dow">' + dowOf(fv('hNewD', '')) + '</span></div>', '학교 휴업일, API에 없는 휴일을 더합니다.', e.hNewD) +
       aFld('h-new-n', '이름', aIn('h-new-n', 'hNewN', fv('hNewN', ''), ' maxlength="20" placeholder="예: 개교기념일 휴업"'), '', e.hNewN) + '</div><div class="a-pact">' + abtn('추가', 'hNewSave', 'btn-primary', 'hol') + '<button class="btn btn-text" data-a="editx">취소</button></div></section>' : '') +
-    '<section class="acard"><h2>저장한 목록 · ' + y + '년</h2>' + (days.length ? '<table class="a-tbl"><thead><tr><th>날짜</th><th>요일</th><th>이름</th><th>출처</th><th>상태</th><th>관리</th></tr></thead><tbody>' + days.map(row).join('') + '</tbody></table>'
+    '<section class="acard"><h2>저장한 목록 · ' + y + '년</h2>' + (days.length ? '<table class="a-tbl"><thead><tr><th>날짜</th><th>이름</th><th>출처</th><th>상태</th><th>관리</th></tr></thead><tbody>' + days.map(row).join('') + '</tbody></table>'
       : '<div class="a-warnbox">' + y + '년 공휴일 목록이 없습니다. [공휴일 불러오기]로 받아 오세요.</div>') +
     '<p class="a-muted">목록에 없는 휴일은 학생 달력에서 평일처럼 보입니다. 저장한 목록은 [업데이트하기]를 눌러야 학생 달력에 쓰입니다.</p></section>' };
 };
-ADM_ACT.hfetch = function(){
+ADM_ACT.hfetch = function(){                                /* "공휴일 정보" 인증키로 불러옴. 키가 없거나 실패하면 이 자리 상자 + 오류 기록 (G-79·G-113) */
   const y = fv('hy', '2026');
   AS.hfail = 0;
   AS.busy = 'hfetch'; admRender();
   setTimeout(function(){
     AS.busy = '';
-    if (O.holFetch === 'fail' || O.admErr){ const no = ADM.seqErr; admFail(y + '년 공휴일 불러오기', '공휴일을 불러오지 못했습니다.', '공공 공휴일 정보 서비스에 연결하지 못했습니다(연결 시간 초과).', '공휴일 받아 오기'); AS.hfail = no; AS.hres = null; }
-    else { const L = HOL_API[y] || {}; AS.hres = { year:y, list:Object.keys(L).sort().map(function(d){ return [d, L[d]]; }) }; AS.err = null; ADM.key.ok = nowStamp(); }
+    const hk = keyBy(HOL_KEY), t = nowStamp();
+    if (!hk || O.holFetch === 'fail' || O.admErr){
+      const no = ADM.seqErr++;
+      ADM.err.unshift({ no:no, at:t, kind:'공휴일 받아 오기', doing:y + '년 공휴일 불러오기', why:hk ? '공공 공휴일 정보 서비스에 연결하지 못했습니다(연결 시간 초과).' : '"' + HOL_KEY + '" 인증키가 없습니다.', rel:hk ? '"' + HOL_KEY + '" 인증키 [가림]' : '-', status:'new' });
+      if (hk && O.holFetch === 'fail'){ hk.chk = 'fail'; hk.at = t; }
+      AS.hfail = no; AS.hres = null;
+    }
+    else { const L = HOL_API[y] || {}; AS.hres = { year:y, list:Object.keys(L).sort().map(function(d){ return [d, L[d]]; }) }; AS.err = null; hk.chk = 'ok'; hk.at = t; }
     admRender(); renderMock();
   }, 700);
 };
 ADM_ACT.hresx = function(){ AS.hres = null; admRender(); };
-ADM_ACT.hsave = function(){ const R = AS.hres; admBusy('hol', '공휴일 저장', '공휴일을 저장하지 못했습니다.', function(){ let n = 0; R.list.forEach(function(x){ if (!DRAFT.holidays[x[0]]){ DRAFT.holidays[x[0]] = { name:x[1], src:'api' }; n++; } }); AS.hres = null; admToast(n ? '새로 받은 공휴일 ' + n + '개를 저장했습니다. [업데이트하기]를 눌러야 학생 달력에 쓰입니다.' : '새로 받은 공휴일이 없습니다. 목록은 그대로입니다.'); }); };
+ADM_ACT.hsave = function(){ const R = AS.hres; admBusy('hol', '공휴일 저장', '공휴일을 저장하지 못했습니다.', function(){ let n = 0; R.list.forEach(function(x){ if (!DRAFT.holidays[x[0]]){ DRAFT.holidays[x[0]] = { name:x[1], src:'api' }; n++; } }); AS.hres = null; admToast(n ? '새로 받은 ' + n + '개를 저장했습니다.' + UPD : '새로 받은 공휴일이 없습니다.'); }); };
 ADM_ACT.hAdd = function(){ AS.edit = { k:'holnew' }; AS.f = { hy:fv('hy', '2026') }; admRender(); };
-ADM_ACT.editx = function(){ const hy = fv('hy', '2026'), rb = fv('rb', 'D2'); AS.edit = null; AS.f = { hy:hy, rb:rb }; admRender(); };
+ADM_ACT.editx = function(){ const hy = fv('hy', '2026'), rb = fv('rb', 'D2'), ab = fv('abld', 'C3'); AS.edit = null; AS.f = { hy:hy, rb:rb, abld:ab }; admRender(); };
 ADM_ACT.hNewSave = function(){
   const d = fv('hNewD', ''), n = String(fv('hNewN', '')).trim(), e = {};
   if (!validDate(d)) e.hNewD = '날짜 형식이 맞지 않습니다. 달력에서 골라 주세요.'; else if (DRAFT.holidays[d]) e.hNewD = '이미 목록에 있는 날짜입니다.';
   if (!n) e.hNewN = '이름을 적어 주세요.';
   if (setErr(e)){ admRender(); return; }
-  admBusy('hol', '휴일 추가', '휴일을 추가하지 못했습니다.', function(){ DRAFT.holidays[d] = { name:n, src:'manual' }; AS.edit = null; AS.f = { hy:d.slice(0, 4) }; admToast('휴일을 추가했습니다. [업데이트하기]를 눌러야 학생 달력에 쓰입니다.'); });
+  admBusy('hol', '휴일 추가', '휴일을 추가하지 못했습니다.', function(){ DRAFT.holidays[d] = { name:n, src:'manual' }; AS.edit = null; AS.f = { hy:d.slice(0, 4) }; admToast('추가했습니다.' + UPD); });
 };
 ADM_ACT.hEd = function(t){ AS.edit = { k:'hol', ds:t.getAttribute('data-d') }; AS.f = { hy:fv('hy', '2026') }; admRender(); };
 ADM_ACT.hEdSave = function(){
@@ -3747,12 +4087,12 @@ ADM_ACT.hEdSave = function(){
   if (!validDate(d)) e.hEdD = '날짜 형식이 맞지 않습니다.'; else if (d !== od && DRAFT.holidays[d]) e.hEdD = '이미 목록에 있는 날짜입니다.';
   if (!n) e.hEdN = '이름을 적어 주세요.';
   if (setErr(e)){ admRender(); return; }
-  admBusy('hol', '공휴일 수정', '공휴일을 고치지 못했습니다.', function(){ const h = DRAFT.holidays[od]; delete DRAFT.holidays[od]; DRAFT.holidays[d] = { name:n, src:h.src }; AS.edit = null; AS.f = { hy:d.slice(0, 4) }; admToast('고쳤습니다.'); });
+  admBusy('hol', '공휴일 수정', '공휴일을 고치지 못했습니다.', function(){ const h = DRAFT.holidays[od]; delete DRAFT.holidays[od]; DRAFT.holidays[d] = { name:n, src:h.src }; AS.edit = null; AS.f = { hy:d.slice(0, 4) }; admToast('고쳤습니다.' + UPD); });
 };
 ADM_ACT.hDel = function(t){
   const d = t.getAttribute('data-d'), h = DRAFT.holidays[d];
-  AS.confirm = { title:'이 공휴일을 지울까요?', what:d + ' ' + h.name + '을(를) 공휴일 목록에서 지웁니다.', when:'[업데이트하기]를 누르면 학생 달력에서 평일로 보입니다.', undo:'업데이트하기 전에는 [변경 버리기]로 되돌릴 수 있습니다.', ok:'공휴일 지우기', danger:true,
-    fn:function(){ admBusy('hol', '공휴일 지우기', '공휴일을 지우지 못했습니다.', function(){ delete DRAFT.holidays[d]; admToast('지웠습니다.'); }); } };
+  AS.confirm = { title:dDow(d) + ' 공휴일을 지울까요?', ok:'공휴일 지우기', danger:true,
+    fn:function(){ admBusy('hol', '공휴일 지우기', '공휴일을 지우지 못했습니다.', function(){ delete DRAFT.holidays[d]; admToast('지웠습니다.' + UPD_OUT); }); } };
   admRender();
 };
 
@@ -3778,18 +4118,23 @@ function tabBld(){
     }).join('') + '</tbody></table>';
 }
 ADM_ACT.bEd = function(t){ AS.edit = { k:'bld', id:t.getAttribute('data-id') }; AS.f = {}; admRender(); };
-ADM_ACT.bSave = function(){
-  const b = BMAP[AS.edit.id], no = String(fv('bNo', dNo(b))).trim().toUpperCase(), nm = String(fv('bName', dName(b))).trim(), e = {};
+function bldErr(b, no, nm){                                  /* 건물 번호·이름 검사 (A-10·A-11 같이 씀, G-115) */
+  const e = {};
   if (!/^[A-Z]{1,2}\d{1,2}$/.test(no)) e.bNo = '건물 번호는 "D2"처럼 영문자와 숫자로 적어 주세요.';
-  else if (BUILDINGS.some(function(x){ return x !== b && dNo(x) === no; })) e.bNo = '다른 건물이 쓰는 번호입니다.';
+  else if (BUILDINGS.some(function(x){ return x !== b && !dGone(x) && dNo(x) === no; }) || PLACES.some(function(p){ return p.id === no; })) e.bNo = '이미 쓰는 번호입니다.';
   if (!nm) e.bName = '이름을 적어 주세요.';
-  if (setErr(e)){ admRender(); return; }
-  admBusy('bld', '건물 정보 저장', '건물 정보를 저장하지 못했습니다.', function(){
+  return e;
+}
+function bldSave(key, keep){                                 /* 건물 번호·이름 저장 (bname·bno) → 학생 화면·관리자 화면의 모든 건물 표시에 쓰임 */
+  const b = BMAP[AS.edit.id], no = String(fv('bNo', dNo(b))).trim().toUpperCase(), nm = String(fv('bName', dName(b))).trim();
+  if (setErr(bldErr(b, no, nm))){ admRender(); return; }
+  admBusy(key, '건물 정보 저장', '건물 정보를 저장하지 못했습니다.', function(){
     if (nm === b.name) delete DRAFT.bname[b.id]; else DRAFT.bname[b.id] = nm;
     if (no === b.id) delete DRAFT.bno[b.id]; else DRAFT.bno[b.id] = no;
-    AS.edit = null; AS.f = {}; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.');
+    AS.edit = null; AS.f = keep || {}; admToast('저장했습니다.' + UPD);
   });
-};
+}
+ADM_ACT.bSave = function(){ bldSave('bld'); };
 function tabRoom(){
   const rb = fv('rb', 'D2'), b = BMAP[rb], flt = AS.flt['A-10room'] || 'all', e = AS.f.err || {};
   const ed = AS.edit && AS.edit.k === 'room' ? AS.edit.key : null;
@@ -3826,14 +4171,13 @@ ADM_ACT.rSave = function(){
   admBusy('room', '강의실 정보 저장', '강의실 정보를 저장하지 못했습니다.', function(){
     if (!auto){ if (fl) DRAFT.roomFloor[k] = Number(fl); else delete DRAFT.roomFloor[k]; }
     if (cap) DRAFT.roomCap[k] = Number(cap); else delete DRAFT.roomCap[k];
-    AS.edit = null; AS.f = { rb:rb }; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.');
+    AS.edit = null; AS.f = { rb:rb }; admToast('저장했습니다.' + UPD);
   });
 };
 ADM_ACT.rDel = function(t){
   const k = t.getAttribute('data-k'), rb = fv('rb', 'D2');
-  AS.confirm = { title:'이 강의실을 지울까요?', what:roomLabel(k) + '을(를) 강의실 목록에서 지웁니다.', when:'[업데이트하기]를 누르면 학생 화면에서 빠집니다.',
-    undo:'업데이트하기 전에는 [변경 버리기]로 되돌릴 수 있습니다. 다음에 반영하는 파일에 다시 나오면 목록에 다시 들어갑니다.', ok:'강의실 지우기', danger:true,
-    fn:function(){ admBusy('room', '강의실 지우기', '강의실을 지우지 못했습니다.', function(){ DRAFT.roomDel[k] = true; AS.f = { rb:rb }; admToast('지웠습니다. [업데이트하기]를 눌러야 학생 화면에서 빠집니다.'); }); } };
+  AS.confirm = { title:roomLabel(k) + '를 지울까요?', ok:'강의실 지우기', danger:true,
+    fn:function(){ admBusy('room', '강의실 지우기', '강의실을 지우지 못했습니다.', function(){ DRAFT.roomDel[k] = true; AS.f = { rb:rb }; admToast('지웠습니다.' + UPD_OUT); }); } };
   admRender();
 };
 function tabCode(){
@@ -3850,12 +4194,12 @@ function tabCode(){
     '<div class="a-pact">' + abtn('줄 추가', 'cAdd', 'btn-secondary', 'code') + '</div></section>';
 }
 ADM_ACT.cEd = function(t){ AS.edit = { k:'code', i:Number(t.getAttribute('data-i')) }; AS.f = {}; admRender(); };
-ADM_ACT.cSave = function(){ const i = AS.edit.i, v = fv('cB', DRAFT.codeMap[i][1]); admBusy('code', '코드 짝짓기 저장', '저장하지 못했습니다.', function(){ DRAFT.codeMap[i] = [DRAFT.codeMap[i][0], v]; AS.edit = null; AS.f = {}; admToast('저장했습니다.'); }); };
+ADM_ACT.cSave = function(){ const i = AS.edit.i, v = fv('cB', DRAFT.codeMap[i][1]); admBusy('code', '코드 짝짓기 저장', '저장하지 못했습니다.', function(){ DRAFT.codeMap[i] = [DRAFT.codeMap[i][0], v]; AS.edit = null; AS.f = {}; admToast('저장했습니다. 업데이트하면 반영됩니다.'); }); };
 ADM_ACT.cAdd = function(){
   const c = String(fv('cNew', '')).trim().toUpperCase(), b = fv('cNewB', 'D2'), e = {};
   if (!/^[A-Z0-9]{1,6}$/.test(c)) e.cNew = '영문자·숫자로 적어 주세요.'; else if (DRAFT.codeMap.some(function(x){ return x[0] === c; })) e.cNew = '이미 있는 코드입니다.';
   if (setErr(e)){ admRender(); return; }
-  admBusy('code', '코드 짝짓기 줄 추가', '줄을 더하지 못했습니다.', function(){ DRAFT.codeMap.push([c, b]); AS.f = {}; admToast('줄을 더했습니다.'); });
+  admBusy('code', '코드 짝짓기 줄 추가', '줄을 더하지 못했습니다.', function(){ DRAFT.codeMap.push([c, b]); AS.f = {}; admToast('더했습니다. 업데이트하면 반영됩니다.'); });
 };
 function tabOrder(){
   const v = fv('sortSel', DRAFT.sort);
@@ -3867,10 +4211,10 @@ function tabOrder(){
     '<h3 class="a-h3">이렇게 보입니다</h3><ol class="a-olist">' + bs.map(function(b){ return '<li>' + esc(dFull(b)) + '</li>'; }).join('') + '</ol>' +
     '<p class="a-muted">새 건물이 생기면 고른 순서에 따라 저절로 제자리에 들어갑니다.</p><div class="a-pact">' + abtn('저장', 'sortSave', 'btn-primary', 'sort') + '</div></section>';
 }
-ADM_ACT.sortSave = function(){ const v = fv('sortSel', DRAFT.sort); admBusy('sort', '건물 목록 순서 저장', '저장하지 못했습니다.', function(){ DRAFT.sort = v; AS.f = {}; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.'); }); };
+ADM_ACT.sortSave = function(){ const v = fv('sortSel', DRAFT.sort); admBusy('sort', '건물 목록 순서 저장', '저장하지 못했습니다.', function(){ DRAFT.sort = v; AS.f = {}; admToast('저장했습니다.' + UPD); }); };
 
 /* ---------- A-11 캠퍼스맵 (점을 찍어 건물 모양대로 그리기, Q6) ---------- */
-function draftParts(b){ const A = DRAFT.areas; if (Object.prototype.hasOwnProperty.call(A, b.id)) return A[b.id] ? [A[b.id]] : null; return SHAPES[b.id] || null; }
+function draftParts(b){ if (dGone(b)) return null; const A = DRAFT.areas; if (Object.prototype.hasOwnProperty.call(A, b.id)) return A[b.id] ? [A[b.id]] : null; return SHAPES[b.id] || null; }
 function aMapSVG(cur){
   const G = MAPGEO, poly = function(cls, p){ return '<polygon class="' + cls + '" points="' + ptsStr(p) + '"/>'; };
   let g = poly('m-ground', G.ground);
@@ -3882,7 +4226,7 @@ function aMapSVG(cur){
   let lb = '';
   BUILDINGS.forEach(function(b){
     const parts = draftParts(b); if (!parts) return;
-    g += '<g class="abld' + (b.rooms ? ' on' : '') + (b.id === cur ? ' cur' : '') + '">' + parts.map(function(p){ return poly('base', p); }).join('') + '</g>';
+    g += '<g class="abld' + (b.rooms && dTap(b) ? ' on' : '') + (b.id === cur ? ' cur' : '') + '">' + parts.map(function(p){ return poly('base', p); }).join('') + '</g>';
     if (b.rooms){ const c = Object.prototype.hasOwnProperty.call(DRAFT.areas, b.id) && DRAFT.areas[b.id] ? centroid(DRAFT.areas[b.id]) : (LPOS[b.id] || centroid(parts[0])); lb += '<text class="albl" x="' + c[0] + '" y="' + c[1] + '">' + esc(dNo(b)) + '</text>'; }
   });
   let d = '';
@@ -3908,7 +4252,7 @@ ADM_SCR['A-11'] = function(){
       (mf && mf.name ? '<div class="a-warnbox">그림을 바꾸면 건물 영역을 다시 맞춰 주세요.</div><div class="a-pact">' + abtn('그림 바꾸기 저장', 'mapImgSave', 'btn-primary', 'mapimg') + '</div>' : '') + '</section>' +
     '<section class="acard"><h2>최대 확대 크기 ' + pubBadge(DRAFT.maxZoom === PUB.maxZoom ? 'same' : 'changed') + '</h2>' +
       aFld('a-mz', '처음 크기의 몇 배까지', aIn('a-mz', 'mz', mz, ' type="number" min="2" max="8" step="1"') + '<span class="a-unit">배</span>', '처음 크기 = 캠퍼스맵 전체가 한 번에 보이는 크기. 2~8배. 그림이 흐려지지 않는 만큼으로 정합니다.', e.mz) +
-      '<div class="a-pact">' + abtn('저장', 'mzSave', 'btn-primary', 'mz') + '</div></section></div></div>',
+      '<div class="a-pact">' + abtn('저장', 'mzSave', 'btn-primary', 'mz') + '</div></section></div></div>' + aBldCard(),
     after:bindAMap };
 };
 function bindAMap(){
@@ -3927,20 +4271,59 @@ ADM_ACT.drawUndo = function(){ AS.draw.pts.pop(); admRender(); };
 ADM_ACT.drawX = function(){ AS.draw = null; admRender(); };
 ADM_ACT.drawDone = function(){
   const d = AS.draw; if (!d || d.pts.length < 3) return;
-  admBusy('area', '건물 영역 저장', '영역을 저장하지 못했습니다.', function(){ DRAFT.areas[d.bid] = d.pts; AS.draw = null; AS.f.abld = d.bid; admToast('영역을 저장했습니다. [업데이트하기]를 누르면 학생 캠퍼스맵에서 누를 수 있습니다.'); });
+  admBusy('area', '건물 영역 저장', '영역을 저장하지 못했습니다.', function(){ DRAFT.areas[d.bid] = d.pts; AS.draw = null; AS.f.abld = d.bid; admToast('저장했습니다.' + UPD); });
 };
 ADM_ACT.areaDel = function(){
   const id = fv('abld', 'C3');
-  AS.confirm = { title:'이 건물의 영역을 지울까요?', what:dFull(BMAP[id]) + '의 캠퍼스맵 영역을 지웁니다.', when:'[업데이트하기]를 누르면 학생 캠퍼스맵에서 이 건물을 누를 수 없습니다. 건물 목록에서는 고를 수 있습니다.',
-    undo:'업데이트하기 전에는 [변경 버리기]로 되돌릴 수 있습니다.', ok:'영역 지우기', danger:true,
-    fn:function(){ admBusy('area', '건물 영역 지우기', '영역을 지우지 못했습니다.', function(){ DRAFT.areas[id] = null; admToast('영역을 지웠습니다.'); }); } };
+  AS.confirm = { title:dFull(BMAP[id]) + ' 영역을 지울까요?', ok:'영역 지우기', danger:true,
+    fn:function(){ admBusy('area', '건물 영역 지우기', '영역을 지우지 못했습니다.', function(){ DRAFT.areas[id] = null; admToast('지웠습니다.' + UPD_OUT); }); } };
   admRender();
 };
-ADM_ACT.mapImgSave = function(){ const mf = AS.mapFile; admBusy('mapimg', '캠퍼스맵 그림 저장', '그림을 저장하지 못했습니다.', function(){ DRAFT.mapImg = mf.name; AS.mapFile = null; admToast('그림을 저장했습니다. 건물 영역을 다시 맞춰 주세요.'); }); };
+ADM_ACT.mapImgSave = function(){ const mf = AS.mapFile; admBusy('mapimg', '캠퍼스맵 그림 저장', '그림을 저장하지 못했습니다.', function(){ DRAFT.mapImg = mf.name; AS.mapFile = null; admToast('저장했습니다.' + UPD); }); };
 ADM_ACT.mzSave = function(){
   const v = Number(fv('mz', DRAFT.maxZoom));
   if (!(v >= 2 && v <= 8 && Math.round(v) === v)){ setErr({ mz:'2~8 사이 숫자로 적어 주세요.' }); admRender(); return; }
-  admBusy('mz', '최대 확대 크기 저장', '저장하지 못했습니다.', function(){ DRAFT.maxZoom = v; AS.f = {}; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 쓰입니다.'); });
+  admBusy('mz', '최대 확대 크기 저장', '저장하지 못했습니다.', function(){ DRAFT.maxZoom = v; AS.f = {}; admToast('저장했습니다.' + UPD); });
+};
+/* A-11 건물 표: 이름·번호 바꾸기, 학생이 누르기 켜기·끄기, 건물 지우기 (G-114~G-116) */
+function aBldCard(){
+  const e = AS.f.err || {}, ed = AS.edit && AS.edit.k === 'abld' ? AS.edit.id : null;
+  const L = BUILDINGS.filter(function(b){ return !dGone(b); }).sort(function(a, c){ const x = codeKey(dNo(a)), y = codeKey(dNo(c)); return x[0] < y[0] ? -1 : x[0] > y[0] ? 1 : x[1] - y[1]; });
+  const same = ['bname', 'bno', 'tap', 'bdel'].every(function(k){ return JSON.stringify(DRAFT[k]) === JSON.stringify(PUB[k]); });
+  return '<section class="acard"><h2>건물 ' + pubBadge(same ? 'same' : 'changed') + '</h2>' +
+    '<p class="a-muted">[학생이 누르기]를 끄면 학생 캠퍼스맵과 건물 목록에서 그 건물을 고를 수 없습니다. 강의실이 있는 건물은 지울 수 없습니다.</p>' +
+    '<table class="a-tbl"><thead><tr><th>건물 번호</th><th>이름</th><th>강의실</th><th>캠퍼스맵 영역</th><th>학생이 누르기</th><th>상태</th><th>관리</th></tr></thead><tbody>' +
+    L.map(function(b){
+      const n = b.rooms ? Object.keys(b.rooms).reduce(function(s, f){ return s + b.rooms[f].length; }, 0) + (b.nofloor || []).length : 0;
+      const area = !!draftParts(b), on = dTap(b);
+      const st = (DRAFT.bname[b.id] || '') === (PUB.bname[b.id] || '') && (DRAFT.bno[b.id] || '') === (PUB.bno[b.id] || '') && on === (PUB.tap.indexOf(b.id) >= 0) ? 'same' : 'changed';
+      if (ed === b.id) return '<tr class="a-tr edit"><td>' + aIn('ab-no', 'bNo', fv('bNo', dNo(b)), ' maxlength="4" aria-label="건물 번호"') + errHTML('ab-no', e.bNo) + '</td><td>' + aIn('ab-name', 'bName', fv('bName', dName(b)), ' maxlength="30" aria-label="이름"') + errHTML('ab-name', e.bName) + '</td>' +
+        '<td class="num">' + (n ? n + '개' : '-') + '</td><td></td><td></td><td></td><td class="a-acts">' + abtn('저장', 'abSave', 'btn-primary sm', 'abld') + '<button class="btn btn-text sm" data-a="editx">취소</button></td></tr>';
+      const sw = b.rooms ? '<button class="a-sw" role="switch" aria-checked="' + on + '" aria-label="' + esc(dFull(b)) + ' 학생이 누르기" data-a="tapTog" data-id="' + b.id + '"' + (AS.busy ? ' disabled' : '') + '><span class="sw-t" aria-hidden="true"></span>' + (on ? '켜짐' : '꺼짐') + '</button>' + (on && !area ? ' <span class="a-muted">건물 목록에서만</span>' : '')
+        : '<span class="a-muted">강의실 없음</span>';
+      return '<tr class="a-tr"><td class="num">' + esc(dNo(b)) + '</td><td>' + esc(dName(b)) + '</td><td class="num">' + (n ? n + '개' : '-') + '</td><td>' + (area ? '있음' : badge('영역 없음', 'warn')) + '</td><td>' + sw + '</td><td>' + pubBadge(st) + '</td>' +
+        '<td class="a-acts"><button class="btn btn-secondary sm" data-a="abEd" data-id="' + b.id + '">수정</button><button class="btn btn-text sm danger-t" data-a="abDel" data-id="' + b.id + '">지우기</button></td></tr>';
+    }).join('') + '</tbody></table></section>';
+}
+ADM_ACT.abEd = function(t){ AS.edit = { k:'abld', id:t.getAttribute('data-id') }; AS.f = { abld:fv('abld', 'C3') }; admRender(); };
+ADM_ACT.abSave = function(){ bldSave('abld', { abld:fv('abld', 'C3') }); };
+ADM_ACT.tapTog = function(t){
+  const b = BMAP[t.getAttribute('data-id')], on = !dTap(b);
+  admBusy('tap', dFull(b) + ' 학생이 누르기 ' + (on ? '켜기' : '끄기'), '바꾸지 못했습니다.', function(){
+    DRAFT.tap = BUILDINGS.filter(function(x){ return x === b ? on : dTap(x); }).map(function(x){ return x.id; });   /* 건물 차례로 둠 (다시 켜면 처음과 같아짐) */
+    admToast((on ? '켰습니다.' : '껐습니다.') + UPD);
+  });
+};
+ADM_ACT.abDel = function(t){
+  const b = BMAP[t.getAttribute('data-id')];
+  if (b.rooms){ admToast('강의실이 있는 건물은 지울 수 없습니다.'); admRender(); return; }   /* 강의실이 연결된 건물은 막음 (G-114) */
+  AS.confirm = { title:dFull(b) + ' 건물을 지울까요?', note:'업데이트하면 되돌릴 수 없습니다.', ok:'건물 지우기', danger:true,
+    fn:function(){ admBusy('abld', dFull(b) + ' 건물 지우기', '건물을 지우지 못했습니다.', function(){
+      DRAFT.bdel = BUILDINGS.filter(function(x){ return x === b || dGone(x); }).map(function(x){ return x.id; });
+      if (AS.edit && AS.edit.id === b.id) AS.edit = null;
+      admToast('지웠습니다.' + UPD_OUT);
+    }); } };
+  admRender();
 };
 
 /* ---------- A-12 사용 불가 설정 (02 7.7, 계속 체크) ---------- */
@@ -3996,20 +4379,18 @@ ADM_ACT.naSave = function(){
   if (setErr(e)){ admRender(); return; }
   const id = AS.panel.id || ('u' + Date.now());
   const u = { id:id, type:ty, bid:bid, floor:fl, room:rm0, start:s, end:cont ? null : en, cont:cont, reason:why };
-  AS.confirm = { title:'사용 불가로 저장할까요?', what:naTarget(u) + ' · ' + s + ' ~ ' + (cont ? '계속' : en) + ' · 학생 화면 문구 "' + naText(u) + '"',
-    when:'[업데이트하기]를 누르면 학생 화면에 보입니다.', undo:'업데이트하기 전에는 [해제]나 [변경 버리기]로 되돌릴 수 있습니다.', ok:'사용 불가로 저장', danger:false,
+  AS.confirm = { title:'사용 불가로 저장할까요?', ok:'사용 불가로 저장', danger:false,
     fn:function(){ admBusy('na', '사용 불가 저장', '사용 불가 설정을 저장하지 못했습니다.', function(){
       const i = DRAFT.unavail.map(function(x){ return x.id; }).indexOf(id);
       if (i >= 0) DRAFT.unavail[i] = u; else DRAFT.unavail.push(u);
-      AS.panel = null; AS.f = {}; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.');
+      AS.panel = null; AS.f = {}; admToast('저장했습니다.' + UPD);
     }); } };
   admRender();
 };
 ADM_ACT.naOff = function(t){
   const u = DRAFT.unavail.filter(function(x){ return x.id === t.getAttribute('data-id'); })[0];
-  AS.confirm = { title:'사용 불가를 해제할까요?', what:naTarget(u) + ' · "' + naText(u) + '"', when:'[업데이트하기]를 누르면 학생 화면에서 사용 불가 표시가 없어집니다.',
-    undo:'해제한 설정은 다시 만들어야 합니다. 업데이트하기 전에는 [변경 버리기]로 되돌릴 수 있습니다.', ok:'사용 불가 해제', danger:true,
-    fn:function(){ admBusy('na', '사용 불가 해제', '해제하지 못했습니다.', function(){ DRAFT.unavail = DRAFT.unavail.filter(function(x){ return x.id !== u.id; }); if (AS.panel && AS.panel.id === u.id) AS.panel = null; admToast('해제했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.'); }); } };
+  AS.confirm = { title:naTarget(u) + ' 사용 불가를 해제할까요?', ok:'사용 불가 해제', danger:true,
+    fn:function(){ admBusy('na', '사용 불가 해제', '해제하지 못했습니다.', function(){ DRAFT.unavail = DRAFT.unavail.filter(function(x){ return x.id !== u.id; }); if (AS.panel && AS.panel.id === u.id) AS.panel = null; admToast('해제했습니다.' + UPD); }); } };
   admRender();
 };
 
@@ -4055,13 +4436,13 @@ ADM_ACT.ntSave = function(){
     const L = DRAFT[key];
     if (id){ const n = L.filter(function(x){ return x.id === id; })[0]; n.title = ti; n.body = bo; if (key === 'notices') n.date = today(); }
     else { const n = { id:(key === 'notices' ? 'n' : 'p') + Date.now(), title:ti, body:bo }; if (key === 'notices'){ n.date = today(); L.unshift(n); } else L.push(n); }
-    AS.panel = null; AS.f = {}; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.');
+    AS.panel = null; AS.f = {}; admToast('저장했습니다.' + UPD);
   });
 };
 ADM_ACT.ntDel = function(t){
   const key = ntKey(), id = t.getAttribute('data-id'), n = DRAFT[key].filter(function(x){ return x.id === id; })[0];
-  AS.confirm = { title:'이 글을 지울까요?', what:'"' + n.title + '"을(를) 지웁니다.', when:'[업데이트하기]를 누르면 학생 화면에서 빠집니다.', undo:'업데이트하기 전에는 [변경 버리기]로 되돌릴 수 있습니다.', ok:'글 지우기', danger:true,
-    fn:function(){ admBusy('nt', '글 지우기', '글을 지우지 못했습니다.', function(){ DRAFT[key] = DRAFT[key].filter(function(x){ return x.id !== id; }); if (AS.panel && AS.panel.id === id) AS.panel = null; admToast('지웠습니다. [업데이트하기]를 눌러야 학생 화면에서 빠집니다.'); }); } };
+  AS.confirm = { title:'이 글을 지울까요?', ok:'글 지우기', danger:true,
+    fn:function(){ admBusy('nt', '글 지우기', '글을 지우지 못했습니다.', function(){ DRAFT[key] = DRAFT[key].filter(function(x){ return x.id !== id; }); if (AS.panel && AS.panel.id === id) AS.panel = null; admToast('지웠습니다.' + UPD_OUT); }); } };
   admRender();
 };
 function moveIn(arr, i, d){ const j = i + d; if (j < 0 || j >= arr.length) return; const t = arr[i]; arr[i] = arr[j]; arr[j] = t; }
@@ -4070,13 +4451,13 @@ ADM_ACT.popDn = function(t){ moveIn(DRAFT.popups, Number(t.getAttribute('data-i'
 ADM_ACT.bnSave = function(){
   const on = !!fv('bnOn', DRAFT.banner.on), tx = String(fv('bnText', DRAFT.banner.text)).trim();
   if (on && !tx){ setErr({ bnText:'배너를 보이려면 문구를 적어 주세요.' }); admRender(); return; }
-  admBusy('bn', '배너 저장', '배너를 저장하지 못했습니다.', function(){ DRAFT.banner = { on:on, text:tx }; AS.f = {}; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.'); });
+  admBusy('bn', '배너 저장', '배너를 저장하지 못했습니다.', function(){ DRAFT.banner = { on:on, text:tx }; AS.f = {}; admToast('저장했습니다.' + UPD); });
 };
 
 /* ---------- A-14 문구·신고 종류 ---------- */
 const TEXT_DEF = {
   src:[['srcTT', '시간표·폐강 교과목 출처', '바닥 영역', 100], ['srcMap', '캠퍼스맵 출처', '바닥 영역 (캠퍼스맵 출처 줄을 둘 때)', 100]],
-  msg:[['offday', '운영하지 않는 날 안내 창', '오늘이 주말·공휴일일 때 건물을 누르면 (S-07, 두 줄)', 100, true], ['vacation', '수업 기간 아님 안내 창', '오늘이 방학일 때 건물을 누르면 (S-07, 두 줄)', 100, true],
+  msg:[['offday', '운영하지 않는 날 안내 창', '오늘이 주말·공휴일일 때 건물을 누르면 (S-07, 한 줄)', 100],['vacation', '수업 기간 아님 안내 창', '오늘이 방학일 때 건물을 누르면 (S-07, 두 줄)', 100, true],
     ['vacNote', '수업 기간 아님 안내 줄', '필터 밑 안내 문구', 60], ['noClass', '수업 시간 밖 안내', '필터 밑 안내 문구 (09:00 전·17:50 뒤)', 60], ['pick', '교시를 고르라는 안내', '층별 안내도·강의실 상세', 40], ['fixed', '휴강·보강·시험 미반영 안내', '층별 안내도·강의실 상세·바닥 영역', 60]]
 };
 ADM_SCR['A-14'] = function(){
@@ -4107,7 +4488,7 @@ ADM_ACT.txSave = function(t){
   const g = t.getAttribute('data-g'), e = {}, nv = {};
   TEXT_DEF[g].forEach(function(d){ const v = String(fv('tx_' + d[0], DRAFT.texts[d[0]])).trim(); if (!v) e['tx_' + d[0]] = '문구를 적어 주세요.'; nv[d[0]] = v; });
   if (setErr(e)){ admRender(); return; }
-  admBusy('tx', '문구 저장', '문구를 저장하지 못했습니다.', function(){ Object.keys(nv).forEach(function(k){ DRAFT.texts[k] = nv[k]; }); AS.f = {}; admToast('저장했습니다. [업데이트하기]를 눌러야 학생 화면에 보입니다.'); });
+  admBusy('tx', '문구 저장', '문구를 저장하지 못했습니다.', function(){ Object.keys(nv).forEach(function(k){ DRAFT.texts[k] = nv[k]; }); AS.f = {}; admToast('저장했습니다.' + UPD); });
 };
 ADM_ACT.rtUp = function(t){ moveIn(DRAFT.reportTypes, Number(t.getAttribute('data-i')), -1); admRender(); };
 ADM_ACT.rtDn = function(t){ moveIn(DRAFT.reportTypes, Number(t.getAttribute('data-i')), 1); admRender(); };
@@ -4115,50 +4496,65 @@ ADM_ACT.rtEdit = function(t){ AS.edit = { k:'rt', i:Number(t.getAttribute('data-
 ADM_ACT.rtSave = function(){
   const i = AS.edit.i, v = String(fv('rtEd', DRAFT.reportTypes[i])).trim();
   if (!v || v === '기타' || DRAFT.reportTypes.some(function(x, j){ return j !== i && x === v; })){ setErr({ rtEd:!v ? '선택지를 적어 주세요.' : '이미 있는 선택지입니다.' }); admRender(); return; }
-  admBusy('rt', '신고 종류 저장', '저장하지 못했습니다.', function(){ DRAFT.reportTypes[i] = v; AS.edit = null; AS.f = {}; admToast('저장했습니다.'); });
+  admBusy('rt', '신고 종류 저장', '저장하지 못했습니다.', function(){ DRAFT.reportTypes[i] = v; AS.edit = null; AS.f = {}; admToast('저장했습니다.' + UPD); });
 };
 ADM_ACT.rtAdd = function(){
   const v = String(fv('rtNew', '')).trim();
   if (!v || v === '기타' || DRAFT.reportTypes.indexOf(v) >= 0){ setErr({ rtNew:!v ? '선택지를 적어 주세요.' : '이미 있는 선택지입니다.' }); admRender(); return; }
-  admBusy('rt', '신고 종류 추가', '선택지를 더하지 못했습니다.', function(){ DRAFT.reportTypes.push(v); AS.f = {}; admToast('선택지를 더했습니다.'); });
+  admBusy('rt', '신고 종류 추가', '선택지를 더하지 못했습니다.', function(){ DRAFT.reportTypes.push(v); AS.f = {}; admToast('더했습니다.' + UPD); });
 };
 ADM_ACT.rtDel = function(t){
   const i = Number(t.getAttribute('data-i')), v = DRAFT.reportTypes[i];
-  AS.confirm = { title:'이 선택지를 지울까요?', what:'"' + v + '" 선택지를 지웁니다.', when:'[업데이트하기]를 누르면 신고 창에서 빠집니다.', undo:'업데이트하기 전에는 [변경 버리기]로 되돌릴 수 있습니다. 이미 받은 신고에는 그대로 남습니다.', ok:'선택지 지우기', danger:true,
-    fn:function(){ admBusy('rt', '신고 종류 지우기', '선택지를 지우지 못했습니다.', function(){ DRAFT.reportTypes.splice(i, 1); admToast('지웠습니다.'); }); } };
+  AS.confirm = { title:'"' + v + '" 선택지를 지울까요?', ok:'선택지 지우기', danger:true,
+    fn:function(){ admBusy('rt', '신고 종류 지우기', '선택지를 지우지 못했습니다.', function(){ DRAFT.reportTypes.splice(i, 1); admToast('지웠습니다.' + UPD_OUT); }); } };
   admRender();
 };
 
-/* ---------- A-15 공휴일 API 인증키 ---------- */
+/* ---------- A-15 API 인증키 (여러 개를 이름 = 쓰는 곳으로 구별, G-111·G-112) ---------- */
+const HOL_KEY = '공휴일 정보';                                /* 공휴일 불러오기가 쓰는 인증키 이름 (G-113) */
+function keyBy(name){ return ADM.keys.filter(function(k){ return k.name === name; })[0] || null; }
+function keyChk(k){ return k.chk ? badge(k.chk === 'ok' ? '성공' : '실패', k.chk === 'ok' ? 'ok' : 'danger') + ' <span class="num">' + esc(k.at) + '</span>' : '<span class="a-muted">-</span>'; }   /* 마지막 확인 결과 */
 ADM_SCR['A-15'] = function(){
-  const k = ADM.key, form = AS.panel && AS.panel.type === 'key';
-  return { html:'<section class="acard a-narrow"><h2>공휴일 API 인증키</h2>' +
-    '<dl class="a-kv"><dt>상태</dt><dd>' + (k.set ? badge('등록됨', 'ok') + ' <span class="num">끝자리 …' + esc(k.tail) + '</span>' : badge('등록 안 됨', 'warn')) + '</dd>' +
-    (k.set ? '<dt>저장 시각</dt><dd class="num">' + esc(k.saved) + '</dd><dt>마지막 연결 성공</dt><dd class="num">' + esc(k.ok) + '</dd>' : '') + '</dl>' +
-    '<p class="a-muted">저장한 인증키는 다시 볼 수 없습니다. 서버에만 보관하고 학생 화면에는 드러나지 않습니다. [업데이트하기] 없이 바로 적용됩니다.</p>' +
-    (AS.keyErr ? '<div class="ferrbox" role="alert">' + esc(AS.keyErr) + '</div>' : '') +
-    (form ? '<div class="a-fld"><label for="k-in">' + (k.set ? '새 인증키' : '인증키') + '</label><span class="pwwrap"><input id="k-in" type="password" data-pw="1" maxlength="200" autocomplete="off"><button type="button" class="pwshow" data-a="pwshow" data-for="k-in">보기</button></span>' +
-        '<p class="fhelp">저장할 때 공공 공휴일 정보 서비스에 연결을 시험합니다. 실패하면 저장하지 않습니다.</p>' + errHTML('k-in', (AS.f.err || {}).keyIn) + '</div>' +
-        '<div class="a-pact">' + abtn('연결 시험하고 저장', 'keySave', 'btn-primary', 'key') + '<button class="btn btn-text" data-a="pclose">취소</button></div>'
-      : '<div class="a-pact">' + (k.set ? '<button class="btn btn-secondary" data-a="keyEdit">인증키 바꾸기</button><button class="btn btn-text danger-t" data-a="keyDel">인증키 지우기</button>' : '<button class="btn btn-primary" data-a="keyEdit">인증키 등록</button>') + '</div>') +
-    '<p><button class="btn btn-text" data-a="go" data-to="A-09">← 공휴일 화면으로</button></p></section>' };
+  const L = ADM.keys, P = AS.panel && AS.panel.type === 'key' ? AS.panel : null, e = AS.f.err || {};
+  const cur = P && P.id ? L.filter(function(k){ return k.id === P.id; })[0] : null;
+  const form = P ? '<section class="acard a-narrow"><h2>' + (cur ? esc(cur.name) + ' 인증키 바꾸기' : '인증키 추가') + '</h2>' +
+      (cur ? '' : aFld('k-name', '이름 (쓰는 곳)', aIn('k-name', 'kName', fv('kName', ''), ' maxlength="20" placeholder="예: ' + HOL_KEY + '"'), '공휴일 불러오기는 이름이 "' + HOL_KEY + '"인 키를 씁니다.', e.kName)) +
+      aFld('k-in', cur ? '새 키 값' : '키 값', '<input id="k-in" type="password" maxlength="200" autocomplete="off" spellcheck="false">', '키 값은 적을 때도 보이지 않습니다. 저장할 때 연결을 시험하고, 실패하면 저장하지 않습니다.', e.keyIn) +
+      (AS.keyErr ? failBox('연결 시험에 실패해 저장하지 못했습니다.', AS.keyErr) : '') +
+      '<div class="a-pact">' + abtn('연결 시험하고 저장', 'keySave', 'btn-primary', 'key') + '<button class="btn btn-text" data-a="pclose">취소</button></div></section>' : '';
+  return { tools:'<button class="btn btn-primary" data-a="keyNew"' + (AS.busy ? ' disabled' : '') + '>인증키 추가</button>', html:
+    '<p class="a-muted">키 값은 끝 4자리만 보입니다. 서버에만 보관하고 학생 화면에는 드러나지 않습니다. [업데이트하기] 없이 바로 적용됩니다.</p>' +
+    (L.length ? '<table class="a-tbl"><thead><tr><th>이름 (쓰는 곳)</th><th>키 값</th><th>저장 시각</th><th>마지막 확인</th><th>관리</th></tr></thead><tbody>' + L.map(function(k){
+      return '<tr class="a-tr' + (cur === k ? ' sel' : '') + '"><td>' + esc(k.name) + '</td><td class="num">…' + esc(k.tail) + '</td><td class="num">' + esc(k.saved) + '</td><td>' + keyChk(k) + '</td>' +
+        '<td class="a-acts"><button class="btn btn-secondary sm" data-a="keyEdit" data-id="' + k.id + '">바꾸기</button><button class="btn btn-text sm danger-t" data-a="keyDel" data-id="' + k.id + '">지우기</button></td></tr>';
+    }).join('') + '</tbody></table>' : '<p class="a-empty">등록한 인증키가 없습니다</p>') + form };
 };
-ADM_ACT.keyEdit = function(){ AS.panel = { type:'key' }; AS.f = {}; AS.keyErr = ''; admRender(); setTimeout(function(){ const i = $('k-in'); if (i) i.focus(); }, 0); };
+ADM_ACT.keyNew = function(){ AS.panel = { type:'key', id:null }; AS.f = {}; AS.keyErr = 0; admRender(); setTimeout(function(){ const i = $('k-name'); if (i) i.focus(); }, 0); };
+ADM_ACT.keyEdit = function(t){ AS.panel = { type:'key', id:t.getAttribute('data-id') }; AS.f = {}; AS.keyErr = 0; admRender(); setTimeout(function(){ const i = $('k-in'); if (i) i.focus(); }, 0); };
 ADM_ACT.keySave = function(){
-  const v = String(($('k-in') || {}).value || '').trim();
-  if (v.length < 8){ setErr({ keyIn:'인증키를 적어 주세요.' }); admRender(); return; }
-  AS.f.err = {}; AS.keyErr = ''; AS.busy = 'key'; admRender();
+  const cur = AS.panel.id ? ADM.keys.filter(function(k){ return k.id === AS.panel.id; })[0] : null;
+  const nm = cur ? cur.name : String(fv('kName', '')).trim(), v = String(($('k-in') || {}).value || '').trim(), e = {};
+  if (!cur){ if (!nm) e.kName = '이름을 적어 주세요.'; else if (keyBy(nm)) e.kName = '같은 이름의 인증키가 이미 있습니다.'; }
+  if (v.length < 8) e.keyIn = '키 값을 8자 이상 적어 주세요.';
+  if (setErr(e)){ admRender(); return; }
+  AS.keyErr = 0; AS.busy = 'key'; admRender();
   setTimeout(function(){
     AS.busy = '';
     if (O.admErr) admFail('인증키 저장', '인증키를 저장하지 못했습니다.');
-    else if (O.keyTest === 'fail'){ AS.keyErr = '연결 시험에 실패해 저장하지 않았습니다. 인증키가 맞는지 확인해 주세요.'; const no = ADM.seqErr++; ADM.err.unshift({ no:no, at:nowStamp(), kind:'공휴일 받아 오기', doing:'인증키 연결 시험', why:'인증키가 맞지 않습니다.', rel:'인증키 [가림]', status:'new' }); }
-    else { ADM.key = { set:true, tail:v.slice(-4), saved:nowStamp(), ok:nowStamp() }; AS.panel = null; AS.err = null; admToast('인증키를 저장했습니다. 연결 시험에 성공했습니다.'); }
+    else if (O.keyTest === 'fail'){ const no = ADM.seqErr++; ADM.err.unshift({ no:no, at:nowStamp(), kind:'인증키 확인', doing:'"' + nm + '" 인증키 연결 시험', why:'인증키가 맞지 않습니다.', rel:'인증키 [가림]', status:'new' }); AS.keyErr = no; }
+    else {
+      const t = nowStamp();
+      if (cur){ cur.tail = v.slice(-4); cur.saved = t; cur.chk = 'ok'; cur.at = t; }
+      else ADM.keys.push({ id:'k' + Date.now(), name:nm, tail:v.slice(-4), saved:t, chk:'ok', at:t });
+      AS.panel = null; AS.f = {}; AS.err = null; admToast('저장했습니다.');
+    }
     admRender(); renderMock();
   }, 800);
 };
-ADM_ACT.keyDel = function(){
-  AS.confirm = { title:'인증키를 지울까요?', what:'저장한 공휴일 API 인증키(끝자리 …' + ADM.key.tail + ')를 지웁니다.', when:'바로 지웁니다.', undo:'지운 인증키는 되돌릴 수 없습니다. 지우면 [공휴일 불러오기]를 쓸 수 없습니다.', ok:'인증키 지우기', danger:true,
-    fn:function(){ admBusy('key', '인증키 지우기', '인증키를 지우지 못했습니다.', function(){ ADM.key = { set:false, tail:'', saved:'', ok:'' }; admToast('인증키를 지웠습니다.'); }); } };
+ADM_ACT.keyDel = function(t){
+  const k = ADM.keys.filter(function(x){ return x.id === t.getAttribute('data-id'); })[0];
+  AS.confirm = { title:'"' + k.name + '" 인증키를 지울까요?', note:'지운 키는 되돌릴 수 없습니다.', ok:'인증키 지우기', danger:true,
+    fn:function(){ admBusy('key', '인증키 지우기', '인증키를 지우지 못했습니다.', function(){ ADM.keys = ADM.keys.filter(function(x){ return x !== k; }); if (AS.panel && AS.panel.id === k.id) AS.panel = null; admToast('지웠습니다.'); }); } };
   admRender();
 };
 ADM_ACT.pwshow = function(t){ togglePw(t); };
@@ -4201,46 +4597,8 @@ ADM_ACT.aiSave = function(){
   const keepVals = function(){ const b = $('ai-pw'), c = $('ai-new'), d = $('ai-new2'); if (b) b.value = pw; if (c) c.value = v; if (d) d.value = v2; updAiRules(); };   /* 오류 뒤에도 적은 값을 남김 */
   if (m){ setErr({ 'ai-new':m }); admRender(); keepVals(); return; }
   if (v !== v2){ setErr({ 'ai-new2':'두 칸의 아이디가 같지 않습니다.' }); admRender(); keepVals(); return; }
-  AS.confirm = { title:'아이디를 바꿀까요?', what:'관리자 아이디를 방금 적은 새 아이디로 바꿉니다.', when:'바꾸면 로그아웃되고, 새 아이디로 다시 로그인해야 합니다.',
-    undo:'다시 바꾸려면 새 아이디로 로그인한 뒤 이 화면에서 바꿉니다.', ok:'아이디 바꾸기', danger:false,
+  AS.confirm = { title:'관리자 아이디를 바꿀까요?', ok:'아이디 바꾸기', danger:false,
     fn:function(){ admBusy('ai', '관리자 아이디 바꾸기', '아이디를 바꾸지 못했습니다.', function(){ ACC.admin.id = v; AS.f = {}; AUTH.chFails = 0; doLogout('관리자 아이디가 바뀌었습니다. 새 아이디로 다시 로그인해 주세요.'); }); } };
-  admRender();
-};
-
-/* ---------- A-19 시연 메일 허용 목록 (가입·비밀번호 찾기 확인 메일을 받을 학번, G-84~G-88) ---------- */
-ADM_SCR['A-19'] = function(){
-  const A = ADM.allow, L = allowList(), e = AS.f.err || {};
-  return { html:
-    '<section class="acard"><h2>허용 목록 사용 ' + (A.on ? badge('켜짐', 'ok') : badge('꺼짐', 'muted')) + '</h2>' +
-      '<p>' + (A.on ? '켜져 있습니다. 목록에 있는 학번만 가입·비밀번호 찾기 확인 메일을 받습니다.' : '꺼져 있습니다. 모든 학번으로 확인 메일을 보낼 수 있습니다.') + '</p>' +
-      '<p class="a-muted">시연에서는 켜고, 실제 서비스에서는 끕니다. [업데이트하기] 없이 바로 적용됩니다(학생 화면 내용이 아닌 관리 설정).</p>' +
-      (A.on && !L.length ? '<div class="a-warnbox">목록이 비어 있어 지금은 아무도 확인 메일을 받을 수 없습니다.</div>' : '') +
-      '<div class="a-pact">' + (A.on ? abtn('허용 목록 끄기', 'allowOffAsk', 'btn-secondary', 'allow') : abtn('허용 목록 켜기', 'allowOn', 'btn-primary', 'allow')) + '</div></section>' +
-    '<section class="acard"><h2>학번 추가</h2><div class="a-grid3">' +
-      aFld('al-id', '학번 (8자리 숫자)', aIn('al-id', 'alId', fv('alId', ''), ' inputmode="numeric" maxlength="8" placeholder="예: 20260103"'), '학교 메일 주소(학번@s.scnu.ac.kr)로 확인 메일을 받을 학번입니다.', e.alId) +
-      '<div class="a-fld a-fld-b">' + abtn('추가', 'allowAdd', 'btn-secondary', 'allowadd') + '</div></div></section>' +
-    '<section class="acard"><h2>등록된 학번 <span class="num">' + L.length + '개</span></h2>' +
-      (L.length ? '<table class="a-tbl"><thead><tr><th>학번</th><th>추가한 날짜</th><th>관리</th></tr></thead><tbody>' + L.map(function(x){
-        return '<tr class="a-tr"><td class="num">' + esc(x.id) + '</td><td class="num">' + esc(x.at) + '</td><td class="a-acts"><button class="btn btn-text sm danger-t" data-a="allowDel" data-id="' + esc(x.id) + '">삭제</button></td></tr>';
-      }).join('') + '</tbody></table>' : '<p class="a-empty">등록된 학번이 없습니다</p>') +
-      '<p class="a-muted">학생 계정이 있는지는 여기에 보이지 않습니다. 목록 밖 학번으로 [확인 번호 받기]를 누르면 메일을 보내지 않고 "지금은 미리 등록된 학번만 가입할 수 있습니다."를 보입니다.</p></section>' };
-};
-ADM_ACT.allowOn = function(){ admBusy('allow', '허용 목록 켜기', '허용 목록을 켜지 못했습니다.', function(){ ADM.allow.on = true; admToast('허용 목록을 켰습니다. 목록에 있는 학번만 확인 메일을 받습니다.'); }); };
-ADM_ACT.allowOffAsk = function(){
-  AS.confirm = { title:'허용 목록을 끌까요?', what:'시연 메일 허용 목록을 끕니다.', when:'바로 적용됩니다. 끄면 모든 학번으로 확인 메일을 보낼 수 있습니다.', undo:'[허용 목록 켜기]로 다시 켤 수 있습니다. 목록은 그대로 남습니다.', ok:'허용 목록 끄기', danger:true,
-    fn:function(){ admBusy('allow', '허용 목록 끄기', '허용 목록을 끄지 못했습니다.', function(){ ADM.allow.on = false; admToast('허용 목록을 껐습니다. 모든 학번으로 확인 메일을 보낼 수 있습니다.'); }); } };
-  admRender();
-};
-ADM_ACT.allowAdd = function(){
-  const v = String(fv('alId', '')).trim();
-  if (!/^\d{8}$/.test(v)){ setErr({ alId:'학번 8자리를 숫자로 적어 주세요.' }); admRender(); return; }
-  if (allowList().some(function(x){ return x.id === v; })){ setErr({ alId:'이미 목록에 있는 학번입니다.' }); admRender(); return; }
-  admBusy('allowadd', '허용 목록 학번 추가', '학번을 더하지 못했습니다.', function(){ ADM.allow.list.push({ id:v, at:today() }); AS.f = {}; admToast('학번을 허용 목록에 더했습니다.'); });
-};
-ADM_ACT.allowDel = function(t){
-  const v = t.getAttribute('data-id');
-  AS.confirm = { title:'이 학번을 허용 목록에서 지울까요?', what:'학번 ' + v + '을(를) 허용 목록에서 지웁니다.', when:'바로 적용됩니다. 허용 목록을 켜 둔 동안 이 학번으로는 확인 메일을 받을 수 없습니다.', undo:'[추가]로 다시 넣을 수 있습니다.', ok:'학번 지우기', danger:true,
-    fn:function(){ admBusy('allow', '허용 목록 학번 지우기', '학번을 지우지 못했습니다.', function(){ ADM.allow.list = ADM.allow.list.filter(function(x){ return x.id !== v; }); admToast('학번을 허용 목록에서 지웠습니다.'); }); } };
   admRender();
 };
 
@@ -4257,6 +4615,7 @@ function admInput(t, isChange){
   if (c) c.textContent = t.value.length + ' / ' + Number(c.getAttribute('data-max')).toLocaleString('ko-KR');
   const er = $('err-' + t.id); if (er) er.hidden = true;
   if (k === 'naReason' || k === 'naEnd'){ const p = $('na-prev'); if (p) p.textContent = naPrevText(); }
+  if (k === 'hNewD' || k === 'hEdD'){ const w = $(k === 'hNewD' ? 'h-new-dow' : 'h-ed-dow'); if (w) w.textContent = dowOf(t.value); }   /* 고른 날짜의 요일 (G-117) */
   if (isChange && t.hasAttribute('data-rr')){ if (k === 'naBid') { AS.f.naFloor = undefined; delete AS.f.naFloor; delete AS.f.naRoom; } if (k === 'naFloor') delete AS.f.naRoom; if (k === 'hy') AS.hres = null; admRender(); }
 }
 el.admin.addEventListener('click', function(e){
@@ -4301,7 +4660,7 @@ function syncMock(){
   setRadio('m-scen', O.scenario);
   M.custom.value = O.custom;
   setRadio('m-data', O.data); setRadio('m-banner', O.banner); setRadio('m-nlist', O.nlist);
-  setRadio('m-place', O.place); setRadio('m-holfetch', O.holFetch); setRadio('m-keytest', O.keyTest); setRadio('m-allow', ADM.allow.on ? 'on' : 'off');
+  setRadio('m-place', O.place); setRadio('m-holfetch', O.holFetch); setRadio('m-keytest', O.keyTest);
   M.popups.value = O.popups;
   M.root.querySelectorAll('select[data-k], select[data-o]').forEach(function(s){ s.value = O[s.getAttribute('data-k') || s.getAttribute('data-o')]; });
   M.root.querySelectorAll('input[type="checkbox"][data-o]').forEach(function(c){ c.checked = !!O[c.getAttribute('data-o')]; });
@@ -4346,6 +4705,7 @@ function renderMock(){
   if (S.modal === 'S-06') over.push('S-06 공지사항 내용');
   if (S.modal === 'S-08') over.push('S-08 문의하기');
   if (S.modal === 'S-09') over.push('S-09 신고하기');
+  if (S.modal === 'S-18') over.push('S-18 로그인 창');
   if (S.flow) over.push(FLOW_ID[S.flow.kind] + ' ' + { signup:'가입하기', findpw:'비밀번호 찾기', chpw:'비밀번호 바꾸기', leave:'탈퇴하기' }[S.flow.kind]);
   if (S.alert) over.push('안내 창');
   const view = VIEW.mode === 'admin' && !VIEW.preview ? '관리자 화면 · ' + AS.scr + ' ' + (ADM_TITLE[AS.scr] || ['', ''])[0] + (AS.confirm ? ' + 확인 창' : '') + (AS.warn ? ' + A-91 자동 로그아웃 경고' : '')
@@ -4359,7 +4719,6 @@ function renderMock(){
     '<b>배치</b> ' + (isPC() ? 'PC (1024px 이상)' : '휴대폰 (1024px 미만)') + (O.phone ? ' · 360px 틀' : '') + ' · <span id="m-ovf">가로 넘침 검사 중</span><br>' +
     '<b>학생 화면 정보</b> ' + ({ loading:'불러오는 중', ok:'정상', fail:'불러오기 실패', none:'시간표 미등록' }[S.data] || S.data);
   M.dis.textContent = '"오늘은 그만 보기" 기록: ' + disCount() + '건';
-  setRadio('m-allow', ADM.allow.on ? 'on' : 'off');
   checkOverflowSoon();
 }
 let ovfRaf = 0;
@@ -4393,7 +4752,7 @@ M.root.addEventListener('click', function(e){
   else if (a === 'reload') openSite('reload');
   else if (a === 'reopen') openSite('reopen');
   else if (a === 'clear-dismiss'){ sDel(KEY_DIS); renderMock(); }
-  else if (a === 'go-admin'){ if (AUTH.who !== 'admin'){ if (AUTH.who) doLogout(''); O.place = 'adminpc'; setRadio('m-place', 'adminpc'); saveO(); loginAdmin(); } else if (VIEW.preview) admPreviewEnd(); mockToast('목업 전용 지름길: 실제로는 학생 화면 로그인 박스에 관리자 아이디로 로그인해 들어갑니다.'); }
+  else if (a === 'go-admin'){ if (AUTH.who !== 'admin'){ if (AUTH.who) doLogout(''); O.place = 'adminpc'; setRadio('m-place', 'adminpc'); saveO(); loginAdmin(); } else if (VIEW.preview) admPreviewEnd(); mockToast('목업 전용 지름길: 실제로는 학생 화면 [로그인] → 로그인 창에 관리자 아이디로 로그인해 들어갑니다.'); }
   else if (a === 'go-student'){ if (AUTH.who) doLogout(''); const s = ACC.students.filter(function(x){ return x.id === MOCK.stuId; })[0]; if (s){ s.status = 'ok'; loginStudent(s, false); } else mockToast('목업 학생 계정이 지워졌습니다. [예시 데이터 처음으로]를 눌러 주세요.'); }
   else if (a === 'go-guest'){ if (AUTH.who) doLogout(''); else openSite('reload'); }
   else if (a === 'acc-reset'){ if (AUTH.who) doLogout(''); resetAccounts(); AUTH.fails = {}; AUTH.lock = {}; renderAll(); mockToast('목업 계정을 처음으로 되돌렸습니다. 바꾼 비밀번호도 처음 값이 됩니다.'); }
@@ -4401,13 +4760,6 @@ M.root.addEventListener('click', function(e){
   else if (a === 'code-expire'){ if (S.flow && S.flow.step === 'code'){ S.flow.exp = Date.now() - 1000; studentTick(); } else mockToast('가입하기·비밀번호 찾기의 확인 번호 단계에서 눌러 주세요.'); }
   else if (a === 'code-resend'){ if (S.flow && S.flow.step === 'code'){ S.flow.resendAt = Date.now(); studentTick(); } else mockToast('확인 번호 단계에서 눌러 주세요.'); }
   else if (a === 'wait-skip'){ LAST.inq = LAST.rep = 0; if (S.form){ grabForm(); renderOverlays(); } }
-  else if (a === 'allow-try'){                               /* 허용 목록 밖 학번으로 가입 시도 (A-19) */
-    if (AUTH.who) doLogout('');
-    openFlow('signup'); S.flow.a1 = S.flow.a2 = true; S.flow.step = 'id'; renderOverlays();
-    const gi = $('g-id'); if (gi) gi.value = '20260199';
-    flowAct('gsend');
-    if (!ADM.allow.on) mockToast('허용 목록이 꺼져 있어 확인 메일이 갑니다. 조정판에서 "켬"을 고르면 막힙니다.');
-  }
   else if (a === 'warn'){ if (VIEW.mode === 'admin' && !VIEW.preview){ AS.warn = { left:120 }; admRender(); } else mockToast('관리자 화면에서 눌러 주세요.'); }
   else if (a === 'warn5'){ if (AS.warn){ AS.warn.left = 5; admTick(); } else mockToast('먼저 [자동 로그아웃 경고 바로 띄우기]를 눌러 주세요.'); }
   else if (a === 'defaults'){
@@ -4429,7 +4781,6 @@ M.root.addEventListener('change', function(e){
   else if (t.name === 'm-place'){ O.place = t.value; }
   else if (t.name === 'm-holfetch'){ O.holFetch = t.value; }
   else if (t.name === 'm-keytest'){ O.keyTest = t.value; }
-  else if (t.name === 'm-allow'){ ADM.allow.on = t.value === 'on'; admRender(); if (S.flow && S.flow.step === 'id'){ S.flow.sid = ($('g-id') || {}).value || S.flow.sid; renderOverlays(); } }
   else if (t.id === 'm-custom'){ O.custom = t.value; }
   else if (ko){ O[ko] = t.type === 'checkbox' ? t.checked : t.value; if (ko === 'emptyAdm') admRender(); if (ko === 'dayLimit' && S.form){ grabForm(); renderOverlays(); } }
   else if (k){
