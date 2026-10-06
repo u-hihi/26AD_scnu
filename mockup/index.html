@@ -53,7 +53,7 @@
     G-80 시간표·폐강 파일 화면의 [목업: 예시 파일로 해 보기]는 목업 전용 단추입니다(점선 표시, 실제 화면에는 없음).
     G-81 새 학기로 반영하면 학기 정보(이름·개강일·종강일)도 함께 바뀝니다. [업데이트하기] 전까지 학생 화면은 그대로입니다.
     G-82 개인정보 처리방침(S-11)은 목차 7개만 두고 내용은 09에서 채웁니다. 바닥 영역 [자세히]는 그중 "4. 방문자 수 세기"로 갑니다.
-    G-83 관리자 화면 표의 줄은 쪽을 나누지 않습니다(예시 줄이 적음). 인테이크 G-09의 "20줄씩 쪽 나누기"는 실제 화면에서 정합니다.
+    G-83 관리자 화면에서 쌓이는 목록 표(문의·신고 A-03, 오류 기록 A-06, 학생 계정 A-18)는 20줄씩 쪽을 나눕니다(G-174·G-179에서 확정, 사용자 결정 2026-10-06·2026-10-07). 20줄 이하이면 쪽 번호를 보이지 않습니다. 이 세 표의 목업 예시 줄은 20줄보다 적어 쪽 번호가 없습니다.
     G-84 (삭제) 시연 메일 허용 목록(A-19)을 없앴습니다(사용자 결정 2026-10-03). 이제 어떤 8자리 학번이든 확인 번호를 받을 수 있습니다.
     G-85 (삭제) A-19를 없애 목록 밖 학번을 막는 문구도 없앴습니다.
     G-86 (삭제) A-19를 없애 가입·비밀번호 찾기 학번 단계의 시연 기간 안내도 없앴습니다.
@@ -118,6 +118,18 @@
     G-169 캠퍼스맵은 오픈스트리트맵(OSM) 자료로 그린 지도로 정했습니다(사용자 결정 2026-10-05). 바닥 영역의 "캠퍼스맵 참고" 줄(A-14 문구)은 늘 두고, OSM 출처 표시도 지금처럼 늘 보입니다. 처음 문구는 "캠퍼스맵 참고: 국립순천대학교"입니다(사용자 결정 2026-10-05). 지도는 OSM으로 그리고 방향·건물 번호·이름만 학교 캠퍼스맵을 참고해서 "출처" 대신 "참고"로 씁니다. 관리자가 A-11에서 캠퍼스맵 그림을 바꿀 수 있는 것은 그대로입니다.
     G-170 서비스 이름("순천대 공실 알리미")을 누르면 [초기화]와 똑같이 동작합니다(05 R-10, 사용자 결정 2026-10-05). 모양은 글자 그대로이고, 마우스를 올리면 손가락 모양이 됩니다. 키보드(Tab, Enter·Space)로도 누를 수 있고, 읽어 주는 이름은 "순천대 공실 알리미 - 처음 화면으로 초기화"입니다. 누른 뒤 초점은 누른 단추에 둡니다([초기화]도 같음, 목업 임의).
     G-171 확정으로 기록합니다(사용자 결정 2026-10-05). 건물 이름 글자를 누르면 그 건물을 누른 것과 같습니다(05 R-11). 관리자가 적은 홈페이지 수용 인원은 "(추정)" 없이 보입니다(G-58). 실제 층별 배치도는 나중에 받으므로, 추정 배치와 "목업 전용 · 추정 배치" 표시는 그대로 둡니다(G-135).
+    G-172 공휴일 화면(A-09)에서 고를 수 있는 연도는 올해와, 저장한 학기 정보의 개강일~종강일이 걸친 해를 합친 것입니다(03 Q-09, 사용자 결정 2026-10-06). 올해는 목업의 "오늘" 기준이고, 학기 정보는 업데이트 전 것도 씁니다. 겹치는 해는 한 번만 보이고, 작은 해부터 늘어놓습니다. 처음 골라진 값은 올해입니다. 경고의 [공휴일 보기]로 오면 경고에 나온 해를 골라 둡니다(G-180). 예시에서는 처음에 2026만 보이고, A-07에서 2027-1학기를 새 학기로 반영하면 2027도 보입니다. 그래서 [반영하기] 뒤 경고의 [공휴일 보기]로 가서 2027년을 불러올 수 있습니다(G-177). 반영하기 전에는 학기 정보가 그대로라 2026만 보입니다. 직접 추가·고치기의 날짜는 고른 해 안에서만 넣습니다(G-178). 공휴일 API 흉내 자료의 2027년 공휴일은 그대로 둡니다. 오류 기록 예시 #5는 그때 고를 수 있던 해에 맞춰 "2026년 공휴일 불러오기"로 고쳤습니다.
+    G-173 시간표 출처 문구(A-14)의 처음 값은 "출처: 국립순천대학교 수업시간표([학기]) · 폐강 교과목 안내"입니다(03 Q-05, 사용자 결정 2026-10-06). 칸 아래에 "[학기]는 지금 학기 이름으로 바뀝니다."를 보입니다. 학생 바닥 영역에서는 [학기]를 업데이트한 학기 이름(예: 2026-2학기)으로 바꿔 보입니다. [미리 보기]에서는 저장한 학기 이름으로 바꿉니다. [학기]를 지워도 오류가 아니고, 적은 글자 그대로 보입니다.
+    G-174 관리자 화면의 긴 표는 20줄씩 쪽을 나눕니다(03 Q-10, 사용자 결정 2026-10-06). 20줄 이하이면 쪽 번호를 보이지 않습니다. 정렬은 전체 줄에 먼저 적용한 뒤 쪽을 나눕니다. 쪽을 나누는 표는 쌓이는 목록 표 세 개(A-03·A-06·A-18)뿐입니다(G-179). 이 세 표의 목업 예시 줄은 20줄보다 적어 화면은 그대로 두고, G-83을 이 내용으로 고쳤습니다.
+    G-175 시간표 파일 검사(A-07)의 수업 겹침 경고는 폐강 수업을 빼고 봅니다(03 Q-03, 사용자 결정 2026-10-06). 폐강 수업을 빼도 겹침이 남을 때만 경고합니다. 폐강인지는 그때까지 반영한 폐강 정보로 판단합니다. 그래서 새 학기 첫 반영 때는 겹침을 그대로 경고합니다. 목업의 경고 예시(D2305, 월 3교시)는 폐강 수업이 끼지 않은 겹침이라 그대로 둡니다.
+    G-176 로그인한 학생이 공실 보기용으로 건물을 고를 때도(G-57) 그 건물 조회수를 1번 셉니다(03 Q-06, 사용자 결정 2026-10-06). [공실 보기]를 열거나 건물 탭을 바꿀 때는 다시 세지 않습니다. 대시보드(A-02)의 건물 조회수는 예시 숫자라 그대로 둡니다.
+    G-177 시간표 파일 검사(A-07)에서 빠진 해를 아직 A-09에서 고를 수 없으면(새 학기라 반영해야 생기는 해) 경고에 "2027년 공휴일 목록이 없습니다. 반영한 뒤 받아 주세요"만 보이고 [공휴일 보기] 단추는 없습니다(사용자 결정 2026-10-06). [반영하기] 뒤 결과에는 "2027년 공휴일 목록이 없습니다"(끝에 마침표 없음, G-182)와 [공휴일 보기]를 보이고, 누르면 A-09가 2027을 골라 둔 채 열립니다(G-180). 빠진 해를 이미 고를 수 있으면(예: 올해) 검사 때도 [공휴일 보기]가 있습니다. 반영 뒤 결과의 빠진 해는 지금 공휴일 목록으로 다시 봐서, 그해 공휴일을 받아 저장하면 이 경고는 사라집니다(확정, 2026-10-07).
+    G-178 공휴일 화면(A-09)에서 휴일을 직접 추가하거나 고칠 때 날짜는 지금 고른 연도 안에서만 고릅니다(사용자 결정 2026-10-06). 달력 칸은 그해 1/1~12/31로 막습니다. 그래도 다른 해 날짜가 들어오면 저장하지 않고 "고른 해의 날짜만 넣을 수 있습니다."를 보입니다. 고른 해가 목록에서 사라지면 연도 칸은 올해로 돌아갑니다(G-183에서 바로잡음).
+    G-179 20줄씩 쪽을 나누는 표는 쌓이는 목록 표인 문의·신고(A-03), 오류 기록(A-06), 학생 계정(A-18)뿐입니다(사용자 결정 2026-10-07). 건물(A-11)·강의실(A-10)·공휴일(A-09) 표는 쪽을 나누지 않고 모든 줄을 보입니다. 이 세 표의 목업 예시 줄은 문의 4줄·신고 3줄, 오류 기록 4줄, 학생 계정 8줄이라 쪽 번호가 없습니다. 건물 표(43줄), 강의실 표(D2 25줄), 공휴일 표(2026년 21줄)는 20줄을 넘지만 쪽을 나누지 않는 표입니다. 그래서 G-83·G-174의 "목업 예시 줄은 20줄보다 적다"는 이 세 표만 가리키도록 고쳤습니다.
+    G-180 새 학기 반영(A-07) 뒤 경고의 [공휴일 보기]를 누르면 공휴일 화면(A-09)이 경고에 나온 해(예: 2027)를 골라 둔 채 열립니다(사용자 결정 2026-10-07). 왼쪽 메뉴 등 다른 길로 들어오면 처음 값은 올해입니다(G-172). 검사 결과 경고의 [공휴일 보기](그해를 이미 고를 수 있을 때, G-177)도 같은 단추라 같게 했습니다.
+    G-181 쪽 나누기 세부 규칙입니다(사용자 승인 2026-10-07). 학생 계정 표(A-18)는 가입일 최근 순입니다. 가입일이 같으면 계정 번호가 큰 것을 위로 둡니다(사용자 승인 2026-10-07). 목업 예시는 계정 8의 가입일을 2026-09-30으로 고쳐 계정 번호 순과 가입일 순을 맞췄습니다. 다음은 목업에 만들지 않고 기록만 합니다. 쪽 번호는 표 아래 가운데에 둡니다. 7쪽을 넘으면 쪽 번호 일부를 "…"로 줄입니다. [오류 기록 보기]로 오면 그 줄이 있는 쪽을 엽니다. 처리한 뒤에는 지금 쪽을 그대로 둡니다. 보기(탭·거르개)를 바꾸면 1쪽으로 갑니다.
+    G-182 시간표 반영(A-07) 뒤 결과의 공휴일 경고 줄 끝에는 마침표를 찍지 않습니다. 예: "2027년 공휴일 목록이 없습니다"(사용자 결정 2026-10-07). 검사 결과에서 [공휴일 보기]가 붙는 경고 줄도 마침표가 없습니다. 검사 때 단추 없이 보이는 "2027년 공휴일 목록이 없습니다. 반영한 뒤 받아 주세요"도 끝에 마침표가 없습니다.
+    G-183 G-178 글을 바로잡았습니다(교차 검토 반영, 2026-10-07). 전에는 "올해로 대체하는 규칙을 없앴다"고 적었지만 그 동작은 남아 있습니다. 이제 규칙으로 둡니다. 고른 해가 목록에서 사라지면 연도 칸은 올해로 돌아갑니다. 예: 2027을 고른 채 [변경 버리기]로 2027-1학기 정보가 사라지면 2026이 골라집니다. G-177의 "목업 임의"는 확정으로 바꿨습니다.
     (이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 "처음 크기의 N배"(처음 값 3배).
     (이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11, G-171에서 확정). 서비스 이름을 누르면 [초기화]와 같습니다(05 R-10, G-170).
     (이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.
@@ -1385,7 +1397,7 @@ const ASSUME = [
   "G-80 시간표·폐강 파일 화면의 [목업: 예시 파일로 해 보기]는 목업 전용 단추입니다(점선 표시, 실제 화면에는 없음).",
   "G-81 새 학기로 반영하면 학기 정보(이름·개강일·종강일)도 함께 바뀝니다. [업데이트하기] 전까지 학생 화면은 그대로입니다.",
   "G-82 개인정보 처리방침(S-11)은 목차 7개만 두고 내용은 09에서 채웁니다. 바닥 영역 [자세히]는 그중 \"4. 방문자 수 세기\"로 갑니다.",
-  "G-83 관리자 화면 표의 줄은 쪽을 나누지 않습니다(예시 줄이 적음). 인테이크 G-09의 \"20줄씩 쪽 나누기\"는 실제 화면에서 정합니다.",
+  "G-83 관리자 화면에서 쌓이는 목록 표(문의·신고 A-03, 오류 기록 A-06, 학생 계정 A-18)는 20줄씩 쪽을 나눕니다(G-174·G-179에서 확정, 사용자 결정 2026-10-06·2026-10-07). 20줄 이하이면 쪽 번호를 보이지 않습니다. 이 세 표의 목업 예시 줄은 20줄보다 적어 쪽 번호가 없습니다.",
   "G-84 (삭제) 시연 메일 허용 목록(A-19)을 없앴습니다(사용자 결정 2026-10-03). 이제 어떤 8자리 학번이든 확인 번호를 받을 수 있습니다.",
   "G-85 (삭제) A-19를 없애 목록 밖 학번을 막는 문구도 없앴습니다.",
   "G-86 (삭제) A-19를 없애 가입·비밀번호 찾기 학번 단계의 시연 기간 안내도 없앴습니다.",
@@ -1450,6 +1462,18 @@ const ASSUME = [
   "G-169 캠퍼스맵은 오픈스트리트맵(OSM) 자료로 그린 지도로 정했습니다(사용자 결정 2026-10-05). 바닥 영역의 \"캠퍼스맵 참고\" 줄(A-14 문구)은 늘 두고, OSM 출처 표시도 지금처럼 늘 보입니다. 처음 문구는 \"캠퍼스맵 참고: 국립순천대학교\"입니다(사용자 결정 2026-10-05). 지도는 OSM으로 그리고 방향·건물 번호·이름만 학교 캠퍼스맵을 참고해서 \"출처\" 대신 \"참고\"로 씁니다. 관리자가 A-11에서 캠퍼스맵 그림을 바꿀 수 있는 것은 그대로입니다.",
   "G-170 서비스 이름(\"순천대 공실 알리미\")을 누르면 [초기화]와 똑같이 동작합니다(05 R-10, 사용자 결정 2026-10-05). 모양은 글자 그대로이고, 마우스를 올리면 손가락 모양이 됩니다. 키보드(Tab, Enter·Space)로도 누를 수 있고, 읽어 주는 이름은 \"순천대 공실 알리미 - 처음 화면으로 초기화\"입니다. 누른 뒤 초점은 누른 단추에 둡니다([초기화]도 같음, 목업 임의).",
   "G-171 확정으로 기록합니다(사용자 결정 2026-10-05). 건물 이름 글자를 누르면 그 건물을 누른 것과 같습니다(05 R-11). 관리자가 적은 홈페이지 수용 인원은 \"(추정)\" 없이 보입니다(G-58). 실제 층별 배치도는 나중에 받으므로, 추정 배치와 \"목업 전용 · 추정 배치\" 표시는 그대로 둡니다(G-135).",
+  "G-172 공휴일 화면(A-09)에서 고를 수 있는 연도는 올해와, 저장한 학기 정보의 개강일~종강일이 걸친 해를 합친 것입니다(03 Q-09, 사용자 결정 2026-10-06). 올해는 목업의 \"오늘\" 기준이고, 학기 정보는 업데이트 전 것도 씁니다. 겹치는 해는 한 번만 보이고, 작은 해부터 늘어놓습니다. 처음 골라진 값은 올해입니다. 경고의 [공휴일 보기]로 오면 경고에 나온 해를 골라 둡니다(G-180). 예시에서는 처음에 2026만 보이고, A-07에서 2027-1학기를 새 학기로 반영하면 2027도 보입니다. 그래서 [반영하기] 뒤 경고의 [공휴일 보기]로 가서 2027년을 불러올 수 있습니다(G-177). 반영하기 전에는 학기 정보가 그대로라 2026만 보입니다. 직접 추가·고치기의 날짜는 고른 해 안에서만 넣습니다(G-178). 공휴일 API 흉내 자료의 2027년 공휴일은 그대로 둡니다. 오류 기록 예시 #5는 그때 고를 수 있던 해에 맞춰 \"2026년 공휴일 불러오기\"로 고쳤습니다.",
+  "G-173 시간표 출처 문구(A-14)의 처음 값은 \"출처: 국립순천대학교 수업시간표([학기]) · 폐강 교과목 안내\"입니다(03 Q-05, 사용자 결정 2026-10-06). 칸 아래에 \"[학기]는 지금 학기 이름으로 바뀝니다.\"를 보입니다. 학생 바닥 영역에서는 [학기]를 업데이트한 학기 이름(예: 2026-2학기)으로 바꿔 보입니다. [미리 보기]에서는 저장한 학기 이름으로 바꿉니다. [학기]를 지워도 오류가 아니고, 적은 글자 그대로 보입니다.",
+  "G-174 관리자 화면의 긴 표는 20줄씩 쪽을 나눕니다(03 Q-10, 사용자 결정 2026-10-06). 20줄 이하이면 쪽 번호를 보이지 않습니다. 정렬은 전체 줄에 먼저 적용한 뒤 쪽을 나눕니다. 쪽을 나누는 표는 쌓이는 목록 표 세 개(A-03·A-06·A-18)뿐입니다(G-179). 이 세 표의 목업 예시 줄은 20줄보다 적어 화면은 그대로 두고, G-83을 이 내용으로 고쳤습니다.",
+  "G-175 시간표 파일 검사(A-07)의 수업 겹침 경고는 폐강 수업을 빼고 봅니다(03 Q-03, 사용자 결정 2026-10-06). 폐강 수업을 빼도 겹침이 남을 때만 경고합니다. 폐강인지는 그때까지 반영한 폐강 정보로 판단합니다. 그래서 새 학기 첫 반영 때는 겹침을 그대로 경고합니다. 목업의 경고 예시(D2305, 월 3교시)는 폐강 수업이 끼지 않은 겹침이라 그대로 둡니다.",
+  "G-176 로그인한 학생이 공실 보기용으로 건물을 고를 때도(G-57) 그 건물 조회수를 1번 셉니다(03 Q-06, 사용자 결정 2026-10-06). [공실 보기]를 열거나 건물 탭을 바꿀 때는 다시 세지 않습니다. 대시보드(A-02)의 건물 조회수는 예시 숫자라 그대로 둡니다.",
+  "G-177 시간표 파일 검사(A-07)에서 빠진 해를 아직 A-09에서 고를 수 없으면(새 학기라 반영해야 생기는 해) 경고에 \"2027년 공휴일 목록이 없습니다. 반영한 뒤 받아 주세요\"만 보이고 [공휴일 보기] 단추는 없습니다(사용자 결정 2026-10-06). [반영하기] 뒤 결과에는 \"2027년 공휴일 목록이 없습니다\"(끝에 마침표 없음, G-182)와 [공휴일 보기]를 보이고, 누르면 A-09가 2027을 골라 둔 채 열립니다(G-180). 빠진 해를 이미 고를 수 있으면(예: 올해) 검사 때도 [공휴일 보기]가 있습니다. 반영 뒤 결과의 빠진 해는 지금 공휴일 목록으로 다시 봐서, 그해 공휴일을 받아 저장하면 이 경고는 사라집니다(확정, 2026-10-07).",
+  "G-178 공휴일 화면(A-09)에서 휴일을 직접 추가하거나 고칠 때 날짜는 지금 고른 연도 안에서만 고릅니다(사용자 결정 2026-10-06). 달력 칸은 그해 1/1~12/31로 막습니다. 그래도 다른 해 날짜가 들어오면 저장하지 않고 \"고른 해의 날짜만 넣을 수 있습니다.\"를 보입니다. 고른 해가 목록에서 사라지면 연도 칸은 올해로 돌아갑니다(G-183에서 바로잡음).",
+  "G-179 20줄씩 쪽을 나누는 표는 쌓이는 목록 표인 문의·신고(A-03), 오류 기록(A-06), 학생 계정(A-18)뿐입니다(사용자 결정 2026-10-07). 건물(A-11)·강의실(A-10)·공휴일(A-09) 표는 쪽을 나누지 않고 모든 줄을 보입니다. 이 세 표의 목업 예시 줄은 문의 4줄·신고 3줄, 오류 기록 4줄, 학생 계정 8줄이라 쪽 번호가 없습니다. 건물 표(43줄), 강의실 표(D2 25줄), 공휴일 표(2026년 21줄)는 20줄을 넘지만 쪽을 나누지 않는 표입니다. 그래서 G-83·G-174의 \"목업 예시 줄은 20줄보다 적다\"는 이 세 표만 가리키도록 고쳤습니다.",
+  "G-180 새 학기 반영(A-07) 뒤 경고의 [공휴일 보기]를 누르면 공휴일 화면(A-09)이 경고에 나온 해(예: 2027)를 골라 둔 채 열립니다(사용자 결정 2026-10-07). 왼쪽 메뉴 등 다른 길로 들어오면 처음 값은 올해입니다(G-172). 검사 결과 경고의 [공휴일 보기](그해를 이미 고를 수 있을 때, G-177)도 같은 단추라 같게 했습니다.",
+  "G-181 쪽 나누기 세부 규칙입니다(사용자 승인 2026-10-07). 학생 계정 표(A-18)는 가입일 최근 순입니다. 가입일이 같으면 계정 번호가 큰 것을 위로 둡니다(사용자 승인 2026-10-07). 목업 예시는 계정 8의 가입일을 2026-09-30으로 고쳐 계정 번호 순과 가입일 순을 맞췄습니다. 다음은 목업에 만들지 않고 기록만 합니다. 쪽 번호는 표 아래 가운데에 둡니다. 7쪽을 넘으면 쪽 번호 일부를 \"…\"로 줄입니다. [오류 기록 보기]로 오면 그 줄이 있는 쪽을 엽니다. 처리한 뒤에는 지금 쪽을 그대로 둡니다. 보기(탭·거르개)를 바꾸면 1쪽으로 갑니다.",
+  "G-182 시간표 반영(A-07) 뒤 결과의 공휴일 경고 줄 끝에는 마침표를 찍지 않습니다. 예: \"2027년 공휴일 목록이 없습니다\"(사용자 결정 2026-10-07). 검사 결과에서 [공휴일 보기]가 붙는 경고 줄도 마침표가 없습니다. 검사 때 단추 없이 보이는 \"2027년 공휴일 목록이 없습니다. 반영한 뒤 받아 주세요\"도 끝에 마침표가 없습니다.",
+  "G-183 G-178 글을 바로잡았습니다(교차 검토 반영, 2026-10-07). 전에는 \"올해로 대체하는 규칙을 없앴다\"고 적었지만 그 동작은 남아 있습니다. 이제 규칙으로 둡니다. 고른 해가 목록에서 사라지면 연도 칸은 올해로 돌아갑니다. 예: 2027을 고른 채 [변경 버리기]로 2027-1학기 정보가 사라지면 2026이 골라집니다. G-177의 \"목업 임의\"는 확정으로 바꿨습니다.",
   "(이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 \"처음 크기의 N배\"(처음 값 3배).",
   "(이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11, G-171에서 확정). 서비스 이름을 누르면 [초기화]와 같습니다(05 R-10, G-170).",
   "(이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.",
@@ -1808,7 +1832,7 @@ function initContent(){
       { id:'u3', type:'room', bid:'D2', floor:3, room:'306', start:'2026-09-28', end:'2026-10-05', cont:false, reason:'공사 중' }
     ],
     texts:{
-      srcTT:'출처: 국립순천대학교 수업시간표(2026-2학기) · 폐강 교과목 안내',
+      srcTT:'출처: 국립순천대학교 수업시간표([학기]) · 폐강 교과목 안내',   /* [학기] = 학기 이름 자리 (G-173) */
       srcMap:'캠퍼스맵 참고: 국립순천대학교',
       offday:'운영하지 않는 날입니다.',
       vacation:'현재 학기 수업 기간이 아닙니다.\n달력에서 수업 기간 날짜를 골라 주세요.',
@@ -1857,7 +1881,7 @@ function resetAccounts(){
   ACC = {
     admin:{ id:MOCK.adminId, pw:MOCK.adminPw, last:'2026-09-30 17:02', fails:2 },
     students:[
-      st(8, MOCK.stuId, '2026-09-02', '2026-10-01', 'ok', '', MOCK.stuPw, { 1:[1,2,5], 2:[3,4], 4:[1,2,5,6], 5:[2,6,7] }),   /* 목 = 3·4교시 공강 */
+      st(8, MOCK.stuId, '2026-09-30', '2026-10-01', 'ok', '', MOCK.stuPw, { 1:[1,2,5], 2:[3,4], 4:[1,2,5,6], 5:[2,6,7] }),   /* 목 = 3·4교시 공강 */
       st(7, '20260007', '2026-09-28', '2026-09-30', 'ok'),
       st(6, '20260006', '2026-09-20', '2026-09-29', 'ok'),
       st(5, '20260005', '2026-09-15', '2026-09-15', 'ok'),
@@ -1891,7 +1915,7 @@ function resetAdminData(){
     err:[
       { no:7, at:'2026-10-01 09:12', kind:'답장 메일', doing:'문의 #10 답장 보내기', why:'메일을 보내는 곳이 응답하지 않았습니다(연결 시간 초과).', rel:'받는 사람 [가림]', status:'new', seenAt:'' },
       { no:6, at:'2026-09-30 22:05', kind:'학생 화면 요청', doing:'층별 안내도 정보 보내기', why:'데이터베이스 연결이 잠시 끊겼습니다.', rel:'건물 D2', status:'new', seenAt:'' },
-      { no:5, at:'2026-09-28 10:00', kind:'공휴일 받아 오기', doing:'2027년 공휴일 불러오기', why:'인증키가 맞지 않습니다.', rel:'"공휴일 정보" 인증키 [가림]', status:'seen', seenAt:'2026-09-28 10:35' },
+      { no:5, at:'2026-09-28 10:00', kind:'공휴일 받아 오기', doing:'2026년 공휴일 불러오기', why:'인증키가 맞지 않습니다.', rel:'"공휴일 정보" 인증키 [가림]', status:'seen', seenAt:'2026-09-28 10:35' },
       { no:4, at:'2026-09-14 16:18', kind:'파일 검사', doing:'시간표 파일 검사', why:'파일을 읽는 중 서버 메모리가 모자랐습니다.', rel:'2026-2학기_시간표_v2.xlsx', status:'seen', seenAt:'2026-09-14 16:40' }
     ],
     keys:[ { id:'k1', name:'공휴일 정보', tail:'a1B2', saved:'2026-09-30 14:10', chk:'ok', at:'2026-10-01 09:12' } ],   /* API 인증키(A-15): 끝 4자리 예시만. chk = 마지막 확인 결과 ok·fail */
@@ -2686,7 +2710,7 @@ function renderPanel(){
 /* ---------- E. 바닥 영역 (FR-016·FR-017) ---------- */
 function renderFooter(){
   el.ftr.innerHTML =
-    '<span>' + esc(T('srcTT')) + '</span>' +
+    '<span>' + esc(T('srcTT').split('[학기]').join(D().sem.name)) + '</span>' +   /* [학기] → 업데이트한 학기 이름 (G-173) */
     '<span>' + esc(T('srcMap')) + '</span>' +                          /* 캠퍼스맵 참고 줄: 늘 둠 (G-169) */
     '<span>지도 데이터 © OpenStreetMap 기여자</span>' +                  /* OSM 사용 조건(ODbL): 항상 보임 */
     '<span>' + esc(T('fixed')) + '</span>' +
@@ -3677,6 +3701,7 @@ function admGo(scr, opt){
     if (opt && opt.tab) AS.tab[scr] = opt.tab;
     if (opt && opt.flt) AS.flt[scr] = opt.flt;
     if (opt && opt.hl) AS.hl = opt.hl;
+    if (opt && opt.hy) AS.f.hy = String(opt.hy);           /* 경고의 [공휴일 보기]: 경고에 나온 해를 골라 둔 채 A-09를 엶 (G-180). 다른 길로 오면 올해 */
     admRender(true);
   };
   if (AS.panel && AS.panel.form){                           /* 입력 칸이 열려 있으면 먼저 묻기 (G-06) */
@@ -3809,7 +3834,7 @@ function admPreviewEnd(){
 ADM_ACT.logout = function(){ doLogout('로그아웃했습니다.'); };
 ADM_ACT.wout = function(){ AS.warn = null; doLogout('로그아웃했습니다.'); };
 ADM_ACT.wkeep = function(){ AS.warn = null; AS.lastAct = Date.now(); admRender(); };
-ADM_ACT.go = function(t){ admGo(t.getAttribute('data-to'), { tab:t.getAttribute('data-tab') || undefined, flt:t.getAttribute('data-flt') || undefined }); };
+ADM_ACT.go = function(t){ admGo(t.getAttribute('data-to'), { tab:t.getAttribute('data-tab') || undefined, flt:t.getAttribute('data-flt') || undefined, hy:t.getAttribute('data-hy') || undefined }); };
 ADM_ACT.cno = function(){ AS.confirm = null; admRender(); };
 ADM_ACT.cok = function(){ const c = AS.confirm; AS.confirm = null; if (c && c.fn) c.fn(); else admRender(); };
 ADM_ACT.errx = function(){ AS.err = null; admRender(); };
@@ -3974,7 +3999,8 @@ ADM_ACT.eseensel = function(){ const s = AS.sel.err || {}, t = nowStamp(); ADM.e
 /* ---------- A-18 학생 계정 ---------- */
 ADM_SCR['A-18'] = function(){
   const flt = AS.flt['A-18'] || 'all', q = AS.q || '';
-  const L = studentsL().filter(function(s){ return (flt === 'all' || s.status === flt) && (!q || s.id.indexOf(q) >= 0); });
+  const L = studentsL().filter(function(s){ return (flt === 'all' || s.status === flt) && (!q || s.id.indexOf(q) >= 0); })
+    .sort(function(a, b){ return a.joined < b.joined ? 1 : a.joined > b.joined ? -1 : b.no - a.no; });   /* 가입일 최근 순, 같은 날이면 계정 번호 큰 것 위 (G-181) */
   return { html:
     '<div class="a-tool"><form class="a-search" data-aform="search" role="search"><label for="s-q" class="sr">학번 검색</label><input id="s-q" data-f="q" inputmode="numeric" maxlength="8" placeholder="학번으로 찾기" value="' + esc(fv('q', q)) + '"><button class="btn btn-secondary" data-a="search">검색</button>' + (q ? '<button class="btn btn-text" data-a="searchx">검색 지우기</button>' : '') + '</form>' +
       segHTML([['all', '전체'], ['ok', '정상'], ['stop', '정지']], flt) + '</div>' +
@@ -4024,6 +4050,7 @@ function setErr(o){ AS.f.err = o; return Object.keys(o).length > 0; }
 function validDate(s){ if (!/^\d{4}-\d{2}-\d{2}$/.test(s || '')) return false; const p = parseD(s); const t = new Date(Date.UTC(p.y, p.m - 1, p.d)); return t.getUTCMonth() === p.m - 1 && t.getUTCDate() === p.d; }
 function semYears(a, b){ const y = []; for (let i = Number(a.slice(0, 4)); i <= Number(b.slice(0, 4)); i++) y.push(i); return y; }
 function holYears(){ const s = {}; Object.keys(DRAFT.holidays).forEach(function(d){ s[d.slice(0, 4)] = 1; }); return s; }
+function holSel(y){ return holYearList().indexOf(String(y)) >= 0; }   /* 그해를 지금 A-09에서 고를 수 있는지 (G-172·G-177) */
 
 /* ---------- A-07 시간표·폐강 파일 반영 ---------- */
 const TT_ACCEPT = { tt:['xlsx', 'csv'], cx:['xlsx'] }, FILE_MAX = 10 * 1024 * 1024;     /* 받는 종류·크기 (G-23) */
@@ -4049,12 +4076,16 @@ function fileCard(k){
     const R = F.res;
     h += '<div class="a-res"><h3 class="a-h3">검사 결과</h3><p class="num">' + esc(R.sum) + '</p>' +
       (R.errs.length ? '<div class="a-resbox err"><p><b>오류 ' + R.errs.length + '건</b> - 고쳐서 다시 올릴 때까지 반영하지 않습니다.</p><table class="a-tbl sm"><thead><tr><th>줄</th><th>이유</th></tr></thead><tbody>' + R.errs.map(function(x){ return '<tr><td class="num">' + esc(x[0]) + '</td><td>' + esc(x[1]) + '</td></tr>'; }).join('') + '</tbody></table></div>' : '') +
-      (R.warns.length ? '<div class="a-resbox warn"><p><b>경고 ' + R.warns.length + '건</b> - 반영을 막지 않습니다.</p><table class="a-tbl sm"><thead><tr><th>줄</th><th>내용</th></tr></thead><tbody>' + R.warns.map(function(x){ return '<tr><td class="num">' + esc(x[0]) + '</td><td>' + esc(x[1]) + (x[2] ? ' <button class="btn btn-text sm" data-a="go" data-to="' + x[2] + '">' + esc(x[3]) + '</button>' : '') + '</td></tr>'; }).join('') + '</tbody></table></div>' : '') +
+      (R.warns.length ? '<div class="a-resbox warn"><p><b>경고 ' + R.warns.length + '건</b> - 반영을 막지 않습니다.</p><table class="a-tbl sm"><thead><tr><th>줄</th><th>내용</th></tr></thead><tbody>' + R.warns.map(function(x){ return '<tr><td class="num">' + esc(x[0]) + '</td><td>' + esc(x[1]) + (x[2] ? ' <button class="btn btn-text sm" data-a="go" data-to="' + x[2] + '"' + (x[4] ? ' data-hy="' + esc(x[4]) + '"' : '') + '>' + esc(x[3]) + '</button>' : '') + '</td></tr>'; }).join('') + '</tbody></table></div>' : '') +
       (R.gone.length ? '<div class="a-resbox"><p><b>이번 파일에서 사라진 강의실 ' + R.gone.length + '개</b> - 목록에는 남습니다. 오타로 들어간 강의실이면 지워 주세요. <button class="btn btn-text sm" data-a="go" data-to="A-10" data-tab="room">강의실 보기</button></p><p class="num">' + esc(R.gone.join(', ')) + '</p></div>' : '') +
       (R.back.length ? '<div class="a-resbox"><p><b>다시 추가된 강의실 ' + R.back.length + '개</b> - 전에 지웠지만 이번 파일에 나와 다시 넣었습니다. 전에 적은 층·수용 인원을 되살렸습니다.</p><p class="num">' + esc(R.back.join(', ')) + '</p></div>' : '') +
       (!R.errs.length ? '<div class="a-pact">' + abtn(isTT ? '반영하기' : '폐강 파일 반영하기', 'freflect', 'btn-primary', 'refl-' + k, ' data-k="' + k + '"') + '</div>' : '') + '</div>';
   }
-  if (F.state === 'done') h += '<div class="okbox" role="status">반영했습니다.' + UPD + '</div>';
+  if (F.state === 'done'){
+    h += '<div class="okbox" role="status">반영했습니다.' + UPD + '</div>';
+    const have = holYears(), miss = (F.years || []).filter(function(y){ return !have[y] && holSel(y); });   /* 반영 뒤: 빠진 해 + [공휴일 보기] (G-177). 지금 목록으로 다시 봄. 줄 끝 마침표 없음 (G-182), 단추는 그해를 골라 둠 (G-180) */
+    if (miss.length) h += '<div class="a-resbox warn">' + miss.map(function(y){ return '<p>' + esc(y + '년 공휴일 목록이 없습니다') + ' <button class="btn btn-text sm" data-a="go" data-to="A-09" data-hy="' + esc(String(y)) + '">공휴일 보기</button></p>'; }).join('') + '</div>';
+  }
   return h + '</section>';
 }
 ADM_SCR['A-07'] = function(){
@@ -4097,7 +4128,7 @@ ADM_ACT.fcheck = function(t){
     const F = AS.file[k]; F.state = 'result';
     const warns = [];
     const have = holYears();
-    semYears(sem.start, sem.end).forEach(function(y){ if (!have[y]) warns.push(['-', y + '년 공휴일 목록이 없습니다', 'A-09', '공휴일 보기']); });   /* 빠진 연도 경고 (02 7.6) */
+    semYears(sem.start, sem.end).forEach(function(y){ if (!have[y]) warns.push(holSel(y) ? ['-', y + '년 공휴일 목록이 없습니다', 'A-09', '공휴일 보기', String(y)] : ['-', y + '년 공휴일 목록이 없습니다. 반영한 뒤 받아 주세요']); });   /* 빠진 연도 경고 (02 7.6). 아직 A-09에서 고를 수 없는 해면 단추 없이 (G-177) */
     if (k === 'tt'){
       const R = { sum:'읽은 줄 1,284 · 건물 13곳 · 강의실 212개', errs:[], warns:warns, gone:[], back:[] };
       if (O.ttResult === 'err') R.errs = [['줄 128', '교시가 1~9 사이 숫자가 아닙니다 (값: 3~5)'], ['줄 342', '강의실 코드가 비어 있습니다'], ['줄 517', '수강 정원이 숫자가 아닙니다 (값: 사십)']];
@@ -4116,6 +4147,7 @@ ADM_ACT.freflect = function(t){
   const isNew = k === 'tt' && fv('semMode', 'cur') === 'new' && sem.name !== DRAFT.sem.name;
   const fn = function(){ admBusy('refl-' + k, (k === 'tt' ? '시간표' : '폐강') + ' 파일 반영', '파일을 반영하지 못했습니다.', function(){
     DRAFT[k] = { sem:sem.name, file:F.name, at:nowStamp() };
+    if (k === 'tt') F.years = semYears(sem.start, sem.end);              /* 반영 뒤 결과의 빠진 해 경고용 (G-177) */
     if (isNew){ DRAFT.sem = { name:sem.name, start:sem.start, end:sem.end }; AS.f.semMode = 'cur'; AS.file.cx = null; }
     F.state = 'done';
     admToast('반영했습니다.' + UPD);
@@ -4179,8 +4211,14 @@ const HOL_API = {                                           /* 공공 공휴일 
 };
 function dDow(ds){ return ds + ' (' + DOW[dow(ds)] + ')'; }                     /* "2026-10-05 (월)" - A-09 날짜는 모두 요일을 붙임 (G-117) */
 function dowOf(v){ return validDate(v) ? '(' + DOW[dow(v)] + ')' : ''; }        /* 날짜 칸 옆 요일 */
+function holYearList(){                                    /* 고를 수 있는 연도 = 올해 + 저장한 학기 정보(업데이트 전 포함)가 걸친 해, 작은 해부터 (G-172) */
+  const s = {}; s[today().slice(0, 4)] = 1;
+  semYears(DRAFT.sem.start, DRAFT.sem.end).forEach(function(y){ s[y] = 1; });
+  return Object.keys(s).sort();
+}
+function holY(){ const L = holYearList(), y = String(fv('hy', '')); return L.indexOf(y) >= 0 ? y : today().slice(0, 4); }   /* 처음 값 = 올해 (G-172). 경고의 [공휴일 보기]로 오면 그해 (G-180). 고른 해가 목록에서 사라지면 올해로 돌아감 (G-178·G-183) */
 ADM_SCR['A-09'] = function(){
-  const y = fv('hy', '2026'), H = DRAFT.holidays, e = AS.f.err || {}, hk = keyBy(HOL_KEY);
+  const y = holY(), H = DRAFT.holidays, e = AS.f.err || {}, hk = keyBy(HOL_KEY);
   const PH = PUB.holidays;
   const days = Object.keys(H).concat(Object.keys(PH).filter(function(d){ return !H[d]; })).filter(function(d){ return d.slice(0, 4) === y; }).sort();   /* 지운 날(삭제 예정)도 줄로 남김 (G-149) */
   const hst = function(d){ return !H[d] ? 'del' : !PH[d] ? 'add' : chgSame(PH[d], H[d]) ? '' : 'mod'; };
@@ -4189,28 +4227,28 @@ ADM_SCR['A-09'] = function(){
   const row = function(d){
     const cs = hst(d), h = H[d] || PH[d];
     if (cs === 'del') return '<tr class="a-tr chg-del"><td class="num">' + dDow(d) + '</td><td>' + esc(h.name) + '</td><td>' + (h.src === 'api' ? '불러옴' : '직접 추가') + '</td><td>' + chgTag(cs) + '</td><td class="a-acts">' + chgBack('hol', d) + '</td></tr>';
-    if (ed === d) return '<tr class="a-tr edit' + chgTr(cs) + '"><td><div class="a-endrow">' + aIn('h-ed-d', 'hEdD', fv('hEdD', d), ' type="date" aria-label="날짜"') + '<span class="a-dow num" id="h-ed-dow">' + dowOf(fv('hEdD', d)) + '</span></div>' + errHTML('h-ed-d', e.hEdD) + '</td><td>' + aIn('h-ed-n', 'hEdN', fv('hEdN', h.name), ' maxlength="20" aria-label="이름"') + errHTML('h-ed-n', e.hEdN) + '</td><td>' + (h.src === 'api' ? '불러옴' : '직접 추가') + '</td><td></td>' +
+    if (ed === d) return '<tr class="a-tr edit' + chgTr(cs) + '"><td><div class="a-endrow">' + aIn('h-ed-d', 'hEdD', fv('hEdD', d), ' type="date" min="' + y + '-01-01" max="' + y + '-12-31" aria-label="날짜"') + '<span class="a-dow num" id="h-ed-dow">' + dowOf(fv('hEdD', d)) + '</span></div>' + errHTML('h-ed-d', e.hEdD) + '</td><td>' + aIn('h-ed-n', 'hEdN', fv('hEdN', h.name), ' maxlength="20" aria-label="이름"') + errHTML('h-ed-n', e.hEdN) + '</td><td>' + (h.src === 'api' ? '불러옴' : '직접 추가') + '</td><td></td>' +
       '<td class="a-acts">' + abtn('저장', 'hEdSave', 'btn-primary sm', 'hol') + '<button class="btn btn-text sm" data-a="editx">취소</button></td></tr>';
     return '<tr class="a-tr' + chgTr(cs) + '"><td class="num">' + dDow(d) + '</td><td>' + esc(h.name) + '</td><td>' + (h.src === 'api' ? '불러옴' : '직접 추가') + '</td><td>' + chgTag(cs) + '</td>' +
       '<td class="a-acts"><button class="btn btn-secondary sm" data-a="hEd" data-d="' + d + '">수정</button><button class="btn btn-text sm danger-t" data-a="hDel" data-d="' + d + '">지우기</button></td></tr>';
   };
   return { html:
     '<div class="a-keyline"><span>"' + HOL_KEY + '" 인증키</span>' + (hk ? badge('등록됨', 'ok') + ' <span class="num">…' + esc(hk.tail) + '</span>' : badge('없음', 'warn') + ' <span>없으면 공휴일을 불러오지 못합니다.</span>') + ' <button class="btn btn-text sm" data-a="go" data-to="A-15">API 인증키 관리</button></div>' +
-    '<div class="a-tool"><label class="a-inl" for="h-y">연도</label><select id="h-y" data-f="hy" data-rr><option' + (y === '2026' ? ' selected' : '') + '>2026</option><option' + (y === '2027' ? ' selected' : '') + '>2027</option></select>' +
+    '<div class="a-tool"><label class="a-inl" for="h-y">연도</label><select id="h-y" data-f="hy" data-rr>' + holYearList().map(function(x){ return '<option' + (x === y ? ' selected' : '') + '>' + x + '</option>'; }).join('') + '</select>' +
       abtn('공휴일 불러오기', 'hfetch', 'btn-primary', 'hfetch') +
       '<button class="btn btn-secondary" data-a="hAdd">휴일 직접 추가</button></div>' +
     (AS.hfail ? failBox('공휴일을 불러오지 못했습니다.', AS.hfail) : '') +
     (R ? '<section class="acard"><h2>받아 온 목록 · ' + y + '년 (' + R.list.length + '개)</h2><table class="a-tbl sm"><thead><tr><th>날짜</th><th>이름</th><th></th></tr></thead><tbody>' +
       R.list.map(function(x){ return '<tr><td class="num">' + dDow(x[0]) + '</td><td>' + esc(x[1]) + '</td><td>' + (H[x[0]] ? badge('이미 있음', 'muted') : badge('새로 받음', 'new')) + '</td></tr>'; }).join('') + '</tbody></table>' +
       '<p class="a-muted">[저장]을 누르면 새로 받은 날만 목록에 더합니다. 직접 추가한 날은 그대로 둡니다.</p><div class="a-pact">' + abtn('저장', 'hsave', 'btn-primary', 'hol') + '<button class="btn btn-text" data-a="hresx">닫기</button></div></section>' : '') +
-    (AS.edit && AS.edit.k === 'holnew' ? '<section class="acard"><h2>휴일 직접 추가</h2><div class="a-grid3">' + aFld('h-new-d', '날짜', '<div class="a-endrow">' + aIn('h-new-d', 'hNewD', fv('hNewD', ''), ' type="date"') + '<span class="a-dow num" id="h-new-dow">' + dowOf(fv('hNewD', '')) + '</span></div>', '학교 휴업일, API에 없는 휴일을 더합니다.', e.hNewD) +
+    (AS.edit && AS.edit.k === 'holnew' ? '<section class="acard"><h2>휴일 직접 추가</h2><div class="a-grid3">' + aFld('h-new-d', '날짜', '<div class="a-endrow">' + aIn('h-new-d', 'hNewD', fv('hNewD', ''), ' type="date" min="' + y + '-01-01" max="' + y + '-12-31"') + '<span class="a-dow num" id="h-new-dow">' + dowOf(fv('hNewD', '')) + '</span></div>', '학교 휴업일, API에 없는 휴일을 더합니다.', e.hNewD) +
       aFld('h-new-n', '이름', aIn('h-new-n', 'hNewN', fv('hNewN', ''), ' maxlength="20" placeholder="예: 개교기념일 휴업"'), '', e.hNewN) + '</div><div class="a-pact">' + abtn('추가', 'hNewSave', 'btn-primary', 'hol') + '<button class="btn btn-text" data-a="editx">취소</button></div></section>' : '') +
     '<section class="acard"><h2>저장한 목록 · ' + y + '년</h2>' + (days.length ? chgLegend(days.map(hst)) + '<table class="a-tbl"><thead><tr><th>날짜</th><th>이름</th><th>출처</th><th>상태</th><th>관리</th></tr></thead><tbody>' + days.map(row).join('') + '</tbody></table>'
       : '<div class="a-warnbox">' + y + '년 공휴일 목록이 없습니다. [공휴일 불러오기]로 받아 오세요.</div>') +
     '<p class="a-muted">목록에 없는 휴일은 학생 달력에서 평일처럼 보입니다. 저장한 목록은 [업데이트하기]를 눌러야 학생 달력에 쓰입니다.</p></section>' };
 };
 ADM_ACT.hfetch = function(){                                /* "공휴일 정보" 인증키로 불러옴. 키가 없거나 실패하면 이 자리 상자 + 오류 기록 (G-79·G-113) */
-  const y = fv('hy', '2026');
+  const y = holY();
   AS.hfail = 0;
   AS.busy = 'hfetch'; admRender();
   setTimeout(function(){
@@ -4229,19 +4267,19 @@ ADM_ACT.hfetch = function(){                                /* "공휴일 정보
 function holSort(){ const H = DRAFT.holidays, o = {}; Object.keys(H).sort().forEach(function(d){ o[d] = H[d]; }); DRAFT.holidays = o; }   /* 날짜 순으로 둠: 지웠다 되돌리거나 고쳐도 업데이트한 값과 차례가 같아 "바뀐 것"으로 잘못 세지 않음 */
 ADM_ACT.hresx = function(){ AS.hres = null; admRender(); };
 ADM_ACT.hsave = function(){ const R = AS.hres; admBusy('hol', '공휴일 저장', '공휴일을 저장하지 못했습니다.', function(){ let n = 0; R.list.forEach(function(x){ if (!DRAFT.holidays[x[0]]){ DRAFT.holidays[x[0]] = { name:x[1], src:'api' }; n++; } }); holSort(); AS.hres = null; admToast(n ? '새로 받은 ' + n + '개를 저장했습니다.' + UPD : '새로 받은 공휴일이 없습니다.'); }); };
-ADM_ACT.hAdd = function(){ AS.edit = { k:'holnew' }; AS.f = { hy:fv('hy', '2026') }; admRender(); };
-ADM_ACT.editx = function(){ const hy = fv('hy', '2026'), rb = fv('rb', 'D2'), ab = fv('abld', ''); AS.edit = null; AS.f = { hy:hy, rb:rb, abld:ab }; admRender(); };
+ADM_ACT.hAdd = function(){ AS.edit = { k:'holnew' }; AS.f = { hy:holY() }; admRender(); };
+ADM_ACT.editx = function(){ const hy = holY(), rb = fv('rb', 'D2'), ab = fv('abld', ''); AS.edit = null; AS.f = { hy:hy, rb:rb, abld:ab }; admRender(); };
 ADM_ACT.hNewSave = function(){
   const d = fv('hNewD', ''), n = String(fv('hNewN', '')).trim(), e = {};
-  if (!validDate(d)) e.hNewD = '날짜 형식이 맞지 않습니다. 달력에서 골라 주세요.'; else if (DRAFT.holidays[d]) e.hNewD = '이미 목록에 있는 날짜입니다.';
+  if (!validDate(d)) e.hNewD = '날짜 형식이 맞지 않습니다. 달력에서 골라 주세요.'; else if (d.slice(0, 4) !== holY()) e.hNewD = '고른 해의 날짜만 넣을 수 있습니다.'; else if (DRAFT.holidays[d]) e.hNewD = '이미 목록에 있는 날짜입니다.';
   if (!n) e.hNewN = '이름을 적어 주세요.';
   if (setErr(e)){ admRender(); return; }
   admBusy('hol', '휴일 추가', '휴일을 추가하지 못했습니다.', function(){ DRAFT.holidays[d] = { name:n, src:'manual' }; holSort(); AS.edit = null; AS.f = { hy:d.slice(0, 4) }; admToast('추가했습니다.' + UPD); });
 };
-ADM_ACT.hEd = function(t){ AS.edit = { k:'hol', ds:t.getAttribute('data-d') }; AS.f = { hy:fv('hy', '2026') }; admRender(); };
+ADM_ACT.hEd = function(t){ AS.edit = { k:'hol', ds:t.getAttribute('data-d') }; AS.f = { hy:holY() }; admRender(); };
 ADM_ACT.hEdSave = function(){
   const od = AS.edit.ds, d = fv('hEdD', od), n = String(fv('hEdN', DRAFT.holidays[od].name)).trim(), e = {};
-  if (!validDate(d)) e.hEdD = '날짜 형식이 맞지 않습니다.'; else if (d !== od && DRAFT.holidays[d]) e.hEdD = '이미 목록에 있는 날짜입니다.';
+  if (!validDate(d)) e.hEdD = '날짜 형식이 맞지 않습니다.'; else if (d.slice(0, 4) !== holY()) e.hEdD = '고른 해의 날짜만 넣을 수 있습니다.'; else if (d !== od && DRAFT.holidays[d]) e.hEdD = '이미 목록에 있는 날짜입니다.';
   if (!n) e.hEdN = '이름을 적어 주세요.';
   if (setErr(e)){ admRender(); return; }
   admBusy('hol', '공휴일 수정', '공휴일을 고치지 못했습니다.', function(){ const h = DRAFT.holidays[od]; delete DRAFT.holidays[od]; DRAFT.holidays[d] = { name:n, src:h.src }; holSort(); AS.edit = null; AS.f = { hy:d.slice(0, 4) }; admToast('고쳤습니다.' + UPD); });
@@ -4752,7 +4790,7 @@ ADM_SCR['A-14'] = function(){
       const v = fv('tx_' + d[0], DRAFT.texts[d[0]]);
       const inner = d[4] ? '<textarea id="tx-' + d[0] + '" data-f="tx_' + d[0] + '" maxlength="' + d[3] + '" rows="2">' + esc(v) + '</textarea>' : aIn('tx-' + d[0], 'tx_' + d[0], v, ' maxlength="' + d[3] + '"');
       return '<div class="a-fld"><label for="tx-' + d[0] + '">' + esc(d[1]) + ' ' + pubBadge(DRAFT.texts[d[0]] === PUB.texts[d[0]] ? 'same' : 'changed') + '</label>' + inner +
-        '<div class="fmeta"><span class="fhelp">쓰이는 자리: ' + esc(d[2]) + ' · 처음 값: ' + esc(T0[d[0]].replace(/\n/g, ' / ')) + '</span>' + cntHTML('tx-' + d[0], v, d[3]) + '</div>' + errHTML('tx-' + d[0], e['tx_' + d[0]]) + '</div>';
+        '<div class="fmeta"><span class="fhelp">쓰이는 자리: ' + esc(d[2]) + ' · 처음 값: ' + esc(T0[d[0]].replace(/\n/g, ' / ')) + '</span>' + cntHTML('tx-' + d[0], v, d[3]) + '</div>' + (d[0] === 'srcTT' ? '<p class="fhelp">[학기]는 지금 학기 이름으로 바뀝니다.</p>' : '') + errHTML('tx-' + d[0], e['tx_' + d[0]]) + '</div>';
     }).join('') + (tab === 'msg' ? '<p class="a-muted">"불러오는 중"·"불러오기 실패" 문구는 서버를 못 받을 때 보이는 문구라 고정입니다. 문의·가입 동의 문구도 고정입니다(09에서 정함).</p>' : '') +
     '<div class="a-pact">' + abtn('저장', 'txSave', 'btn-primary', 'tx', ' data-g="' + tab + '"') + '</div></section>';
     return { html:html };
