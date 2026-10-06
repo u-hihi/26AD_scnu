@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko" data-theme="light" data-primary="A" data-status-colors="1" data-status-shape="1">
+<html lang="ko" data-theme="light" data-status-shape="1">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,7 +84,7 @@
     G-135 강의실 배치가 추정이라는 것은 목업 전용 표시(점선 테두리 + "목업 전용")로만 알립니다. 층 목록 맨 위 한 줄과 층 이름 옆 작은 표입니다. 실제 사이트 문구가 아닙니다. 실제 배치도(층별 안내판·소방 대피도)를 받으면 스크립트의 FLOOR_LAYOUT에 층별 외곽선·복도·강의실 칸 자리를 적어 바꿉니다.
     G-136 그림 위에 "위에서 내려다본 건물 모양입니다. 캠퍼스맵처럼 아래쪽이 정문 쪽입니다." 한 줄(사이트 문구)을 둡니다. 복도 띠 안에 "복도" 글자를 둡니다. 건물 바닥은 캠퍼스맵의 건물 색을 옅게, 복도는 더 밝은 색으로 칠합니다(목업 임의). 강의실 칸 안의 정보·상태 모양과 사용 불가 빗금(G-59)은 예전과 같고, 칸마다 "301호 공실"처럼 읽어 주는 이름(aria-label)을 붙였습니다.
     G-137 S-12 공실 보기(로그인한 학생, 여러 교시·여러 건물)는 칸 안에 교시 작은 칸(G-60)이 여러 개 들어가야 해서, 예전 ① 모양(강의실 줄 - 복도 - 강의실 줄)을 그대로 씁니다.
-    G-138 "층 정보 없음" 묶음은 그림 밖 칸 목록으로 보이고, 강의실이 없는 층(E-15 후보 ②)은 그림 없이 "강의실 없음" 글자만 보입니다.
+    G-138 "층 정보 없음" 묶음은 그림 밖 칸 목록으로 보이고, 강의실이 없는 층(E-15 ②, G-167)은 그림 없이 "강의실 없음" 글자만 보입니다.
     G-139 S-03 층별 안내도의 건물 이름 바로 밑에 보기 고르기 [건물 모양] / [강의실만]을 둡니다(사용자 결정 2026-10-03). 처음 값은 [건물 모양](G-130~G-136의 그림)입니다. 단추 모양은 관리자 화면의 단추 묶음(고른 단추를 대표색으로 채움)을 그대로 쓰고, 휴대폰에서는 단추 높이만 44px로 키웁니다(목업 임의).
     G-140 [강의실만]은 건물 외곽선 없이 강의실 칸만 보입니다. S-12와 같은 예전 ① 모양(강의실 줄 - 복도 - 강의실 줄)을 다시 씁니다. 칸 안의 정보·상태 모양·사용 불가 빗금(G-59)·읽어 주는 이름(aria-label)은 [건물 모양]과 같습니다. "위에서 내려다본 건물 모양입니다…" 한 줄과 목업 전용 "추정 배치" 표시(G-135)는 숨깁니다(건물 그림이 아니어서). "층 정보 없음" 묶음과 강의실 없는 층은 두 보기가 같습니다(G-138).
     G-141 고른 보기는 같은 방문 동안 다른 건물로 가거나 칸을 눌러도 그대로입니다(목업 임의). [초기화]를 누르거나 사이트를 새로 열면 [건물 모양]으로 돌아갑니다. 보기를 바꿔도 열린 강의실 상세(S-04)와 층 바로가기는 그대로입니다. 휴대폰만 따로 바꾸는 것은 없습니다(옆으로 밀기·손가락 확대로 충분하다고 사용자 확인).
@@ -113,15 +113,20 @@
     G-164 한 번 누를 때마다 한 단계씩 되돌리거나 다시 합니다. 실행 취소 뒤 새로 저장하면 다시 실행 기록은 버립니다. 기록은 50단계까지입니다(목업 임의). 저장한 값만 바꾸므로 줄 표시·"업데이트 안 한 변경 N건"·지도 그림이 바로 바뀌고, 마지막 업데이트 때와 같아지면 변경 없음이 됩니다. 단추의 title과 읽어 주는 이름에 무엇을 되돌리는지 붙입니다(예: "실행 취소: 공과대학 1호관(D2) 영역 지우기"). 되돌릴 것이 없을 때, 점 찍기 그리기·[이동] 중, 처리 중에는 누를 수 없습니다(그리기·이동 중에는 [점 하나 되돌리기]·[취소]를 씀). 결과 알림은 "실행 취소했습니다."·"다시 실행했습니다."이고, [되돌리기](G-152)처럼 G-110 끝말을 붙이지 않습니다(학생 화면에 보이게 될지 빠질지가 경우마다 달라서).
     G-165 A-11에서 Ctrl+Z는 실행 취소, Ctrl+Y·Ctrl+Shift+Z는 다시 실행입니다. 글자 입력 칸에 초점이 있으면 브라우저 기본 동작(입력한 글자 되돌리기)을 그대로 두고, 확인 창이 떠 있을 때는 동작하지 않습니다.
     G-166 실행 취소 기록은 [업데이트하기]·[변경 버리기]·로그아웃 때와 A-11을 떠날 때 지웁니다. 다른 화면(A-10 등)에서 같은 값을 바꾼 뒤 돌아와 되돌리면 그 변경까지 덮어쓰는 것을 막으려는 것입니다. [미리 보기]를 다녀와도 기록은 남습니다(값이 바뀌지 않아서).
+    G-167 조정판 3·4번의 보류·제안 항목을 모두 정했습니다(사용자 결정 2026-10-05). 공실/수업중 모양은 ① 색 칸 + 글자, 상태 색은 ① 초록 / 주황빛 갈색, 대표색은 A(#2B5C8A)입니다. 층은 ① 높은 층이 위, 층 정보 없음은 ① 맨 아래 묶음입니다. 기준 표시는 ① 날짜만("9/15 업데이트"), "오늘" 모양은 ① 흐린 모양 + "오늘" 테두리만입니다. 안내 창(S-07)은 ① 가운데 창 + [확인], [학생이 누르기]가 꺼진 강의실 없는 건물은 ① 반응 없음, 강의실이 없는 층은 ② "강의실 없음" 표시, 건물 이름 겹침은 번호로 바꾸고 그래도 겹치면 숨김입니다. 조정판의 바꿔 보기는 없앴습니다. 건물 목록 정렬·캠퍼스맵 최대 확대는 관리자 화면(A-10·A-11)에서 정합니다.
+    G-168 강의실 상세(S-04)는 상태·시각·수용 인원을 이름·값 짝(05 2.14 표 모양)으로 보입니다(사용자 결정 2026-10-05). S-03에서 열면 "상태"·"시각"·"수용 인원" 줄입니다. S-12에서 열면 고른 교시마다 한 줄씩(G-61) 이름 칸에 "3교시"처럼 교시를, 값 칸에 상태와 시각을 보이고, 맨 아래에 "수용 인원" 줄을 둡니다. 값 칸의 시각 문장에는 상태 글자를 다시 쓰지 않습니다(예: [수업중] 11:50 끝, [공실] 다음 수업 13:00 시작, 사용자 결정 2026-10-05). S-03의 "시각" 줄도 같습니다.
+    G-169 캠퍼스맵은 오픈스트리트맵(OSM) 자료로 그린 지도로 정했습니다(사용자 결정 2026-10-05). 바닥 영역의 "캠퍼스맵 참고" 줄(A-14 문구)은 늘 두고, OSM 출처 표시도 지금처럼 늘 보입니다. 처음 문구는 "캠퍼스맵 참고: 국립순천대학교"입니다(사용자 결정 2026-10-05). 지도는 OSM으로 그리고 방향·건물 번호·이름만 학교 캠퍼스맵을 참고해서 "출처" 대신 "참고"로 씁니다. 관리자가 A-11에서 캠퍼스맵 그림을 바꿀 수 있는 것은 그대로입니다.
+    G-170 서비스 이름("순천대 공실 알리미")을 누르면 [초기화]와 똑같이 동작합니다(05 R-10, 사용자 결정 2026-10-05). 모양은 글자 그대로이고, 마우스를 올리면 손가락 모양이 됩니다. 키보드(Tab, Enter·Space)로도 누를 수 있고, 읽어 주는 이름은 "순천대 공실 알리미 - 처음 화면으로 초기화"입니다. 누른 뒤 초점은 누른 단추에 둡니다([초기화]도 같음, 목업 임의).
+    G-171 확정으로 기록합니다(사용자 결정 2026-10-05). 건물 이름 글자를 누르면 그 건물을 누른 것과 같습니다(05 R-11). 관리자가 적은 홈페이지 수용 인원은 "(추정)" 없이 보입니다(G-58). 실제 층별 배치도는 나중에 받으므로, 추정 배치와 "목업 전용 · 추정 배치" 표시는 그대로 둡니다(G-135).
     (이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 "처음 크기의 N배"(처음 값 3배).
-    (이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11 확인 필요 항목). 서비스 이름을 누르면 반응이 없습니다(05 R-10).
+    (이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11, G-171에서 확정). 서비스 이름을 누르면 [초기화]와 같습니다(05 R-10, G-170).
     (이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.
     (이전 목업) 시간표 미등록(E-04)이면 캠퍼스맵의 모든 건물을 누를 수 없습니다.
     (이전 목업) 교시를 고르지 않았을 때 S-03·S-04 기준 줄은 "10/1(목) 기준"처럼 날짜만 보입니다.
     (이전 목업) S-03 층 바로가기 단추에 "층 정보 없음" 묶음 단추도 넣습니다(묶음을 보일 때).
-    (이전 목업) "오늘" 모양 후보 ②의 글자는 필터 안내 문구 칸에 넣습니다.
+    (이전 목업) "오늘" 모양 후보 ②의 글자는 ①로 정해 없앴습니다(G-167).
     (이전 목업) S-04 이름·값 모양의 이름 칸 "상태"·"시각"은 목업에서 붙인 말입니다.
-    (이전 목업) 대표색 B·C, 상태 색 ②·③의 마우스 올림·누름·옅은 색·테두리 값은 05에 없어 목업에서 만들었습니다.
+    (이전 목업) 대표색 B·C, 상태 색 ②·③ 후보 값은 A·①로 정해 없앴습니다(G-167).
     (이전 목업) 휴대폰 필터를 펼치면 안내 문구는 교시 단추 밑에, 접으면 요약 줄 밑에 보입니다.
     (이전 목업) 브라우저 [뒤로]는 S-03·S-12에서만 S-01로 보냅니다. 다른 화면의 [뒤로]는 04에 없어(05 R-02) 따로 처리하지 않습니다.
     (이전 목업) 캠퍼스맵은 오픈스트리트맵(OSM, ODbL) 자료의 모양으로 그리고, 학교 캠퍼스맵 방향(정문이 아래쪽)으로 돌렸습니다. OSM에 없는 건물은 반듯한 사각형으로 대략 그렸습니다. 건물 번호·이름은 학교 캠퍼스맵 범례를 따릅니다.
@@ -135,7 +140,7 @@
    1. 디자인 토큰 (05 1장 - CSS 변수 이름은 05 토큰 이름 앞에 "--"만 붙임)
    ===================================================================== */
 :root{
-  /* 1.1.1 대표색 - 후보 A (05 제안) */
+  /* 1.1.1 대표색 A (05 제안, G-167에서 정함) */
   --color-primary:#2B5C8A;
   --color-primary-hover:#234D74;
   --color-primary-pressed:#1B3D5D;
@@ -233,12 +238,7 @@
 }
 @supports (height:100dvh){ :root{ --screen-h:100dvh; } }
 
-/* 대표색 후보 B·C (05 1.1.1 비교표). 마우스 올림·누름·옅은 색은 05에 값이 없어 목업에서 임의로 만듦 */
-html[data-primary="B"]{ --color-primary:#1F4E79; --color-primary-hover:#1A4267; --color-primary-pressed:#143552; --color-primary-soft:#E6EDF4; }
-html[data-primary="C"]{ --color-primary:#3A6EA5; --color-primary-hover:#315D8C; --color-primary-pressed:#284C73; --color-primary-soft:#E8F0F8; }
-/* 상태 색 조합 ②·③ (05 1.1.3 비교표). 공실은 같은 초록, 수업중 색만 바뀜. 값은 목업 임의 */
-html[data-status-colors="2"]{ --color-busy-text:#4B5563; --color-busy-bg:#EEF0F3; --color-busy-border:#7F8995; }
-html[data-status-colors="3"]{ --color-busy-text:#B42318; --color-busy-bg:#FDECEA; --color-busy-border:#D2463B; }
+/* 대표색 B·C, 상태 색 ②·③ 후보는 A·①로 정해 지움 (G-167) */
 
 /* ----- 다크: 비교용 임시 색 (05는 라이트만 확정, 다크 모드는 범위 밖). 글자 대비는 WCAG AA 4.5:1 이상으로 고름 ----- */
 html[data-theme="dark"]{
@@ -285,10 +285,6 @@ html[data-theme="dark"]{
   --shadow-2:0 4px 12px rgba(0,0,0,.45);
   --shadow-3:0 12px 32px rgba(0,0,0,.6);
 }
-html[data-theme="dark"][data-primary="B"]{ --color-primary:#7FA7D1; --color-primary-hover:#96B8DB; --color-primary-pressed:#ACC8E5; --color-primary-soft:#1B2A3C; }
-html[data-theme="dark"][data-primary="C"]{ --color-primary:#9FC4EE; --color-primary-hover:#B4D1F2; --color-primary-pressed:#C8DEF6; --color-primary-soft:#203247; }
-html[data-theme="dark"][data-status-colors="2"]{ --color-busy-text:#B8C0CA; --color-busy-bg:#262C34; --color-busy-border:#7A8591; }
-html[data-theme="dark"][data-status-colors="3"]{ --color-busy-text:#FF9A8F; --color-busy-bg:#3A1C19; --color-busy-border:#D2574C; }
 
 /* =====================================================================
    2. 기본
@@ -367,10 +363,8 @@ h1,h2,h3,p{ margin:0; }
 .is-pc .day.can:not(.sel):hover{ background:var(--color-primary-soft); }
 .day.can:not(.sel):active{ background:var(--color-pressed-bg); }
 .day.off{ color:var(--color-text-disabled); cursor:default; }
-/* 오늘이 주말·공휴일·방학이고 골라져 있을 때 (보류 후보, 05 2.17) */
+/* 오늘이 주말·공휴일·방학이고 골라져 있을 때: ① 흐린 모양 + "오늘" 테두리만 (05 2.17, G-167) */
 .day.off.tl1{ box-shadow:inset 0 0 0 2px var(--color-primary); }
-.day.off.tl2{ background:var(--color-primary); color:var(--color-text-on-primary); font-weight:var(--font-weight-bold); box-shadow:0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary); }
-.day.off.tl3{ background:var(--color-primary-soft); box-shadow:inset 0 0 0 2px var(--color-primary); }
 
 /* 2.4 교시 단추 */
 .periods{ display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--space-2); }
@@ -440,7 +434,6 @@ html[data-theme="dark"] .is-m .panel.open{ box-shadow:0 -4px 12px rgba(0,0,0,.5)
 .p-bname{ font-size:var(--font-size-xl); font-weight:var(--font-weight-bold); line-height:var(--font-line-tight); padding-right:44px; }
 .p-room{ font-size:var(--font-size-md); font-weight:var(--font-weight-semibold); margin-top:calc(var(--space-2) * -1); }
 .p-base{ font-size:var(--font-size-sm); color:var(--color-text-secondary); }
-.p-time{ font-size:var(--font-size-md); }
 .p-fixed{ font-size:var(--font-size-sm); color:var(--color-text-secondary); }
 .p-report{ width:100%; margin-top:auto; }
 .kv{ display:grid; grid-template-columns:auto 1fr; column-gap:var(--space-4); row-gap:var(--space-2); align-items:baseline; }
@@ -475,7 +468,7 @@ html[data-theme="dark"] .is-m .panel.open{ box-shadow:0 -4px 12px rgba(0,0,0,.5)
 .free .st, .stchip.free{ color:var(--color-free-text); font-weight:var(--font-weight-bold); }
 .busy .st, .stchip.busy{ color:var(--color-busy-text); font-weight:var(--font-weight-regular); }
 .ico{ display:none; flex:none; }
-html[data-status-shape="3"] .ico{ display:block; }
+/* 공실/수업중 모양 ① 색 칸 + 글자 (G-167). <html>의 data-status-shape="1"은 고정 값 - 셀렉터 우선순위를 그대로 두려고 남김 */
 html[data-status-shape="1"] .room.free{ background:var(--color-free-bg); border-color:var(--color-free-border); }
 html[data-status-shape="1"] .room.busy{ background:var(--color-busy-bg); border-color:var(--color-busy-border); }
 .is-pc .room:hover{ border-color:var(--color-border-strong); box-shadow:inset 0 0 0 1px var(--color-border-strong); }
@@ -527,12 +520,14 @@ html[data-status-shape="1"] .stchip.busy{ background:var(--color-busy-bg); borde
 /* A. 머리 영역 */
 .hdr{ position:relative; z-index:var(--z-header); background:var(--color-bg); border-bottom:1px solid var(--color-border); flex:none; }
 .is-pc .hdr{ height:var(--size-header-pc); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:var(--space-4); padding:0 var(--space-6); }
-.svc{ font-size:var(--font-size-lg); font-weight:var(--font-weight-bold); line-height:var(--font-line-tight); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.svc{ display:block; max-width:100%; font-size:var(--font-size-lg); font-weight:var(--font-weight-bold); line-height:var(--font-line-tight); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; cursor:pointer; }   /* 서비스 이름 = [초기화]와 같은 단추, 모양은 글자 그대로 (05 R-10, G-170) */
+.svc:focus-visible{ outline:2px solid var(--color-primary); outline-offset:2px; border-radius:var(--radius-sm); }
+.is-pc .svc{ justify-self:start; }
 .stamp{ font-size:var(--font-size-sm); color:var(--color-text-secondary); white-space:nowrap; font-variant-numeric:tabular-nums; }
 .acts{ justify-self:end; display:flex; align-items:center; gap:var(--space-1); }
 .is-m .hdr{ padding:0 var(--space-4); }
 .hrow{ height:var(--size-header-mobile); display:flex; align-items:center; gap:var(--space-2); }
-.is-m .svc{ flex:1; min-width:0; }
+.is-m .svc{ flex:0 1 auto; min-width:0; margin-right:auto; }   /* 누르는 자리는 글자 너비만, 단추는 예전처럼 오른쪽 */
 .is-m .stamp{ font-size:var(--font-size-xs); white-space:normal; padding-bottom:var(--space-2); min-height:1px; }
 .menu{ position:absolute; left:0; right:0; top:100%; z-index:var(--z-menu); background:var(--color-bg); box-shadow:var(--shadow-2); border-top:1px solid var(--color-border); }
 .mrow{ display:flex; align-items:center; width:100%; min-height:48px; padding:0 var(--space-4); border-bottom:1px solid var(--color-border); color:var(--color-primary); font-weight:var(--font-weight-semibold); }
@@ -589,7 +584,7 @@ html[data-status-shape="1"] .stchip.busy{ background:var(--color-busy-bg); borde
 .bld.on .base{ fill:var(--color-map-building-on); }
 .mapvp.nodata .bld.on .base{ fill:var(--color-map-building-off); }
 .bld .hl{ fill:var(--color-map-highlight); fill-opacity:0; stroke:none; vector-effect:non-scaling-stroke; }
-.mapvp:not(.inert) .bld.on, .mapvp:not(.inert) .bld.tap{ cursor:pointer; }
+.mapvp:not(.inert) .bld.on{ cursor:pointer; }
 .is-pc .mapvp:not(.inert):not(.dragging) .bld.on:hover .hl{ fill-opacity:.25; stroke:var(--color-map-highlight); stroke-width:2px; }
 .lbl{ font-size:var(--font-size-sm); font-weight:var(--font-weight-semibold); fill:var(--color-map-label-text); stroke:var(--color-map-label-halo); stroke-width:6px; stroke-linejoin:round; paint-order:stroke; text-anchor:middle; dominant-baseline:central; pointer-events:none; }
 .lbl.pl{ font-size:var(--font-size-xs); font-weight:var(--font-weight-regular); fill:var(--color-text-secondary); }  /* 위치 표시(운동장·문): 건물이 아님, 누를 수 없음 */
@@ -807,9 +802,9 @@ em.opt{ font-style:normal; font-size:var(--font-size-xs); color:var(--color-text
 .mtabs .tab:focus-visible{ outline:2px solid var(--color-primary); outline-offset:-2px; }
 .mb[role="tabpanel"]{ border-top:0; margin-top:0; }
 .is-pc #scr-multi.on, .is-pc #scr-policy.on, .is-pc #scr-tt.on{ overflow:auto; }
-.plines{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:var(--space-2); }
-.plines li{ display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; }
-.plines .stchip{ align-self:auto; font-size:var(--font-size-sm); }
+/* S-12에서 연 강의실 상세: 교시 줄의 값 칸 = 상태 + 시각 (G-61·G-168) */
+.kv dd.kv-st{ display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; }
+.kv-st .stchip{ align-self:auto; font-size:var(--font-size-sm); }
 
 /* S-11 개인정보 처리방침 (틀) */
 .policy{ padding:var(--space-4) var(--space-6) var(--space-8); max-width:760px; display:flex; flex-direction:column; gap:var(--space-4); }
@@ -1170,7 +1165,7 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
             <section id="scr-policy" class="scr" aria-label="개인정보 처리방침"></section>
             <!-- S-13 내 시간표 (로그인한 학생) -->
             <section id="scr-tt" class="scr" aria-label="내 시간표"></section>
-            <!-- 짧은 안내 띠 (S-07 후보 ②, 사용 불가 강의실 사유, 건물 3개 한도 등) -->
+            <!-- 짧은 안내 띠 (사용 불가 강의실 사유, 건물 3개 한도 등) -->
             <div id="strip" class="strip note" role="status" hidden></div>
           </main>
           <!-- S-04 강의실 상세 (PC 오른쪽 패널 / 휴대폰 아래 패널) -->
@@ -1196,7 +1191,7 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
   <div class="mhead">
     <div class="mt">
       <div><span class="badge">목업 전용</span><strong>목업 조정판</strong></div>
-      <p class="hint">사이트 화면이 아닙니다. 모양 후보와 상황을 바꿔 보는 칸입니다. 조정판 설정만 이 브라우저에 기억됩니다(비밀번호·이메일·로그인 상태는 기억하지 않음).</p>
+      <p class="hint">사이트 화면이 아닙니다. 상황을 바꿔 보는 칸입니다. 조정판 설정만 이 브라우저에 기억됩니다(비밀번호·이메일·로그인 상태는 기억하지 않음).</p>
     </div>
     <button type="button" class="mbtn" data-m="close">닫기</button>
   </div>
@@ -1321,14 +1316,8 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
   </section>
 
   <section>
-    <h3>3. 보류 후보 바꿔 보기</h3>
-    <p class="hint">04·05의 "보류 - 목업에서 결정" 항목입니다. 건물 목록 정렬·캠퍼스맵 최대 확대는 이제 관리자 화면(A-10·A-11)에서 정합니다.</p>
-    <div id="m-opts"></div>
-  </section>
-
-  <section>
-    <h3>4. 제안 확인 (04·05 "제안 - 목업에서 확인")</h3>
-    <div id="m-props"></div>
+    <h3>3·4. 보류·제안 항목</h3>
+    <p class="hint">모두 결정함(G-167). 바꿔 보기는 없앴습니다.</p>
   </section>
 
   <section>
@@ -1427,7 +1416,7 @@ const ASSUME = [
   "G-135 강의실 배치가 추정이라는 것은 목업 전용 표시(점선 테두리 + \"목업 전용\")로만 알립니다. 층 목록 맨 위 한 줄과 층 이름 옆 작은 표입니다. 실제 사이트 문구가 아닙니다. 실제 배치도(층별 안내판·소방 대피도)를 받으면 스크립트의 FLOOR_LAYOUT에 층별 외곽선·복도·강의실 칸 자리를 적어 바꿉니다.",
   "G-136 그림 위에 \"위에서 내려다본 건물 모양입니다. 캠퍼스맵처럼 아래쪽이 정문 쪽입니다.\" 한 줄(사이트 문구)을 둡니다. 복도 띠 안에 \"복도\" 글자를 둡니다. 건물 바닥은 캠퍼스맵의 건물 색을 옅게, 복도는 더 밝은 색으로 칠합니다(목업 임의). 강의실 칸 안의 정보·상태 모양과 사용 불가 빗금(G-59)은 예전과 같고, 칸마다 \"301호 공실\"처럼 읽어 주는 이름(aria-label)을 붙였습니다.",
   "G-137 S-12 공실 보기(로그인한 학생, 여러 교시·여러 건물)는 칸 안에 교시 작은 칸(G-60)이 여러 개 들어가야 해서, 예전 ① 모양(강의실 줄 - 복도 - 강의실 줄)을 그대로 씁니다.",
-  "G-138 \"층 정보 없음\" 묶음은 그림 밖 칸 목록으로 보이고, 강의실이 없는 층(E-15 후보 ②)은 그림 없이 \"강의실 없음\" 글자만 보입니다.",
+  "G-138 \"층 정보 없음\" 묶음은 그림 밖 칸 목록으로 보이고, 강의실이 없는 층(E-15 ②, G-167)은 그림 없이 \"강의실 없음\" 글자만 보입니다.",
   "G-139 S-03 층별 안내도의 건물 이름 바로 밑에 보기 고르기 [건물 모양] / [강의실만]을 둡니다(사용자 결정 2026-10-03). 처음 값은 [건물 모양](G-130~G-136의 그림)입니다. 단추 모양은 관리자 화면의 단추 묶음(고른 단추를 대표색으로 채움)을 그대로 쓰고, 휴대폰에서는 단추 높이만 44px로 키웁니다(목업 임의).",
   "G-140 [강의실만]은 건물 외곽선 없이 강의실 칸만 보입니다. S-12와 같은 예전 ① 모양(강의실 줄 - 복도 - 강의실 줄)을 다시 씁니다. 칸 안의 정보·상태 모양·사용 불가 빗금(G-59)·읽어 주는 이름(aria-label)은 [건물 모양]과 같습니다. \"위에서 내려다본 건물 모양입니다…\" 한 줄과 목업 전용 \"추정 배치\" 표시(G-135)는 숨깁니다(건물 그림이 아니어서). \"층 정보 없음\" 묶음과 강의실 없는 층은 두 보기가 같습니다(G-138).",
   "G-141 고른 보기는 같은 방문 동안 다른 건물로 가거나 칸을 눌러도 그대로입니다(목업 임의). [초기화]를 누르거나 사이트를 새로 열면 [건물 모양]으로 돌아갑니다. 보기를 바꿔도 열린 강의실 상세(S-04)와 층 바로가기는 그대로입니다. 휴대폰만 따로 바꾸는 것은 없습니다(옆으로 밀기·손가락 확대로 충분하다고 사용자 확인).",
@@ -1456,15 +1445,20 @@ const ASSUME = [
   "G-164 한 번 누를 때마다 한 단계씩 되돌리거나 다시 합니다. 실행 취소 뒤 새로 저장하면 다시 실행 기록은 버립니다. 기록은 50단계까지입니다(목업 임의). 저장한 값만 바꾸므로 줄 표시·\"업데이트 안 한 변경 N건\"·지도 그림이 바로 바뀌고, 마지막 업데이트 때와 같아지면 변경 없음이 됩니다. 단추의 title과 읽어 주는 이름에 무엇을 되돌리는지 붙입니다(예: \"실행 취소: 공과대학 1호관(D2) 영역 지우기\"). 되돌릴 것이 없을 때, 점 찍기 그리기·[이동] 중, 처리 중에는 누를 수 없습니다(그리기·이동 중에는 [점 하나 되돌리기]·[취소]를 씀). 결과 알림은 \"실행 취소했습니다.\"·\"다시 실행했습니다.\"이고, [되돌리기](G-152)처럼 G-110 끝말을 붙이지 않습니다(학생 화면에 보이게 될지 빠질지가 경우마다 달라서).",
   "G-165 A-11에서 Ctrl+Z는 실행 취소, Ctrl+Y·Ctrl+Shift+Z는 다시 실행입니다. 글자 입력 칸에 초점이 있으면 브라우저 기본 동작(입력한 글자 되돌리기)을 그대로 두고, 확인 창이 떠 있을 때는 동작하지 않습니다.",
   "G-166 실행 취소 기록은 [업데이트하기]·[변경 버리기]·로그아웃 때와 A-11을 떠날 때 지웁니다. 다른 화면(A-10 등)에서 같은 값을 바꾼 뒤 돌아와 되돌리면 그 변경까지 덮어쓰는 것을 막으려는 것입니다. [미리 보기]를 다녀와도 기록은 남습니다(값이 바뀌지 않아서).",
+  "G-167 조정판 3·4번의 보류·제안 항목을 모두 정했습니다(사용자 결정 2026-10-05). 공실/수업중 모양은 ① 색 칸 + 글자, 상태 색은 ① 초록 / 주황빛 갈색, 대표색은 A(#2B5C8A)입니다. 층은 ① 높은 층이 위, 층 정보 없음은 ① 맨 아래 묶음입니다. 기준 표시는 ① 날짜만(\"9/15 업데이트\"), \"오늘\" 모양은 ① 흐린 모양 + \"오늘\" 테두리만입니다. 안내 창(S-07)은 ① 가운데 창 + [확인], [학생이 누르기]가 꺼진 강의실 없는 건물은 ① 반응 없음, 강의실이 없는 층은 ② \"강의실 없음\" 표시, 건물 이름 겹침은 번호로 바꾸고 그래도 겹치면 숨김입니다. 조정판의 바꿔 보기는 없앴습니다. 건물 목록 정렬·캠퍼스맵 최대 확대는 관리자 화면(A-10·A-11)에서 정합니다.",
+  "G-168 강의실 상세(S-04)는 상태·시각·수용 인원을 이름·값 짝(05 2.14 표 모양)으로 보입니다(사용자 결정 2026-10-05). S-03에서 열면 \"상태\"·\"시각\"·\"수용 인원\" 줄입니다. S-12에서 열면 고른 교시마다 한 줄씩(G-61) 이름 칸에 \"3교시\"처럼 교시를, 값 칸에 상태와 시각을 보이고, 맨 아래에 \"수용 인원\" 줄을 둡니다. 값 칸의 시각 문장에는 상태 글자를 다시 쓰지 않습니다(예: [수업중] 11:50 끝, [공실] 다음 수업 13:00 시작, 사용자 결정 2026-10-05). S-03의 \"시각\" 줄도 같습니다.",
+  "G-169 캠퍼스맵은 오픈스트리트맵(OSM) 자료로 그린 지도로 정했습니다(사용자 결정 2026-10-05). 바닥 영역의 \"캠퍼스맵 참고\" 줄(A-14 문구)은 늘 두고, OSM 출처 표시도 지금처럼 늘 보입니다. 처음 문구는 \"캠퍼스맵 참고: 국립순천대학교\"입니다(사용자 결정 2026-10-05). 지도는 OSM으로 그리고 방향·건물 번호·이름만 학교 캠퍼스맵을 참고해서 \"출처\" 대신 \"참고\"로 씁니다. 관리자가 A-11에서 캠퍼스맵 그림을 바꿀 수 있는 것은 그대로입니다.",
+  "G-170 서비스 이름(\"순천대 공실 알리미\")을 누르면 [초기화]와 똑같이 동작합니다(05 R-10, 사용자 결정 2026-10-05). 모양은 글자 그대로이고, 마우스를 올리면 손가락 모양이 됩니다. 키보드(Tab, Enter·Space)로도 누를 수 있고, 읽어 주는 이름은 \"순천대 공실 알리미 - 처음 화면으로 초기화\"입니다. 누른 뒤 초점은 누른 단추에 둡니다([초기화]도 같음, 목업 임의).",
+  "G-171 확정으로 기록합니다(사용자 결정 2026-10-05). 건물 이름 글자를 누르면 그 건물을 누른 것과 같습니다(05 R-11). 관리자가 적은 홈페이지 수용 인원은 \"(추정)\" 없이 보입니다(G-58). 실제 층별 배치도는 나중에 받으므로, 추정 배치와 \"목업 전용 · 추정 배치\" 표시는 그대로 둡니다(G-135).",
   "(이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 \"처음 크기의 N배\"(처음 값 3배).",
-  "(이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11 확인 필요 항목). 서비스 이름을 누르면 반응이 없습니다(05 R-10).",
+  "(이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11, G-171에서 확정). 서비스 이름을 누르면 [초기화]와 같습니다(05 R-10, G-170).",
   "(이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.",
   "(이전 목업) 시간표 미등록(E-04)이면 캠퍼스맵의 모든 건물을 누를 수 없습니다.",
   "(이전 목업) 교시를 고르지 않았을 때 S-03·S-04 기준 줄은 \"10/1(목) 기준\"처럼 날짜만 보입니다.",
   "(이전 목업) S-03 층 바로가기 단추에 \"층 정보 없음\" 묶음 단추도 넣습니다(묶음을 보일 때).",
-  "(이전 목업) \"오늘\" 모양 후보 ②의 글자는 필터 안내 문구 칸에 넣습니다.",
+  "(이전 목업) \"오늘\" 모양 후보 ②의 글자는 ①로 정해 없앴습니다(G-167).",
   "(이전 목업) S-04 이름·값 모양의 이름 칸 \"상태\"·\"시각\"은 목업에서 붙인 말입니다.",
-  "(이전 목업) 대표색 B·C, 상태 색 ②·③의 마우스 올림·누름·옅은 색·테두리 값은 05에 없어 목업에서 만들었습니다.",
+  "(이전 목업) 대표색 B·C, 상태 색 ②·③ 후보 값은 A·①로 정해 없앴습니다(G-167).",
   "(이전 목업) 휴대폰 필터를 펼치면 안내 문구는 교시 단추 밑에, 접으면 요약 줄 밑에 보입니다.",
   "(이전 목업) 브라우저 [뒤로]는 S-03·S-12에서만 S-01로 보냅니다. 다른 화면의 [뒤로]는 04에 없어(05 R-02) 따로 처리하지 않습니다.",
   "(이전 목업) 캠퍼스맵은 오픈스트리트맵(OSM, ODbL) 자료의 모양으로 그리고, 학교 캠퍼스맵 방향(정문이 아래쪽)으로 돌렸습니다. OSM에 없는 건물은 반듯한 사각형으로 대략 그렸습니다. 건물 번호·이름은 학교 캠퍼스맵 범례를 따릅니다.",
@@ -1764,35 +1758,17 @@ const SCEN = [
   ['custom',  '직접 입력',                 '', 0, 0, '아래 칸에 적은 날짜·시각']
 ];
 
-/* ---------- 조정판 선택지 ---------- */
-const OPTS = [   /* 3. 보류 후보 (04·05 "보류 - 목업에서 결정") */
-  { k:'statusShape', label:'공실 / 수업중 모양 (04 2.3·2.4, 05 2.17)', def:'1', ch:[['1','① 색 칸 + 글자'],['2','② 글자만'],['3','③ 아이콘 + 글자']] },
-  { k:'statusColors', label:'상태 색 조합 (05 1.1.3)', def:'1', ch:[['1','① 초록 / 주황빛 갈색 (05 제안)'],['2','② 초록 / 회색'],['3','③ 초록 / 빨강']] },
-  { k:'primary', label:'대표색 (05 1.1.1)', def:'A', ch:[['A','A #2B5C8A (05 제안)'],['B','B #1F4E79'],['C','C #3A6EA5']] },
-  { k:'floorOrder', label:'층 순서 (04 2.3)', def:'1', ch:[['1','① 높은 층이 위 (건물 모양과 같음)'],['2','② 1층이 위']] },
-  { k:'nofloor', label:'층을 알 수 없는 강의실 (04 2.3, E-09) - D2에서 보임', def:'1', ch:[['1','① 맨 아래 "층 정보 없음" 묶음'],['2','② 맨 위 묶음'],['3','③ 보여 주지 않음']] },
-  { k:'stamp', label:'기준 표시의 시·분 (04 2.0 A)', def:'1', ch:[['1','① 날짜만 "9/15 업데이트"'],['2','② 시·분까지 "9/15 14:30 업데이트"']] },
-  { k:'todayLook', label:'오늘이 주말·공휴일·방학일 때 "오늘" 모양 (04 2.0 C) - 상황을 토요일·공휴일·방학으로 바꾸면 보임', def:'1', ch:[['1','① 흐린 모양 + "오늘" 테두리만'],['2','② 골라진 모양 + "운영하지 않는 날"/"수업 기간 아님" 글자'],['3','③ 흐린 모양 + 골라진 테두리(옅은 바탕)']] },
-  { k:'mapSrc', label:'바닥 영역의 캠퍼스맵 출처 줄 (04 2.0 E, 캠퍼스맵 재료와 함께 결정)', def:'1', ch:[['0','두지 않음 (학교 자료 없이 직접 만든 지도일 때)'],['1','둠 (학교 캠퍼스맵을 참고해 그렸을 때)']] }
-];
-const PROPS = [  /* 4. 제안 확인 (04·05 "제안 - 목업에서 확인") */
-  { k:'alertStyle', label:'S-07 안내 창 모양 (04 2.7) - 사용 불가 건물 안내도 같은 모양', def:'1', ch:[['1','① 가운데 안내 창 + [확인] (04 제안)'],['2','② 몇 초 동안 떴다가 사라지는 띠']] },
-  { k:'noRoomBld', label:'강의실이 없는 건물을 누름 (04 2.1, E-13)', def:'1', ch:[['1','① 반응 없음 (04 제안)'],['2','② 짧은 안내 "강의실이 없는 건물입니다"']] },
-  { k:'emptyFloor', label:'강의실이 없는 층 (04 2.3, E-15) - 사회과학대학(E7)에서 보임', def:'1', ch:[['1','① 보여 주지 않음 (04 제안)'],['2','② "강의실 없음"으로 표시']] },
-  { k:'detailStyle', label:'강의실 상세의 시각·수용 인원 (05 2.14)', def:'1', ch:[['1','한 문장 (04 2.4 그림)'],['2','이름·값 짝 (05 2.14 표 모양)']] },
-  { k:'labelMode', label:'건물 이름 글자가 겹칠 때 (05 2.15)', def:'p', ch:[['p','번호로 바꾸고, 그래도 겹치면 숨김 (05 제안)'],['1','① 숨기기'],['2','② 번호만'],['3','③ 그대로 두기']] }
-];
+/* ---------- 조정판 선택지: 3·4번 칸(보류·제안 항목)은 모두 정해 바꿔 보기를 없앰 (G-167). 정한 값은 화면 코드에 바로 적음 ---------- */
 const DEFAULTS = { theme:'light', phone:false, scenario:'device', custom:'2026-10-01T11:20', data:'ok', banner:'short', popups:'1', nlist:'yes',
   /* 로그인·가입 흉내 */ place:'adminpc', fastLock:false, codeLimit:false, formFail:false, dayLimit:false,
   /* 관리자 흉내 */ admErr:false, ttResult:'ok', cxResult:'ok', holFetch:'ok', keyTest:'ok', mailFail:false, emptyAdm:false };
-OPTS.concat(PROPS).forEach(function(o){ DEFAULTS[o.k] = o.def; });
 
 /* ---------- 브라우저 저장 (목업 설정, "오늘은 그만 보기" 기록만. 비밀번호·이메일·로그인 상태는 저장하지 않음) ---------- */
 const MEM = {};
 function sGet(k){ try { const v = window.localStorage.getItem(k); return v === null ? (MEM[k] || null) : v; } catch (e){ return MEM[k] || null; } }
 function sSet(k, v){ MEM[k] = v; try { window.localStorage.setItem(k, v); } catch (e){ /* 저장 불가 환경: 메모리만 씀 */ } }
 function sDel(k){ delete MEM[k]; try { window.localStorage.removeItem(k); } catch (e){ /* 무시 */ } }
-const KEY_OPT = 'advmock-scnu-options-v3';
+const KEY_OPT = 'advmock-scnu-options-v3';                 /* 옛 3·4번 칸 값(statusShape 등)은 DEFAULTS에 없어 읽을 때 버림 - 정한 값을 덮지 않음 (G-167). 테마·휴대폰·상황 흉내는 그대로 기억 */
 const KEY_DIS = 'advmock-scnu-dismiss-v1';
 const O = (function(){
   const o = Object.assign({}, DEFAULTS);
@@ -1833,7 +1809,7 @@ function initContent(){
     ],
     texts:{
       srcTT:'출처: 국립순천대학교 수업시간표(2026-2학기) · 폐강 교과목 안내',
-      srcMap:'캠퍼스맵 출처: 국립순천대학교',
+      srcMap:'캠퍼스맵 참고: 국립순천대학교',
       offday:'운영하지 않는 날입니다.',
       vacation:'현재 학기 수업 기간이 아닙니다.\n달력에서 수업 기간 날짜를 골라 주세요.',
       vacNote:'현재 학기 수업 기간이 아닙니다',
@@ -1971,8 +1947,6 @@ const ICON = {
   chev:'<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   x:'<svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5 5 15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
   menu:'<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M4 6h14M4 11h14M4 16h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
-  free:'<svg class="ico" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
-  busy:'<svg class="ico" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5" fill="currentColor"/></svg>',
   na:'<svg class="ico na-ico" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 3.5l9 9M12.5 3.5l-9 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>'
 };
 const LOADING_HTML = '<div class="loading" role="status"><span class="spinner" aria-hidden="true"></span>불러오는 중…</div>';
@@ -2011,7 +1985,7 @@ function stampText(){
   if (S.data === 'loading' || S.data === 'fail') return '';
   if (S.data === 'none') return '아직 시간표가 등록되지 않았습니다';                       /* E-04 */
   const u = D().updated;
-  return D().sem.name + ' 시간표 기준 · ' + md(u.ds) + (O.stamp === '2' ? ' ' + u.hm : '') + ' 업데이트';   /* 업데이트 = [업데이트하기]를 누른 시각 */
+  return D().sem.name + ' 시간표 기준 · ' + md(u.ds) + ' 업데이트';   /* 날짜만 "9/15 업데이트" (G-167). 업데이트 = [업데이트하기]를 누른 시각 */
 }
 function authBtnHTML(){                                    /* [로그인] / 내 계정 ▾ (G-51). 관리자 [미리 보기]에서는 숨김 */
   if (VIEW.preview) return '';
@@ -2025,11 +1999,12 @@ function authBtnHTML(){                                    /* [로그인] / 내 
       '<button class="mrow danger-t" role="menuitem" data-act="leave">탈퇴하기</button>' +
     '</div>' : '') + '</div>';
 }
+const SVC_BTN = '<button type="button" class="svc" data-act="svc" title="순천대 공실 알리미 - 처음 화면으로 초기화" aria-label="순천대 공실 알리미 - 처음 화면으로 초기화">순천대 공실 알리미</button>';   /* 누르면 [초기화]와 같음 (05 R-10, G-170) */
 function renderHeader(){
   const st = esc(stampText());
   if (isPC()){
     el.hdr.innerHTML =
-      '<div class="svc" data-act="svc">순천대 공실 알리미</div>' +
+      SVC_BTN +
       '<div class="stamp">' + st + '</div>' +
       '<nav class="acts" aria-label="머리 메뉴">' +
         '<button class="btn btn-secondary" data-act="reset">초기화</button>' +
@@ -2041,7 +2016,7 @@ function renderHeader(){
   } else {
     el.hdr.innerHTML =
       '<div class="hrow">' +
-        '<div class="svc" data-act="svc">순천대 공실 알리미</div>' +
+        SVC_BTN +
         '<button class="btn btn-secondary" data-act="reset">초기화</button>' +
         authBtnHTML() +
         '<button class="ibtn' + (S.menu ? ' on' : '') + '" data-act="menu" aria-label="메뉴" aria-expanded="' + S.menu + '">' + ICON.menu + '</button>' +
@@ -2109,7 +2084,6 @@ function noteLines(){
     if (!S.periods.length) L.push(T('pick'));
   } else if (S.period === null) L.push(T('noClass'));                                    /* FR-015 */
   if (S.filterDate === t && !inSem(t)) L.push(T('vacNote'));                             /* FR-014, E-05 */
-  if (O.todayLook === '2' && S.filterDate === t && !selectable(t)) L.push(offKind(t) === 'weekend' ? '운영하지 않는 날' : '수업 기간 아님'); /* "오늘" 후보 ② */
   return L;
 }
 function calHTML(){
@@ -2125,7 +2099,7 @@ function calHTML(){
     if (selectable(ds)){
       cells += '<button class="day can' + (sel ? ' sel' : '') + (isT ? ' today' : '') + '" data-act="date" data-date="' + ds + '" aria-pressed="' + sel + '" aria-label="' + m + '월 ' + d + '일' + (isT ? ' 오늘' : '') + '">' + d + '</button>';
     } else {
-      cells += '<span class="day off' + (isT ? (sel ? ' tl' + O.todayLook : ' today') : '') + '" aria-disabled="true">' + d + '</span>';
+      cells += '<span class="day off' + (isT ? (sel ? ' tl1' : ' today') : '') + '" aria-disabled="true">' + d + '</span>';
     }
   }
   return '<div class="cal">' +
@@ -2203,7 +2177,6 @@ function renderMapScreen(){
   el.mapvp.classList.toggle('nodata', S.data === 'none');
   el.mapOver.hidden = S.data !== 'loading';
   el.mapOver.innerHTML = S.data === 'loading' ? LOADING_HTML : '';                          /* E-01 */
-  el.mapg.querySelectorAll('.bld.nr').forEach(function(g){ g.classList.toggle('tap', O.noRoomBld === '2'); });
   renderSelBar();
   mapMarks();
   if (!isMap && !fail) renderList();
@@ -2242,16 +2215,13 @@ function roomsByFloor(b){
   });
   return { R:R, nf:nf };
 }
-function floorGroups(b){
+function floorGroups(b){                                    /* 층 묶음 (G-167): 높은 층이 위, 강의실이 없는 층은 "강의실 없음"(E-15 ②), 층 정보 없음은 맨 아래(E-09 ①) */
   const x = roomsByFloor(b);
-  let fl = Object.keys(x.R).filter(function(f){ return x.R[f].length; }).map(Number);
-  if (O.emptyFloor === '2'){ fl = []; for (let f = 1; f <= b.floors; f++) fl.push(f); }   /* 강의실 없는 층 후보 ② */
-  fl = fl.slice().sort(function(a, c){ return O.floorOrder === '1' ? c - a : a - c; });
+  const fl = Object.keys(x.R).filter(function(f){ return x.R[f].length; }).map(Number);
+  for (let f = 1; f <= (b.floors || 0); f++) if (fl.indexOf(f) < 0) fl.push(f);           /* 1층~맨 위층은 강의실이 없어도 넣음. 관리자가 적은 다른 층(지하 등)도 그대로 */
+  fl.sort(function(a, c){ return c - a; });
   const gs = fl.map(function(f){ return { key:'f' + f, label:f + '층', rooms:x.R[f] || [], known:true, floor:f }; });
-  if (x.nf.length && O.nofloor !== '3'){                                                    /* E-09 후보 ①② (③은 숨김) */
-    const g = { key:'nf', label:'층 정보 없음', rooms:x.nf, known:false, floor:null };
-    if (O.nofloor === '1') gs.push(g); else gs.unshift(g);
-  }
+  if (x.nf.length) gs.push({ key:'nf', label:'층 정보 없음', rooms:x.nf, known:false, floor:null });
   return gs;
 }
 
@@ -2522,7 +2492,7 @@ function roomCell(b, no, floor, at){
   const st = r ? r.st : '';
   return '<button class="room' + (st ? ' ' + st : '') + (cur ? ' cur' : '') + '" data-act="room" data-key="' + key + '" aria-pressed="' + cur + '" aria-label="' + esc(no) + '호' + (st ? (st === 'free' ? ' 공실' : ' 수업중') : '') + '"' + (at || '') + '>' +
     '<span class="no num">' + esc(no) + '</span>' +
-    (st ? '<span class="st">' + (st === 'free' ? ICON.free + '공실' : ICON.busy + '수업중') + '</span>' : '') +
+    (st ? '<span class="st">' + (st === 'free' ? '공실' : '수업중') + '</span>' : '') +
     '</button>';
 }
 function cells(b, list, floor){ return list.map(function(no){ return roomCell(b, no, floor); }).join(''); }
@@ -2669,8 +2639,8 @@ function renderTT(){
 }
 
 /* ---------- S-04 강의실 상세 (FR-005·FR-011·FR-016) ---------- */
-function chipHTML(st){ return '<span class="stchip ' + st + '">' + (st === 'free' ? ICON.free + '공실' : ICON.busy + '수업중') + '</span>'; }
-function timeText(r){ return r.st === 'busy' ? '수업중 · ' + r.end + ' 끝' : (r.next ? '다음 수업 ' + r.next + ' 시작' : '남은 수업 없음'); }
+function chipHTML(st){ return '<span class="stchip ' + st + '">' + (st === 'free' ? '공실' : '수업중') + '</span>'; }
+function timeText(r){ return r.st === 'busy' ? r.end + ' 끝' : (r.next ? '다음 수업 ' + r.next + ' 시작' : '남은 수업 없음'); }   /* 상태 글자는 배지에만 (G-168): "[수업중] 11:50 끝" */
 function capText(key){
   const a = capAdmin(key), c = capOf(key);
   if (c === null) return '수용 인원 정보 없음';                                              /* E-10 */
@@ -2690,22 +2660,16 @@ function renderPanel(){
   if (!open){ el.panel.innerHTML = ''; return; }
   const pick = '<div class="note" role="status">' + esc(T('pick')) + '</div>';            /* E-06 */
   let info;
-  if (S.screen === 'S-12'){
+  const cap = '<dt>수용 인원</dt><dd>' + esc(capText(S.room).replace(/^수용 인원 /, '')) + '</dd>';   /* 이름·값 짝 (05 2.14, G-168) */
+  if (S.screen === 'S-12'){                                 /* 고른 교시마다 한 줄씩 (G-61): 이름 칸 = 교시, 값 칸 = 상태 + 시각 */
     const P = selPeriods();
-    info = (P.length ? '<ul class="plines">' + P.map(function(p){ const r = roomStatus(S.room, S.filterDate, p);
-      return '<li>' + chipHTML(r.st) + '<span class="num">' + p + '교시 · ' + esc(timeText(r)) + '</span></li>'; }).join('') + '</ul>' : pick) +
-      '<p class="p-time">' + esc(capText(S.room)) + '</p>';
+    info = (P.length ? '' : pick) + '<dl class="kv">' + P.map(function(p){ const r = roomStatus(S.room, S.filterDate, p);
+      return '<dt class="num">' + p + '교시</dt><dd class="kv-st">' + chipHTML(r.st) + ' <span class="num">' + esc(timeText(r)) + '</span></dd>'; }).join('') + cap + '</dl>';
   } else {
     let chip = '', time = '';
     if (S.period !== null){ const r = roomStatus(S.room, S.filterDate, S.period); chip = chipHTML(r.st); time = timeText(r); }
-    if (O.detailStyle === '2'){
-      const c = capText(S.room).replace(/^수용 인원 /, '');
-      info = (S.period === null ? pick : '') + '<dl class="kv">' +
-        (S.period === null ? '' : '<dt>상태</dt><dd>' + chip + '</dd><dt>시각</dt><dd class="num">' + esc(time) + '</dd>') +
-        '<dt>수용 인원</dt><dd>' + esc(c) + '</dd></dl>';
-    } else {
-      info = (S.period === null ? pick : chip + '<p class="p-time num">' + esc(time) + '</p>') + '<p class="p-time">' + esc(capText(S.room)) + '</p>';
-    }
+    info = (S.period === null ? pick : '') + '<dl class="kv">' +
+      (S.period === null ? '' : '<dt>상태</dt><dd>' + chip + '</dd><dt>시각</dt><dd class="num">' + esc(time) + '</dd>') + cap + '</dl>';
   }
   el.panel.innerHTML =
     '<button class="ibtn panel-x" data-act="px" aria-label="닫기">' + ICON.x + '</button>' +
@@ -2723,7 +2687,7 @@ function renderPanel(){
 function renderFooter(){
   el.ftr.innerHTML =
     '<span>' + esc(T('srcTT')) + '</span>' +
-    (O.mapSrc === '1' ? '<span>' + esc(T('srcMap')) + '</span>' : '') +
+    '<span>' + esc(T('srcMap')) + '</span>' +                          /* 캠퍼스맵 참고 줄: 늘 둠 (G-169) */
     '<span>지도 데이터 © OpenStreetMap 기여자</span>' +                  /* OSM 사용 조건(ODbL): 항상 보임 */
     '<span>' + esc(T('fixed')) + '</span>' +
     '<span class="fvisit">방문자 수는 누구인지 알 수 없게 셉니다 <button class="flink" data-act="policy" data-at="pol-visit">자세히</button></span>' +
@@ -2759,7 +2723,7 @@ function renderOverlays(){
   S.lgLast = S.modal === 'S-18' ? mh : '';
   let ah = '';
   if (S.alert === 'weekend' || S.alert === 'vacation' || S.alert === 'na'){
-    if (O.alertStyle === '1') ah = '<div class="alert" role="alertdialog" aria-modal="true"><p>' +
+    ah = '<div class="alert" role="alertdialog" aria-modal="true"><p>' +                       /* S-07: 가운데 안내 창 + [확인] (G-167) */
       (S.alert === 'na' ? esc(S.alertText) : nl2br(S.alert === 'weekend' ? T('offday') : T('vacation'))) +
       '</p><div class="aact"><button class="btn btn-primary" data-act="alertok">확인</button></div></div>';
   } else if (S.alert === 'discard'){
@@ -3163,9 +3127,9 @@ function buildMap(){
   G.bg.forEach(function(p){ g += poly('m-bgb', p); });                    /* 이름 없는 바탕 건물(C3 포함): 누를 수 없음, 이름 없음 (E-14) */
   BUILDINGS.forEach(function(b){
     if (!b.parts) return;                                                                                          /* 영역 없는 건물(E-14)은 그리지 않음 */
-    const on = clickable(b), nr = !b.rooms;
-    g += '<g class="bld' + (on ? ' on' : '') + (nr ? ' nr' : '') + '" data-b="' + b.id + '"' +
-      (on ? ' data-bid="' + b.id + '"' : '') + (nr ? ' data-nobld="' + b.id + '"' : '') + '>' +
+    const on = clickable(b);
+    g += '<g class="bld' + (on ? ' on' : '') + '" data-b="' + b.id + '"' +
+      (on ? ' data-bid="' + b.id + '"' : '') + '>' +
       b.parts.map(function(p){ const s = ptsStr(p); return '<polygon class="base" points="' + s + '"/>' + (on ? '<polygon class="hl" points="' + s + '"/>' : ''); }).join('') + '</g>';
   });
   PLACES.forEach(function(p){ if (p.kind === 'gate') g += '<circle class="m-gate" cx="' + p.x + '" cy="' + p.y + '" r="7"/>'; });  /* 문 자리 점 */
@@ -3207,34 +3171,24 @@ function layoutLabels(){
   const anyOv = function(bx){ for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) if (ov(bx[i], bx[j])) return true; return false; };
   const hit = function(b, placed){ return placed.some(function(p){ return ov(p, b); }); };
   const mode = LBL.map(function(){ return 'name'; }), vis = LBL.map(function(){ return true; });
-  if (O.labelMode === '1'){                                /* ① 숨기기: 겹치면 하나만 */
-    const placed = [];
-    LORDER.forEach(function(i){ if (hit(NB[i], placed)) vis[i] = false; else placed.push(NB[i]); });
-  } else if (O.labelMode === '2'){                         /* ② 번호만: 겹치는 이름은 번호로 (숨기지 않음) */
-    if (anyOv(NB)){
-      const placed = [];
-      LORDER.forEach(function(i){ if (hit(NB[i], placed)){ mode[i] = 'code'; placed.push(CB[i]); } else placed.push(NB[i]); });
-    }
-  } else if (O.labelMode === 'p'){                         /* 05 제안: 번호로 두고 겹치는 번호는 숨긴 뒤, 자리가 있으면 이름으로 되돌림 */
-    if (anyOv(NB)){
-      const cur = [];
-      LORDER.forEach(function(i){ mode[i] = 'code'; if (hit(CB[i], cur)) vis[i] = false; else cur.push(CB[i]); });
-      const cb = function(j){ return mode[j] === 'name' ? NB[j] : CB[j]; };
-      LORDER.forEach(function(i){                          /* 자리가 있으면 이름으로 되돌림. 누를 수 있는 건물 이름은 다른 건물·운동장 글자보다 먼저 */
-        if (!vis[i]) return;
-        const by = [];
-        for (let j = 0; j < N; j++){ if (j !== i && vis[j] && ov(NB[i], cb(j))) by.push(j); }
-        if (by.length && !(LBL[i].prio === 0 && by.every(function(j){ return LBL[j].prio >= 2; }))) return;
-        by.forEach(function(j){ vis[j] = false; });
-        mode[i] = 'name';
-      });
-      LORDER.forEach(function(i){                          /* 숨긴 번호 중 다시 자리가 난 것은 번호로 보임 */
-        if (vis[i]) return;
-        for (let j = 0; j < N; j++){ if (j !== i && vis[j] && ov(CB[i], cb(j))) return; }
-        vis[i] = true; mode[i] = 'code';
-      });
-    }
-  }                                                         /* ③ 그대로 두기: 모두 이름 */
+  if (anyOv(NB)){                                          /* 겹치면 번호로 두고 겹치는 번호는 숨긴 뒤, 자리가 있으면 이름으로 되돌림 (05 제안, G-167) */
+    const cur = [];
+    LORDER.forEach(function(i){ mode[i] = 'code'; if (hit(CB[i], cur)) vis[i] = false; else cur.push(CB[i]); });
+    const cb = function(j){ return mode[j] === 'name' ? NB[j] : CB[j]; };
+    LORDER.forEach(function(i){                          /* 자리가 있으면 이름으로 되돌림. 누를 수 있는 건물 이름은 다른 건물·운동장 글자보다 먼저 */
+      if (!vis[i]) return;
+      const by = [];
+      for (let j = 0; j < N; j++){ if (j !== i && vis[j] && ov(NB[i], cb(j))) by.push(j); }
+      if (by.length && !(LBL[i].prio === 0 && by.every(function(j){ return LBL[j].prio >= 2; }))) return;
+      by.forEach(function(j){ vis[j] = false; });
+      mode[i] = 'name';
+    });
+    LORDER.forEach(function(i){                          /* 숨긴 번호 중 다시 자리가 난 것은 번호로 보임 */
+      if (vis[i]) return;
+      for (let j = 0; j < N; j++){ if (j !== i && vis[j] && ov(CB[i], cb(j))) return; }
+      vis[i] = true; mode[i] = 'code';
+    });
+  }
   LBL.forEach(function(l, i){
     l.mode = mode[i]; l.vis = vis[i];
     const t = mode[i] === 'name' ? l.name : l.code;
@@ -3345,8 +3299,7 @@ function mapTap(t){
   if (el.mapvp.classList.contains('inert')) return;         /* 불러오는 중에는 건물을 누를 수 없음 (E-01) */
   const g = t.closest('[data-bid]');
   if (g){ clickBuilding(g.getAttribute('data-bid')); return; }
-  const n = t.closest('[data-nobld]');
-  if (n && O.noRoomBld === '2') showStrip('강의실이 없는 건물입니다');   /* E-13 후보 ② (①은 반응 없음) */
+  /* 누를 수 없는 건물(강의실이 없고 [학생이 누르기]가 꺼진 건물 등)은 반응 없음 (E-13 ①, G-167) */
 }
 
 
@@ -3406,9 +3359,8 @@ function openSite(how){                                     /* 사이트를 새�
   scrollTopAll();
   if (VIEW.mode === 'admin') admRender();
 }
-function showAlertText(kind, text){
-  if (O.alertStyle === '1'){ S.alert = kind; S.alertText = text || ''; renderOverlays(); renderMock(); }
-  else showStrip(kind === 'na' ? text : (kind === 'weekend' ? T('offday') : T('vacation')).replace(/\n/g, ' '));
+function showAlertText(kind, text){                         /* S-07 안내 창: 가운데 창 + [확인] (G-167) */
+  S.alert = kind; S.alertText = text || ''; renderOverlays(); renderMock();
 }
 function clickBuilding(bid){
   if (S.data !== 'ok') return;
@@ -3497,8 +3449,8 @@ el.site.addEventListener('click', function(e){
   const a = t.getAttribute('data-act');
   if (t.disabled) return;
   switch (a){
-    case 'svc': return;                                     /* 서비스 이름: 반응 없음 (05 R-10, 목업 임의) */
-    case 'reset': doReset(); return;
+    case 'svc':                                             /* 서비스 이름 = [초기화]와 똑같음 (05 R-10, G-170) */
+    case 'reset': doReset(); setTimeout(function(){ const nb = el.hdr.querySelector('[data-act="' + a + '"]'); if (nb) nb.focus({ preventScroll:true }); }, 0); return;   /* 누른 단추로 초점을 돌려 둠 - 열린 메뉴를 닫으며 머리 영역을 다시 그린 뒤 (G-170) */
     case 'inquiry': openForm('inq'); return;                /* S-08 팝업 */
     case 'report': openForm('rep', null); return;           /* S-09 팝업 - 머리 영역에서 열면 건물·강의실 칸 없음 */
     case 'reportroom': openForm('rep', S.room); return;     /* S-09 팝업 - 강의실이 저절로 들어가고 고정 */
@@ -4788,7 +4740,7 @@ ADM_ACT.bnSave = function(){
 
 /* ---------- A-14 문구·신고 종류 ---------- */
 const TEXT_DEF = {
-  src:[['srcTT', '시간표·폐강 교과목 출처', '바닥 영역', 100], ['srcMap', '캠퍼스맵 출처', '바닥 영역 (캠퍼스맵 출처 줄을 둘 때)', 100]],
+  src:[['srcTT', '시간표·폐강 교과목 출처', '바닥 영역', 100], ['srcMap', '캠퍼스맵 참고', '바닥 영역', 100]],
   msg:[['offday', '운영하지 않는 날 안내 창', '오늘이 주말·공휴일일 때 건물을 누르면 (S-07, 한 줄)', 100],['vacation', '수업 기간 아님 안내 창', '오늘이 방학일 때 건물을 누르면 (S-07, 두 줄)', 100, true],
     ['vacNote', '수업 기간 아님 안내 줄', '필터 밑 안내 문구', 60], ['noClass', '수업 시간 밖 안내', '필터 밑 안내 문구 (09:00 전·17:50 뒤)', 60], ['pick', '교시를 고르라는 안내', '층별 안내도·강의실 상세', 40], ['fixed', '휴강·보강·시험 미반영 안내', '층별 안내도·강의실 상세·바닥 영역', 60]]
 };
@@ -4989,17 +4941,11 @@ document.addEventListener('keydown', function(e){                 /* A-11 실행
    목업 조정판 (사이트의 일부가 아님)
    ===================================================================== */
 const M = { root:$('mock'), tab:$('mock-tab'), now:$('m-now'), scen:$('m-scen'), custom:$('m-custom'), popups:$('m-popups'),
-  opts:$('m-opts'), props:$('m-props'), dis:$('m-dismiss'), assume:$('m-assume'), toast:$('mock-toast'), toastT:0 };
+  dis:$('m-dismiss'), assume:$('m-assume'), toast:$('mock-toast'), toastT:0 };
 function buildMock(){
   M.scen.innerHTML = SCEN.map(function(s){
     return '<label class="o"><input type="radio" name="m-scen" value="' + s[0] + '"><span>' + esc(s[1]) + ' <span class="hint">- ' + esc(s[5]) + '</span></span></label>';
   }).join('');
-  const sel = function(o){
-    return '<div class="fld"><span>' + esc(o.label) + '</span><select data-k="' + o.k + '">' +
-      o.ch.map(function(c){ return '<option value="' + c[0] + '">' + esc(c[1]) + '</option>'; }).join('') + '</select></div>';
-  };
-  M.opts.innerHTML = OPTS.map(sel).join('');
-  M.props.innerHTML = PROPS.map(sel).join('');
   M.assume.innerHTML = ASSUME.map(function(a){ return '<li>' + esc(a) + '</li>'; }).join('');
 }
 function setRadio(name, v){ M.root.querySelectorAll('input[name="' + name + '"]').forEach(function(r){ r.checked = r.value === String(v); }); }
@@ -5011,16 +4957,14 @@ function syncMock(){
   setRadio('m-data', O.data); setRadio('m-banner', O.banner); setRadio('m-nlist', O.nlist);
   setRadio('m-place', O.place); setRadio('m-holfetch', O.holFetch); setRadio('m-keytest', O.keyTest);
   M.popups.value = O.popups;
-  M.root.querySelectorAll('select[data-k], select[data-o]').forEach(function(s){ s.value = O[s.getAttribute('data-k') || s.getAttribute('data-o')]; });
+  M.root.querySelectorAll('select[data-o]').forEach(function(s){ s.value = O[s.getAttribute('data-o')]; });
   M.root.querySelectorAll('input[type="checkbox"][data-o]').forEach(function(c){ c.checked = !!O[c.getAttribute('data-o')]; });
 }
 function applyAttrs(){
   const d = document.documentElement;
   const th = VIEW.mode === 'admin' && !VIEW.preview ? 'light' : O.theme;     /* 관리자 화면은 라이트만 */
   d.setAttribute('data-theme', th);
-  d.setAttribute('data-primary', O.primary);
-  d.setAttribute('data-status-colors', O.statusColors);
-  d.setAttribute('data-status-shape', O.statusShape);
+  /* 대표색 A·상태 색 ①·모양 ①은 정한 값 (G-167): CSS 기본값과 <html>의 data-status-shape="1"을 그대로 씀 */
   const cs = document.querySelector('meta[name="color-scheme"]');
   if (cs) cs.setAttribute('content', th === 'dark' ? 'dark' : 'light');
 }
@@ -5119,7 +5063,7 @@ M.root.addEventListener('click', function(e){
 });
 M.root.addEventListener('change', function(e){
   const t = e.target;
-  const k = t.getAttribute('data-k'), ko = t.getAttribute('data-o');
+  const ko = t.getAttribute('data-o');
   if (t.name === 'm-theme'){ O.theme = t.value; applyAttrs(); render(); }
   else if (t.id === 'm-phone'){ O.phone = t.checked; applyLayout(true); }
   else if (t.name === 'm-scen'){ O.scenario = t.value; S.addMin = 0; saveO(); openSite('reload'); }
@@ -5132,12 +5076,6 @@ M.root.addEventListener('change', function(e){
   else if (t.name === 'm-keytest'){ O.keyTest = t.value; }
   else if (t.id === 'm-custom'){ O.custom = t.value; }
   else if (ko){ O[ko] = t.type === 'checkbox' ? t.checked : t.value; if (ko === 'emptyAdm') admRender(); if (ko === 'dayLimit' && S.form){ grabForm(); renderOverlays(); } }
-  else if (k){
-    O[k] = t.value;
-    applyAttrs();
-    if (k === 'labelMode'){ V.lastS = -1; draw(); }
-    render();
-  }
   saveO();
   renderMock();
 });
