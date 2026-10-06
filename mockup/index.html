@@ -38,7 +38,7 @@
     G-65 확인 번호 단계에서 남은 시간(10분)과 [다시 받기]까지 남은 초(60초)를 보입니다. 틀리면 남은 기회를 알립니다.
     G-66 이미 가입한 학번으로 가입하거나, 가입하지 않은 학번으로 비밀번호를 찾아도 화면은 "확인 번호를 보냈습니다"로 똑같습니다. 이때 목업에서는 확인 번호가 맞지 않는 것으로 처리하고, 목업 알림으로 이유를 설명합니다.
     G-67 (삭제) 학생 비밀번호 규칙에서 "학번이 들어가지 않음"·"흔한 비밀번호가 아님"을 뺐습니다(사용자 결정 2026-10-03). 남은 규칙은 8자 이상·영문자·숫자·특수기호입니다.
-    G-68 이용약관 내용은 틀만 둡니다(가입 첫 단계에서 [보기]로 펼침).
+    G-68 이용약관 내용은 틀만 둡니다(가입 첫 단계에서 [보기]로 펼침). G-188에서 시연용 초안을 넣었습니다.
     G-69 관리자 [미리 보기]는 로그인하지 않은 학생 화면으로 보이고, 맨 위 띠에 [미리 보기 끝내기]가 있습니다. 업데이트할 변경이 없으면 [미리 보기]·[변경 버리기]·[업데이트하기]를 누를 수 없습니다.
     G-70 [변경 버리기]는 빨강 확인 창을 거칩니다. 버리면 저장한 값 전체(파일 반영 포함)가 마지막 업데이트 때로 돌아갑니다.
     G-71 확인 창(A-90)은 짧은 질문 제목과, 되돌릴 수 없을 때만 그 사실 한 줄을 보입니다(예: "처리 완료할까요?" + "이메일이 지워지며 되돌릴 수 없습니다."). 목록의 한 줄에서 연 창은 제목에 대상을 넣습니다(예: "학번 20260004 계정을 삭제할까요?"). 업데이트 확인 창만 바뀐 종류 이름을 한 줄로 보입니다(예: "바뀐 것: 공지사항, 사용 불가 설정"). [업데이트하기] 단추는 파랑입니다(다시 고쳐 업데이트할 수 있어서). 지우기·버리기·해제·정지·삭제는 빨강입니다.
@@ -130,6 +130,14 @@
     G-181 쪽 나누기 세부 규칙입니다(사용자 승인 2026-10-07). 학생 계정 표(A-18)는 가입일 최근 순입니다. 가입일이 같으면 계정 번호가 큰 것을 위로 둡니다(사용자 승인 2026-10-07). 목업 예시는 계정 8의 가입일을 2026-09-30으로 고쳐 계정 번호 순과 가입일 순을 맞췄습니다. 다음은 목업에 만들지 않고 기록만 합니다. 쪽 번호는 표 아래 가운데에 둡니다. 7쪽을 넘으면 쪽 번호 일부를 "…"로 줄입니다. [오류 기록 보기]로 오면 그 줄이 있는 쪽을 엽니다. 처리한 뒤에는 지금 쪽을 그대로 둡니다. 보기(탭·거르개)를 바꾸면 1쪽으로 갑니다.
     G-182 시간표 반영(A-07) 뒤 결과의 공휴일 경고 줄 끝에는 마침표를 찍지 않습니다. 예: "2027년 공휴일 목록이 없습니다"(사용자 결정 2026-10-07). 검사 결과에서 [공휴일 보기]가 붙는 경고 줄도 마침표가 없습니다. 검사 때 단추 없이 보이는 "2027년 공휴일 목록이 없습니다. 반영한 뒤 받아 주세요"도 끝에 마침표가 없습니다.
     G-183 G-178 글을 바로잡았습니다(교차 검토 반영, 2026-10-07). 전에는 "올해로 대체하는 규칙을 없앴다"고 적었지만 그 동작은 남아 있습니다. 이제 규칙으로 둡니다. 고른 해가 목록에서 사라지면 연도 칸은 올해로 돌아갑니다. 예: 2027을 고른 채 [변경 버리기]로 2027-1학기 정보가 사라지면 2026이 골라집니다. G-177의 "목업 임의"는 확정으로 바꿨습니다.
+    G-184 학생 계정(A-18)에서 학번으로 검색하면 결과를 1쪽부터 보입니다(사용자 결정 2026-10-07). 보기 고르기를 바꿀 때와 같습니다. 목업에는 쪽 번호를 만들지 않아(G-181) 기록만 합니다.
+    G-185 강의실 코드 앞부분이 여러 건물 번호와 맞으면 가장 긴 번호로 봅니다(사용자 결정 2026-10-07, 03 Q-01). G-162 규칙에 더합니다. 예: 예시 건물에 A1(대학본부)과 A18(체육관 증축동)이 둘 다 있으므로 A18101은 A18 건물 101호입니다. 목업은 시간표 파일을 실제로 읽지 않아 짝짓기 표·예시가 없습니다. 기록만 합니다.
+    G-186 호실 번호로 층을 정하는 규칙입니다(사용자 결정 2026-10-07, 03 Q-02). 세 자리 숫자는 첫 자리가 층입니다(305 → 3층). "B"(또는 "b") 뒤에 세 자리 숫자가 오면 지하이고, B 뒤 첫 숫자가 지하 층수입니다(B101 → 지하 1층). 그 밖의 번호(E01처럼 글자가 섞인 번호, 네 자리 번호)는 층 미정이고 관리자가 A-10에서 적습니다. 10층 이상인 건물은 없습니다. 305호는 늘 3층이므로 층 정보 없음 예시는 E01·E02입니다. A-10에서 직접 적는 층은 0을 받지 않고 "층은 숫자로 적어 주세요."를 보입니다(목업 임의: 0을 저장하면 층 미정처럼 보이던 문제를 막음).
+    G-187 지하층 표시입니다(사용자 결정 2026-10-07). 층별 안내도(S-03)·공실 보기(S-12)의 층 묶음과 층 바로가기에서 지하층은 1층 아래에 둡니다. 이름은 "지하 1층"이고, 지하가 여러 층이면 지하 1층이 위입니다. 강의실 상세(S-04)는 "B101호 · 지하 1층", A-10 층 칸은 "지하 1층 (자동)", A-12 층 고르기·대상 표시도 "지하 1층"입니다. 층 묶음에는 1층~맨 위층과 강의실이 있는 다른 층을 넣습니다(전에는 "관리자가 적은 다른 층"). 예시 데이터: 기초교육관(E2)에 지하 1층 B101·B102를 더했습니다. A-10에서 층 미정 강의실에 -1을 적어도 지하 1층 묶음으로 갑니다.
+    G-188 가입 첫 단계(S-14) 이용약관의 [보기]를 누르면 시연용 초안(제1조~제6조와 부칙)을 펼칩니다(사용자 결정 2026-10-07, 03 FR-034·Q-07). 글은 03 FR-034 그대로입니다. G-68의 "틀만 둡니다"를 바꿉니다. 글 상자는 05 2.16 "약관 글 상자"를 따릅니다. 옅은 회색 바탕, 작은 글자, 높이 제한 없음, 상자 안 스크롤 없음입니다. 길면 가입 창 내용이 스크롤합니다. 기존 토큰만 씁니다.
+    G-189 빈 쪽 처리입니다(사용자 결정 2026-10-07). 쪽을 나누는 표(A-03·A-06·A-18)에서 처리해서 지금 쪽이 비면 앞 쪽을 보입니다. 표 전체가 비면 빈 목록 안내(04 E-45)를 보입니다. 목업에는 쪽 번호가 없어(G-181) 앞 쪽으로 가는 동작은 기록만 합니다. 빈 목록 안내는 이미 있습니다. "받은 문의가 없습니다"·"받은 신고가 없습니다"(A-03), "오류 기록이 없습니다"(A-06), "학생 계정이 없습니다"·"(검색어) 학번을 찾지 못했습니다"(A-18)입니다.
+    G-190 메일 보내기 방식입니다(사용자 결정 2026-10-07). 시연 때 확인 번호·문의 답장 메일은 관리자 PC 안의 메일 확인 도구로 보냅니다. 메일은 PC 밖으로 나가지 않습니다. 서버 설정 파일만 바꾸면 실제 메일 서비스로 보냅니다. 화면 문구는 그대로입니다. 목업 알림(화면 문구 아님)의 "실제로는 학교 메일함으로 확인 번호가 갑니다."만 "시연에서는 관리자 PC의 메일 확인 도구로 확인 번호가 갑니다."로 고쳤습니다.
+    G-191 층을 직접 적을 때는 지하 3층~10층의 정수만 받고 0은 받지 않습니다(사용자 결정 2026-10-07, 04 2.28). 어기면 "층은 -3~10 사이 숫자로 적어 주세요(0 제외)."
     (이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 "처음 크기의 N배"(처음 값 3배).
     (이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11, G-171에서 확정). 서비스 이름을 누르면 [초기화]와 같습니다(05 R-10, G-170).
     (이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.
@@ -871,7 +879,9 @@ em.opt{ font-style:normal; font-size:var(--font-size-xs); color:var(--color-text
 .steps .did .sn{ background:var(--color-bg-subtle); }
 .cbox{ border:1px solid var(--color-border); border-radius:var(--radius-md); padding:var(--space-2) var(--space-3); display:flex; flex-direction:column; gap:var(--space-1); }
 .cb-top{ display:flex; align-items:center; justify-content:space-between; gap:var(--space-2); }
-.ctext{ font-size:var(--font-size-sm); color:var(--color-text-secondary); background:var(--color-bg-subtle); border-radius:var(--radius-sm); padding:var(--space-2); }
+.ctext{ font-size:var(--font-size-sm); line-height:var(--font-line-normal); color:var(--color-text-secondary); background:var(--color-bg-subtle); border-radius:var(--radius-sm); padding:var(--space-2); display:flex; flex-direction:column; gap:var(--space-1); white-space:normal; }   /* 약관 글 상자 (05 2.16): 높이 제한·상자 안 스크롤 없음, 길면 창 내용이 스크롤 (G-188) */
+.ctext p{ margin:0; }
+.ctext .ct-h{ font-weight:var(--font-weight-semibold); }
 .mailrow{ display:flex; align-items:stretch; }
 .mailrow input{ border-radius:var(--radius-md) 0 0 var(--radius-md) !important; min-width:0; }
 .dom{ display:flex; align-items:center; padding:0 var(--space-3); background:var(--color-bg-subtle); border:1px solid var(--color-border-strong); border-left:0; border-radius:0 var(--radius-md) var(--radius-md) 0; color:var(--color-text-secondary); white-space:nowrap; font-size:var(--font-size-md); }
@@ -1341,7 +1351,7 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
       <li>캠퍼스맵: 오픈스트리트맵(OSM) 자료로 건물·도로·운동장을 실제 모양대로 그렸습니다. 방향은 학교 캠퍼스맵과 같게 정문이 아래쪽이고, 건물 번호·이름은 학교 캠퍼스맵 범례를 따릅니다.</li>
       <li>누를 수 있는 건물(처음 값, 예시 강의실이 있는 건물 13곳): 약학대학(A2), 생명산업과학대학 1·2호관(B3·B4), 공과대학 1·2·3호관(D2·D3·D4), 기초교육관(E2), 사범대학 1·2·3호관(E3·E4·E5), 미래창조관(E6), 사회과학대학(E7), 인문예술대학(E8). 관리자 화면 A-11 건물 표에서 건물마다 켜고 끕니다(강의실이 없는 건물도 켤 수 있음).</li>
       <li>공과대학 1호관(D2), 목요일 3교시: 301 공실·남은 수업 없음(E-12), 302 수업중·13:50 끝, 303 수업중·수용 인원 정보 없음(E-10), 304 수업중·11:50 끝, 305 공실·다음 수업 13:00 시작, 201 폐강 수업이라 공실. E01·E02는 층 정보 없음(E-09).</li>
-      <li>사범대학 1호관(E3), 목요일 3교시: 공실 없음(E-11). 사회과학대학(E7): 2층에 강의실 없음(E-15).</li>
+      <li>사범대학 1호관(E3), 목요일 3교시: 공실 없음(E-11). 사회과학대학(E7): 2층에 강의실 없음(E-15). 기초교육관(E2): 지하 1층(B101·B102)이 1층 아래에 보입니다.</li>
       <li>공동실험실습관(C3): 캠퍼스맵 영역이 없는 건물(E-14). 관리자 화면 A-11 건물 표의 [영역 그리기]로 점을 찍어 영역을 그리고 업데이트하면 학생 캠퍼스맵에서 누를 수 있습니다.</li>
       <li>관리자 예시: 문의 4건(이메일은 example.com 예시), 신고 3건, 오류 기록 4건, 학생 계정 8개(학번은 2026xxxx 예시), 인증키 끝자리 …a1B2.</li>
     </ul>
@@ -1382,7 +1392,7 @@ const ASSUME = [
   "G-65 확인 번호 단계에서 남은 시간(10분)과 [다시 받기]까지 남은 초(60초)를 보입니다. 틀리면 남은 기회를 알립니다.",
   "G-66 이미 가입한 학번으로 가입하거나, 가입하지 않은 학번으로 비밀번호를 찾아도 화면은 \"확인 번호를 보냈습니다\"로 똑같습니다. 이때 목업에서는 확인 번호가 맞지 않는 것으로 처리하고, 목업 알림으로 이유를 설명합니다.",
   "G-67 (삭제) 학생 비밀번호 규칙에서 \"학번이 들어가지 않음\"·\"흔한 비밀번호가 아님\"을 뺐습니다(사용자 결정 2026-10-03). 남은 규칙은 8자 이상·영문자·숫자·특수기호입니다.",
-  "G-68 이용약관 내용은 틀만 둡니다(가입 첫 단계에서 [보기]로 펼침).",
+  "G-68 이용약관 내용은 틀만 둡니다(가입 첫 단계에서 [보기]로 펼침). G-188에서 시연용 초안을 넣었습니다.",
   "G-69 관리자 [미리 보기]는 로그인하지 않은 학생 화면으로 보이고, 맨 위 띠에 [미리 보기 끝내기]가 있습니다. 업데이트할 변경이 없으면 [미리 보기]·[변경 버리기]·[업데이트하기]를 누를 수 없습니다.",
   "G-70 [변경 버리기]는 빨강 확인 창을 거칩니다. 버리면 저장한 값 전체(파일 반영 포함)가 마지막 업데이트 때로 돌아갑니다.",
   "G-71 확인 창(A-90)은 짧은 질문 제목과, 되돌릴 수 없을 때만 그 사실 한 줄을 보입니다(예: \"처리 완료할까요?\" + \"이메일이 지워지며 되돌릴 수 없습니다.\"). 목록의 한 줄에서 연 창은 제목에 대상을 넣습니다(예: \"학번 20260004 계정을 삭제할까요?\"). 업데이트 확인 창만 바뀐 종류 이름을 한 줄로 보입니다(예: \"바뀐 것: 공지사항, 사용 불가 설정\"). [업데이트하기] 단추는 파랑입니다(다시 고쳐 업데이트할 수 있어서). 지우기·버리기·해제·정지·삭제는 빨강입니다.",
@@ -1474,6 +1484,14 @@ const ASSUME = [
   "G-181 쪽 나누기 세부 규칙입니다(사용자 승인 2026-10-07). 학생 계정 표(A-18)는 가입일 최근 순입니다. 가입일이 같으면 계정 번호가 큰 것을 위로 둡니다(사용자 승인 2026-10-07). 목업 예시는 계정 8의 가입일을 2026-09-30으로 고쳐 계정 번호 순과 가입일 순을 맞췄습니다. 다음은 목업에 만들지 않고 기록만 합니다. 쪽 번호는 표 아래 가운데에 둡니다. 7쪽을 넘으면 쪽 번호 일부를 \"…\"로 줄입니다. [오류 기록 보기]로 오면 그 줄이 있는 쪽을 엽니다. 처리한 뒤에는 지금 쪽을 그대로 둡니다. 보기(탭·거르개)를 바꾸면 1쪽으로 갑니다.",
   "G-182 시간표 반영(A-07) 뒤 결과의 공휴일 경고 줄 끝에는 마침표를 찍지 않습니다. 예: \"2027년 공휴일 목록이 없습니다\"(사용자 결정 2026-10-07). 검사 결과에서 [공휴일 보기]가 붙는 경고 줄도 마침표가 없습니다. 검사 때 단추 없이 보이는 \"2027년 공휴일 목록이 없습니다. 반영한 뒤 받아 주세요\"도 끝에 마침표가 없습니다.",
   "G-183 G-178 글을 바로잡았습니다(교차 검토 반영, 2026-10-07). 전에는 \"올해로 대체하는 규칙을 없앴다\"고 적었지만 그 동작은 남아 있습니다. 이제 규칙으로 둡니다. 고른 해가 목록에서 사라지면 연도 칸은 올해로 돌아갑니다. 예: 2027을 고른 채 [변경 버리기]로 2027-1학기 정보가 사라지면 2026이 골라집니다. G-177의 \"목업 임의\"는 확정으로 바꿨습니다.",
+  "G-184 학생 계정(A-18)에서 학번으로 검색하면 결과를 1쪽부터 보입니다(사용자 결정 2026-10-07). 보기 고르기를 바꿀 때와 같습니다. 목업에는 쪽 번호를 만들지 않아(G-181) 기록만 합니다.",
+  "G-185 강의실 코드 앞부분이 여러 건물 번호와 맞으면 가장 긴 번호로 봅니다(사용자 결정 2026-10-07, 03 Q-01). G-162 규칙에 더합니다. 예: 예시 건물에 A1(대학본부)과 A18(체육관 증축동)이 둘 다 있으므로 A18101은 A18 건물 101호입니다. 목업은 시간표 파일을 실제로 읽지 않아 짝짓기 표·예시가 없습니다. 기록만 합니다.",
+  "G-186 호실 번호로 층을 정하는 규칙입니다(사용자 결정 2026-10-07, 03 Q-02). 세 자리 숫자는 첫 자리가 층입니다(305 → 3층). \"B\"(또는 \"b\") 뒤에 세 자리 숫자가 오면 지하이고, B 뒤 첫 숫자가 지하 층수입니다(B101 → 지하 1층). 그 밖의 번호(E01처럼 글자가 섞인 번호, 네 자리 번호)는 층 미정이고 관리자가 A-10에서 적습니다. 10층 이상인 건물은 없습니다. 305호는 늘 3층이므로 층 정보 없음 예시는 E01·E02입니다. A-10에서 직접 적는 층은 0을 받지 않고 \"층은 숫자로 적어 주세요.\"를 보입니다(목업 임의: 0을 저장하면 층 미정처럼 보이던 문제를 막음).",
+  "G-187 지하층 표시입니다(사용자 결정 2026-10-07). 층별 안내도(S-03)·공실 보기(S-12)의 층 묶음과 층 바로가기에서 지하층은 1층 아래에 둡니다. 이름은 \"지하 1층\"이고, 지하가 여러 층이면 지하 1층이 위입니다. 강의실 상세(S-04)는 \"B101호 · 지하 1층\", A-10 층 칸은 \"지하 1층 (자동)\", A-12 층 고르기·대상 표시도 \"지하 1층\"입니다. 층 묶음에는 1층~맨 위층과 강의실이 있는 다른 층을 넣습니다(전에는 \"관리자가 적은 다른 층\"). 예시 데이터: 기초교육관(E2)에 지하 1층 B101·B102를 더했습니다. A-10에서 층 미정 강의실에 -1을 적어도 지하 1층 묶음으로 갑니다.",
+  "G-188 가입 첫 단계(S-14) 이용약관의 [보기]를 누르면 시연용 초안(제1조~제6조와 부칙)을 펼칩니다(사용자 결정 2026-10-07, 03 FR-034·Q-07). 글은 03 FR-034 그대로입니다. G-68의 \"틀만 둡니다\"를 바꿉니다. 글 상자는 05 2.16 \"약관 글 상자\"를 따릅니다. 옅은 회색 바탕, 작은 글자, 높이 제한 없음, 상자 안 스크롤 없음입니다. 길면 가입 창 내용이 스크롤합니다. 기존 토큰만 씁니다.",
+  "G-189 빈 쪽 처리입니다(사용자 결정 2026-10-07). 쪽을 나누는 표(A-03·A-06·A-18)에서 처리해서 지금 쪽이 비면 앞 쪽을 보입니다. 표 전체가 비면 빈 목록 안내(04 E-45)를 보입니다. 목업에는 쪽 번호가 없어(G-181) 앞 쪽으로 가는 동작은 기록만 합니다. 빈 목록 안내는 이미 있습니다. \"받은 문의가 없습니다\"·\"받은 신고가 없습니다\"(A-03), \"오류 기록이 없습니다\"(A-06), \"학생 계정이 없습니다\"·\"(검색어) 학번을 찾지 못했습니다\"(A-18)입니다.",
+  "G-190 메일 보내기 방식입니다(사용자 결정 2026-10-07). 시연 때 확인 번호·문의 답장 메일은 관리자 PC 안의 메일 확인 도구로 보냅니다. 메일은 PC 밖으로 나가지 않습니다. 서버 설정 파일만 바꾸면 실제 메일 서비스로 보냅니다. 화면 문구는 그대로입니다. 목업 알림(화면 문구 아님)의 \"실제로는 학교 메일함으로 확인 번호가 갑니다.\"만 \"시연에서는 관리자 PC의 메일 확인 도구로 확인 번호가 갑니다.\"로 고쳤습니다.",
+  "G-191 층을 직접 적을 때는 지하 3층~10층의 정수만 받고 0은 받지 않습니다(사용자 결정 2026-10-07, 04 2.28). 어기면 \"층은 -3~10 사이 숫자로 적어 주세요(0 제외).\"",
   "(이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 \"처음 크기의 N배\"(처음 값 3배).",
   "(이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11, G-171에서 확정). 서비스 이름을 누르면 [초기화]와 같습니다(05 R-10, G-170).",
   "(이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.",
@@ -1599,7 +1617,7 @@ const BUILDINGS = [
   { id:'D4',  name:'공과대학 3호관', college:'공과대학', floors:5, fp:'rect', rooms:{ 1:rm(1,3), 2:rm(2,4), 3:rm(3,4), 4:rm(4,3), 5:rm(5,2) } },
   { id:'D5',  name:'학군단' },
   { id:'E1',  name:'학생회관' },
-  { id:'E2',  name:'기초교육관', college:'기타', floors:4, fp:'rect', rooms:{ 1:rm(1,4), 2:rm(2,5), 3:rm(3,4), 4:rm(4,3) } },
+  { id:'E2',  name:'기초교육관', college:'기타', floors:4, fp:'rect', rooms:{ 1:rm(1,4), 2:rm(2,5), 3:rm(3,4), 4:rm(4,3), '-1':['B101','B102'] } },   /* 지하 1층 (G-187) */
   { id:'E3',  name:'사범대학 1호관', college:'사범대학', floors:2, fp:'rect',
     rooms:{ 1:['101','102','103'], 2:['201','202','203'] } },                                         /* 목 3교시 공실 없음 (E-11) */
   { id:'E4',  name:'사범대학 2호관', college:'사범대학', floors:3, fp:'rect', rooms:{ 1:rm(1,3), 2:rm(2,3), 3:rm(3,3) } },
@@ -1734,6 +1752,9 @@ function roomStatus(key, ds, p){
   const later = bl.filter(function(b){ return b.s > p; }).sort(function(a, b){ return a.s - b.s; });
   return { st:'free', next: later.length ? PER()[later[0].s][0] : null };
 }
+/* 층 규칙 (G-186): 세 자리 숫자 → 첫 자리가 층(305 → 3층), B/b + 세 자리 → 지하(B101 → -1), 그 밖(E01·네 자리) → 층 미정.
+   예시 데이터는 이 규칙대로 rooms[층]에 적고, 층 미정은 nofloor에 둠. 지하층은 음수 층(-1 = 지하 1층) */
+function flName(f){ f = Number(f); return f < 0 ? '지하 ' + (-f) + '층' : f + '층'; }   /* 층 이름: -1 → "지하 1층" (G-187) */
 function floorOf(b, no){
   const fs = Object.keys(b.rooms || {});
   for (let i = 0; i < fs.length; i++){ if (b.rooms[fs[i]].indexOf(no) >= 0) return Number(fs[i]); }
@@ -2242,9 +2263,9 @@ function roomsByFloor(b){
 function floorGroups(b){                                    /* 층 묶음 (G-167): 높은 층이 위, 강의실이 없는 층은 "강의실 없음"(E-15 ②), 층 정보 없음은 맨 아래(E-09 ①) */
   const x = roomsByFloor(b);
   const fl = Object.keys(x.R).filter(function(f){ return x.R[f].length; }).map(Number);
-  for (let f = 1; f <= (b.floors || 0); f++) if (fl.indexOf(f) < 0) fl.push(f);           /* 1층~맨 위층은 강의실이 없어도 넣음. 관리자가 적은 다른 층(지하 등)도 그대로 */
+  for (let f = 1; f <= (b.floors || 0); f++) if (fl.indexOf(f) < 0) fl.push(f);           /* 1층~맨 위층은 강의실이 없어도 넣음. 강의실이 있는 다른 층(지하 등)도 그대로. 지하는 1층 아래 (G-187) */
   fl.sort(function(a, c){ return c - a; });
-  const gs = fl.map(function(f){ return { key:'f' + f, label:f + '층', rooms:x.R[f] || [], known:true, floor:f }; });
+  const gs = fl.map(function(f){ return { key:'f' + f, label:flName(f), rooms:x.R[f] || [], known:true, floor:f }; });
   if (x.nf.length) gs.push({ key:'nf', label:'층 정보 없음', rooms:x.nf, known:false, floor:null });
   return gs;
 }
@@ -2699,7 +2720,7 @@ function renderPanel(){
     '<button class="ibtn panel-x" data-act="px" aria-label="닫기">' + ICON.x + '</button>' +
     '<div class="panel-in">' +
       '<h2 class="p-bname">' + esc(fullName(b)) + '</h2>' +
-      '<p class="p-room">' + esc(no) + '호 · ' + (f === null ? '층 정보 없음' : f + '층') + '</p>' +      /* E-09 */
+      '<p class="p-room">' + esc(no) + '호 · ' + (f === null ? '층 정보 없음' : flName(f)) + '</p>' +      /* E-09 */
       '<p class="p-base num">' + esc(baseLine()) + '</p>' +
       info +
       '<p class="p-fixed">' + esc(T('fixed')) + '</p>' +
@@ -2982,12 +3003,22 @@ function openFlow(kind){
   S.modal = FLOW_ID[kind];                                   /* 가입하기·비밀번호 찾기는 로그인 창(S-18) 자리에서 바뀜 */
   renderHeader(); renderOverlays(); renderMock();
 }
+const TERMS = [                                              /* 이용약관 시연용 초안 (03 FR-034, G-188) */
+  '이용약관 (시연용 초안)',
+  '제1조(목적) 이 약관은 "순천대 공실 알리미"(가칭, 이하 "서비스")를 쓰는 데 필요한 것을 정합니다.',
+  '제2조(서비스 내용) 서비스는 학교 수업시간표로 강의실의 공실/수업중을 보여 줍니다. 로그인하면 내 시간표와 여러 교시·여러 건물 공실 보기를 쓸 수 있습니다.',
+  '제3조(정보의 정확성) 공실 정보는 학교 시간표로 계산한 것입니다. 휴강·보강·시험·행사는 반영하지 않아 실제와 다를 수 있습니다.',
+  '제4조(계정) 학번과 학교 메일 확인 번호로 가입합니다. 계정은 본인만 씁니다. 다른 사람의 학번으로 가입하면 안 됩니다.',
+  '제5조(이용 제한) 서비스를 방해하거나 거짓 신고를 되풀이하면 관리자가 계정을 정지할 수 있습니다.',
+  '제6조(탈퇴) 언제든 탈퇴할 수 있습니다. 탈퇴하면 계정과 내 시간표를 바로 지웁니다. 개인정보는 개인정보 처리방침을 따릅니다.',
+  '부칙 이 약관은 시연용 초안입니다. 학생 대상 공개 전에 다시 정합니다.'
+];
 function codeToast(){
   const F = S.flow;
   const bad = F.kind === 'signup' ? F.exists : !F.exists;
   mockToast(bad
     ? (F.kind === 'signup' ? '이미 가입한 학번입니다. 실제 메일에는 확인 번호 대신 "이미 가입되어 있습니다" 안내가 갑니다. 화면 문구는 똑같습니다.' : '가입하지 않은 학번입니다. 실제 메일에는 "가입한 계정이 없습니다" 안내가 갑니다. 화면 문구는 똑같습니다.')
-    : '실제로는 학교 메일함으로 확인 번호가 갑니다. 목업 확인 번호: ' + MOCK.code);
+    : '시연에서는 관리자 PC의 메일 확인 도구로 확인 번호가 갑니다. 목업 확인 번호: ' + MOCK.code);
 }
 function stepsHTML(F){
   const L = F.kind === 'signup' ? [['agree','동의'],['id','학번'],['code','확인 번호'],['pw','비밀번호']] : (F.kind === 'findpw' ? [['id','학번'],['code','확인 번호'],['pw','새 비밀번호']] : []);
@@ -3002,7 +3033,7 @@ function flowHTML(){
   if (F.step === 'agree'){
     body += '<p>가입하려면 아래 두 가지에 각각 동의해 주세요.</p>' +
       '<div class="cbox"><div class="cb-top"><label class="chk-row"><input type="checkbox" class="chk" id="g-a1"' + (F.a1 ? ' checked' : '') + '>이용약관에 동의합니다 <em class="req">필수</em></label><button type="button" class="lnk" data-act="gterms">' + (F.terms ? '접기' : '보기') + '</button></div>' +
-        (F.terms ? '<div class="ctext">이용약관 내용은 운영 단계에서 정합니다. 목업에서는 틀만 있습니다.</div>' : '') + '</div>' +
+        (F.terms ? '<div class="ctext">' + TERMS.map(function(t, i){ return '<p' + (i ? '' : ' class="ct-h"') + '>' + esc(t) + '</p>'; }).join('') + '</div>' : '') + '</div>' +
       '<div class="cbox"><label class="chk-row"><input type="checkbox" class="chk" id="g-a2"' + (F.a2 ? ' checked' : '') + '>개인정보 수집·이용에 동의합니다 <em class="req">필수</em></label>' +
         '<dl class="agree-t"><dt>쓰는 곳</dt><dd>로그인, 내 시간표 저장, 계정 관리·부정 이용 대응</dd><dt>받는 항목</dt><dd>학번, 비밀번호(알아볼 수 없게 바꿔 저장), 내 시간표</dd><dt>보관</dt><dd>탈퇴하면 바로 지웁니다. 1년 동안 쓰지 않으면 지웁니다. 내 시간표는 종강하면 지웁니다.</dd><dt>거부할 권리</dt><dd>동의하지 않아도 됩니다. 로그인하지 않고 공실 보기를 쓸 수 있습니다.</dd></dl></div>';
     foot = '<button class="btn btn-primary" data-act="gnext" id="g-next"' + (F.a1 && F.a2 ? '' : ' disabled') + '>다음</button>';
@@ -4358,9 +4389,9 @@ function tabRoom(){
       const k = rb + '-' + x.no, fl = x.auto ? x.f : DRAFT.roomFloor[k], cap = DRAFT.roomCap[k], au = capAuto(k);
       const cs = rst(k);
       const marks = (GONE_EX[k] ? badge('이번 파일에서 사라짐', 'warn') : '') + (BACK_EX[k] ? badge('다시 추가됨', 'new') : '');
-      if (ed === k) return '<tr class="a-tr edit' + chgTr(cs) + '"><td class="num">' + esc(rb + x.no) + '</td><td class="num">' + esc(x.no) + '</td><td>' + (x.auto ? fl + '층 (자동)' : aIn('r-fl', 'rFl', fv('rFl', fl || ''), ' type="number" min="-3" max="30" aria-label="층"') + errHTML('r-fl', e.rFl)) + '</td>' +
+      if (ed === k) return '<tr class="a-tr edit' + chgTr(cs) + '"><td class="num">' + esc(rb + x.no) + '</td><td class="num">' + esc(x.no) + '</td><td>' + (x.auto ? flName(fl) + ' (자동)' : aIn('r-fl', 'rFl', fv('rFl', fl || ''), ' type="number" min="-3" max="10" aria-label="층"') + errHTML('r-fl', e.rFl)) + '</td>' +
         '<td>' + aIn('r-cap', 'rCap', fv('rCap', cap || ''), ' type="number" min="1" max="2000" aria-label="수용 인원" placeholder="비우면 자동 값"') + errHTML('r-cap', e.rCap) + '</td><td>' + marks + '</td><td></td><td class="a-acts">' + abtn('저장', 'rSave', 'btn-primary sm', 'room') + '<button class="btn btn-text sm" data-a="editx">취소</button></td></tr>';
-      return '<tr class="a-tr' + chgTr(cs) + '"><td class="num">' + esc(rb + x.no) + '</td><td class="num">' + esc(x.no) + '</td><td>' + (fl ? fl + '층 ' + (x.auto ? '<span class="a-muted">(자동)</span>' : '<span class="a-muted">(직접)</span>') : badge('층 미정', 'warn')) + '</td>' +
+      return '<tr class="a-tr' + chgTr(cs) + '"><td class="num">' + esc(rb + x.no) + '</td><td class="num">' + esc(x.no) + '</td><td>' + (fl ? flName(fl) + ' ' + (x.auto ? '<span class="a-muted">(자동)</span>' : '<span class="a-muted">(직접)</span>') : badge('층 미정', 'warn')) + '</td>' +
         '<td>' + (cap ? cap + '명 <span class="a-muted">(직접 · 홈페이지 값)</span>' : au !== null ? '약 ' + au + '명 <span class="a-muted">(추정)</span>' : '<span class="a-muted">정보 없음</span>') + '</td><td>' + marks + '</td><td>' + chgTag(cs) + '</td>' +
         '<td class="a-acts">' + (cs === 'del' ? chgBack('room', k) : '<button class="btn btn-secondary sm" data-a="rEd" data-k="' + k + '">수정</button><button class="btn btn-text sm danger-t" data-a="rDel" data-k="' + k + '">지우기</button>') + '</td></tr>';
     }).join('') + '</tbody></table>' : '<p class="a-empty">해당하는 강의실이 없습니다</p>');
@@ -4371,7 +4402,7 @@ ADM_ACT.rSave = function(){
   const k = AS.edit.key, rb = k.slice(0, k.indexOf('-')), b = BMAP[rb], no = k.slice(k.indexOf('-') + 1);
   const auto = Object.keys(b.rooms).some(function(f){ return b.rooms[f].indexOf(no) >= 0; });
   const fl = String(fv('rFl', DRAFT.roomFloor[k] || '')).trim(), cap = String(fv('rCap', DRAFT.roomCap[k] || '')).trim(), e = {};
-  if (!auto && fl && !/^-?\d{1,2}$/.test(fl)) e.rFl = '층은 숫자로 적어 주세요.';
+  if (!auto && fl && !/^(-[1-3]|[1-9]|10)$/.test(fl)) e.rFl = '층은 -3~10 사이 숫자로 적어 주세요(0 제외).';
   if (cap && (!/^\d+$/.test(cap) || Number(cap) < 1)) e.rCap = '수용 인원은 1 이상의 숫자로 적어 주세요.';
   if (setErr(e)){ admRender(); return; }
   admBusy('room', '강의실 정보 저장', '강의실 정보를 저장하지 못했습니다.', function(){
@@ -4648,7 +4679,7 @@ ADM_ACT.abDel = function(t){
 };
 
 /* ---------- A-12 사용 불가 설정 (02 7.7, 계속 체크) ---------- */
-function naTarget(u){ const b = BMAP[u.bid]; return dFull(b) + (u.type === 'bld' ? ' · 건물 전체' : u.type === 'floor' ? ' · ' + u.floor + '층 전체' : ' · ' + u.room + '호'); }
+function naTarget(u){ const b = BMAP[u.bid]; return dFull(b) + (u.type === 'bld' ? ' · 건물 전체' : u.type === 'floor' ? ' · ' + flName(u.floor) + ' 전체' : ' · ' + u.room + '호'); }
 function naState(u){ const t = today(); return t < u.start ? ['예정', 'muted'] : inRange(u, t) ? ['적용 중', 'new'] : ['끝남', 'muted']; }
 function naPrevText(){ const r = String(fv('naReason', '')).trim(); if (!r) return '사유를 적으면 학생 화면 문구가 여기에 보입니다'; const c = !!fv('naCont', false), e = fv('naEnd', ''); return r + ' 사용금지' + (c || !validDate(e) ? '' : ' · ' + md(e) + '까지'); }
 ADM_SCR['A-12'] = function(){
@@ -4666,13 +4697,13 @@ ADM_SCR['A-12'] = function(){
 function naForm(pid){
   const e = AS.f.err || {}, ty = fv('naType', 'bld'), bid = fv('naBid', 'D2'), b = BMAP[bid];
   const floors = Object.keys(b.rooms).map(Number).sort(function(a, c){ return a - c; });
-  const fl = Number(fv('naFloor', floors[0]));
+  const fl = Number(fv('naFloor', floors.indexOf(1) >= 0 ? 1 : floors[0]));   /* 처음 값은 1층 (지하가 있어도) */
   const rooms = (b.rooms[fl] || []);
   const cont = !!fv('naCont', false);
   return '<div class="a-ph"><h2>' + (pid.id ? '사용 불가 수정' : '사용 불가 새로 설정') + '</h2><button class="ibtn" data-a="pclose" aria-label="닫기">' + ICON.x + '</button></div>' +
     '<fieldset class="a-fld"><legend>대상</legend>' + [['bld', '건물 전체'], ['floor', '층 하나'], ['room', '강의실 하나']].map(function(x){ return '<label class="rad"><input type="radio" name="naType" data-f="naType" data-rr value="' + x[0] + '"' + (ty === x[0] ? ' checked' : '') + '>' + x[1] + '</label>'; }).join('') + '</fieldset>' +
     aFld('na-b', '건물', '<select id="na-b" data-f="naBid" data-rr>' + roomBlds().map(function(x){ return '<option value="' + x.id + '"' + (x.id === bid ? ' selected' : '') + '>' + esc(dFull(x)) + '</option>'; }).join('') + '</select>') +
-    (ty !== 'bld' ? aFld('na-f', '층', '<select id="na-f" data-f="naFloor" data-rr>' + floors.map(function(f){ return '<option value="' + f + '"' + (f === fl ? ' selected' : '') + '>' + f + '층</option>'; }).join('') + '</select>') : '') +
+    (ty !== 'bld' ? aFld('na-f', '층', '<select id="na-f" data-f="naFloor" data-rr>' + floors.map(function(f){ return '<option value="' + f + '"' + (f === fl ? ' selected' : '') + '>' + flName(f) + '</option>'; }).join('') + '</select>') : '') +
     (ty === 'room' ? aFld('na-r', '강의실', '<select id="na-r" data-f="naRoom">' + rooms.map(function(r){ return '<option value="' + esc(r) + '"' + (r === fv('naRoom', rooms[0]) ? ' selected' : '') + '>' + esc(r) + '호</option>'; }).join('') + '</select>') : '') +
     '<div class="a-grid2">' + aFld('na-s', '시작일', aIn('na-s', 'naStart', fv('naStart', today()), ' type="date"'), '', e.naStart) +
     '<div class="a-fld"><label for="na-e">종료일</label><div class="a-endrow">' + aIn('na-e', 'naEnd', fv('naEnd', ''), ' type="date"' + (cont ? ' disabled' : '')) +
