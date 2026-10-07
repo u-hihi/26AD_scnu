@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light">
+<meta name="color-scheme" content="only light">
 <title>순천대 공실 알리미</title>
 <!--
   학생 화면 + 관리자 화면 전체 목업 (단일 자기완결 HTML, mockup/index.html)
@@ -138,6 +138,12 @@
     G-189 빈 쪽 처리입니다(사용자 결정 2026-10-07). 쪽을 나누는 표(A-03·A-06·A-18)에서 처리해서 지금 쪽이 비면 앞 쪽을 보입니다. 표 전체가 비면 빈 목록 안내(04 E-45)를 보입니다. 목업에는 쪽 번호가 없어(G-181) 앞 쪽으로 가는 동작은 기록만 합니다. 빈 목록 안내는 이미 있습니다. "받은 문의가 없습니다"·"받은 신고가 없습니다"(A-03), "오류 기록이 없습니다"(A-06), "학생 계정이 없습니다"·"(검색어) 학번을 찾지 못했습니다"(A-18)입니다.
     G-190 메일 보내기 방식입니다(사용자 결정 2026-10-07). 시연 때 확인 번호·문의 답장 메일은 관리자 PC 안의 메일 확인 도구로 보냅니다. 메일은 PC 밖으로 나가지 않습니다. 서버 설정 파일만 바꾸면 실제 메일 서비스로 보냅니다. 화면 문구는 그대로입니다. 목업 알림(화면 문구 아님)의 "실제로는 학교 메일함으로 확인 번호가 갑니다."만 "시연에서는 관리자 PC의 메일 확인 도구로 확인 번호가 갑니다."로 고쳤습니다.
     G-191 층을 직접 적을 때는 지하 3층~10층의 정수만 받고 0은 받지 않습니다(사용자 결정 2026-10-07, 04 2.28). 어기면 "층은 -3~10 사이 숫자로 적어 주세요(0 제외)."
+    G-192 일부 휴대폰 브라우저의 "강제 어둡게"를 막습니다(사용자 결정 2026-10-07). color-scheme을 "only light"로 적습니다(meta와 CSS 둘 다). 목업의 다크 비교용 테마는 그대로 둡니다.
+    G-193 누를 수 있는 건물은 색으로 구분합니다. ② 중간 진하기 파랑(칠 #7499C4, 윤곽선 #4F6F92)으로 확정했습니다(사용자 결정 2026-10-07). 조정판 바꿔 보기는 없앴습니다. 누를 수 없는 건물·땅 색은 그대로입니다.
+    G-194 층별 실제 강의실 배치는 사용자가 주는 실제 배치도를 개발 때 자료로 넣습니다(사용자 결정 2026-10-07). 관리자 화면에서 고치는 기능은 없습니다. 받기 전까지 목업 배치는 추정입니다(G-132 등 유지).
+    G-195 지도 강조 테두리는 진한 남색 #1A3A5A입니다(사용자 결정 2026-10-07). 채움은 대표색 25% 그대로입니다. 학생 캠퍼스맵 마우스 올림, 관리자 A-11 마우스 올림·영역 그리기·옮기기 전 자리에 씁니다.
+    G-196 고른 건물 색(#A9C1DC + 대표색 3px 테두리)은 그대로 둡니다(사용자 결정 2026-10-07).
+    G-197 관리자 A-11에서 고른 건물 테두리(대표색 3px)는 그대로 둡니다(사용자 결정 2026-10-07). 이웃한 ② 칠 위에서는 대비가 2.36:1입니다. 테두리 안쪽(고른 건물 칠 #A9C1DC)과는 3.78:1이고, 칠 색으로도 구별됩니다.
     (이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 "처음 크기의 N배"(처음 값 3배).
     (이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11, G-171에서 확정). 서비스 이름을 누르면 [초기화]와 같습니다(05 R-10, G-170).
     (이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.
@@ -160,6 +166,7 @@
    1. 디자인 토큰 (05 1장 - CSS 변수 이름은 05 토큰 이름 앞에 "--"만 붙임)
    ===================================================================== */
 :root{
+  color-scheme:only light;            /* 브라우저 강제 어둡게(auto dark) 막기 (G-192). 목업 다크 비교용은 아래 html[data-theme="dark"]가 덮음 */
   /* 1.1.1 대표색 A (05 제안, G-167에서 정함) */
   --color-primary:#2B5C8A;
   --color-primary-hover:#234D74;
@@ -194,10 +201,12 @@
   /* 1.1.4 캠퍼스맵 (후보 ③ 직접 만든 지도 색) */
   --color-map-label-text:var(--color-text);
   --color-map-label-halo:#FFFFFF;
-  --color-map-highlight:var(--color-primary);
+  --color-map-highlight:var(--color-primary);          /* 강조 채움 (대표색 25%) */
+  --color-map-highlight-edge:#1A3A5A;                  /* 강조 테두리 진한 남색 (G-195): 누를 수 있는 건물 칠 위 3.95:1 */
   --color-map-ground:#EEF1EC;
   --color-map-building-off:#D5DBE2;   /* 누를 수 없는 건물 */
-  --color-map-building-on:#C9D6E6;    /* 누를 수 있는 건물 */
+  --color-map-building-on:#7499C4;    /* 누를 수 있는 건물 ② (G-193): 땅 2.60:1 · 누를 수 없는 건물 2.12:1 */
+  --color-map-building-on-edge:#4F6F92;   /* 누를 수 있는 건물 윤곽선 ② (G-193): 땅 4.58:1 */
   --color-map-road:#FFFFFF;
   --color-map-green:#DDE9D7;          /* 목업 임의: 잔디·운동장 */
   --color-map-edge:#AEB8C3;           /* 목업 임의: 건물 윤곽선 */
@@ -295,6 +304,8 @@ html[data-theme="dark"]{
   --color-map-ground:#1A221C;
   --color-map-building-off:#39424F;
   --color-map-building-on:#2C4360;
+  --color-map-building-on-edge:var(--color-map-edge);   /* 다크 비교용은 예전 값 그대로 (G-193·G-195는 라이트만) */
+  --color-map-highlight-edge:var(--color-primary);
   --color-map-road:#2A323C;
   --color-map-green:#1F3024;
   --color-map-edge:#4D5866;
@@ -601,11 +612,11 @@ html[data-status-shape="1"] .stchip.busy{ background:var(--color-busy-bg); borde
 .m-gate{ fill:var(--color-text-secondary); }
 .m-bgb{ fill:var(--color-map-building-off); stroke:var(--color-map-edge); stroke-width:1px; vector-effect:non-scaling-stroke; }  /* 이름 없는 바탕 건물 */
 .bld .base{ fill:var(--color-map-building-off); stroke:var(--color-map-edge); stroke-width:1px; vector-effect:non-scaling-stroke; }
-.bld.on .base{ fill:var(--color-map-building-on); }
-.mapvp.nodata .bld.on .base{ fill:var(--color-map-building-off); }
+.bld.on .base{ fill:var(--color-map-building-on); stroke:var(--color-map-building-on-edge); }
+.mapvp.nodata .bld.on .base{ fill:var(--color-map-building-off); stroke:var(--color-map-edge); }
 .bld .hl{ fill:var(--color-map-highlight); fill-opacity:0; stroke:none; vector-effect:non-scaling-stroke; }
 .mapvp:not(.inert) .bld.on{ cursor:pointer; }
-.is-pc .mapvp:not(.inert):not(.dragging) .bld.on:hover .hl{ fill-opacity:.25; stroke:var(--color-map-highlight); stroke-width:2px; }
+.is-pc .mapvp:not(.inert):not(.dragging) .bld.on:hover .hl{ fill-opacity:.25; stroke:var(--color-map-highlight-edge); stroke-width:2px; }   /* 채움은 대표색 25%, 테두리만 남색 (G-195) */
 .lbl{ font-size:var(--font-size-sm); font-weight:var(--font-weight-semibold); fill:var(--color-map-label-text); stroke:var(--color-map-label-halo); stroke-width:6px; stroke-linejoin:round; paint-order:stroke; text-anchor:middle; dominant-baseline:central; pointer-events:none; }
 .lbl.pl{ font-size:var(--font-size-xs); font-weight:var(--font-weight-regular); fill:var(--color-text-secondary); }  /* 위치 표시(운동장·문): 건물이 아님, 누를 수 없음 */
 .zoom{ position:absolute; right:var(--space-4); bottom:var(--space-4); z-index:var(--z-map-control); display:flex; flex-direction:column; background:var(--color-bg); border-radius:var(--radius-md); box-shadow:var(--shadow-1); overflow:hidden; border:1px solid var(--color-border); }
@@ -1035,21 +1046,21 @@ button.a-card:hover{ border-color:var(--color-primary); box-shadow:var(--shadow-
 .amap{ display:block; width:100%; height:auto; }
 .amap.drawing{ cursor:crosshair; }
 .abld .base{ fill:var(--color-map-building-off); stroke:var(--color-map-edge); stroke-width:1px; vector-effect:non-scaling-stroke; }
-.abld.on .base{ fill:var(--color-map-building-on); }
+.abld.on .base{ fill:var(--color-map-building-on); stroke:var(--color-map-building-on-edge); }
 .abld.cur .base{ fill:var(--color-map-pick); stroke:var(--color-primary); stroke-width:3px; }
 .albl{ font-size:20px; font-weight:700; fill:var(--color-text); stroke:#FFFFFF; stroke-width:5px; paint-order:stroke; stroke-linejoin:round; text-anchor:middle; dominant-baseline:central; pointer-events:none; }
-.adraw{ fill:var(--color-primary); fill-opacity:.2; stroke:var(--color-primary); stroke-width:3px; vector-effect:non-scaling-stroke; pointer-events:none; }
-.adot{ fill:#FFFFFF; stroke:var(--color-primary); stroke-width:3px; vector-effect:non-scaling-stroke; pointer-events:none; }
+.adraw{ fill:var(--color-primary); fill-opacity:.2; stroke:var(--color-map-highlight-edge); stroke-width:3px; vector-effect:non-scaling-stroke; pointer-events:none; }
+.adot{ fill:#FFFFFF; stroke:var(--color-map-highlight-edge); stroke-width:3px; vector-effect:non-scaling-stroke; pointer-events:none; }
 .adot.first{ fill:var(--color-primary); }
 .a-drawbar{ display:flex; align-items:center; gap:var(--space-2); flex-wrap:wrap; min-height:calc(var(--size-target-pc) + var(--space-2) * 2); background:var(--color-primary-soft); border-radius:var(--radius-md); padding:var(--space-2) var(--space-3); margin-bottom:var(--space-2); font-size:var(--font-size-sm); }
 .a-drawbar:focus{ outline:none; }
 .a-selbar0{ background:var(--color-bg-subtle); color:var(--color-text-secondary); }   /* 아무 건물도 고르지 않음 (G-154) */
 /* 지도에서 건물 고르기·옮기기 (G-153·G-156) */
 .abld[data-a]{ cursor:pointer; outline:none; }
-.abld[data-a]:not(.cur):hover .base{ stroke:var(--color-primary); stroke-width:2px; }
+.abld[data-a]:not(.cur):hover .base{ stroke:var(--color-map-highlight-edge); stroke-width:2px; }   /* 남색 (G-195) */
 .abld[data-a]:focus-visible .base{ stroke:var(--color-text); stroke-width:3px; stroke-dasharray:5 3; }
 .acur-ol polygon{ fill:none; stroke:var(--color-primary); stroke-width:3px; vector-effect:non-scaling-stroke; pointer-events:none; }   /* 고른 건물 테두리를 이웃 건물 위에 */
-.aghost{ fill:none; stroke:var(--color-primary); stroke-width:2px; stroke-dasharray:6 4; vector-effect:non-scaling-stroke; pointer-events:none; }   /* 옮기기 전 자리 */
+.aghost{ fill:none; stroke:var(--color-map-highlight-edge); stroke-width:2px; stroke-dasharray:6 4; vector-effect:non-scaling-stroke; pointer-events:none; }   /* 옮기기 전 자리 */
 .amap.moving{ cursor:grab; touch-action:none; }
 .amap.moving.dragging{ cursor:grabbing; }
 #amove{ outline:none; }
@@ -1339,7 +1350,7 @@ body.sheet-open #mock-tab{ top:22%; }  /* 휴대폰 아래 패널(S-04)의 [X]�
 
   <section>
     <h3>3·4. 보류·제안 항목</h3>
-    <p class="hint">모두 결정함(G-167). 바꿔 보기는 없앴습니다.</p>
+    <p class="hint">모두 결정함(G-167, G-193). 바꿔 보기는 없앴습니다.</p>
   </section>
 
   <section>
@@ -1492,6 +1503,12 @@ const ASSUME = [
   "G-189 빈 쪽 처리입니다(사용자 결정 2026-10-07). 쪽을 나누는 표(A-03·A-06·A-18)에서 처리해서 지금 쪽이 비면 앞 쪽을 보입니다. 표 전체가 비면 빈 목록 안내(04 E-45)를 보입니다. 목업에는 쪽 번호가 없어(G-181) 앞 쪽으로 가는 동작은 기록만 합니다. 빈 목록 안내는 이미 있습니다. \"받은 문의가 없습니다\"·\"받은 신고가 없습니다\"(A-03), \"오류 기록이 없습니다\"(A-06), \"학생 계정이 없습니다\"·\"(검색어) 학번을 찾지 못했습니다\"(A-18)입니다.",
   "G-190 메일 보내기 방식입니다(사용자 결정 2026-10-07). 시연 때 확인 번호·문의 답장 메일은 관리자 PC 안의 메일 확인 도구로 보냅니다. 메일은 PC 밖으로 나가지 않습니다. 서버 설정 파일만 바꾸면 실제 메일 서비스로 보냅니다. 화면 문구는 그대로입니다. 목업 알림(화면 문구 아님)의 \"실제로는 학교 메일함으로 확인 번호가 갑니다.\"만 \"시연에서는 관리자 PC의 메일 확인 도구로 확인 번호가 갑니다.\"로 고쳤습니다.",
   "G-191 층을 직접 적을 때는 지하 3층~10층의 정수만 받고 0은 받지 않습니다(사용자 결정 2026-10-07, 04 2.28). 어기면 \"층은 -3~10 사이 숫자로 적어 주세요(0 제외).\"",
+  "G-192 일부 휴대폰 브라우저의 \"강제 어둡게\"를 막습니다(사용자 결정 2026-10-07). color-scheme을 \"only light\"로 적습니다(meta와 CSS 둘 다). 목업의 다크 비교용 테마는 그대로 둡니다.",
+  "G-193 누를 수 있는 건물은 색으로 구분합니다. ② 중간 진하기 파랑(칠 #7499C4, 윤곽선 #4F6F92)으로 확정했습니다(사용자 결정 2026-10-07). 조정판 바꿔 보기는 없앴습니다. 누를 수 없는 건물·땅 색은 그대로입니다.",
+  "G-194 층별 실제 강의실 배치는 사용자가 주는 실제 배치도를 개발 때 자료로 넣습니다(사용자 결정 2026-10-07). 관리자 화면에서 고치는 기능은 없습니다. 받기 전까지 목업 배치는 추정입니다(G-132 등 유지).",
+  "G-195 지도 강조 테두리는 진한 남색 #1A3A5A입니다(사용자 결정 2026-10-07). 채움은 대표색 25% 그대로입니다. 학생 캠퍼스맵 마우스 올림, 관리자 A-11 마우스 올림·영역 그리기·옮기기 전 자리에 씁니다.",
+  "G-196 고른 건물 색(#A9C1DC + 대표색 3px 테두리)은 그대로 둡니다(사용자 결정 2026-10-07).",
+  "G-197 관리자 A-11에서 고른 건물 테두리(대표색 3px)는 그대로 둡니다(사용자 결정 2026-10-07). 이웃한 ② 칠 위에서는 대비가 2.36:1입니다. 테두리 안쪽(고른 건물 칠 #A9C1DC)과는 3.78:1이고, 칠 색으로도 구별됩니다.",
   "(이전 목업) 처음 크기(최소 축소) = 캠퍼스맵 전체가 가운데 구역에 들어오는 크기. 최대 확대는 관리자가 정한 \"처음 크기의 N배\"(처음 값 3배).",
   "(이전 목업) 건물 이름 글자를 누르면 그 아래 건물을 누른 것과 같습니다(05 R-11, G-171에서 확정). 서비스 이름을 누르면 [초기화]와 같습니다(05 R-10, G-170).",
   "(이전 목업) 불러오는 중·불러오기 실패 동안에는 머리 영역의 기준 표시를 비워 둡니다.",
@@ -5035,7 +5052,7 @@ function applyAttrs(){
   d.setAttribute('data-theme', th);
   /* 대표색 A·상태 색 ①·모양 ①은 정한 값 (G-167): CSS 기본값과 <html>의 data-status-shape="1"을 그대로 씀 */
   const cs = document.querySelector('meta[name="color-scheme"]');
-  if (cs) cs.setAttribute('content', th === 'dark' ? 'dark' : 'light');
+  if (cs) cs.setAttribute('content', th === 'dark' ? 'dark' : 'only light');   /* 라이트는 강제 어둡게 막기 (G-192). 다크는 목업 비교용 */
 }
 const MQ = window.matchMedia('(min-width: 1024px)');       /* bp-desktop 1024px (05 4.1) */
 function applyLayout(force){
